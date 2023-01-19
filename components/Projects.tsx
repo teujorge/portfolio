@@ -63,11 +63,7 @@ export const Projects = () => {
           alt={media.alt}
           width={400}
         />
-        <p>
-          {desc.map((line) => {
-            return line + " ";
-          })}
-        </p>
+        <p>{desc.map((line) => line + " ")}</p>
         <p>{tech.map((t) => t + " ")}</p>
         <div
           css={css`
