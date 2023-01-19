@@ -31,7 +31,7 @@ export const Projects = () => {
     tech.forEach((t) => (technologies += t + " "));
 
     let iconButtons = "";
-    icons.map((icon) => (iconButtons += icon));
+    icons.forEach((icon) => (iconButtons += icon));
 
     return (
       <div
