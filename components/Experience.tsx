@@ -30,7 +30,8 @@ export const Experience = () => {
       ? `${end}`
       : "current";
 
-    const description = desc.map((line) => line + " ");
+    let description = "";
+    desc.forEach((line) => (description += line + " "));
 
     return (
       <div

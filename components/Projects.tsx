@@ -24,9 +24,14 @@ export const Projects = () => {
     tech: string[];
     icons: JSX.Element[];
   }) => {
-    const description = desc.map((line) => line + " ");
-    const technologies = tech.map((t) => t + " ");
-    const iconButtons = icons.map((icon) => icon);
+    let description = "";
+    desc.forEach((line) => (description += line + " "));
+
+    let technologies = "";
+    tech.forEach((t) => (technologies += t + " "));
+
+    let iconButtons = "";
+    icons.map((icon) => (iconButtons += icon));
 
     return (
       <div
