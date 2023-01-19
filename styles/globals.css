@@ -6,6 +6,7 @@
 :root {
   --max-width: 1200px;
   --border-radius: 12px;
+  --background-color: #f0f0f0;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
@@ -25,6 +26,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  background-color: var(--background-color);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -35,6 +40,10 @@ h2 {
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+  }
+
   html {
     color-scheme: dark;
   }
