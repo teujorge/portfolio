@@ -30,6 +30,8 @@ export const Experience = () => {
       ? `${end}`
       : "current";
 
+    const description = desc.map((line) => line + " ");
+
     return (
       <div
         css={css`
@@ -68,7 +70,7 @@ export const Experience = () => {
             {title} {employer ? `, ${employer}` : ""} {city ? `, ${city}` : ""}
           </h4>
           <p>{date ? date : "current"}</p>
-          <p>{desc.map((line) => line + " ")}</p>
+          <p>{description}</p>
         </div>
       </div>
     );

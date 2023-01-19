@@ -24,6 +24,10 @@ export const Projects = () => {
     tech: string[];
     icons: JSX.Element[];
   }) => {
+    const description = desc.map((line) => line + " ");
+    const technologies = tech.map((t) => t + " ");
+    const iconButtons = icons.map((icon) => icon);
+
     return (
       <div
         css={css`
@@ -63,8 +67,8 @@ export const Projects = () => {
           alt={media.alt}
           width={400}
         />
-        <p>{desc.map((line) => line + " ")}</p>
-        <p>{tech.map((t) => t + " ")}</p>
+        <p>{description}</p>
+        <p>{technologies}</p>
         <div
           css={css`
             display: flex;
@@ -73,7 +77,7 @@ export const Projects = () => {
             width: fit-content;
           `}
         >
-          {icons.map((icon) => icon)}
+          {iconButtons}
         </div>
       </div>
     );
