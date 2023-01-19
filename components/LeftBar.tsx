@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import IconEmail from "../public/svg/envelope.svg";
 import IconGithub from "../public/svg/github.svg";
 import IconLinkedIn from "../public/svg/linkedin.svg";

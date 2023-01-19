@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import Image from "next/image";
 import ProfileImg from "../public/images/profile.jpg";
 import { css } from "@emotion/react";
@@ -59,9 +61,9 @@ export const About = () => {
             I strive to make a contribution to society through technology and
             engineering in order to bring comfort to the world. I am constantly
             looking to further develop my technical, communication and
-            interpersonal skills. Shortly, I am a Mechanical Engineer by trade
-            currently accruing my software expertise by working on a variety of
-            interesting projects on a daily basis.
+            interpersonal skills. Shortly, I am a mechanical engineer by trade
+            but I am now focused on accruing software expertise by working on a
+            variety of interesting projects on a daily basis.
           </p>
           <br />
 
@@ -86,7 +88,6 @@ export const About = () => {
             <ul>
               <li>React</li>
               <li>NextJS</li>
-
               <li>Typescript</li>
             </ul>
           </div>

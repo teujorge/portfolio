@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import IconApple from "../public/svg/apple-store.svg";
 import IconDemo from "../public/svg/magnifying-glass.svg";
 import IconGithub from "../public/svg/github.svg";

@@ -1,6 +1,8 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
-import { css } from "@emotion/react";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
 import { LeftBar } from "@/components/LeftBar";

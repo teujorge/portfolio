@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import IconCode from "../public/svg/code.svg";
 import IconDiagram from "../public/svg/diagram.svg";
 import IconTerminal from "../public/svg/terminal.svg";

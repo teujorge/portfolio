@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+
 import EarthImg from "../public/images/earth.png";
 import Image from "next/image";
 import MoonImg from "../public/images/moon.png";
@@ -31,34 +33,38 @@ export const Title = () => {
         height: 100vh;
       `}
     >
+      {/* earth */}
       <div
-        css={css({
-          position: "absolute",
-          bottom: "-20px",
-          right: "50px",
-          width: "min(30vw, 50vh)",
-          height: "min(30vw, 50vh)",
-          maxWidth: "400px",
-          maxHeight: "400px",
-          transform: `translateY(${earthTranslator})`,
-          transition: "transform .1s ease-out",
-        })}
+        css={css`
+          position: absolute;
+          bottom: -20px;
+          right: 50px;
+          margin: 0px !important;
+          width: min(30vw, 50vh);
+          height: min(30vw, 50vh);
+          max-width: 400px;
+          max-height: 400px;
+          transform: translateY(${earthTranslator});
+          transition: transform 0s linear;
+        `}
       >
         <Image src={EarthImg} alt={"image-of-earth"} fill />
       </div>
 
+      {/* moon */}
       <div
-        css={css({
-          position: "absolute",
-          bottom: "-50px",
-          right: "0px",
-          width: "min(8vw, 10vh)",
-          height: "min(8vw, 10vh)",
-          maxWidth: "80px",
-          maxHeight: "80px",
-          transform: `translateY(${moonTranslator})`,
-          transition: "transform .1s ease-out",
-        })}
+        css={css`
+          position: absolute;
+          bottom: -50px;
+          right: 0px;
+          margin: 0px !important;
+          width: min(8vw, 10vh);
+          height: min(8vw, 10vh);
+          max-width: 80px,
+          max-height: 80px;
+          transform: translateY(${moonTranslator});
+          transition: transform 0s linear;
+        `}
       >
         <Image src={MoonImg} alt={"image-of-moon"} fill />
       </div>
