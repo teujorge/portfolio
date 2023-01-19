@@ -46,6 +46,8 @@ export const Experience = () => {
 
           @media (max-width: 800px) {
             flex-direction: column;
+            margin: 0px !important;
+            border-left: 0px solid transparent !important;
           }
 
           @media (prefers-color-scheme: dark) {
@@ -58,7 +60,8 @@ export const Experience = () => {
             margin-right: 0px !important;
 
             @media (max-width: 800px) {
-              margin: 10px !important;
+              margin: 0px !important;
+              margin-top: 20px !important;
             }
 
             @media (prefers-color-scheme: dark) {
@@ -68,11 +71,27 @@ export const Experience = () => {
         >
           <Image src={icon.src} alt={icon.alt} width={40} height={40} />
         </div>
-        <div>
+        <div
+          css={css`
+            & p {
+              margin-top: 4px;
+            }
+
+            @media (max-width: 800px) {
+              margin: 10px !important;
+            }
+          `}
+        >
           <h4>
             {title} {employer ? `, ${employer}` : ""} {city ? `, ${city}` : ""}
           </h4>
-          <p>{date ? date : "current"}</p>
+          <p
+            css={css`
+              font-size: 13px;
+            `}
+          >
+            {date ? date : "current"}
+          </p>
           <p>{description}</p>
         </div>
       </div>

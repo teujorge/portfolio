@@ -17,6 +17,10 @@ export const About = () => {
           @media (max-width: 1000px) {
             flex-direction: column;
           }
+
+          @media (max-width: 800px) {
+            margin: 0px !important;
+          }
         `}
       >
         <Image
@@ -47,15 +51,23 @@ export const About = () => {
           height={200}
         />
 
-        <div>
+        <div
+          css={css`
+            & p {
+              margin-top: 20px;
+            }
+
+            @media (max-width: 800px) {
+              margin: 10px !important;
+            }
+          `}
+        >
           <p>Hello! I am Matheus.</p>
-          <br />
 
           <p>
             I enjoy developing products using technology, whether that be
             physical or virtual.
           </p>
-          <br />
 
           <p>
             I strive to make a contribution to society through technology and
@@ -65,7 +77,6 @@ export const About = () => {
             but I am now focused on accruing software expertise by working on a
             variety of interesting projects on a daily basis.
           </p>
-          <br />
 
           <p>Here are a few technologies I have enjoyed working with:</p>
 

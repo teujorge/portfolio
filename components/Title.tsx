@@ -21,9 +21,6 @@ export const Title = () => {
     };
   }, []);
 
-  const moonTranslator = `${-scrollPosition * 3}px`;
-  const earthTranslator = `${-scrollPosition * 1.2}px`;
-
   return (
     <div
       css={css`
@@ -36,43 +33,27 @@ export const Title = () => {
       {/* earth */}
       <div
         css={css`
+          z-index: -1;
           position: absolute;
           bottom: -20px;
-          right: 50px;
+          right: 0px;
           margin: 0px !important;
           width: min(30vw, 50vh);
           height: min(30vw, 50vh);
           max-width: 400px;
           max-height: 400px;
-          transform: translateY(${earthTranslator});
+          filter: blur(${scrollPosition / 100}px);
+          transform: translateY(${-scrollPosition * 1.2}px)
+            rotateZ(${-scrollPosition / 10}deg);
+          transform-origin: 0px 0px;
           transition: transform 0s linear;
         `}
       >
         <Image src={EarthImg} alt={"image-of-earth"} fill />
       </div>
 
-      {/* moon */}
       <div
         css={css`
-          position: absolute;
-          bottom: -50px;
-          right: 0px;
-          margin: 0px !important;
-          width: min(8vw, 10vh);
-          height: min(8vw, 10vh);
-          max-width: 80px,
-          max-height: 80px;
-          transform: translateY(${moonTranslator});
-          transition: transform 0s linear;
-        `}
-      >
-        <Image src={MoonImg} alt={"image-of-moon"} fill />
-      </div>
-
-      <div
-        css={css`
-          /* background-color: red; */
-
           & * {
             margin: 4px;
           }
@@ -88,6 +69,10 @@ export const Title = () => {
           & p {
             font-size: 18px;
           }
+
+          @media (max-width: 800px) {
+            margin: 10px !important;
+          }
         `}
       >
         <p>Hi, my name is</p>
@@ -99,7 +84,7 @@ export const Title = () => {
             max-width: 70%;
 
             @media (max-width: 800px) {
-              max-width: 80%;
+              max-width: 100%;
             }
           `}
         >

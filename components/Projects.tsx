@@ -43,14 +43,15 @@ export const Projects = () => {
           align-items: center;
 
           & p {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            margin-left: 20px;
-            margin-right: 20px;
+            margin-top: 20px;
           }
 
           @media (max-width: 1000px) {
             flex-direction: column;
+          }
+
+          @media (max-width: 800px) {
+            margin: 10px !important;
           }
         `}
       >
@@ -65,15 +66,23 @@ export const Projects = () => {
         >
           {title}
         </h3>
-        <Image
+        <div
           css={css`
-            margin: 10px;
-            border-radius: 12px;
+            @media (max-width: 800px) {
+              margin: 0px !important;
+            }
           `}
-          src={media.src}
-          alt={media.alt}
-          width={400}
-        />
+        >
+          <Image
+            css={css`
+              margin: 10px;
+              border-radius: 12px;
+            `}
+            src={media.src}
+            alt={media.alt}
+            width={300}
+          />
+        </div>
         <p>{description}</p>
         <p>{technologies}</p>
         <div
