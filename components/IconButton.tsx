@@ -18,7 +18,6 @@ export const IconButton = ({
 
   return (
     <a
-      key={alt}
       css={css({
         margin: "4px",
         padding: `${padding}px`,

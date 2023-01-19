@@ -102,11 +102,13 @@ export const Projects = () => {
         tech={["Dart", "Flutter", "API"]}
         icons={[
           <IconButton
+            key={"movie-matter-app-store"}
             src={IconApple}
             alt={"movie-matter-app-store"}
             href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
           />,
           <IconButton
+            key={"movie-matter-google-store"}
             src={IconGoogle}
             alt={"movie-matter-google-store"}
             href={
@@ -114,6 +116,7 @@ export const Projects = () => {
             }
           />,
           <IconButton
+            key={"movie-matter-github"}
             src={IconGithub}
             alt={"movie-matter-github"}
             href={"https://github.com/teujorge/MovieMatter"}
@@ -141,6 +144,7 @@ export const Projects = () => {
         tech={["Arduino", "Embedded System"]}
         icons={[
           <IconButton
+            key={"water-tag-github"}
             src={IconGithub}
             alt={"water-tag-github"}
             href={"https://github.com/teujorge/Arduino-Water-Belt"}
@@ -159,11 +163,13 @@ export const Projects = () => {
         tech={["Dart", "Flutter", "FlameGame"]}
         icons={[
           <IconButton
+            key={"atlas-arena-demo"}
             src={IconDemo}
             alt={"atlas-arena-demo"}
             href={"https://teujorge.github.io/atlas/"}
           />,
           <IconButton
+            key={"atlas-arena-github"}
             src={IconGithub}
             alt={"atlas-arena-github"}
             href={"https://github.com/teujorge/atlas"}
@@ -182,11 +188,13 @@ export const Projects = () => {
         tech={["Dart", "Flutter", "FlameGame"]}
         icons={[
           <IconButton
+            key={"fractal-viz-demo"}
             src={IconDemo}
             alt={"fractal-viz-demo"}
             href={"https://teujorge.github.io/fractals/"}
           />,
           <IconButton
+            key={"fractal-viz-github"}
             src={IconGithub}
             alt={"fractal-viz-github"}
             href={"https://github.com/teujorge/fractals"}
