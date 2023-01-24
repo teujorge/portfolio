@@ -1,7 +1,7 @@
-import IconEmail from "../public/svg/envelope.svg";
-import IconGithub from "../public/svg/github.svg";
-import IconLinkedIn from "../public/svg/linkedin.svg";
-import IconResume from "../public/svg/file.svg";
+import IconEmail from "../public/svg/envelope";
+import IconGithub from "../public/svg/github";
+import IconLinkedIn from "../public/svg/linkedin";
+import IconResume from "../public/svg/file";
 import { css } from "@emotion/react";
 import { IconButton } from "./IconButton";
 /** @jsxImportSource @emotion/react */

@@ -1,7 +1,6 @@
-import IconCode from "../public/svg/code.svg";
-import IconDiagram from "../public/svg/diagram.svg";
-import IconTerminal from "../public/svg/terminal.svg";
-import Image from "next/image";
+import IconCode from "../public/svg/code";
+import IconDiagram from "../public/svg/diagram";
+import IconTerminal from "../public/svg/terminal";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 
@@ -15,7 +14,7 @@ export const Experience = () => {
     city,
     desc,
   }: {
-    icon: { src: any; alt: string };
+    icon: any;
     title: string;
     employer?: string;
     start?: string;
@@ -56,7 +55,10 @@ export const Experience = () => {
       >
         <div
           css={css`
+            display: flex;
             margin-right: 0px !important;
+            width: 40px;
+            height: 40px;
 
             @media (max-width: 800px) {
               margin: 0px !important;
@@ -68,7 +70,7 @@ export const Experience = () => {
             }
           `}
         >
-          <Image src={icon.src} alt={icon.alt} width={40} height={40} />
+          {icon}
         </div>
         <div
           css={css`
@@ -102,7 +104,7 @@ export const Experience = () => {
       <h2>experience</h2>
 
       <Job
-        icon={{ src: IconCode, alt: "code-icon" }}
+        icon={IconCode}
         title={"Freelance Software Engineer"}
         desc={[
           "Implemented and updated application modules under the direction of Software Lead.",
@@ -112,7 +114,7 @@ export const Experience = () => {
       />
 
       <Job
-        icon={{ src: IconTerminal, alt: "terminal-icon" }}
+        icon={IconTerminal}
         title={"Test Software Engineer"}
         employer={"Honeywell Aerospace"}
         city={"Clearwater"}
@@ -126,7 +128,7 @@ export const Experience = () => {
       />
 
       <Job
-        icon={{ src: IconDiagram, alt: "diagram-icon" }}
+        icon={IconDiagram}
         title={"Systems Engineer Intern"}
         employer={"BendixKing"}
         city={"Albuquerque"}

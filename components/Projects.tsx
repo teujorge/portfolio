@@ -1,7 +1,7 @@
-import IconApple from "../public/svg/apple-store.svg";
-import IconDemo from "../public/svg/magnifying-glass.svg";
-import IconGithub from "../public/svg/github.svg";
-import IconGoogle from "../public/svg/play-store.svg";
+import IconApple from "../public/svg/apple-store";
+import IconDemo from "../public/svg/magnifying-glass";
+import IconGithub from "../public/svg/github";
+import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
 import ShowAtlasArena from "../public/images/atlas_arena_show.gif";
 import ShowFractalViz from "../public/images/fractal_viz_show.gif";
@@ -115,13 +115,11 @@ export const Projects = () => {
           <IconButton
             key={"co-pilot-platform"}
             src={IconDemo}
-            alt={"movie-matter-app-store"}
             href={"https://co-pilot.netlify.app"}
           />,
           <IconButton
             key={"co-pilot-github"}
             src={IconGithub}
-            alt={"movie-matter-app-store"}
             href={"https://github.com/teujorge/co-pilot-web"}
           />,
         ]}
@@ -139,13 +137,11 @@ export const Projects = () => {
           <IconButton
             key={"movie-matter-app-store"}
             src={IconApple}
-            alt={"movie-matter-app-store"}
             href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
           />,
           <IconButton
             key={"movie-matter-google-store"}
             src={IconGoogle}
-            alt={"movie-matter-google-store"}
             href={
               "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
             }
@@ -153,7 +149,6 @@ export const Projects = () => {
           <IconButton
             key={"movie-matter-github"}
             src={IconGithub}
-            alt={"movie-matter-github"}
             href={"https://github.com/teujorge/MovieMatter"}
           />,
         ]}
@@ -171,7 +166,6 @@ export const Projects = () => {
           <IconButton
             key={"water-tag-github"}
             src={IconGithub}
-            alt={"water-tag-github"}
             href={"https://github.com/teujorge/Arduino-Water-Belt"}
           />,
         ]}
@@ -190,13 +184,11 @@ export const Projects = () => {
           <IconButton
             key={"atlas-arena-demo"}
             src={IconDemo}
-            alt={"atlas-arena-demo"}
             href={"https://teujorge.github.io/atlas/"}
           />,
           <IconButton
             key={"atlas-arena-github"}
             src={IconGithub}
-            alt={"atlas-arena-github"}
             href={"https://github.com/teujorge/atlas"}
           />,
         ]}
@@ -215,13 +207,11 @@ export const Projects = () => {
           <IconButton
             key={"fractal-viz-demo"}
             src={IconDemo}
-            alt={"fractal-viz-demo"}
             href={"https://teujorge.github.io/fractals/"}
           />,
           <IconButton
             key={"fractal-viz-github"}
             src={IconGithub}
-            alt={"fractal-viz-github"}
             href={"https://github.com/teujorge/fractals"}
           />,
         ]}

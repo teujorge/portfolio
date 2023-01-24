@@ -1,15 +1,12 @@
-import Image from "next/image";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 
 export const IconButton = ({
   src,
-  alt,
   href,
   size = 50,
 }: {
   src: any;
-  alt: string;
   href: string;
   size?: number;
 }) => {
@@ -20,7 +17,6 @@ export const IconButton = ({
 
   // let, w = .5 size
   const width = size * 0.5;
-
   // thus, p = .25 size
   const padding = size * 0.25;
 
@@ -59,7 +55,7 @@ export const IconButton = ({
       target="_blank"
       rel="noreferrer"
     >
-      <Image src={src} alt={alt} width={width} height={width} />
+      {src}
     </a>
   );
 };
