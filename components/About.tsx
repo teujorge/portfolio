@@ -1,8 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
 import Image from "next/image";
 import ProfileImg from "../public/images/profile.jpg";
 import { css } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
 
 export const About = () => {
   return (

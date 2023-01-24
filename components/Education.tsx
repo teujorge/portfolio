@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
-
 import { css } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
 
 export const Education = () => {
   const School = ({

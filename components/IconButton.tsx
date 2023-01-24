@@ -1,7 +1,6 @@
-/** @jsxImportSource @emotion/react */
-
 import Image from "next/image";
 import { css } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
 
 export const IconButton = ({
   src,

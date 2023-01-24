@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
-
 import IconCode from "../public/svg/code.svg";
 import IconDiagram from "../public/svg/diagram.svg";
 import IconTerminal from "../public/svg/terminal.svg";
 import Image from "next/image";
 import { css } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
 
 export const Experience = () => {
   const Job = ({
@@ -106,7 +105,7 @@ export const Experience = () => {
         icon={{ src: IconCode, alt: "code-icon" }}
         title={"Freelance Software Engineer"}
         desc={[
-          "Implemented and updated application modules under the direction of Senior Software Developers.",
+          "Implemented and updated application modules under the direction of Software Lead.",
           "Successfully completed several freelance projects, with strong customer satisfaction rate.",
           "Efficiently managed and executed personal projects, according to established objectives and timelines.",
         ]}
