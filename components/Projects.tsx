@@ -83,7 +83,7 @@ export const Projects = () => {
             `}
             src={media.src}
             alt={media.alt}
-            width={300}
+            width={250}
           />
         </div>
         <p>{description}</p>
