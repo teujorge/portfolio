@@ -26,9 +26,11 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
           height: min(30vw, 50vh);
           max-width: 400px !important;
           max-height: 400px !important;
+          border-radius: 50%;
+          overflow: hidden;
           transform: translateY(${-scrollPosition * 1.2}px)
-            rotateZ(${-scrollPosition / 10}deg);
-          transition: transform 0.1s ease-out;
+            rotateZ(${scrollPosition / 10}deg);
+          transition: transform 0.05s ease-out;
         `}
       >
         <Image src={EarthImg} alt={"planet-earth"} quality={25} fill priority />
