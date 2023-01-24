@@ -28,21 +28,18 @@ export const LeftBar = () => {
       <IconButton
         href={"https://github.com/teujorge"}
         src={IconGithub}
-        alt={"matheus-jorge-github"}
         size={40}
       />
 
       <IconButton
         href={"https://www.linkedin.com/in/matheus-jorge/"}
         src={IconLinkedIn}
-        alt={"matheus-jorge-linkedin"}
         size={40}
       />
 
       <IconButton
         href={"mailto:mrljorge@outlook.com"}
         src={IconEmail}
-        alt={"matheus-jorge-email"}
         size={40}
       />
 
@@ -51,7 +48,6 @@ export const LeftBar = () => {
           "https://raw.githubusercontent.com/teujorge/teujorge.github.io/master/assets/images/resume_2022.png"
         }
         src={IconResume}
-        alt={"matheus-jorge-resume"}
         size={40}
       />
     </div>
