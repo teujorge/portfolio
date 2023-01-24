@@ -71,8 +71,11 @@ export const Projects = () => {
         </h3>
         <div
           css={css`
-            @media (max-width: 800px) {
-              margin: 0px !important;
+            @media (max-width: 1000px) {
+              margin-top: 10px !important;
+              margin-bottom: 0px !important;
+              margin-left: 0px !important;
+              margin-right: 0px !important;
             }
           `}
         >
@@ -86,17 +89,29 @@ export const Projects = () => {
             width={250}
           />
         </div>
-        <p>{description}</p>
-        <p>{technologies}</p>
+
+        {/* descriptions */}
         <div
           css={css`
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             margin: 0px !important;
-            margin-inline: auto !important;
-            width: fit-content;
           `}
         >
-          {iconButtons}
+          <p>{description}</p>
+          <p>{technologies}</p>
+          <div
+            css={css`
+              display: flex;
+              margin: 0px !important;
+              margin-inline: auto !important;
+              width: fit-content;
+            `}
+          >
+            {iconButtons}
+          </div>
         </div>
       </div>
     );
