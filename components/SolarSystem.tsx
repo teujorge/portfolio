@@ -143,12 +143,11 @@ export const SolarSystem = ({ scrollPosition }: { scrollPosition: number }) => {
             left: 0px;
             margin: 0px !important;
             padding-left: ${body.d}px;
-
             transform-origin: left;
-            animation: ${body.animation} ${500 / body.v}s linear infinite;
+            animation: ${body.animation} ${1000 / (body.v + 1)}s linear infinite;
           `}
         >
-          <Image src={body.img} alt={body.key} width={body.r} />
+          <Image src={body.img} alt={body.key} width={body.r} quality={50} />
         </div>
       ))}
     </div>
