@@ -23,8 +23,8 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
           margin: 0px !important;
           width: min(30vw, 50vh);
           height: min(30vw, 50vh);
-          max-width: 400px;
-          max-height: 400px;
+          max-width: 400px !important;
+          max-height: 400px !important;
           transform: translateY(${-scrollPosition * 1.2}px)
             rotateZ(${-scrollPosition / 10}deg);
 
