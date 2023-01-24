@@ -60,7 +60,7 @@ export const Projects = () => {
       >
         <h3
           css={css`
-            margin-top: 25px;
+            margin-top: 50px;
             width: 150px !important;
             min-width: 150px !important;
             max-width: 150px !important;
@@ -71,17 +71,15 @@ export const Projects = () => {
         </h3>
         <div
           css={css`
+            border-radius: 12px;
+
             @media (max-width: 1000px) {
-              margin-top: 10px !important;
-              margin-bottom: 0px !important;
-              margin-left: 0px !important;
-              margin-right: 0px !important;
+              margin: 10px !important;
             }
           `}
         >
           <Image
             css={css`
-              margin: 10px;
               border-radius: 12px;
             `}
             src={media.src}
