@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import IconApple from "../public/svg/apple-store.svg";
 import IconDemo from "../public/svg/magnifying-glass.svg";
 import IconGithub from "../public/svg/github.svg";
@@ -11,6 +9,7 @@ import ShowMovieMatter from "../public/images/movie_matter_show.png";
 import ShowWaterTag from "../public/images/water_tag_show.gif";
 import { css } from "@emotion/react";
 import { IconButton } from "./IconButton";
+/** @jsxImportSource @emotion/react */
 
 export const Projects = () => {
   const Project = ({
