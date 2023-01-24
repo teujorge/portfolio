@@ -28,11 +28,10 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
           max-height: 400px !important;
           transform: translateY(${-scrollPosition * 1.2}px)
             rotateZ(${-scrollPosition / 10}deg);
-
           transition: transform 0.1s ease-out;
         `}
       >
-        <Image src={EarthImg} alt={"planet-earth"} fill />
+        <Image src={EarthImg} alt={"planet-earth"} quality={25} fill priority />
       </div>
 
       <div
