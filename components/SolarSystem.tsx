@@ -116,47 +116,41 @@ export const SolarSystem = ({ scrollPosition }: { scrollPosition: number }) => {
   return (
     <div
       css={css`
-        height: 200px;
+        z-index: -1;
+
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        margin: 0px !important;
+
+        opacity: ${scrollPosition > 500 ? 1 : 0};
+        filter: blur(20px);
+
+        transition: opacity 1s ease;
       `}
     >
-      <div
-        css={css`
-          z-index: -1;
+      {solarSystemTransformed.map((body) => (
+        <div
+          key={body.key}
+          css={css`
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            margin: 0px !important;
+            padding-left: ${body.d}px;
 
-          position: fixed;
-          bottom: 50px;
-          right: 50px;
-
-          display: flex;
-          justify-content: left;
-          align-items: center;
-
-          margin: 0px !important;
-
-          opacity: ${scrollPosition > 500 ? 1 : 0};
-          filter: blur(20px);
-
-          transition: opacity 1s ease;
-        `}
-      >
-        {solarSystemTransformed.map((body) => (
-          <div
-            key={body.key}
-            css={css`
-              position: absolute;
-              top: 0px;
-              left: 0px;
-              margin: 0px !important;
-              padding-left: ${body.d}px;
-
-              transform-origin: left;
-              animation: ${body.animation} ${500 / body.v}s linear infinite;
-            `}
-          >
-            <Image src={body.img} alt={body.key} width={body.r} />
-          </div>
-        ))}
-      </div>
+            transform-origin: left;
+            animation: ${body.animation} ${500 / body.v}s linear infinite;
+          `}
+        >
+          <Image src={body.img} alt={body.key} width={body.r} />
+        </div>
+      ))}
     </div>
   );
 };
