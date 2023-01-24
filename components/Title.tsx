@@ -10,6 +10,7 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        margin-top: 0px !important;
         height: 100vh;
       `}
     >
@@ -18,8 +19,8 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
         css={css`
           z-index: -1;
           position: absolute;
-          bottom: -20px;
-          right: 0px;
+          bottom: -50px;
+          right: 25px;
           margin: 0px !important;
           width: min(30vw, 50vh);
           height: min(30vw, 50vh);
