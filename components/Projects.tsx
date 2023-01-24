@@ -29,10 +29,14 @@ export const Projects = () => {
     desc.forEach((line) => (description += line + " "));
 
     let technologies = "";
-    tech.forEach((t) => (technologies += t + " "));
 
-    let iconButtons = "";
-    icons.forEach((icon) => (iconButtons += icon));
+    for (let i = 0; i < tech.length - 1; i++) {
+      technologies += tech[i] + " - ";
+    }
+    technologies += tech[tech.length - 1];
+
+    let iconButtons: JSX.Element[] = [];
+    icons.forEach((icon) => iconButtons.push(icon));
 
     return (
       <div
@@ -102,6 +106,27 @@ export const Projects = () => {
     <div>
       <h2>personal projects</h2>
 
+      {/* <Project
+        title={"Co Pilot"}
+        media={{ src: ShowMovieMatter, alt: "co-pilot-platform-preview" }}
+        desc={["[In-Development]"]}
+        tech={["NextJS", "DB", "API"]}
+        icons={[
+          <IconButton
+            key={"co-pilot-platform"}
+            src={IconDemo}
+            alt={"movie-matter-app-store"}
+            href={"https://co-pilot.netlify.app"}
+          />,
+          <IconButton
+            key={"co-pilot-github"}
+            src={IconGithub}
+            alt={"movie-matter-app-store"}
+            href={"https://github.com/teujorge/co-pilot-web"}
+          />,
+        ]}
+      /> */}
+
       <Project
         title={"MovieMatter"}
         media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
@@ -133,16 +158,6 @@ export const Projects = () => {
           />,
         ]}
       />
-
-      {/* 
-      <Project
-        title={"Co Pilot"}
-        media={{ src: EyesImg, alt: "co-pilot-platform-preview" }}
-        desc={["[In-Development]"]}
-        tech={["NextJS", "DB", "API"]}
-        icons={[<p>website</p>, <p>github</p>]}
-      />
-      */}
 
       <Project
         title={"Water Tag"}

@@ -14,28 +14,47 @@ export const IconButton = ({
   size?: number;
 }) => {
   // size = padding + width
-  const width = size / 2;
-  const padding = size / 4;
+  // |---- size ----|
+  // |--|        |--| paddings
+  //    |--------|    width
+
+  // let, w = .5 size
+  const width = size * 0.5;
+
+  // thus, p = .25 size
+  const padding = size * 0.25;
 
   return (
     <a
-      css={css({
-        margin: "4px",
-        padding: `${padding}px`,
-        width: `${size}px`,
-        height: `${size}px`,
-        borderRadius: "50%",
-        backgroundColor: "transparent",
-        transition: "background-color 0.2s ease",
+      css={css`
+        display:flex;
+        justify-content:center;
+        align-items:center;
 
-        "&:hover": {
-          backgroundColor: "white",
+        margin: 4px;
+        padding: ${padding}px;
+        width: ${size}px;
+        height: ${size}px;
+
+        border-radius: 50%;
+        background-color: white;
+        filter: invert(1);
+        transition: filter 0.2s ease;
+
+        &:hover {
+          filter: invert(0);
         },
 
-        "@media (prefers-color-scheme: dark)": {
-          filter: "invert()",
+        @media (prefers-color-scheme: light) {
+          filter: invert(0);
+   
+          &:hover {
+            filter: invert(1);
+          },
+
         },
-      })}
+     
+    `}
       href={href}
       target="_blank"
       rel="noreferrer"
