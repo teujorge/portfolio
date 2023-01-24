@@ -1,26 +1,9 @@
-/** @jsxImportSource @emotion/react */
-
 import EarthImg from "../public/images/earth.png";
 import Image from "next/image";
-import MoonImg from "../public/images/moon.png";
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+/** @jsxImportSource @emotion/react */
 
-export const Title = () => {
-  const [scrollPosition, setScrollPosition] = useState<number>(0);
-
-  useEffect(() => {
-    function handleScroll() {
-      const position = window.scrollY;
-      setScrollPosition(position);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
   return (
     <div
       css={css`
@@ -42,14 +25,13 @@ export const Title = () => {
           height: min(30vw, 50vh);
           max-width: 400px;
           max-height: 400px;
-          filter: blur(${scrollPosition / 100}px);
           transform: translateY(${-scrollPosition * 1.2}px)
             rotateZ(${-scrollPosition / 10}deg);
-          transform-origin: 0px 0px;
-          transition: transform 0s linear;
+
+          transition: transform 0.1s ease-out;
         `}
       >
-        <Image src={EarthImg} alt={"image-of-earth"} fill />
+        <Image src={EarthImg} alt={"planet-earth"} fill />
       </div>
 
       <div
