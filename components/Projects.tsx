@@ -3,10 +3,10 @@ import IconDemo from "../public/svg/magnifying-glass";
 import IconGithub from "../public/svg/github";
 import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
-import ShowAtlasArena from "../public/images/atlas_arena_show.gif";
-import ShowFractalViz from "../public/images/fractal_viz_show.gif";
-import ShowMovieMatter from "../public/images/movie_matter_show.png";
-import ShowWaterTag from "../public/images/water_tag_show.gif";
+import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
+import ShowFractalViz from "../public/images/demos/fractal_viz.gif";
+import ShowMovieMatter from "../public/images/demos/movie_matter.png";
+import ShowWaterTag from "../public/images/demos/water_tag.gif";
 import { css } from "@emotion/react";
 import { IconButton } from "./IconButton";
 /** @jsxImportSource @emotion/react */
