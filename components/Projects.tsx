@@ -6,6 +6,7 @@ import Image, { StaticImageData } from "next/image";
 import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
 import ShowFractalViz from "../public/images/demos/fractal_viz.gif";
 import ShowMovieMatter from "../public/images/demos/movie_matter.png";
+import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
 import ShowWaterTag from "../public/images/demos/water_tag.gif";
 import { css } from "@emotion/react";
 import { IconButton } from "./IconButton";
@@ -137,6 +138,22 @@ export const Projects = () => {
           />,
         ]}
       /> */}
+
+      <Project
+        title={"Zid Product Manager"}
+        media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
+        desc={[
+          "A dashboard app for managing your products in the zid platform. With an admin page to manage app users.",
+        ]}
+        tech={["React", "DB", "API"]}
+        icons={[
+          <IconButton
+            key={"zid-platform"}
+            src={IconDemo}
+            href={"https://zid-products-staging.netlify.app/login"}
+          />,
+        ]}
+      />
 
       <Project
         title={"MovieMatter"}
