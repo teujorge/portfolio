@@ -107,7 +107,7 @@ export const Experience = () => {
         icon={IconCode}
         title={"Freelance Software Engineer"}
         desc={[
-          "Implemented and updated application modules under the direction of Software Lead.",
+          "Implemented and update application modules under the direction of Software Lead.",
           "Successfully completed several freelance projects, with strong customer satisfaction rate.",
           "Efficiently managed and executed personal projects, according to established objectives and timelines.",
         ]}
@@ -122,7 +122,7 @@ export const Experience = () => {
         end={"2022"}
         desc={[
           "Worked as a productive and positive team member to design, code, test, report, and debug software.",
-          "Effectively coded software changes and alterations based on specific design specifications.",
+          "Effectively coded software changes and alterations based on design specifications.",
           "Supported product manufacturing by maintaining and updating factory equipment.",
         ]}
       />
