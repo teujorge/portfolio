@@ -8,7 +8,7 @@ import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
 import { SolarSystem } from "@/components/SolarSystem";
 import { Title } from "@/components/Title";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
@@ -25,6 +25,13 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // prevent re-render
+  const memoLeftBar = useMemo(LeftBar, []);
+  const memoAbout = useMemo(About, []);
+  const memoExperience = useMemo(Experience, []);
+  const memoProjects = useMemo(Projects, []);
+  const memoEducation = useMemo(Education, []);
 
   return (
     <>
@@ -48,12 +55,12 @@ export default function Home() {
           }
         `}
       >
-        <LeftBar />
+        {memoLeftBar}
         <Title scrollPosition={scrollPosition} />
-        <About />
-        <Experience />
-        <Projects />
-        <Education />
+        {memoAbout}
+        {memoExperience}
+        {memoProjects}
+        {memoEducation}
         {/* <Contact /> */}
         <SolarSystem scrollPosition={scrollPosition} />
       </main>
