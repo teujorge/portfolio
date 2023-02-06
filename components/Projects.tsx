@@ -72,26 +72,38 @@ export const Projects = () => {
         </h3>
         <div
           css={css`
+            position: relative;
+            object-fit: contain;
+            margin: 0px;
+            padding: 0px;
             border-radius: 12px;
+            width: 500px !important;
+            height: ${500 * (media.src.height / media.src.width)}px !important;
 
             @media (max-width: 1000px) {
               margin: 10px !important;
+              width: 250px !important;
+              height: ${250 *
+              (media.src.height / media.src.width)}px !important;
             }
           `}
         >
           <Image
             css={css`
+              margin: 0px !important;
+              padding: 0px !important;
               border-radius: 12px;
             `}
             src={media.src}
             alt={media.alt}
-            width={250}
+            fill
           />
         </div>
 
         {/* descriptions */}
         <div
           css={css`
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
