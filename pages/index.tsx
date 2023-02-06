@@ -1,5 +1,7 @@
 import Head from "next/head";
+import inView from "@/utils/inView";
 import { About } from "@/components/About";
+import { AppContext } from "./_app";
 import { Contact } from "@/components/Contact";
 import { css } from "@emotion/react";
 import { Education } from "@/components/Education";
@@ -8,16 +10,26 @@ import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
 import { SolarSystem } from "@/components/SolarSystem";
 import { Title } from "@/components/Title";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
-  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const { setScrollPosition } = useContext(AppContext);
 
   useEffect(() => {
+    const revealElements = document.querySelectorAll(".reveal");
+
+    // handle scroll position state and in view animation
     function handleScroll() {
-      const position = window.scrollY;
-      setScrollPosition(position);
+      setScrollPosition(window.scrollY);
+      inView({
+        elements: revealElements,
+        elementVisibleThreshold: 150,
+        forgetfulScroll: false,
+        inViewFn: (e, i) => {
+          e.classList.add("revealShowing");
+        },
+      });
     }
 
     window.addEventListener("scroll", handleScroll);
@@ -26,12 +38,13 @@ export default function Home() {
     };
   }, []);
 
-  // prevent re-render
+  // // prevent re-render
   const memoLeftBar = useMemo(LeftBar, []);
   const memoAbout = useMemo(About, []);
   const memoExperience = useMemo(Experience, []);
   const memoProjects = useMemo(Projects, []);
   const memoEducation = useMemo(Education, []);
+  const memoContact = useMemo(Contact, []);
 
   return (
     <>
@@ -49,6 +62,8 @@ export default function Home() {
           justify-content: center;
           align-items: center;
 
+          margin-bottom: 100px;
+
           & div {
             margin: 40px;
             max-width: var(--max-width);
@@ -56,13 +71,13 @@ export default function Home() {
         `}
       >
         {memoLeftBar}
-        <Title scrollPosition={scrollPosition} />
+        <Title />
         {memoAbout}
         {memoExperience}
         {memoProjects}
         {memoEducation}
-        {/* <Contact /> */}
-        <SolarSystem scrollPosition={scrollPosition} />
+        {/* memoContact */}
+        <SolarSystem />
       </main>
     </>
   );

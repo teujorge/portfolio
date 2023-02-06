@@ -7,10 +7,14 @@ import ImgNeptune from "../public/images/solar-system/8_neptune.png";
 import ImgSaturn from "../public/images/solar-system/6_saturn.png";
 import ImgUranus from "../public/images/solar-system/7_uranus.png";
 import ImgVenus from "../public/images/solar-system/2_venus.png";
+import { AppContext } from "@/pages/_app";
 import { css, keyframes } from "@emotion/react";
+import { useContext } from "react";
 /** @jsxImportSource @emotion/react */
 
-export const SolarSystem = ({ scrollPosition }: { scrollPosition: number }) => {
+export const SolarSystem = () => {
+  const { scrollPosition } = useContext(AppContext);
+
   const SOLAR_SYSTEM = {
     mercury: {
       img: ImgMercury,
