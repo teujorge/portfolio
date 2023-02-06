@@ -73,7 +73,7 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
           `}
         >
           I continuously develop my software skills by building and designing
-          fun games exception embedded systems and everything in between.
+          fun games, exception embedded systems and everything in between.
         </p>
       </div>
     </div>
