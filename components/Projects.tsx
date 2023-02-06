@@ -130,7 +130,7 @@ export const Projects = () => {
 
   return (
     <div>
-      <h2>personal projects</h2>
+      <h2>projects</h2>
 
       {/* <Project
         title={"Co Pilot"}
