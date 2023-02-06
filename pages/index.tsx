@@ -18,6 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     const revealElements = document.querySelectorAll(".reveal");
+    const solarSystemElement = document.querySelectorAll(".solarSystem");
 
     // handle scroll position state and in view animation
     function handleScroll() {
@@ -28,6 +29,20 @@ export default function Home() {
         forgetfulScroll: false,
         inViewFn: (e, i) => {
           e.classList.add("revealShowing");
+        },
+      });
+      inView({
+        elements: solarSystemElement,
+        elementVisibleThreshold: 150,
+        forgetfulScroll: false,
+        aboveViewFn: (e, i) => {
+          e.classList.remove("revealSolarSystem");
+        },
+        inViewFn: (e, i) => {
+          e.classList.add("revealSolarSystem");
+        },
+        belowViewFn: (e, i) => {
+          e.classList.remove("revealSolarSystem");
         },
       });
     }
@@ -61,8 +76,6 @@ export default function Home() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-
-          margin-bottom: 100px;
 
           & div {
             margin: 40px;

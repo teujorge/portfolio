@@ -118,42 +118,53 @@ export const SolarSystem = () => {
   }
 
   return (
-    <div
-      css={css`
-        z-index: -1;
+    <div className="solarSystem">
+      {/* area to display w/out blur */}
+      <div
+        css={css`
+          height: 250px;
+        `}
+      />
 
-        position: fixed;
-        bottom: 50px;
-        right: 50px;
+      {/* spinning solar system */}
+      <div
+        css={css`
+          z-index: -1;
 
-        display: flex;
-        justify-content: left;
-        align-items: center;
+          position: fixed;
+          bottom: 50px;
+          right: 50px;
 
-        margin: 0px !important;
+          display: flex;
+          justify-content: left;
+          align-items: center;
 
-        opacity: ${scrollPosition > 500 ? 1 : 0};
-        filter: blur(20px);
+          margin: 0px !important;
 
-        transition: opacity 1s ease;
-      `}
-    >
-      {solarSystemTransformed.map((body) => (
-        <div
-          key={body.key}
-          css={css`
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            margin: 0px !important;
-            padding-left: ${body.d}px;
-            transform-origin: left;
-            animation: ${body.animation} ${1000 / (body.v + 1)}s linear infinite;
-          `}
-        >
-          <Image src={body.img} alt={body.key} width={body.r} quality={50} />
-        </div>
-      ))}
+          opacity: ${scrollPosition > 500 ? 1 : 0};
+          filter: blur(20px);
+
+          transition: opacity 1s ease, filter 1s ease;
+        `}
+      >
+        {solarSystemTransformed.map((body) => (
+          <div
+            key={body.key}
+            css={css`
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              margin: 0px !important;
+              padding-left: ${body.d}px;
+              transform-origin: left;
+              animation: ${body.animation} ${1000 / (body.v + 1)}s linear
+                infinite;
+            `}
+          >
+            <Image src={body.img} alt={body.key} width={body.r} quality={50} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
