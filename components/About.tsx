@@ -25,6 +25,7 @@ export const About = () => {
         `}
       >
         <Image
+          className="reveal"
           css={css`
             display: flex;
             justify-content: center;
@@ -65,14 +66,14 @@ export const About = () => {
             }
           `}
         >
-          <p>Hello! I am Matheus.</p>
+          <p className="reveal">Hello! I am Matheus.</p>
 
-          <p>
+          <p className="reveal">
             I enjoy developing products using technology, whether that be
             physical or virtual.
           </p>
 
-          <p>
+          <p className="reveal">
             I strive to make a contribution to society through technology and
             engineering in order to bring comfort to the world. I am constantly
             looking to further develop my technical, communication and
@@ -81,9 +82,12 @@ export const About = () => {
             variety of interesting projects on a daily basis.
           </p>
 
-          <p>Here are a few technologies I have enjoyed working with:</p>
+          <p className="reveal">
+            Here are a few technologies I have enjoyed working with:
+          </p>
 
           <div
+            className="reveal"
             css={css`
               display: flex;
               margin: 12px !important;

@@ -35,6 +35,7 @@ export const Experience = () => {
 
     return (
       <div
+        className="reveal"
         css={css`
           display: flex;
           flex-direction: row;

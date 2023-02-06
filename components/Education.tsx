@@ -16,6 +16,7 @@ export const Education = () => {
   }) => {
     return (
       <div
+        className="reveal"
         css={css`
           display: flex;
           flex-direction: column;

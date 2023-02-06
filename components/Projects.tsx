@@ -41,10 +41,16 @@ export const Projects = () => {
 
     return (
       <div
+        className="reveal"
         css={css`
           display: flex;
           justify-content: center;
           align-items: center;
+
+          padding: 20px;
+
+          border-radius: 20px;
+          background-color: var(--off-background-color);
 
           & p {
             margin-top: 20px;
@@ -61,11 +67,16 @@ export const Projects = () => {
       >
         <h3
           css={css`
-            margin-top: 50px;
-            width: 150px !important;
-            min-width: 150px !important;
-            max-width: 150px !important;
+            margin: 10px;
+            width: 150px;
+            min-width: 150px;
+            max-width: 150px;
             text-align: center;
+
+            @media (max-width: 600px) {
+              min-width: 100px;
+              max-width: 100%;
+            }
           `}
         >
           {title}

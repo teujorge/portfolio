@@ -7,6 +7,7 @@
   --max-width: 1200px;
   --border-radius: 12px;
   --background-color: #f0f0f0;
+  --off-background-color: #e0e0e099;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
@@ -36,12 +37,29 @@ a {
 }
 
 h2 {
-  margin: 25px;
+  font-size: 30px;
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.35s ease !important;
+}
+
+.revealShowing {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 0.35s ease !important;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #121212;
+    --off-background-color: #20202099;
   }
 
   html {
