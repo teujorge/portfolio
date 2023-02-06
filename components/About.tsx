@@ -10,6 +10,8 @@ export const About = () => {
       <div
         css={css`
           display: flex;
+          justify-content: center;
+          align-items: center;
           flex-direction: row;
           justify-content: center;
 
@@ -52,6 +54,8 @@ export const About = () => {
 
         <div
           css={css`
+            margin-top: 10px !important;
+
             & p {
               margin-top: 20px;
             }
