@@ -1,13 +1,9 @@
 import EarthImg from "../public/images/earth.png";
 import Image from "next/image";
 import { css } from "@emotion/react";
-import { useContext } from "react";
-import { AppContext } from "@/pages/_app";
 /** @jsxImportSource @emotion/react */
 
-export const Title = () => {
-  const { scrollPosition } = useContext(AppContext);
-
+export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
   return (
     <div
       css={css`
@@ -34,7 +30,7 @@ export const Title = () => {
           overflow: hidden;
           transform: translateY(${-scrollPosition * 1.2}px)
             rotateZ(${scrollPosition / 10}deg);
-          transition: transform 0.05s ease-out;
+          transition: transform 0.1s ease-out;
         `}
       >
         <Image src={EarthImg} alt={"planet-earth"} quality={25} fill priority />
