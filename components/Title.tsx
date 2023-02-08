@@ -30,7 +30,7 @@ export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
           overflow: hidden;
           transform: translateY(${-scrollPosition * 1.2}px)
             rotateZ(${scrollPosition / 10}deg);
-          transition: transform 0.2s ease-out;
+          transition: transform 0.05s ease-out;
         `}
       >
         <Image src={EarthImg} alt={"planet-earth"} quality={25} fill priority />
