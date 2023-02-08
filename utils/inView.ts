@@ -1,14 +1,12 @@
-function inView({
+async function inView({
   elements,
   elementVisibleThreshold = 0,
-  forgetfulScroll,
   aboveViewFn,
   inViewFn,
   belowViewFn,
 }: {
   elements: NodeListOf<Element>;
   elementVisibleThreshold?: number;
-  forgetfulScroll?: boolean;
   aboveViewFn?: (e: Element, i: number) => void;
   inViewFn?: (e: Element, i: number) => void;
   belowViewFn?: (e: Element, i: number) => void;
@@ -23,11 +21,7 @@ function inView({
 
     // element above window upper limit
     if (elementRect.bottom < -elementVisibleThreshold) {
-      if (forgetfulScroll) {
-        if (elements[i] != undefined) {
-          aboveViewFn!(elements[i], i);
-        }
-      }
+      if (aboveViewFn) aboveViewFn(elements[i], i);
     }
     // element is above window lower limit (in view)
     else if (elementRect.top < windowHeight - elementVisibleThreshold) {
@@ -35,9 +29,7 @@ function inView({
     }
     // element is below window lower limit
     else {
-      if (elements[i] != undefined && belowViewFn) {
-        belowViewFn(elements[i], i);
-      }
+      if (belowViewFn) belowViewFn(elements[i], i);
     }
   }
 
