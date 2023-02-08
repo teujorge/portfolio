@@ -62,7 +62,7 @@ export default function Home() {
     // handle scroll position state
     function handleScroll() {
       const scrollDiff = Math.abs(scrollPosition - window.scrollY);
-      if (scrollDiff > 5) setScrollPosition(window.scrollY);
+      if (scrollDiff > 1) setScrollPosition(window.scrollY);
     }
 
     window.addEventListener("scroll", handleScroll);
