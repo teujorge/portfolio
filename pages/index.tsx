@@ -19,23 +19,21 @@ export default function Home() {
     const revealElements = document.querySelectorAll(".reveal");
     const solarSystemElement = document.querySelectorAll(".solarSystem");
 
+    console.log(revealElements[0]);
+
     // handle scroll in view animation
     function handleScroll() {
       inView({
         elements: revealElements,
-        elementVisibleThreshold: 150,
-        forgetfulScroll: false,
+        elementVisibleThreshold: 100,
         inViewFn: (e, i) => {
-          if (!e.classList.contains("revealShowing")) {
-            e.classList.add("revealShowing");
-          }
+          e.classList.add("revealShowing");
         },
       });
 
       inView({
         elements: solarSystemElement,
         elementVisibleThreshold: 150,
-        forgetfulScroll: false,
         aboveViewFn: (e, i) => {
           if (e.classList.contains("revealSolarSystem")) {
             e.classList.remove("revealSolarSystem");
