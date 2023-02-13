@@ -10,6 +10,7 @@ export const LeftBar = () => {
   return (
     <div
       css={css`
+        z-index: 100;
         position: fixed;
         top: 0px;
         left: 0px;
