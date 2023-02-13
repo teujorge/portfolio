@@ -89,7 +89,7 @@ export const World = () => {
             ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
             ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
           );
-          transition: transform 0.2s ease;
+          transition: transform 0.3s ease;
           filter: invert(0);
 
           @media (prefers-color-scheme: dark) {
@@ -121,7 +121,7 @@ export const World = () => {
             ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
             ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
           );
-          transition: transform 0.2s ease, top 0.2s ease, left 0.2s ease;
+          transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
         `}
       />
       <div
@@ -146,7 +146,7 @@ export const World = () => {
             ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
             ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
           );
-          transition: transform 0.2s ease, top 0.2s ease, left 0.2s ease;
+          transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
         `}
       >
         <p>
