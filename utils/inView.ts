@@ -11,10 +11,7 @@ export function inView({
   inViewFn?: (e: Element, i: number) => void;
   belowViewFn?: (e: Element, i: number) => void;
 }) {
-  var indexOfElementsInView: number[] = [];
   var windowHeight: number = window.innerHeight;
-
-  if (!aboveViewFn) aboveViewFn = inViewFn;
 
   for (var i = 0; i < elements.length; i++) {
     var elementRect = elements[i].getBoundingClientRect();
@@ -25,19 +22,11 @@ export function inView({
     }
     // element is above window lower limit (in view)
     else if (elementRect.top < windowHeight - elementVisibleThreshold) {
-      indexOfElementsInView.push(i);
+      if (inViewFn) inViewFn(elements[i], i);
     }
     // element is below window lower limit
     else {
       if (belowViewFn) belowViewFn(elements[i], i);
     }
-  }
-
-  // only work on last item of elements in view
-  var actionIndex: number =
-    indexOfElementsInView[indexOfElementsInView.length - 1];
-  var actionElement: Element = elements[actionIndex];
-  if (actionElement != undefined && inViewFn) {
-    inViewFn(actionElement, actionIndex);
   }
 }
