@@ -108,12 +108,34 @@ export const World = () => {
       <div
         css={css`
           margin: 0px !important;
+
+          z-index: 10;
+          position: absolute;
+          top: ${CITIES_LIVED[currentCityIndex].position.y}px;
+          left: ${CITIES_LIVED[currentCityIndex].position.x}px;
+
+          width: 10px;
+          height: 10px;
+
+          border-radius: 50%;
+          background-color: cyan;
+
+          transform: translate(
+            ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
+            ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
+          );
+          transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
+        `}
+      />
+      <div
+        css={css`
+          margin: 0px !important;
           padding: 6px;
 
           z-index: 10;
           position: absolute;
-          top: ${8 + mapHeight / 2}px;
-          left: ${8 + mapWidth / 2}px;
+          top: ${CITIES_LIVED[currentCityIndex].position.y + 6}px;
+          left: ${CITIES_LIVED[currentCityIndex].position.x + 6}px;
 
           display: flex;
           justify-content: center;
@@ -122,6 +144,12 @@ export const World = () => {
           border-radius: 8px;
           color: #f0f0f0;
           background-color: #000000dd;
+
+          transform: translate(
+            ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
+            ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
+          );
+          transition: transform 0.3s ease, top 0.3s ease, left 0.3s ease;
         `}
       >
         <p>
@@ -131,24 +159,6 @@ export const World = () => {
       </div>
 
       {/* location dot marker */}
-      <div
-        css={css`
-          margin: 0px !important;
-
-          z-index: 10;
-          position: absolute;
-          top: ${5 + mapHeight / 2}px;
-          left: ${5 + mapWidth / 2}px;
-
-          width: 10px;
-          height: 10px;
-
-          border-radius: 50%;
-          background-color: cyan;
-        `}
-      />
-
-      {/* go to next */}
       <button
         css={css`
           z-index: 12;
