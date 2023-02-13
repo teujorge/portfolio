@@ -49,6 +49,7 @@ export const World = () => {
 
   return (
     <div
+      className="reveal"
       css={css`
         position: relative;
         display: flex;
@@ -129,6 +130,7 @@ export const World = () => {
 
       <button
         css={css`
+          cursor: pointer;
           font-size: inherit;
           font-family: inherit;
 
