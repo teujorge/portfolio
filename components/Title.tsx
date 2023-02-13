@@ -1,13 +1,9 @@
 import EarthImg from "../public/images/earth.png";
 import Image from "next/image";
 import { css } from "@emotion/react";
-import { useContext } from "react";
-import { AppContext } from "@/pages/_app";
 /** @jsxImportSource @emotion/react */
 
-export const Title = () => {
-  const { scrollPosition } = useContext(AppContext);
-
+export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
   return (
     <div
       css={css`

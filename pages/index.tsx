@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { About } from "@/components/About";
-import { AppContext } from "./_app";
 import { Contact } from "@/components/Contact";
 import { css } from "@emotion/react";
 import { Education } from "@/components/Education";
@@ -10,39 +9,45 @@ import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
 import { SolarSystem } from "@/components/SolarSystem";
 import { Title } from "@/components/Title";
-import { useContext, useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
-  const { setScrollPosition } = useContext(AppContext);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const revealElements = document.querySelectorAll(".reveal");
     const solarSystemElement = document.querySelectorAll(".solarSystem");
 
-    // handle scroll position state and in view animation
+    console.log(revealElements[0]);
+
+    // handle scroll in view animation
     function handleScroll() {
-      setScrollPosition(window.scrollY);
       inView({
         elements: revealElements,
-        elementVisibleThreshold: 150,
-        forgetfulScroll: false,
+        elementVisibleThreshold: 100,
         inViewFn: (e, i) => {
           e.classList.add("revealShowing");
         },
       });
+
       inView({
         elements: solarSystemElement,
         elementVisibleThreshold: 150,
-        forgetfulScroll: false,
         aboveViewFn: (e, i) => {
-          e.classList.remove("revealSolarSystem");
+          if (e.classList.contains("revealSolarSystem")) {
+            e.classList.remove("revealSolarSystem");
+          }
         },
         inViewFn: (e, i) => {
-          e.classList.add("revealSolarSystem");
+          if (!e.classList.contains("revealSolarSystem")) {
+            e.classList.add("revealSolarSystem");
+          }
         },
         belowViewFn: (e, i) => {
-          e.classList.remove("revealSolarSystem");
+          if (e.classList.contains("revealSolarSystem")) {
+            e.classList.remove("revealSolarSystem");
+          }
         },
       });
     }
@@ -53,7 +58,20 @@ export default function Home() {
     };
   }, []);
 
-  // // prevent re-render
+  useEffect(() => {
+    // handle scroll position state
+    function handleScroll() {
+      const scrollDiff = Math.abs(scrollPosition - window.scrollY);
+      if (scrollDiff > 1) setScrollPosition(window.scrollY);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollPosition]);
+
+  // prevent re-render
   const memoLeftBar = useMemo(LeftBar, []);
   const memoAbout = useMemo(About, []);
   const memoExperience = useMemo(Experience, []);
@@ -84,13 +102,13 @@ export default function Home() {
         `}
       >
         {memoLeftBar}
-        <Title />
+        <Title scrollPosition={scrollPosition} />
         {memoAbout}
         {memoExperience}
         {memoProjects}
         {memoEducation}
         {/* memoContact */}
-        <SolarSystem />
+        <SolarSystem scrollPosition={scrollPosition} />
       </main>
     </>
   );

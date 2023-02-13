@@ -8,6 +8,7 @@ export const About = () => {
     <div>
       <h2>about me</h2>
       <div
+        className="reveal"
         css={css`
           display: flex;
           justify-content: center;
@@ -25,7 +26,6 @@ export const About = () => {
         `}
       >
         <Image
-          className="reveal"
           css={css`
             display: flex;
             justify-content: center;
