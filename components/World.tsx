@@ -75,10 +75,7 @@ export const World = () => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        overflow: hidden;
-
-        border: 2px solid black;
+        overflow: visible;
         border-radius: 50px;
 
         @media (prefers-color-scheme: dark) {
