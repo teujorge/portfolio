@@ -2,13 +2,32 @@
 import Image from "next/image";
 import worldMap from "public/images/flags/world-map.png";
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const World = () => {
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
-
-  const mapWidth = 300;
+  const [mapWidth, setMapWidth] = useState(350);
   const mapHeight = (mapWidth * 3) / 5;
+
+  function calculateMapWidth(screenWidth: number) {
+    if (screenWidth < 500) return 350;
+    else if (screenWidth < 750) return 400;
+    else if (screenWidth < 1000) return 650;
+    else if (screenWidth < 1250) return 900;
+
+    return 1000;
+  }
+
+  useEffect(() => {
+    setMapWidth(calculateMapWidth(window.innerWidth));
+
+    function handleResize() {
+      setMapWidth(calculateMapWidth(window.innerWidth));
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const CITIES_LIVED: {
     name: string;
@@ -69,6 +88,11 @@ export const World = () => {
     >
       <Image
         css={css`
+          transform: translate(
+            ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
+            ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
+          );
+          transition: transform 0.2s ease;
           filter: invert(0);
 
           @media (prefers-color-scheme: dark) {
@@ -81,7 +105,6 @@ export const World = () => {
         width={mapWidth}
         height={mapHeight}
       />
-
       <div
         css={css`
           margin: 0px !important;
@@ -97,10 +120,13 @@ export const World = () => {
           border-radius: 50%;
           background-color: cyan;
 
-          transition: top 0.2s ease, left 0.2s ease;
+          transform: translate(
+            ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
+            ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
+          );
+          transition: transform 0.2s ease, top 0.2s ease, left 0.2s ease;
         `}
       />
-
       <div
         css={css`
           margin: 0px !important;
@@ -119,7 +145,11 @@ export const World = () => {
           color: #f0f0f0;
           background-color: #000000dd;
 
-          transition: top 0.2s ease, left 0.2s ease;
+          transform: translate(
+            ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
+            ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
+          );
+          transition: transform 0.2s ease, top 0.2s ease, left 0.2s ease;
         `}
       >
         <p>
@@ -130,6 +160,7 @@ export const World = () => {
 
       <button
         css={css`
+          z-index: 12;
           cursor: pointer;
           font-size: inherit;
           font-family: inherit;
