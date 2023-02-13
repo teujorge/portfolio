@@ -10,6 +10,7 @@ import { Projects } from "@/components/Projects";
 import { SolarSystem } from "@/components/SolarSystem";
 import { Title } from "@/components/Title";
 import { useEffect, useMemo, useState } from "react";
+import { World } from "@/components/World";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
@@ -108,6 +109,7 @@ export default function Home() {
         {memoExperience}
         {memoProjects}
         {memoEducation}
+        <World />
         {/* memoContact */}
         <SolarSystem scrollPosition={scrollPosition} />
       </main>
