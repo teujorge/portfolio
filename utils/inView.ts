@@ -1,4 +1,4 @@
-function inView({
+export function inView({
   elements,
   elementVisibleThreshold = 0,
   forgetfulScroll,
@@ -49,5 +49,3 @@ function inView({
     inViewFn(actionElement, actionIndex);
   }
 }
-
-export default inView;

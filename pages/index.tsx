@@ -1,16 +1,16 @@
 import Head from "next/head";
-import inView from "@/utils/inView";
 import { About } from "@/components/About";
 import { AppContext } from "./_app";
 import { Contact } from "@/components/Contact";
 import { css } from "@emotion/react";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
+import { inView } from "@/utils/inView";
 import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
 import { SolarSystem } from "@/components/SolarSystem";
 import { Title } from "@/components/Title";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo } from "react";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
