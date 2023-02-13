@@ -66,6 +66,24 @@ export const World = () => {
     },
   ];
 
+  // two points to compare
+  const p1 = CITIES_LIVED[currentCityIndex].position;
+  const p0 =
+    CITIES_LIVED[
+      currentCityIndex === 0 ? CITIES_LIVED.length - 1 : currentCityIndex - 1
+    ].position;
+
+  // v = d/t
+  const mapVelocity = 1000;
+
+  // d = d1 - d0
+  const distanceToTravel = Math.sqrt(
+    Math.pow(p0.x + p1.x, 2) + Math.pow(p0.y + p0.y, 2)
+  );
+
+  // t = d/v
+  const timeToTravel = distanceToTravel / mapVelocity;
+
   return (
     <div
       className="reveal"
@@ -90,7 +108,7 @@ export const World = () => {
             ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
             ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
           );
-          transition: transform 0.3s ease;
+          transition: transform ${timeToTravel}s ease;
           filter: invert(0);
 
           @media (prefers-color-scheme: dark) {
