@@ -15,13 +15,13 @@ import { useEffect, useMemo, useState } from "react";
 export default function Home() {
   const [scrollPosition, setScrollPosition] = useState(0);
 
+  // handle in view animation
   useEffect(() => {
+    window.scrollTo({ top: 0 });
+
     const revealElements = document.querySelectorAll(".reveal");
     const solarSystemElement = document.querySelectorAll(".solarSystem");
 
-    console.log(revealElements[0]);
-
-    // handle scroll in view animation
     function handleScroll() {
       inView({
         elements: revealElements,
@@ -58,6 +58,7 @@ export default function Home() {
     };
   }, []);
 
+  // handle scroll position state
   useEffect(() => {
     // handle scroll position state
     function handleScroll() {
