@@ -31,38 +31,53 @@ export const World = () => {
 
   const CITIES_LIVED: {
     name: string;
-    year: string;
+    year: number;
     position: { x: number; y: number };
   }[] = [
     {
       name: "san diego",
-      year: "1997",
+      year: 1997,
       position: { x: 0.155 * mapWidth, y: 0.545 * mapHeight },
     },
     {
       name: "salvador",
-      year: "1998",
+      year: 1998,
       position: { x: 0.365 * mapWidth, y: 0.725 * mapHeight },
     },
     {
       name: "bogota",
-      year: "1999",
+      year: 1999,
       position: { x: 0.27 * mapWidth, y: 0.66 * mapHeight },
     },
     {
       name: "quito",
-      year: "2001",
+      year: 2001,
       position: { x: 0.2625 * mapWidth, y: 0.6825 * mapHeight },
     },
     {
       name: "abu dhabi",
-      year: "2008",
+      year: 2008,
       position: { x: 0.613 * mapWidth, y: 0.58 * mapHeight },
     },
     {
+      name: "mexico city",
+      year: 2015,
+      position: { x: 0.2 * mapWidth, y: 0.59 * mapHeight },
+    },
+    {
+      name: "boston",
+      year: 2016,
+      position: { x: 0.2825 * mapWidth, y: 0.483 * mapHeight },
+    },
+    {
       name: "burlington",
-      year: "2017",
+      year: 2017,
       position: { x: 0.28 * mapWidth, y: 0.48 * mapHeight },
+    },
+    {
+      name: "clearwater",
+      year: 2020,
+      position: { x: 0.247 * mapWidth, y: 0.562 * mapHeight },
     },
   ];
 
@@ -95,24 +110,21 @@ export const World = () => {
         align-items: center;
         overflow: visible;
         border-radius: 50px;
-
-        @media (prefers-color-scheme: dark) {
-          filter: invert(1);
-        }
       `}
     >
       {/* world map */}
       <Image
         css={css`
+          z-index: 1;
           transform: translate(
             ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
             ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
           );
           transition: transform ${timeToTravel}s ease;
-          filter: invert(0);
+          filter: invert(1);
 
           @media (prefers-color-scheme: dark) {
-            filter: invert(1);
+            filter: invert(0);
           }
         `}
         src={worldMap}
@@ -138,14 +150,15 @@ export const World = () => {
           align-items: center;
 
           border-radius: 8px;
-          color: #f0f0f0;
-          background-color: #000000dd;
+          color: #101010;
+          background-color: #ffffffdd;
+
+          @media (prefers-color-scheme: dark) {
+            filter: invert(1);
+          }
         `}
       >
-        <p>
-          {CITIES_LIVED[currentCityIndex].name}{" "}
-          {CITIES_LIVED[currentCityIndex].year}
-        </p>
+        <p>{CITIES_LIVED[currentCityIndex].name}</p>
       </div>
 
       {/* location dot marker */}
@@ -162,43 +175,77 @@ export const World = () => {
           height: 10px;
 
           border-radius: 50%;
-          background-color: cyan;
+          background-color: #04aa6d;
+
+          @media (prefers-color-scheme: dark) {
+            filter: invert(1);
+          }
         `}
       />
 
-      {/* go to next */}
-      <button
+      {/* slider to change time */}
+      <input
         css={css`
-          z-index: 12;
-          cursor: pointer;
-          font-size: inherit;
-          font-family: inherit;
+          z-index: 10;
+          -webkit-appearance: none; /* Override default CSS styles */
+          appearance: none;
+          width: 100%;
+          height: 18px;
+          border-radius: 50px;
+          background-color: #d3d3d3;
+          outline: none; /* Remove outline */
+          opacity: 0.65; /* Set transparency (for mouse-over effects on hover) */
+          -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+          transition: all 0.2s ease;
 
-          margin: 10px;
-          padding: 6px;
+          /* Mouse-over effects */
+          :hover,
+          :active {
+            opacity: 1; /* Fully shown on mouse-over */
+          }
 
-          border: 2px solid #000;
-          border-radius: 8px;
+          ::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #04aa6d;
+            cursor: pointer;
+            transition: width 0.2s ease, height 0.2s ease;
+          }
+          ::-webkit-slider-thumb:hover,
+          ::-webkit-slider-thumb:active {
+            width: 26px;
+            height: 26px;
+          }
 
-          color: #f0f0f0;
-          background-color: #000000dd;
-          transition: background-color 0.2s ease;
-
-          :hover {
-            color: #fff;
-            background-color: #000;
+          @media (prefers-color-scheme: dark) {
+            filter: invert(1);
           }
         `}
-        onClick={() => {
-          if (currentCityIndex >= CITIES_LIVED.length - 1) {
-            setCurrentCityIndex(0);
-          } else {
-            setCurrentCityIndex(currentCityIndex + 1);
+        type="range"
+        min={0}
+        max={CITIES_LIVED.length - 1}
+        step={0.01}
+        value={currentCityIndex}
+        onChange={(event) => {
+          const chosenIndex = Math.round(Number(event.target.value));
+
+          if (chosenIndex !== currentCityIndex) {
+            setCurrentCityIndex(chosenIndex);
           }
         }}
+      />
+
+      {/* time label for input range slider */}
+      <p
+        css={css`
+          padding: 10px;
+        `}
       >
-        <p>next</p>
-      </button>
+        {CITIES_LIVED[currentCityIndex].year}
+      </p>
     </div>
   );
 };
