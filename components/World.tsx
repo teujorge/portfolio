@@ -189,7 +189,7 @@ export const World = () => {
           z-index: 10;
           -webkit-appearance: none; /* Override default CSS styles */
           appearance: none;
-          width: 100%;
+          width: 80%;
           height: 18px;
           border-radius: 50px;
           background-color: #d3d3d3;

@@ -57,7 +57,7 @@ h2 {
 }
 
 .revealSolarSystem * {
-  filter: blur(1px) !important;
+  filter: blur(0px) !important;
 }
 
 @media (prefers-color-scheme: dark) {
