@@ -11,10 +11,10 @@ export function inView({
   inViewFn?: (e: Element, i: number) => void;
   belowViewFn?: (e: Element, i: number) => void;
 }) {
-  var windowHeight: number = window.innerHeight;
+  let windowHeight: number = window.innerHeight;
 
-  for (var i = 0; i < elements.length; i++) {
-    var elementRect = elements[i].getBoundingClientRect();
+  for (let i = 0; i < elements.length; i++) {
+    let elementRect = elements[i].getBoundingClientRect();
 
     // element above window upper limit
     if (elementRect.bottom < -elementVisibleThreshold) {
