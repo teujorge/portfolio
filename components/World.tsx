@@ -244,7 +244,7 @@ export const World = () => {
           padding: 10px;
         `}
       >
-        {CITIES_LIVED[currentCityIndex].year}
+        Where I was in {CITIES_LIVED[currentCityIndex].year}
       </p>
     </div>
   );
