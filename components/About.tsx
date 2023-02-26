@@ -66,20 +66,12 @@ export const About = () => {
             }
           `}
         >
-          <p className="reveal">Hello! I am Matheus.</p>
-
           <p className="reveal">
-            I enjoy developing products using technology, whether that be
-            physical or virtual.
-          </p>
-
-          <p className="reveal">
-            I strive to make a contribution to society through technology and
-            engineering in order to bring comfort to the world. I am constantly
-            looking to further develop my technical, communication and
-            interpersonal skills. Shortly, I am a mechanical engineer by trade
-            but I am now focused on accruing software expertise by working on a
-            variety of interesting projects on a daily basis.
+            I am an innovative Software Engineer with a proven track record of
+            identifying issues and achieving solutions to satisfy project
+            requirements. Committed to working as a collaborative and positive
+            team member, striving to utilize my knowledge and expertise for
+            optimal engineering results.
           </p>
 
           <p className="reveal">
