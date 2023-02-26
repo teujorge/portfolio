@@ -5,7 +5,7 @@ export function inView({
   inViewFn,
   belowViewFn,
 }: {
-  elements: NodeListOf<Element>;
+  elements: NodeListOf<Element> | HTMLElement[];
   elementVisibleThreshold?: number;
   aboveViewFn?: (e: Element, i: number) => void;
   inViewFn?: (e: Element, i: number) => void;
