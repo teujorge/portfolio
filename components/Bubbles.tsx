@@ -15,12 +15,12 @@ type ColorRGBA = {
 };
 
 const Bubbles = ({
-  quantity = 10,
+  quantity = 4,
   blur = 100, // px
   minSpeed = 50, // px/s
   maxSpeed = 100, // px/s
-  minSize = 100, // px
-  maxSize = 500, // px
+  minSize = 5, // window width %
+  maxSize = 55, // window width %,
 }: {
   quantity?: number;
   blur?: number;
@@ -73,31 +73,39 @@ const Bubbles = ({
       setFinalPosition({ ...newFinalPosition });
     }
 
-    // using top pos
     function randOrigin(): Position {
       return {
-        x: Math.round(Math.random() * window.innerWidth - maxSize / 2),
+        x: Math.round(
+          Math.random() * window.innerWidth -
+            widthPercentageToPixels(maxSize) / 2
+        ),
         y: window.innerHeight + blur,
       };
     }
 
-    // using translate
     function randFinalPosition(origin: Position): Position {
       return {
         x: Math.round(Math.random() * window.innerWidth),
         y:
           -1 *
-          (origin.y + Math.round(Math.random() * maxSize) + maxSize + blur),
+          (origin.y +
+            Math.random() * widthPercentageToPixels(maxSize) +
+            widthPercentageToPixels(maxSize) +
+            blur),
       };
     }
 
-    function randSpeed() {
+    function randSpeed(): number {
       return Math.round(Math.random() * maxSpeed) + minSpeed + 1;
     }
 
     function randSize(): number {
-      const _size = Math.round(Math.random() * maxSize + minSize);
-      return _size > 0 ? _size : 1;
+      const percentage = Math.random() * maxSize + minSize;
+      return widthPercentageToPixels(percentage);
+    }
+
+    function widthPercentageToPixels(p: number): number {
+      return (window.innerWidth * p) / 100;
     }
 
     function randColor(): ColorRGBA {
@@ -109,7 +117,7 @@ const Bubbles = ({
       };
     }
 
-    function calcAnimTime() {
+    function calcAnimTime(): number {
       if (size === 0) return 10;
 
       const dx = finalPosition.x - origin.x;
