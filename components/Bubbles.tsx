@@ -2,10 +2,6 @@
 import { css, keyframes } from "@emotion/react";
 import { useEffect, useRef, useState } from "react";
 
-export function delay(time: number) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
 type Position = {
   x: number;
   y: number;
@@ -33,19 +29,26 @@ const Bubbles = ({
   minSize?: number;
   maxSize?: number;
 }) => {
-  // a single bubble
+  // single bubble component
   const Bubble = ({ bubbleId }: { bubbleId: string }) => {
     const [origin, setOrigin] = useState<Position>({
       x: -maxSize - blur,
       y: -maxSize - blur,
     });
+
     const [finalPosition, setFinalPosition] = useState<Position>({
       x: -maxSize - blur,
       y: -maxSize - blur,
     });
 
+    const [color, setColor] = useState<ColorRGBA>({
+      r: 0,
+      g: 0,
+      b: 0,
+      a: 0,
+    });
+
     const [size, setSize] = useState<number>(0);
-    const [color, setColor] = useState<ColorRGBA>({ r: 0, g: 0, b: 0, a: 0 });
 
     const bubbleRef = useRef<HTMLDivElement>(null);
 
@@ -102,7 +105,7 @@ const Bubbles = ({
         r: Math.round(Math.random() * 200),
         g: Math.round(Math.random() * 200),
         b: Math.round(Math.random() * 200),
-        a: Math.random() - 0.25,
+        a: Math.random() * (0.75 - 0.15) + 0.15,
       };
     }
 
