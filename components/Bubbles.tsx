@@ -1,16 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { css, keyframes } from "@emotion/react";
+import { useEffect, useRef, useState } from "react";
 
 export function delay(time: number) {
   return new Promise((resolve) => setTimeout(resolve, time));
-}
-
-enum ScreenCorner {
-  tl = "top left",
-  tr = "top right",
-  bl = "bottom left",
-  br = "bottom right",
 }
 
 type Position = {
@@ -26,117 +19,65 @@ type ColorRGBA = {
 };
 
 const Bubbles = ({
-  from = ScreenCorner.bl,
-  to = ScreenCorner.tr,
-  quantity = 5,
-  blur = 50, // px
-  timeInterval = 100, // ms
-  maxSpeed = 50,
-  minSpeed = 2,
-  minSize = 50, // px
-  maxSize = 200, // px
+  quantity = 10,
+  blur = 100, // px
+  minSize = 100, // px
+  maxSize = 500, // px
 }: {
-  from?: ScreenCorner;
-  to?: ScreenCorner;
   quantity?: number;
   blur?: number;
-  timeInterval?: number;
-  maxSpeed?: number;
-  minSpeed?: number;
   minSize?: number;
   maxSize?: number;
 }) => {
   // a single bubble
   const Bubble = ({ bubbleId }: { bubbleId: string }) => {
     const [origin, setOrigin] = useState<Position>({
+      x: 0,
+      y: -maxSize * 2,
+    });
+    const [finalPosition, setFinalPosition] = useState<Position>({
       x: -maxSize,
       y: -maxSize,
     });
-    const [speed, setSpeed] = useState<number>(0);
-    const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
     const [angle, setAngle] = useState<number>(45);
     const [size, setSize] = useState<number>(0);
     const [color, setColor] = useState<ColorRGBA>({ r: 0, g: 0, b: 0, a: 0 });
 
-    const [reseting, setReseting] = useState(true);
+    const bubbleRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      handleBallReset();
-    }, [reseting]);
+      bubbleRef.current!.addEventListener(
+        "animationiteration",
+        function () {
+          resetBubble();
+        },
+        false
+      );
+    }, []);
 
-    useEffect(() => {
-      handlePositionChange();
-    }, [position]);
-
-    function handleBallReset() {
-      if (!reseting) return;
-
+    function resetBubble() {
       setSize(randSize());
-      setSpeed(randSpeed());
       setColor(randColor());
+      setAngle(randAngle());
       setOrigin({ ...randOrigin() });
-      setPosition({ ...resetPosition() });
-
-      setReseting(false);
+      setFinalPosition({ ...randFinalPosition() });
     }
 
-    function handlePositionChange() {
-      if (reseting) return;
-
-      // reset ball
-      if (!ballIsInView()) setReseting(true);
-      // move ball
-      else {
-        delay(timeInterval).then(() => {
-          let _position = position;
-          _position.x += Math.cos(angle * (Math.PI / 180)) * speed;
-          _position.y -= Math.sin(angle * (Math.PI / 180)) * speed;
-          setPosition({ ..._position });
-
-          let _angle = angle + (Math.random() - 0.5) * 5;
-          if (_angle > 90) setAngle(90);
-          else if (_angle < 0) setAngle(0);
-          else setAngle(_angle);
-        });
-      }
-    }
-
-    function ballIsInView(): boolean {
-      //   console.log(
-      //     "X:",
-      //     position.x + origin.x,
-      //     window.innerWidth + maxSize * 4,
-      //     "Y:",
-      //     -position.y,
-      //     window.innerHeight + maxSize * 4
-      //   );
-
-      // check X
-      if (position.x + origin.x > window.innerWidth + maxSize * 4) {
-        console.log("ball is outside X");
-        return false;
-      }
-      // check Y
-      else if (-position.y > window.innerHeight + maxSize * 4) {
-        console.log("ball is outside Y");
-        return false;
-      }
-      return true;
-    }
-
+    // using bottom pos
     function randOrigin(): Position {
       return {
-        x: Math.round(
-          Math.random() * (window.innerWidth * 3) - window.innerWidth
-        ),
-        y: 0,
+        x: Math.round(Math.random() * window.innerWidth),
+        y: Math.round(Math.random() * -maxSize * 5) - maxSize,
       };
     }
 
-    function resetPosition(): Position {
+    // using translate
+    function randFinalPosition(): Position {
       return {
-        x: -maxSize,
-        y: maxSize,
+        x: Math.round(
+          Math.random() * window.innerWidth - window.innerWidth / 2
+        ),
+        y: Math.round(Math.random() * maxSize * 3) + window.innerHeight,
       };
     }
 
@@ -146,25 +87,40 @@ const Bubbles = ({
 
     function randColor(): ColorRGBA {
       return {
-        r: Math.round(Math.random() * 255),
-        g: Math.round(Math.random() * 255),
-        b: Math.round(Math.random() * 255),
+        r: Math.round(Math.random() * 200),
+        g: Math.round(Math.random() * 200),
+        b: Math.round(Math.random() * 200),
         a: Math.random() - 0.25,
       };
     }
 
-    function randSpeed(): number {
-      return Math.round(Math.random() * maxSpeed + minSpeed);
+    function randAngle(): number {
+      return Math.round(Math.random() * 90);
     }
+
+    const floatAnim = keyframes`
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(${-2000 + origin.y}px);
+    }
+    `;
+
+    // v = d/t
+    const animTime =
+      size === 0 ? 250 : Math.round(Math.random() * 20 + 75) * 1000;
+    console.log(animTime);
 
     return (
       <div
         id={bubbleId}
+        ref={bubbleRef}
         css={css`
           z-index: -5;
           position: fixed;
-          bottom: ${origin.x}px;
-          left: ${origin.y}px;
+          bottom: ${origin.y}px;
+          left: ${origin.x}px;
 
           width: ${size}px;
           height: ${size}px;
@@ -178,8 +134,7 @@ const Bubbles = ({
 
           filter: blur(${blur}px);
 
-          transform: translate(${position.x}px, ${position.y}px);
-          transition: transform ${timeInterval}ms linear;
+          animation: ${floatAnim} ${animTime}ms linear infinite;
         `}
       />
     );
