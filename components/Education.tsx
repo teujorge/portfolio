@@ -1,7 +1,3 @@
-import flagMX from "public/images/flags/mx-flag.png";
-import flagUAE from "public/images/flags/uae-flag.png";
-import flagUSA from "public/images/flags/usa-flag.png";
-import Image, { StaticImageData } from "next/image";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 
@@ -10,13 +6,11 @@ const School = ({
   degree,
   city,
   date,
-  image,
 }: {
   school: string;
   degree: string;
   city: string;
   date: string;
-  image: { src: StaticImageData; alt: string };
 }) => {
   return (
     <div
@@ -42,13 +36,6 @@ const School = ({
         </h4>
         <p>{date ? date : "current"}</p>
       </div>
-      <Image
-        src={image.src}
-        alt={image.alt}
-        width={25}
-        height={25}
-        quality={100}
-      />
     </div>
   );
 };
@@ -62,24 +49,21 @@ export const Education = () => {
         school={"University of Vermont"}
         degree={"BS Mechanical Engineering"}
         city={"Burlington"}
-        date={"2020"}
-        image={{ src: flagUSA, alt: "usa-flag" }}
+        date={"2016-2020"}
       />
 
       <School
         school={"American School Foundation"}
         degree={"High School"}
         city={"Mexico City"}
-        date={"2016"}
-        image={{ src: flagMX, alt: "mx-flag" }}
+        date={"2015-2016"}
       />
 
       <School
         school={"American Community School"}
         degree={"High School"}
         city={"Abu Dhabi"}
-        date={"2015"}
-        image={{ src: flagUAE, alt: "uae-flag" }}
+        date={"2008-2015"}
       />
     </div>
   );

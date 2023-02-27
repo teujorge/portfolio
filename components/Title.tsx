@@ -1,9 +1,24 @@
 import EarthImg from "../public/images/earth.png";
 import Image from "next/image";
 import { css } from "@emotion/react";
+import { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */
 
-export const Title = ({ scrollPosition }: { scrollPosition: number }) => {
+export const Title = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      const scrollDiff = Math.abs(scrollPosition - window.scrollY);
+      if (scrollDiff > 1) setScrollPosition(window.scrollY);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollPosition]);
+
   return (
     <div
       css={css`
