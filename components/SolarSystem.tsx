@@ -141,6 +141,8 @@ export const SolarSystem = ({ scrollPosition }: { scrollPosition: number }) => {
           filter: blur(20px);
 
           transition: opacity 1s ease, filter 1s ease;
+
+          scale: 2;
         `}
       >
         {solarSystemTransformed.map((body) => (
