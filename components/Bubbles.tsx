@@ -30,8 +30,9 @@ const Bubbles = ({
   to = ScreenCorner.tr,
   quantity = 5,
   blur = 50, // px
-  speed = 10, // px per time interval
-  timeInterval = 200, // ms
+  timeInterval = 100, // ms
+  maxSpeed = 50,
+  minSpeed = 2,
   minSize = 50, // px
   maxSize = 200, // px
 }: {
@@ -39,8 +40,9 @@ const Bubbles = ({
   to?: ScreenCorner;
   quantity?: number;
   blur?: number;
-  speed?: number;
   timeInterval?: number;
+  maxSpeed?: number;
+  minSpeed?: number;
   minSize?: number;
   maxSize?: number;
 }) => {
@@ -50,6 +52,7 @@ const Bubbles = ({
       x: -maxSize,
       y: -maxSize,
     });
+    const [speed, setSpeed] = useState<number>(0);
     const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
     const [angle, setAngle] = useState<number>(45);
     const [size, setSize] = useState<number>(0);
@@ -69,6 +72,7 @@ const Bubbles = ({
       if (!reseting) return;
 
       setSize(randSize());
+      setSpeed(randSpeed());
       setColor(randColor());
       setOrigin({ ...randOrigin() });
       setPosition({ ...resetPosition() });
@@ -147,6 +151,10 @@ const Bubbles = ({
         b: Math.round(Math.random() * 255),
         a: Math.random() - 0.25,
       };
+    }
+
+    function randSpeed(): number {
+      return Math.round(Math.random() * maxSpeed + minSpeed);
     }
 
     return (
