@@ -18,7 +18,6 @@ export default function Home() {
     window.scrollTo({ top: 0 });
 
     const revealElements = document.querySelectorAll(".reveal");
-    // const solarSystemElement = document.querySelectorAll(".solarSystem");
 
     function handleScroll() {
       inView({
@@ -28,26 +27,6 @@ export default function Home() {
           e.classList.add("revealShowing");
         },
       });
-
-      // inView({
-      //   elements: solarSystemElement,
-      //   elementVisibleThreshold: 150,
-      //   aboveViewFn: (e, i) => {
-      //     if (e.classList.contains("revealSolarSystem")) {
-      //       e.classList.remove("revealSolarSystem");
-      //     }
-      //   },
-      //   inViewFn: (e, i) => {
-      //     if (!e.classList.contains("revealSolarSystem")) {
-      //       e.classList.add("revealSolarSystem");
-      //     }
-      //   },
-      //   belowViewFn: (e, i) => {
-      //     if (e.classList.contains("revealSolarSystem")) {
-      //       e.classList.remove("revealSolarSystem");
-      //     }
-      //   },
-      // });
     }
 
     window.addEventListener("scroll", handleScroll);
