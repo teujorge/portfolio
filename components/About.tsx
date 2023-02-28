@@ -5,16 +5,15 @@ import { css } from "@emotion/react";
 
 export const About = () => {
   return (
-    <div>
+    <div className="section">
       <h2>about me</h2>
       <div
         className="reveal"
         css={css`
           display: flex;
-          justify-content: center;
-          align-items: center;
           flex-direction: row;
           justify-content: center;
+          align-items: center;
 
           @media (max-width: 1000px) {
             flex-direction: column;
@@ -51,18 +50,19 @@ export const About = () => {
           alt={"profile-image"}
           width={200}
           height={200}
+          priority
         />
 
         <div
           css={css`
-            margin-top: 10px !important;
+            margin: 30px;
 
-            & p {
+            p {
               margin-top: 20px;
             }
 
             @media (max-width: 800px) {
-              margin: 10px !important;
+              margin: 10px;
             }
           `}
         >

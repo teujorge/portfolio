@@ -41,11 +41,13 @@ export const Experience = () => {
           flex-direction: row;
           justify-content: center;
           align-items: center;
+
+          margin: 40px;
           border-left: 2px solid purple;
 
           @media (max-width: 800px) {
             flex-direction: column;
-            margin: 0px !important;
+            margin: 0px;
             border-left: 0px solid transparent !important;
           }
 
@@ -54,16 +56,25 @@ export const Experience = () => {
           }
         `}
       >
+        {/* icon */}
         <div
           css={css`
             display: flex;
-            margin-right: 0px !important;
+
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-right: 0px;
+
             width: 40px;
             height: 40px;
 
             @media (max-width: 800px) {
-              margin: 0px !important;
-              margin-top: 20px !important;
+              margin-top: 20px;
+              margin-bottom: 0px;
+              margin-left: 0px;
+              margin-right: 0px;
             }
 
             @media (prefers-color-scheme: dark) {
@@ -73,19 +84,25 @@ export const Experience = () => {
         >
           {icon}
         </div>
+
+        {/* texts */}
         <div
           css={css`
-            & p {
+            margin: 40px;
+
+            p {
               margin-top: 4px;
             }
 
             @media (max-width: 800px) {
-              margin: 10px !important;
+              margin: 10px;
             }
           `}
         >
           <h4>
-            {title} {employer ? `, ${employer}` : ""} {city ? `, ${city}` : ""}
+            {title}
+            {employer ? `, ${employer}` : ""}
+            {city ? `, ${city}` : ""}
           </h4>
           <p
             css={css`
@@ -101,7 +118,7 @@ export const Experience = () => {
   };
 
   return (
-    <div>
+    <div className="section">
       <h2>experience</h2>
 
       <Job

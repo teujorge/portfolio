@@ -1,94 +1,63 @@
-import EarthImg from "../public/images/earth.png";
-import Image from "next/image";
-import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 
 export const Title = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    function handleScroll() {
-      const scrollDiff = Math.abs(scrollPosition - window.scrollY);
-      if (scrollDiff > 1) setScrollPosition(window.scrollY);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrollPosition]);
-
   return (
     <div
+      className="section"
       css={css`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-top: 0px !important;
         height: 100vh;
       `}
     >
-      {/* earth */}
+      {/* headers */}
       <div
         css={css`
-          z-index: -1;
-          position: absolute;
-          bottom: -50px;
-          right: 25px;
-          margin: 0px !important;
-          width: min(30vw, 50vh);
-          height: min(30vw, 50vh);
-          max-width: 400px !important;
-          max-height: 400px !important;
-          border-radius: 50%;
-          overflow: hidden;
-          transform: translateY(${-scrollPosition * 1.2}px)
-            rotateZ(${scrollPosition / 10}deg);
-          transition: transform 0.05s ease-out;
-        `}
-      >
-        <Image src={EarthImg} alt={"planet-earth"} quality={25} fill priority />
-      </div>
-
-      <div
-        css={css`
-          & * {
-            margin: 4px;
-          }
-
-          & h1 {
+          h1 {
             font-size: calc(20px + 5vw);
           }
 
-          & h3 {
+          h3 {
             font-size: calc(20px + 3vw);
           }
 
-          & p {
+          p {
             font-size: 18px;
-          }
-
-          @media (max-width: 800px) {
-            margin: 10px !important;
           }
         `}
       >
         <p>Hi, my name is</p>
         <h1>Matheus Jorge.</h1>
         <h3>I engineer things!</h3>
-        <p
-          css={css`
-            padding: 30px;
-            max-width: 70%;
+      </div>
 
-            @media (max-width: 800px) {
-              max-width: 100%;
+      {/* text */}
+      <div
+        css={css`
+          margin: 30px;
+
+          p {
+            font-size: 18px;
+            margin: 10px;
+          }
+
+          @media (max-width: 800px) {
+            margin-left: 10px;
+            margin-right: 10px;
+
+            p {
+              font-size: 17px;
             }
-          `}
-        >
-          I continuously develop my software skills by building and designing
-          fun games, exception embedded systems and everything in between.
+          }
+        `}
+      >
+        <p>
+          Whether I&apos;m designing and building fun games or working on
+          complex web apps, I&apos;m constantly pushing myself to develop my
+          software skills and take on new challenges. I believe that software
+          engineering is more than just a job — it&apos;s a passion. And
+          I&apos;m excited to share that passion with you through my portfolio.
+          Explore my projects and experience, and let&apos;s engineer great
+          things together!
         </p>
       </div>
     </div>
