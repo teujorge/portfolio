@@ -22,13 +22,10 @@ export const Projects = () => {
   }: {
     title: string;
     media: { src: StaticImageData; alt: string };
-    desc: string[];
+    desc: string;
     tech: string[];
     icons: JSX.Element[];
   }) => {
-    let description = "";
-    desc.forEach((line) => (description += line + " "));
-
     let technologies = "";
 
     for (let i = 0; i < tech.length - 1; i++) {
@@ -86,9 +83,11 @@ export const Projects = () => {
           css={css`
             object-fit: contain;
             margin: 20px;
-            border-radius: 12px;
             width: 500px;
             height: ${500 * (media.src.height / media.src.width)}px;
+
+            border: none;
+            border-radius: 12px;
 
             @media (max-width: 1000px) {
               margin: 10px;
@@ -99,7 +98,6 @@ export const Projects = () => {
           src={media.src}
           alt={media.alt}
           unoptimized={true}
-          priority
         />
 
         {/* descriptions */}
@@ -113,7 +111,7 @@ export const Projects = () => {
             margin: 0px !important;
           `}
         >
-          <p>{description}</p>
+          <p>{desc}</p>
           <p>{technologies}</p>
           <div
             css={css`
@@ -137,7 +135,10 @@ export const Projects = () => {
       <Project
         title={"Co Pilot"}
         media={{ src: ShowMovieMatter, alt: "co-pilot-platform-preview" }}
-        desc={["[In-Development]"]}
+        desc={`[In-Development] This platform offers a streamlined user experience, with intuitive project 
+            management tools for efficient project completion. Users authenticate with Google and connect their 
+            Stripe accounts for seamless and easy payment processing. Users can create and collaborate on 
+            projects, as well as bid on projects submitted by others.`}
         tech={["NextJS", "DB", "API"]}
         icons={[
           <IconButton
@@ -156,9 +157,9 @@ export const Projects = () => {
       <Project
         title={"Zid Product Manager"}
         media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
-        desc={[
-          "A dashboard app for managing your products in the zid platform. With an admin page to manage app users.",
-        ]}
+        desc={`The Zid Platform Dashboard is a powerful web application designed to help users manage their 
+            products with ease. The dashboard provides a centralized location for viewing and editing product 
+            details, and includes robust search and filtering options for quick and efficient navigation.`}
         tech={["React", "DB", "API"]}
         icons={[
           <IconButton
@@ -172,10 +173,11 @@ export const Projects = () => {
       <Project
         title={"MovieMatter"}
         media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
-        desc={[
-          "An app for iOS and Android that shows users relevant movies, tv shows and celebrities using the TMDB API.",
-          "Users can login and append to their lists to obtain unique media recommendations.",
-        ]}
+        desc={`This media hub app is a must-have for movie and TV show enthusiasts. 
+            Using the TMDB API, the app provides users with personalized recommendations for movies, 
+            TV shows, and celebrities. The app also allows users to create personalized lists of their 
+            favorite media, making it easy to keep track of what they've watched and what they want 
+            to see next.`}
         tech={["Dart", "Flutter", "API"]}
         icons={[
           <IconButton
@@ -199,30 +201,12 @@ export const Projects = () => {
       />
 
       <Project
-        title={"Water Tag"}
-        media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
-        desc={[
-          "Laser tag, but with water!",
-          "Carry a water sensitive vest and spray water on your friends in three different game modes.",
-        ]}
-        tech={["Arduino", "Embedded System"]}
-        icons={[
-          <IconButton
-            key={"water-tag-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/Arduino-Water-Belt"}
-          />,
-        ]}
-      />
-
-      <Project
         title={"Atlas Arena"}
         media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
-        desc={[
-          "[In-Development]",
-          "A pixel-art game where you, Atlas, defend your home from endless waves of enemies.",
-          "You can choose to a Knight, a Mage or an Archer in this quest to defend your home!",
-        ]}
+        desc={`[In-Development] Atlas is a thrilling pixel-art game where players take on the role of Atlas, 
+            defending their home from endless waves of enemies. Players can choose to be a Knight, a Mage, 
+            or an Archer, each with unique abilities and skills to master. The game features challenging 
+            gameplay, with increasingly difficult levels and a variety of enemies to defeat.`}
         tech={["Dart", "Flutter", "FlameGame"]}
         icons={[
           <IconButton
@@ -239,24 +223,18 @@ export const Projects = () => {
       />
 
       <Project
-        title={"Fractal Viz"}
-        media={{ src: ShowFractalViz, alt: "fractal-viz-demo" }}
-        desc={[
-          "[In-Development]",
-          "Visualize the Chaos Game!",
-          "Use simple shapes and rule sets to create complex fractals",
-        ]}
-        tech={["Dart", "Flutter", "FlameGame"]}
+        title={"Water Wars"}
+        media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
+        desc={`Water Wars is an exciting twist on the classic laser tag game. Players wear 
+            water-sensitive vests and use water guns to soak their opponents in three different 
+            game modes. With its engaging gameplay and unique water-based mechanics, Water Wars 
+            is perfect for players of all ages.`}
+        tech={["Arduino", "Embedded System"]}
         icons={[
           <IconButton
-            key={"fractal-viz-demo"}
-            src={IconDemo}
-            href={"https://teujorge.github.io/fractals/"}
-          />,
-          <IconButton
-            key={"fractal-viz-github"}
+            key={"water-wars-github"}
             src={IconGithub}
-            href={"https://github.com/teujorge/fractals"}
+            href={"https://github.com/teujorge/Arduino-Water-Belt"}
           />,
         ]}
       />
