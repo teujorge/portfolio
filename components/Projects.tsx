@@ -46,9 +46,7 @@ export const Projects = () => {
           display: flex;
           justify-content: center;
           align-items: center;
-
           padding: 20px;
-
           border-radius: 20px;
           background-color: var(--off-background-color);
 
@@ -65,6 +63,7 @@ export const Projects = () => {
           }
         `}
       >
+        {/* project title */}
         <h3
           css={css`
             margin: 10px;
@@ -81,35 +80,27 @@ export const Projects = () => {
         >
           {title}
         </h3>
-        <div
+
+        {/* image demo */}
+        <Image
           css={css`
-            position: relative;
             object-fit: contain;
-            margin: 0px;
-            padding: 0px;
+            margin: 20px;
             border-radius: 12px;
-            width: 500px !important;
-            height: ${500 * (media.src.height / media.src.width)}px !important;
+            width: 500px;
+            height: ${500 * (media.src.height / media.src.width)}px;
 
             @media (max-width: 1000px) {
-              margin: 10px !important;
-              width: 250px !important;
-              height: ${250 *
-              (media.src.height / media.src.width)}px !important;
+              margin: 10px;
+              width: 250px;
+              height: ${250 * (media.src.height / media.src.width)}px;
             }
           `}
-        >
-          <Image
-            css={css`
-              margin: 0px !important;
-              padding: 0px !important;
-              border-radius: 12px;
-            `}
-            src={media.src}
-            alt={media.alt}
-            fill
-          />
-        </div>
+          src={media.src}
+          alt={media.alt}
+          unoptimized={true}
+          priority
+        />
 
         {/* descriptions */}
         <div
@@ -143,7 +134,7 @@ export const Projects = () => {
     <div>
       <h2>projects</h2>
 
-      {/* <Project
+      <Project
         title={"Co Pilot"}
         media={{ src: ShowMovieMatter, alt: "co-pilot-platform-preview" }}
         desc={["[In-Development]"]}
@@ -160,7 +151,7 @@ export const Projects = () => {
             href={"https://github.com/teujorge/co-pilot-web"}
           />,
         ]}
-      /> */}
+      />
 
       <Project
         title={"Zid Product Manager"}
