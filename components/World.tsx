@@ -132,6 +132,7 @@ export const World = () => {
         quality={1}
         width={mapWidth}
         height={mapHeight}
+        priority
       />
 
       {/* location label */}

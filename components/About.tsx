@@ -51,6 +51,7 @@ export const About = () => {
           alt={"profile-image"}
           width={200}
           height={200}
+          priority
         />
 
         <div
