@@ -124,11 +124,11 @@ const Bubbles = ({
       const dy = finalPosition.y - origin.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const sToMs = 1000;
       // time = distance / speed
-      const time = sToMs * (distance / randSpeed());
-      console.log(time);
-      return time;
+      const time = distance / randSpeed();
+
+      const sToMs = 1000;
+      return time * sToMs;
     }
 
     const floatAnim = keyframes`
