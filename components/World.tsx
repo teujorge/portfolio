@@ -51,17 +51,17 @@ export const World = () => {
     },
     {
       name: "salvador",
-      year: 1998,
+      year: 1999,
       position: { x: 0.375 * mapWidth, y: 0.745 * mapHeight },
     },
     {
       name: "bogota",
-      year: 1999,
+      year: 2000,
       position: { x: 0.285 * mapWidth, y: 0.675 * mapHeight },
     },
     {
       name: "quito",
-      year: 2001,
+      year: 2004,
       position: { x: 0.27 * mapWidth, y: 0.695 * mapHeight },
     },
     {
