@@ -25,6 +25,11 @@ const School = ({
         justify-content: center;
         align-items: center;
         margin: 40px;
+
+        @media (max-width: 800px) {
+          margin-left: 10px;
+          margin-right: 10px;
+        }
       `}
     >
       <div
