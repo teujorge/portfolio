@@ -18,7 +18,6 @@ export default function Home() {
     window.scrollTo({ top: 0 });
 
     const revealElements = document.querySelectorAll(".reveal");
-    // const solarSystemElement = document.querySelectorAll(".solarSystem");
 
     function handleScroll() {
       inView({
@@ -28,26 +27,6 @@ export default function Home() {
           e.classList.add("revealShowing");
         },
       });
-
-      // inView({
-      //   elements: solarSystemElement,
-      //   elementVisibleThreshold: 150,
-      //   aboveViewFn: (e, i) => {
-      //     if (e.classList.contains("revealSolarSystem")) {
-      //       e.classList.remove("revealSolarSystem");
-      //     }
-      //   },
-      //   inViewFn: (e, i) => {
-      //     if (!e.classList.contains("revealSolarSystem")) {
-      //       e.classList.add("revealSolarSystem");
-      //     }
-      //   },
-      //   belowViewFn: (e, i) => {
-      //     if (e.classList.contains("revealSolarSystem")) {
-      //       e.classList.remove("revealSolarSystem");
-      //     }
-      //   },
-      // });
     }
 
     window.addEventListener("scroll", handleScroll);
@@ -59,28 +38,20 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Matheus Jorge&apos;s Portfolio</title>
-        <meta name="description" content="Portfolio of Matheus Jorge" />
+        <title>Matheus&apos;s Portfolio</title>
+        <meta
+          name="description"
+          content={`Explore my experience and background with software engineering. 
+          Browse through my projects and accomplishments to learn more about my skills and expertise.`}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Bubbles />
+      <LeftBar />
 
-      <main
-        css={css`
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-
-          & div {
-            margin: 40px;
-            max-width: var(--max-width);
-          }
-        `}
-      >
-        <LeftBar />
+      <main>
         <Title />
         <About />
         <Experience />

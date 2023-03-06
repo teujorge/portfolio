@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 export const Contact = () => {
   return (
     <div
+      className="section"
       css={css`
         background-color: red;
       `}
