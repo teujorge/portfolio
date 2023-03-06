@@ -1,5 +1,5 @@
 import IconApple from "../public/svg/apple-store";
-import IconDemo from "../public/svg/magnifying-glass";
+import IconDemo from "../public/svg/eye";
 import IconGithub from "../public/svg/github";
 import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
