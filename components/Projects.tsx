@@ -4,7 +4,6 @@ import IconGithub from "../public/svg/github";
 import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
 import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
-import ShowFractalViz from "../public/images/demos/fractal_viz.gif";
 import ShowMovieMatter from "../public/images/demos/movie_matter.png";
 import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
 import ShowWaterTag from "../public/images/demos/water_tag.gif";
@@ -26,6 +25,9 @@ export const Projects = () => {
     tech: string[];
     icons: JSX.Element[];
   }) => {
+    const IMAGE_WIDTH_L = 400;
+    const IMAGE_WIDTH_S = 250;
+
     let technologies = "";
 
     for (let i = 0; i < tech.length - 1; i++) {
@@ -43,11 +45,14 @@ export const Projects = () => {
           display: flex;
           justify-content: center;
           align-items: center;
+          margin: 40px;
           padding: 20px;
           border-radius: 20px;
           background-color: var(--off-background-color);
 
-          & p {
+          box-shadow: 0px 0px 8px var(--shadow-color);
+
+          p {
             margin-top: 20px;
           }
 
@@ -56,49 +61,51 @@ export const Projects = () => {
           }
 
           @media (max-width: 800px) {
-            margin: 10px !important;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
           }
         `}
       >
-        {/* project title */}
-        <h3
-          css={css`
-            margin: 10px;
-            width: 150px;
-            min-width: 150px;
-            max-width: 150px;
-            text-align: center;
-
-            @media (max-width: 600px) {
-              min-width: 100px;
-              max-width: 100%;
-            }
-          `}
-        >
-          {title}
-        </h3>
-
-        {/* image demo */}
-        <Image
-          css={css`
-            object-fit: contain;
-            margin: 20px;
-            width: 500px;
-            height: ${500 * (media.src.height / media.src.width)}px;
-
-            border: none;
-            border-radius: 12px;
-
-            @media (max-width: 1000px) {
+        <div>
+          {/* project title */}
+          <h3
+            css={css`
               margin: 10px;
-              width: 250px;
-              height: ${250 * (media.src.height / media.src.width)}px;
-            }
-          `}
-          src={media.src}
-          alt={media.alt}
-          unoptimized={true}
-        />
+              text-align: left;
+
+              @media (max-width: 1000px) {
+                text-align: center;
+              }
+            `}
+          >
+            {title}
+          </h3>
+
+          {/* image demo */}
+          <Image
+            css={css`
+              object-fit: contain;
+              margin: 20px;
+              width: ${IMAGE_WIDTH_L}px;
+              height: ${IMAGE_WIDTH_L * (media.src.height / media.src.width)}px;
+
+              border: none;
+              border-radius: 12px;
+
+              @media (max-width: 1100px) {
+                margin: 15px;
+                width: ${IMAGE_WIDTH_S}px;
+                height: ${IMAGE_WIDTH_S *
+                (media.src.height / media.src.width)}px;
+              }
+            `}
+            src={media.src}
+            alt={media.alt}
+            unoptimized={true}
+          />
+        </div>
 
         {/* descriptions */}
         <div
@@ -108,7 +115,6 @@ export const Projects = () => {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 0px !important;
           `}
         >
           <p>{desc}</p>
@@ -116,8 +122,7 @@ export const Projects = () => {
           <div
             css={css`
               display: flex;
-              margin: 0px !important;
-              margin-inline: auto !important;
+              margin: 10px;
               width: fit-content;
             `}
           >
@@ -129,7 +134,7 @@ export const Projects = () => {
   };
 
   return (
-    <div>
+    <div className="section">
       <h2>projects</h2>
 
       <Project

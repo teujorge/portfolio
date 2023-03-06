@@ -1,28 +1,38 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
-import worldMap from "public/images/flags/world-map.png";
+import worldMap from "public/images/world-map.png";
 import { css } from "@emotion/react";
 import { useEffect, useState } from "react";
 
 export const World = () => {
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const [mapWidth, setMapWidth] = useState(350);
-  const mapHeight = (mapWidth * 3) / 5;
+  const mapHeight = mapWidth * (worldMap.height / worldMap.width);
 
   function calculateMapWidth(screenWidth: number) {
-    if (screenWidth < 500) return 350;
-    else if (screenWidth < 750) return 400;
-    else if (screenWidth < 1000) return 650;
-    else if (screenWidth < 1250) return 900;
+    if (screenWidth < 500) {
+      if (mapWidth === 350) return undefined;
+      return 350;
+    } else if (screenWidth < 750) {
+      if (mapWidth === 400) return undefined;
+      return 400;
+    } else if (screenWidth < 1000) {
+      if (mapWidth === 650) return undefined;
+      return 650;
+    } else if (screenWidth < 1250) {
+      if (mapWidth === 900) return undefined;
+      return 900;
+    }
 
     return 1000;
   }
 
   useEffect(() => {
-    setMapWidth(calculateMapWidth(window.innerWidth));
+    handleResize();
 
     function handleResize() {
-      setMapWidth(calculateMapWidth(window.innerWidth));
+      const newWidth = calculateMapWidth(window.innerWidth);
+      if (newWidth) setMapWidth(newWidth);
     }
 
     window.addEventListener("resize", handleResize);
@@ -37,47 +47,52 @@ export const World = () => {
     {
       name: "san diego",
       year: 1997,
-      position: { x: 0.155 * mapWidth, y: 0.545 * mapHeight },
+      position: { x: 0.167 * mapWidth, y: 0.564 * mapHeight },
     },
     {
       name: "salvador",
       year: 1998,
-      position: { x: 0.365 * mapWidth, y: 0.725 * mapHeight },
+      position: { x: 0.375 * mapWidth, y: 0.745 * mapHeight },
     },
     {
       name: "bogota",
       year: 1999,
-      position: { x: 0.27 * mapWidth, y: 0.66 * mapHeight },
+      position: { x: 0.285 * mapWidth, y: 0.675 * mapHeight },
     },
     {
       name: "quito",
       year: 2001,
-      position: { x: 0.2625 * mapWidth, y: 0.6825 * mapHeight },
+      position: { x: 0.27 * mapWidth, y: 0.695 * mapHeight },
     },
     {
       name: "abu dhabi",
       year: 2008,
-      position: { x: 0.613 * mapWidth, y: 0.58 * mapHeight },
+      position: { x: 0.62 * mapWidth, y: 0.59 * mapHeight },
     },
     {
       name: "mexico city",
       year: 2015,
-      position: { x: 0.2 * mapWidth, y: 0.59 * mapHeight },
+      position: { x: 0.207 * mapWidth, y: 0.605 * mapHeight },
     },
     {
       name: "boston",
       year: 2016,
-      position: { x: 0.2825 * mapWidth, y: 0.483 * mapHeight },
+      position: { x: 0.287 * mapWidth, y: 0.5125 * mapHeight },
     },
     {
       name: "burlington",
       year: 2017,
-      position: { x: 0.28 * mapWidth, y: 0.48 * mapHeight },
+      position: { x: 0.28 * mapWidth, y: 0.5 * mapHeight },
     },
     {
       name: "clearwater",
       year: 2020,
-      position: { x: 0.247 * mapWidth, y: 0.562 * mapHeight },
+      position: { x: 0.257 * mapWidth, y: 0.58 * mapHeight },
+    },
+    {
+      name: "salvador",
+      year: 2022,
+      position: { x: 0.375 * mapWidth, y: 0.745 * mapHeight },
     },
   ];
 
@@ -101,92 +116,98 @@ export const World = () => {
 
   return (
     <div
-      className="reveal"
+      className="reveal section"
       css={css`
-        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         overflow: visible;
-        border-radius: 50px;
       `}
     >
-      {/* world map */}
-      <Image
-        css={css`
-          z-index: 1;
-          transform: translate(
-            ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
-            ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
-          );
-          transition: transform ${timeToTravel}s ease;
-          filter: invert(1);
-
-          @media (prefers-color-scheme: dark) {
-            filter: invert(0);
-          }
-        `}
-        src={worldMap}
-        alt="world-map"
-        quality={1}
-        width={mapWidth}
-        height={mapHeight}
-        priority
-      />
-
-      {/* location label */}
+      {/* interactive map */}
       <div
         css={css`
-          margin: 0px !important;
-          padding: 6px;
-
-          z-index: 10;
-          position: absolute;
-          top: ${8 + mapHeight / 2}px;
-          left: ${8 + mapWidth / 2}px;
-
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          border-radius: 8px;
-          color: #101010;
-          background-color: #ffffffdd;
-
-          @media (prefers-color-scheme: dark) {
-            filter: invert(1);
-          }
+          position: relative;
+          width: ${mapWidth}px;
+          height: ${mapHeight}px;
         `}
       >
-        <p>{CITIES_LIVED[currentCityIndex].name}</p>
-      </div>
+        {/* world map */}
+        <Image
+          css={css`
+            z-index: 1;
+            transform: translate(
+              ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
+              ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
+            );
+            transition: transform ${timeToTravel}s ease;
 
-      {/* location dot marker */}
-      <div
-        css={css`
-          margin: 0px !important;
-
-          z-index: 10;
-          position: absolute;
-          top: ${5 + mapHeight / 2}px;
-          left: ${5 + mapWidth / 2}px;
-
-          width: 10px;
-          height: 10px;
-
-          border-radius: 50%;
-          background-color: #04aa6d;
-
-          @media (prefers-color-scheme: dark) {
             filter: invert(1);
-          }
-        `}
-      />
+            @media (prefers-color-scheme: dark) {
+              filter: invert(0);
+            }
+          `}
+          src={worldMap}
+          alt="world-map"
+          quality={1}
+          width={mapWidth}
+          height={mapHeight}
+          priority
+        />
+
+        {/* location dot marker */}
+        <div
+          css={css`
+            z-index: 11;
+            position: absolute;
+            top: ${mapHeight / 2 - 5}px;
+            left: ${mapWidth / 2 - 5}px;
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+            background-color: #04aa6d;
+
+            @media (prefers-color-scheme: dark) {
+              filter: invert(1);
+            }
+          `}
+        />
+
+        {/* location dot label */}
+        <div
+          css={css`
+            margin: 0px !important;
+            padding: 6px;
+
+            z-index: 10;
+            position: absolute;
+            top: ${mapHeight / 2}px;
+            left: ${mapWidth / 2}px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 8px;
+            color: #101010;
+            background-color: #ffffffdd;
+
+            @media (prefers-color-scheme: dark) {
+              filter: invert(1);
+            }
+          `}
+        >
+          <p>{CITIES_LIVED[currentCityIndex].name}</p>
+        </div>
+      </div>
 
       {/* slider to change time */}
       <input
         css={css`
+          cursor: pointer;
           z-index: 10;
           -webkit-appearance: none; /* Override default CSS styles */
           appearance: none;
@@ -212,13 +233,12 @@ export const World = () => {
             height: 24px;
             border-radius: 50%;
             background: #04aa6d;
-            cursor: pointer;
-            transition: width 0.2s ease, height 0.2s ease;
+
+            transition: transform 0.2s ease;
           }
           ::-webkit-slider-thumb:hover,
           ::-webkit-slider-thumb:active {
-            width: 26px;
-            height: 26px;
+            transform: scale(1.1);
           }
 
           @media (prefers-color-scheme: dark) {
