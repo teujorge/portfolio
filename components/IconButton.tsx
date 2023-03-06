@@ -36,29 +36,29 @@ export const IconButton = ({
   switch (descPos) {
     case DescPos.top:
       descriptionPositionStyle = css`
-        bottom: ${size}px;
-        left: calc(-25% + 12px);
+        bottom: ${size + 5}px;
+        left: -25px;
       `;
       break;
 
     case DescPos.bot:
       descriptionPositionStyle = css`
-        top: ${size}px;
-        left: calc(-25% + 12px);
+        top: ${size + 5}px;
+        left: -25px;
       `;
       break;
 
     case DescPos.left:
       descriptionPositionStyle = css`
         top: calc(25% - 12px);
-        right: ${size}px;
+        right: ${size + 5}px;
       `;
       break;
 
     case DescPos.right:
       descriptionPositionStyle = css`
         top: calc(25% - 12px);
-        left: ${size}px;
+        left: ${size + 5}px;
       `;
       break;
   }
@@ -79,7 +79,7 @@ export const IconButton = ({
           height: ${size}px;
 
           border-radius: 50%;
-          background-color: white;
+          background-color: black;
 
           transition: background-color 0.2s ease;
 
@@ -87,7 +87,7 @@ export const IconButton = ({
             z-index: 100;
             width: ${width}px;
             height: ${width}px;
-            fill: black;
+            fill: white;
             transition: fill 0.2s ease;
           }
 
@@ -104,17 +104,17 @@ export const IconButton = ({
           }
 
           @media (prefers-color-scheme: light) {
-            background-color: black;
+            background-color: white;
 
             svg {
-              fill: white;
+              fill: black;
             }
 
             :hover {
-              background-color: white;
+              background-color: black;
 
               svg {
-                fill: black;
+                fill: white;
               }
             }
           }
@@ -133,11 +133,12 @@ export const IconButton = ({
 
             margin: 4px;
             padding: 8px;
-
-            border-radius: var(--border-radius);
-            background-color: var(--background-color);
+            width: 100px;
 
             opacity: 0;
+            border-radius: var(--border-radius);
+            color: var(--background-color);
+            background-color: var(--foreground-color);
             transition: opacity 0.2s ease;
 
             box-shadow: 0px 0px 8px var(--shadow-color);
