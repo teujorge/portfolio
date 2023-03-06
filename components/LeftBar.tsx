@@ -45,9 +45,7 @@ export const LeftBar = () => {
       />
 
       <IconButton
-        href={
-          "https://raw.githubusercontent.com/teujorge/teujorge.github.io/master/assets/images/resume_2022.png"
-        }
+        href={"https://resume.io/r/gtFDsZNxN"}
         src={IconResume}
         size={40}
       />
