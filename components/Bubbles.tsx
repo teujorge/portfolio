@@ -17,9 +17,9 @@ type ColorRGBA = {
 const Bubbles = ({
   quantity = 4,
   blur = 100, // px
-  minSpeed = 50, // px/s
-  maxSpeed = 100, // px/s
-  minSize = 5, // window width %
+  minSpeed = 25, // px/s
+  maxSpeed = 75, // px/s
+  minSize = 10, // window width %
   maxSize = 55, // window width %,
 }: {
   quantity?: number;
@@ -31,7 +31,7 @@ const Bubbles = ({
 }) => {
   // single bubble component
   const Bubble = ({ bubbleId }: { bubbleId: string }) => {
-    const [origin, setOrigin] = useState<Position>({
+    const [initialPosition, setInitialPosition] = useState<Position>({
       x: -maxSize - blur,
       y: -maxSize - blur,
     });
@@ -55,37 +55,45 @@ const Bubbles = ({
     useEffect(() => {
       bubbleRef.current!.addEventListener(
         "animationiteration",
-        function () {
-          resetBubble();
-        },
+        resetBubble,
         false
       );
+
+      return () => {
+        bubbleRef.current!.removeEventListener(
+          "animationiteration",
+          resetBubble,
+          false
+        );
+      };
     }, []);
 
     function resetBubble() {
       setSize(randSize());
       setColor(randColor());
 
-      const newOrigin = randOrigin();
-      setOrigin({ ...newOrigin });
+      const newInitialPosition = randInitialPosition();
+      setInitialPosition({ ...newInitialPosition });
 
-      const newFinalPosition = randFinalPosition(newOrigin);
+      const newFinalPosition = randFinalPosition(newInitialPosition);
       setFinalPosition({ ...newFinalPosition });
     }
 
-    function randOrigin(): Position {
+    function randInitialPosition(): Position {
       return {
-        x: Math.round(
+        x:
           Math.random() * window.innerWidth -
-            widthPercentageToPixels(maxSize) / 2
-        ),
+          widthPercentageToPixels(maxSize) / 2,
         y: window.innerHeight + blur,
       };
     }
 
     function randFinalPosition(origin: Position): Position {
       return {
-        x: Math.round(Math.random() * window.innerWidth),
+        x:
+          Math.random() * window.innerWidth -
+          widthPercentageToPixels(maxSize) / 2 -
+          origin.x,
         y:
           -1 *
           (origin.y +
@@ -96,12 +104,14 @@ const Bubbles = ({
     }
 
     function randSpeed(): number {
-      return Math.round(Math.random() * maxSpeed) + minSpeed + 1;
+      const speed = Math.random() * maxSpeed + minSpeed;
+      return speed > 0 ? speed : 1;
     }
 
     function randSize(): number {
       const percentage = Math.random() * maxSize + minSize;
-      return widthPercentageToPixels(percentage);
+      const size = widthPercentageToPixels(percentage);
+      return size >= 0 ? size : 0;
     }
 
     function widthPercentageToPixels(p: number): number {
@@ -109,22 +119,25 @@ const Bubbles = ({
     }
 
     function randColor(): ColorRGBA {
+      const minOpacity = 0.25;
+      const maxOpacity = 0.75;
+
       return {
-        r: Math.round(Math.random() * 200),
-        g: Math.round(Math.random() * 200),
-        b: Math.round(Math.random() * 200),
-        a: Math.random() * (0.75 - 0.15) + 0.15,
+        r: Math.random() * 200,
+        g: Math.random() * 200,
+        b: Math.random() * 200,
+        a: Math.random() * (maxOpacity - minOpacity) + minOpacity,
       };
     }
 
     function calcAnimTime(): number {
-      if (size === 0) return 10;
+      if (size < 10) return 50;
 
-      const dx = finalPosition.x - origin.x;
-      const dy = finalPosition.y - origin.y;
+      const dx = finalPosition.x - initialPosition.x;
+      const dy = finalPosition.y - initialPosition.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // time = distance / speed
+      // v = d/t
       const time = distance / randSpeed();
 
       const sToMs = 1000;
@@ -133,18 +146,12 @@ const Bubbles = ({
 
     const floatAnim = keyframes`
     0% {
-        opacity: 1;
         transform: translate(0px, 0px);
     }
 
-    98% {
-        opacity: 1;
-    }
-
     100% {
-        opacity: 0;
         transform: translate(
-          ${finalPosition.x - origin.x}px,
+          ${finalPosition.x}px,
           ${finalPosition.y}px
         );
     }
@@ -157,8 +164,8 @@ const Bubbles = ({
         css={css`
           z-index: -5;
           position: fixed;
-          top: ${origin.y}px;
-          left: ${origin.x}px;
+          top: ${initialPosition.y}px;
+          left: ${initialPosition.x}px;
 
           width: ${size}px;
           height: ${size}px;
@@ -177,7 +184,7 @@ const Bubbles = ({
     );
   };
 
-  let bubbles = [];
+  let bubbles: JSX.Element[] = [];
   for (let i = 0; i < quantity; i++) {
     bubbles.push(
       <Bubble
