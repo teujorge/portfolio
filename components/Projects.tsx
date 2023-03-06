@@ -5,6 +5,7 @@ import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
 import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
 import ShowMovieMatter from "../public/images/demos/movie_matter.png";
+import ShowCoPilot from "../public/images/demos/co_pilot.gif";
 import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
 import ShowWaterTag from "../public/images/demos/water_tag.gif";
 import { css } from "@emotion/react";
@@ -139,7 +140,7 @@ export const Projects = () => {
 
       <Project
         title={"Co Pilot"}
-        media={{ src: ShowMovieMatter, alt: "co-pilot-platform-preview" }}
+        media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
         desc={`[In-Development] This platform offers a streamlined user experience, with intuitive project 
             management tools for efficient project completion. Users authenticate with Google and connect their 
             Stripe accounts for seamless and easy payment processing. Users can create and collaborate on 
