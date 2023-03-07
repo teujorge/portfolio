@@ -6,12 +6,17 @@ export const Title = () => {
     <div
       className="section"
       css={css`
-        height: 100vh;
+        min-height: 100vh;
       `}
     >
       {/* headers */}
       <div
         css={css`
+          min-height: 40vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
           h1 {
             font-size: calc(20px + 5vw);
           }
