@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 type Position = {
   x: number;
@@ -51,22 +51,6 @@ const Bubbles = ({
     const [size, setSize] = useState<number>(0);
 
     const bubbleRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-      bubbleRef.current!.addEventListener(
-        "animationiteration",
-        resetBubble,
-        false
-      );
-
-      return () => {
-        bubbleRef.current!.removeEventListener(
-          "animationiteration",
-          resetBubble,
-          false
-        );
-      };
-    }, []);
 
     function resetBubble() {
       setSize(randSize());
@@ -161,6 +145,7 @@ const Bubbles = ({
       <div
         id={bubbleId}
         ref={bubbleRef}
+        onAnimationIteration={resetBubble}
         css={css`
           z-index: -5;
           position: fixed;
