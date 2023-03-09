@@ -192,7 +192,7 @@ export const Experience = () => {
 
           `Programmed autonomous processes to efficiently 
           test systems, improving testing rigour and 
-          increasing testing efficiency by 50%`,
+          increasing testing efficiency by 50%.`,
         ]}
       />
     </div>
