@@ -111,8 +111,9 @@ export const Experience = () => {
             {date ? date : "current"}
           </p>
           <ul>
-            {desc.map((description) => (
+            {desc.map((description, index) => (
               <div
+                key={`description-${title}-${index}`}
                 className="reveal"
                 css={css`
                   margin: 20px;
