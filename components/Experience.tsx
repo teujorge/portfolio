@@ -69,7 +69,7 @@ export const Experience = () => {
             height: 40px;
 
             @media (max-width: 800px) {
-              margin-top: 20px;
+              margin-top: 40px;
               margin-bottom: 0px;
               margin-left: 0px;
               margin-right: 0px;
@@ -110,12 +110,20 @@ export const Experience = () => {
           >
             {date ? date : "current"}
           </p>
-          {desc.map((description) => (
-            <div className="reveal">
-              <br />
-              <p>{description}</p>
-            </div>
-          ))}
+          <ul>
+            {desc.map((description) => (
+              <div
+                className="reveal"
+                css={css`
+                  margin: 20px;
+                `}
+              >
+                <li>
+                  <p>{description}</p>
+                </li>
+              </div>
+            ))}
+          </ul>
         </div>
       </div>
     );
