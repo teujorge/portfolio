@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import Image from "next/image";
 import worldMap from "public/images/world-map.png";
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import { useEffect, useState } from "react";
 
 export const World = () => {
@@ -114,6 +114,15 @@ export const World = () => {
   // t = d/v
   const timeToTravel = distanceToTravel / mapVelocity;
 
+  const shimmerAnimation = keyframes` 
+    0% {
+      left: -110%;
+    }
+    100% {
+      left: 110%;
+    }
+  `;
+
   return (
     <div
       className="reveal section"
@@ -207,34 +216,60 @@ export const World = () => {
       {/* slider to change time */}
       <input
         css={css`
+          overflow: hidden;
+          position: relative;
           cursor: pointer;
           z-index: 10;
           -webkit-appearance: none; /* Override default CSS styles */
           appearance: none;
+          padding: 10px;
           width: 80%;
-          height: 18px;
+          max-width: 80vw;
+          height: 24px;
           border-radius: 50px;
-          background-color: #d3d3d3;
+          background-color: #e8e8e8;
           outline: none; /* Remove outline */
           opacity: 0.65; /* Set transparency (for mouse-over effects on hover) */
           -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
           transition: all 0.2s ease;
 
-          /* Mouse-over effects */
+          /* mouse-over effects */
           :hover,
           :active {
-            opacity: 1; /* Fully shown on mouse-over */
+            opacity: 1; /* fully shown on mouse-over */
+          }
+
+          ::before {
+            content: "";
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            opacity: 0.75;
+            background: linear-gradient(
+              to right,
+              transparent,
+              #f7f7f7,
+              transparent
+            );
+            animation: ${shimmerAnimation} 3s infinite;
           }
 
           ::-webkit-slider-thumb {
+            z-index: 20;
             -webkit-appearance: none; /* Override default look */
             appearance: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+
+            width: 40px;
+            height: 14px;
+
+            opacity: 1;
+            border-radius: var(--border-radius);
             background: #04aa6d;
 
-            transition: transform 0.2s ease;
+            transition: all 0.2s ease;
           }
           ::-webkit-slider-thumb:hover,
           ::-webkit-slider-thumb:active {
