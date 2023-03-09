@@ -212,6 +212,7 @@ export const World = () => {
           -webkit-appearance: none; /* Override default CSS styles */
           appearance: none;
           width: 80%;
+          max-width: 80vw;
           height: 18px;
           border-radius: 50px;
           background-color: #d3d3d3;
