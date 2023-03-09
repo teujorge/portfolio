@@ -175,7 +175,8 @@ export const Experience = () => {
           `Streamlined the manufacturing process by 
           maintaining and updating factory equipment, 
           resulting in a 10% reduction in equipment 
-          downtime and an increase in product output by 5%.`,
+          downtime resulting in an increase to product 
+          output.`,
         ]}
       />
 
