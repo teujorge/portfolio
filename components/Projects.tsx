@@ -72,6 +72,7 @@ export const Projects = () => {
         <div>
           {/* project title */}
           <h3
+            className="reveal"
             css={css`
               margin: 10px;
               text-align: left;
@@ -86,6 +87,7 @@ export const Projects = () => {
 
           {/* image demo */}
           <Image
+            className="reveal"
             css={css`
               object-fit: contain;
               margin: 20px;
@@ -118,9 +120,10 @@ export const Projects = () => {
             align-items: center;
           `}
         >
-          <p>{desc}</p>
-          <p>{technologies}</p>
+          <p className="reveal">{desc}</p>
+          <p className="reveal">{technologies}</p>
           <div
+            className="reveal"
             css={css`
               display: flex;
               margin: 10px;
@@ -141,10 +144,16 @@ export const Projects = () => {
       <Project
         title={"Co Pilot"}
         media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
-        desc={`[In-Development] This platform offers a streamlined user experience, with intuitive project 
-            management tools for efficient project completion. Users authenticate with Google and connect their 
-            Stripe accounts for seamless and easy payment processing. Users can create and collaborate on 
-            projects, as well as bid on projects submitted by others.`}
+        desc={`
+          [In-Development] This platform connects users with skilled 
+          freelancers to efficiently complete their projects. With 
+          intuitive tools and a streamlined user experience, users 
+          can easily create and collaborate on projects, as well as 
+          submit project proposals and receive bids from qualified 
+          freelancers. Authentication through Google and seamless 
+          payment processing via Stripe make it easy to get started 
+          and manage projects from start to finish.
+        `}
         tech={["NextJS", "DB", "API"]}
         icons={[
           <IconButton
@@ -165,9 +174,13 @@ export const Projects = () => {
       <Project
         title={"Zid Product Manager"}
         media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
-        desc={`The Zid Platform Dashboard is a powerful web application designed to help users manage their 
-            products with ease. The dashboard provides a centralized location for viewing and editing product 
-            details, and includes robust search and filtering options for quick and efficient navigation.`}
+        desc={`
+          The Zid Platform Dashboard is a powerful web application 
+          designed to help users manage their products with ease. The 
+          dashboard provides centralized location for viewing and 
+          editing product details and includes robust filtering 
+          options for quick and efficient navigation.
+        `}
         tech={["React", "DB", "API"]}
         icons={[
           <IconButton
@@ -182,11 +195,14 @@ export const Projects = () => {
       <Project
         title={"MovieMatter"}
         media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
-        desc={`This media hub app is a must-have for movie and TV show enthusiasts. 
-            Using the TMDB API, the app provides users with personalized recommendations for movies, 
-            TV shows, and celebrities. The app also allows users to create personalized lists of their 
-            favorite media, making it easy to keep track of what they've watched and what they want 
-            to see next.`}
+        desc={`
+          This media hub app is a must-have for movie and TV show 
+          enthusiasts. Using the TMDB API, the app provides users with 
+          personalized recommendations for movies, TV shows, and 
+          celebrities. The app also allows users to create personalized 
+          lists of their favorite media, making it easy to keep track 
+          of what they've watched and what they want to see next.
+        `}
         tech={["Dart", "Flutter", "API"]}
         icons={[
           <IconButton
@@ -215,10 +231,14 @@ export const Projects = () => {
       <Project
         title={"Atlas Arena"}
         media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
-        desc={`[In-Development] Atlas is a thrilling pixel-art game where players take on the role of Atlas, 
-            defending their home from endless waves of enemies. Players can choose to be a Knight, a Mage, 
-            or an Archer, each with unique abilities and skills to master. The game features challenging 
-            gameplay, with increasingly difficult levels and a variety of enemies to defeat.`}
+        desc={`[In-Development] Atlas is a thrilling pixel-art game 
+          where players take on the role of Atlas, defending their 
+          home from endless waves of enemies. Players can choose to be 
+          a Knight, a Mage, or an Archer, each with unique abilities 
+          and skills to master. The game features challenging game 
+          play, with increasingly difficult levels and a variety of 
+          enemies to defeat.
+        `}
         tech={["Dart", "Flutter", "FlameGame"]}
         icons={[
           <IconButton
@@ -239,10 +259,14 @@ export const Projects = () => {
       <Project
         title={"Water Wars"}
         media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
-        desc={`Water Wars is an exciting twist on the classic laser tag game. Players wear 
-            water-sensitive vests and use water guns to soak their opponents in three different 
-            game modes. With its engaging gameplay and unique water-based mechanics, Water Wars 
-            is perfect for players of all ages.`}
+        desc={`
+          Water Wars is an exciting twist on the classic laser 
+          tag game. Players wear water-sensitive vests and use 
+          water guns to soak their opponents in three different 
+          game modes. With its engaging game play and unique 
+          water-based mechanics, Water Wars is perfect for 
+          players of all ages.
+        `}
         tech={["Arduino", "Embedded System"]}
         icons={[
           <IconButton

@@ -98,7 +98,7 @@ export const About = () => {
             <ul>
               <li>React</li>
               <li>NextJS</li>
-              <li>Typescript</li>
+              <li>TypeScript</li>
             </ul>
           </div>
         </div>
