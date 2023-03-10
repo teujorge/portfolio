@@ -54,8 +54,8 @@ export default function Home() {
       <main>
         <Title />
         <About />
-        <Experience />
         <Projects />
+        <Experience />
         <Education />
         <World />
       </main>
