@@ -22,7 +22,7 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
       1000
     );
     // const camera = new THREE.OrthographicCamera();
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
