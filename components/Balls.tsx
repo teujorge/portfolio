@@ -38,8 +38,8 @@ const Balls: React.FC<Props> = ({ numBalls }) => {
       const geometry = new THREE.SphereGeometry(0.1, 32, 32);
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`),
-        metalness: 0.75,
-        roughness: 0.75,
+        metalness: 0.25,
+        roughness: 0.25,
       });
       const ball = new THREE.Mesh(geometry, material);
       ball.position.set(
@@ -88,16 +88,18 @@ const Balls: React.FC<Props> = ({ numBalls }) => {
           // ignore "this" ball
           if (i === j) continue;
 
-          const distance = balls[i].position.distanceTo(balls[j].position);
+          const distanceBetweenBalls = balls[i].position.distanceTo(
+            balls[j].position
+          );
           const radiusSum = 0.25;
 
-          if (distance < radiusSum) {
+          if (distanceBetweenBalls < radiusSum) {
             // balls are colliding, adjust their velocities to push them apart
             const direction = new THREE.Vector3()
               .subVectors(balls[i].position, balls[j].position)
               .normalize();
             const adjustment = direction.multiplyScalar(
-              (radiusSum - distance) / 2
+              (radiusSum - distanceBetweenBalls) / 2
             );
 
             balls[i].position.add(adjustment);
@@ -111,21 +113,25 @@ const Balls: React.FC<Props> = ({ numBalls }) => {
         const directionToMouse = new THREE.Vector3()
           .subVectors(mousePos, balls[i].position)
           .normalize();
-        const mouseForce = directionToMouse
-          .multiplyScalar(1 / (distanceToMouse * distanceToMouse))
-          .clampLength(0, 0.01);
-        cumulativeForce.add(mouseForce);
 
-        // calculate force perpendicular to direction towards mouse
-        const perpendicularDirection = new THREE.Vector3(
-          -directionToMouse.y,
-          directionToMouse.x,
-          0
-        );
-        const perpendicularForce = perpendicularDirection.clampLength(0, 0.001);
-        cumulativeForce.add(perpendicularForce);
+        const minMouseDistance = 0.25;
+        let mouseForce: THREE.Vector3;
+        // balls too close are repelled
+        if (distanceToMouse < minMouseDistance) {
+          mouseForce = directionToMouse.multiplyScalar(
+            -1 * distanceToMouse * distanceToMouse
+          );
+        }
+        // far balls are attracted to mouse
+        else {
+          mouseForce = directionToMouse.multiplyScalar(
+            distanceToMouse * distanceToMouse
+          );
+        }
+        cumulativeForce.add(mouseForce.clampLength(0, 0.01));
 
-        balls[i].velocity = cumulativeForce.clampLength(0.01, 1);
+        if (!balls[i].velocity) balls[i].velocity = new THREE.Vector3(0, 0, 0);
+        balls[i].velocity!.add(cumulativeForce).clampLength(0, 0.1);
         balls[i].position.add(balls[i].velocity!);
       }
 
