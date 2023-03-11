@@ -29,7 +29,7 @@ const Sphere = ({
     const newY = minY + ((maxY - minY) * (wave + 1)) / 2;
 
     // update position
-    const newPosition = new THREE.Vector3(position.x, newY, position.y);
+    const newPosition = new THREE.Vector3(position.x, newY, position.z);
     setPosition(newPosition);
   }
 
@@ -47,8 +47,8 @@ const Sphere = ({
 const Wave = () => {
   const allPositions: THREE.Vector3[] = [];
 
-  const maxX = 100;
-  const maxZ = 100;
+  const maxX = 20;
+  const maxZ = 20;
   const spacing = 5;
 
   const minY = 0;
