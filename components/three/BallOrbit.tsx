@@ -141,7 +141,7 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />;
+  return <canvas ref={canvasRef} style={{ width: "100%", height: "99%" }} />;
 };
 
 export default BallOrbit;
