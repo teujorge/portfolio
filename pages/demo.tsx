@@ -9,10 +9,13 @@ import {
   useEffect,
   useState,
 } from "react";
+import Link from "next/link";
+import Wave from "@/components/three/Wave";
 
 enum Demo {
   orbit = "Mouse Orbit",
   grid = "Chaos Grid",
+  wave = "Ball Wave",
 }
 
 type DemoContextType = {
@@ -61,6 +64,9 @@ export default function Demonstration() {
 
       case Demo.grid:
         return <BallGrid />;
+
+      case Demo.wave:
+        return <Wave />;
     }
   }
 
@@ -76,6 +82,7 @@ export default function Demonstration() {
     >
       <div
         css={css`
+          z-index: 100;
           width: 100vw;
           height: 100vh;
         `}
@@ -89,6 +96,7 @@ export default function Demonstration() {
             }
           `}
         >
+          <Link href="/">back</Link>
           <h1>Demos:</h1>
           <h2
             css={css`
@@ -105,6 +113,14 @@ export default function Demonstration() {
             onClick={() => setWhichDemo(Demo.grid)}
           >
             {Demo.grid}
+          </h2>
+          <h2
+            css={css`
+              font-weight: ${whichDemo === Demo.wave ? 900 : 100};
+            `}
+            onClick={() => setWhichDemo(Demo.wave)}
+          >
+            {Demo.wave}
           </h2>
         </div>
 
