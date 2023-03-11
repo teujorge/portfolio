@@ -10,6 +10,7 @@ import { Title } from "@/components/Title";
 import { useEffect } from "react";
 import { World } from "@/components/World";
 import Bubbles from "@/components/Bubbles";
+import Link from "next/link";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
@@ -50,6 +51,20 @@ export default function Home() {
 
       <Bubbles />
       <LeftBar />
+
+      <Link
+        css={css`
+          z-index: 100;
+          cursor: hover;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          font-size: 8px;
+        `}
+        href={"demo"}
+      >
+        easter egg?
+      </Link>
 
       <main>
         <Title />
