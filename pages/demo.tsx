@@ -11,31 +11,46 @@ import {
 } from "react";
 
 enum Demo {
-  orbit = "ball orbit",
-  grid = "ball grid",
+  orbit = "Mouse Orbit",
+  grid = "Chaos Grid",
 }
 
 type DemoContextType = {
+  mousePosition: number;
+  setMousePosition: Dispatch<SetStateAction<number>>;
+
   scrollPosition: number;
   setScrollPosition: Dispatch<SetStateAction<number>>;
 };
 
 export const DemoContext = createContext<DemoContextType>({
+  mousePosition: 0,
+  setMousePosition: () => {},
+
   scrollPosition: 0,
   setScrollPosition: () => {},
 });
 
 export default function Demonstration() {
   const [whichDemo, setWhichDemo] = useState<Demo>(Demo.grid);
+  const [mousePosition, setMousePosition] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     function onScroll() {
       setScrollPosition(scrollY);
     }
+
+    function onMouseMove(event: MouseEvent) {
+      const pos = (event.clientX / window.innerWidth) * 2 - 1;
+      setMousePosition(pos);
+    }
+
     window.addEventListener("scroll", onScroll, false);
+    window.addEventListener("mousemove", onMouseMove, false);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);
 
@@ -52,6 +67,9 @@ export default function Demonstration() {
   return (
     <DemoContext.Provider
       value={{
+        mousePosition: mousePosition,
+        setMousePosition: setMousePosition,
+
         scrollPosition: scrollPosition,
         setScrollPosition: setScrollPosition,
       }}
@@ -78,7 +96,7 @@ export default function Demonstration() {
             `}
             onClick={() => setWhichDemo(Demo.orbit)}
           >
-            Balls Orbit
+            {Demo.orbit}
           </h2>
           <h2
             css={css`
@@ -86,7 +104,7 @@ export default function Demonstration() {
             `}
             onClick={() => setWhichDemo(Demo.grid)}
           >
-            Balls Grid
+            {Demo.grid}
           </h2>
         </div>
 

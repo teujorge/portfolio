@@ -16,13 +16,13 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      50,
+      60,
       canvas.clientWidth / canvas.clientHeight,
       0.1,
       1000
     );
     // const camera = new THREE.OrthographicCamera();
-    const renderer = new THREE.WebGLRenderer({ canvas });
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
@@ -30,7 +30,7 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
     // create balls
     const balls: BallBody[] = [];
     for (let i = 0; i < numBalls; i++) {
-      const geometry = new THREE.SphereGeometry(0.1, 32, 32);
+      const geometry = new THREE.SphereGeometry(0.05, 32, 32);
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`),
         metalness: 0.25,
@@ -78,6 +78,31 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
       for (let i = 0; i < balls.length; i++) {
         let cumulativeForce = new THREE.Vector3(0, 0, 0);
 
+        // calculate force from mouse
+        const mousePos = new THREE.Vector3(mouse.x, mouse.y, 18.75);
+        const distanceToMouse = balls[i].position.distanceTo(mousePos);
+        const directionToMouse = new THREE.Vector3()
+          .subVectors(mousePos, balls[i].position)
+          .normalize();
+
+        const minMouseDistance = 0.2;
+        let mouseForce: THREE.Vector3;
+        // balls too close are repelled
+        if (distanceToMouse < minMouseDistance) {
+          mouseForce = directionToMouse.multiplyScalar(-1 * distanceToMouse);
+        }
+        // far balls are attracted to mouse
+        else {
+          mouseForce = directionToMouse.multiplyScalar(
+            distanceToMouse * distanceToMouse
+          );
+        }
+        cumulativeForce.add(mouseForce.clampLength(0, 0.0002));
+
+        if (!balls[i].velocity) balls[i].velocity = new THREE.Vector3(0, 0, 0);
+        balls[i].velocity!.add(cumulativeForce).clampLength(0.001, 0.01);
+        balls[i].position.add(balls[i].velocity!);
+
         // calculate force from other balls and prevent collisions
         for (let j = 0; j < balls.length; j++) {
           // ignore "this" ball
@@ -86,7 +111,7 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
           const distanceBetweenBalls = balls[i].position.distanceTo(
             balls[j].position
           );
-          const radiusSum = 0.25;
+          const radiusSum = 0.1;
 
           if (distanceBetweenBalls < radiusSum) {
             // balls are colliding, adjust their velocities to push them apart
@@ -101,33 +126,6 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
             balls[j].position.sub(adjustment);
           }
         }
-
-        // calculate force from mouse
-        const mousePos = new THREE.Vector3(mouse.x, mouse.y, 18.75);
-        const distanceToMouse = balls[i].position.distanceTo(mousePos);
-        const directionToMouse = new THREE.Vector3()
-          .subVectors(mousePos, balls[i].position)
-          .normalize();
-
-        const minMouseDistance = 0.25;
-        let mouseForce: THREE.Vector3;
-        // balls too close are repelled
-        if (distanceToMouse < minMouseDistance) {
-          mouseForce = directionToMouse.multiplyScalar(
-            -1 * distanceToMouse * distanceToMouse
-          );
-        }
-        // far balls are attracted to mouse
-        else {
-          mouseForce = directionToMouse.multiplyScalar(
-            distanceToMouse * distanceToMouse
-          );
-        }
-        cumulativeForce.add(mouseForce.clampLength(0, 0.01));
-
-        if (!balls[i].velocity) balls[i].velocity = new THREE.Vector3(0, 0, 0);
-        balls[i].velocity!.add(cumulativeForce).clampLength(0, 0.1);
-        balls[i].position.add(balls[i].velocity!);
       }
 
       renderer.render(scene, camera);
@@ -143,7 +141,7 @@ const BallOrbit = ({ numBalls }: { numBalls: number }) => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />;
+  return <canvas ref={canvasRef} style={{ width: "100%", height: "99%" }} />;
 };
 
 export default BallOrbit;
