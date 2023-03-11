@@ -11,11 +11,13 @@ import {
 } from "react";
 import Link from "next/link";
 import Wave from "@/components/three/Wave";
+import Flow from "@/components/three/Flow";
 
 enum Demo {
   orbit = "Mouse Orbit",
   grid = "Chaos Grid",
   wave = "Ball Wave",
+  flow = "Form Flow",
 }
 
 type DemoContextType = {
@@ -35,7 +37,7 @@ export const DemoContext = createContext<DemoContextType>({
 });
 
 export default function Demonstration() {
-  const [whichDemo, setWhichDemo] = useState<Demo>(Demo.grid);
+  const [whichDemo, setWhichDemo] = useState<Demo>(Demo.flow);
   const [mousePosition, setMousePosition] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -67,6 +69,9 @@ export default function Demonstration() {
 
       case Demo.wave:
         return <Wave />;
+
+      case Demo.flow:
+        return <Flow />;
     }
   }
 
@@ -93,6 +98,11 @@ export default function Demonstration() {
 
             h2 {
               cursor: pointer;
+              margin: 6px;
+              padding: 6px;
+              text-align: left;
+              font-size: 20px;
+              text-decoration: none;
             }
           `}
         >
@@ -106,6 +116,7 @@ export default function Demonstration() {
           >
             {Demo.orbit}
           </h2>
+
           <h2
             css={css`
               font-weight: ${whichDemo === Demo.grid ? 900 : 100};
@@ -114,6 +125,7 @@ export default function Demonstration() {
           >
             {Demo.grid}
           </h2>
+
           <h2
             css={css`
               font-weight: ${whichDemo === Demo.wave ? 900 : 100};
@@ -121,6 +133,15 @@ export default function Demonstration() {
             onClick={() => setWhichDemo(Demo.wave)}
           >
             {Demo.wave}
+          </h2>
+
+          <h2
+            css={css`
+              font-weight: ${whichDemo === Demo.flow ? 900 : 100};
+            `}
+            onClick={() => setWhichDemo(Demo.flow)}
+          >
+            {Demo.flow}
           </h2>
         </div>
 
