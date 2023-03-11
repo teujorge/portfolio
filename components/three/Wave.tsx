@@ -1,18 +1,13 @@
 import { useRef, useState } from "react";
-import { Canvas, RootState, Vector3, useFrame } from "@react-three/fiber";
-
-type Point = {
-  x: number;
-  y: number;
-  z: number;
-};
+import { Canvas, RootState, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 
 const Sphere = ({
   pos,
   minY,
   maxY,
 }: {
-  pos: Point;
+  pos: THREE.Vector3;
   minY: number;
   maxY: number;
 }) => {
@@ -31,23 +26,18 @@ const Sphere = ({
     const wave = Math.sin(
       (position.x + position.z) / 10 + state.clock.elapsedTime
     );
-    const y = minY + ((maxY - minY) * (wave + 1)) / 2;
+    const newY = minY + ((maxY - minY) * (wave + 1)) / 2;
 
     // update position
-    setPosition({
-      ...position,
-      //   x,
-      y,
-    });
+    const newPosition = new THREE.Vector3(position.x, newY, position.y);
+    setPosition(newPosition);
   }
 
-  function pointToVector(p: Point): Vector3 {
-    return [p.x, p.y, p.z];
-  }
-
-  // return the view, these are regular Three.js elements expressed in JSX
   return (
-    <mesh ref={ref} position={pointToVector(position)}>
+    <mesh
+      ref={ref}
+      position={new THREE.Vector3(position.x, position.y, position.z)}
+    >
       <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial roughness={0.75} metalness={0.5} />
     </mesh>
@@ -55,10 +45,10 @@ const Sphere = ({
 };
 
 const Wave = () => {
-  const allPositions: Point[] = [];
+  const allPositions: THREE.Vector3[] = [];
 
-  const maxX = 50;
-  const maxZ = 50;
+  const maxX = 100;
+  const maxZ = 100;
   const spacing = 5;
 
   const minY = 0;
@@ -66,12 +56,13 @@ const Wave = () => {
 
   for (let x = 0; x < maxX; x++) {
     for (let z = 0; z < maxZ; z++) {
-      allPositions.push({ x: spacing * x, y: 0, z: spacing * z });
+      allPositions.push(new THREE.Vector3(spacing * x, 0, spacing * z));
     }
   }
 
   return (
     <Canvas
+      gl={{ powerPreference: "high-performance" }}
       camera={{
         fov: 55,
         position: [(spacing * maxZ) / 2, 50, 200],
@@ -79,8 +70,8 @@ const Wave = () => {
     >
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      {allPositions.map((pos) => (
-        <Sphere minY={minY} maxY={maxY} pos={pos} />
+      {allPositions.map((pos, index) => (
+        <Sphere key={index} minY={minY} maxY={maxY} pos={pos} />
       ))}
     </Canvas>
   );
