@@ -16,16 +16,20 @@
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
+    "debounce": "^1.2.1",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.2",
     "next": "13.1.2",
+    "random": "^4.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sharp": "^0.31.3",
+    "simple-input-events": "^2.0.0",
     "three": "^0.150.1",
     "typescript": "4.9.4"
   },
   "devDependencies": {
+    "@types/debounce": "^1.2.1",
     "@types/three": "^0.149.0"
   }
 }
