@@ -11,7 +11,7 @@ import {
 } from "react";
 import Link from "next/link";
 import Wave from "@/components/three/Wave";
-import Flow from "@/components/three/Flow";
+import Flow from "@/components/three/flow/Flow";
 
 enum Demo {
   orbit = "Mouse Orbit",
