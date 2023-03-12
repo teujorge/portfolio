@@ -1,34 +1,39 @@
 import debounce from "debounce";
 import { FlowDemo } from "./FlowDemo";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { css } from "@emotion/react";
 
 const Flow = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLParagraphElement>(null);
+
+  const lessRef = useRef<HTMLButtonElement>(null);
+  const moreRef = useRef<HTMLButtonElement>(null);
+  const evenLessRef = useRef<HTMLButtonElement>(null);
+  const evenMoreRef = useRef<HTMLButtonElement>(null);
+
+  const [demo, setDemo] = useState<FlowDemo>();
+  const [config, setConfig] = useState<any>({
+    nInstances: 2000,
+    useCube: false,
+    scale: 1,
+  });
+
   useEffect(() => {
-    let config = {
-      nInstances: 2000,
-      useCube: false,
-      scale: 1,
-    };
+    if (!demo) setDemo(new FlowDemo(containerRef.current, config));
+    counterRef.current!.innerText = `${config.nInstances * 2}`;
+  }, []);
 
-    const container = document.getElementById("flow-demo");
-    let less = document.getElementById("less")!;
-    let more = document.getElementById("more")!;
-    let evenLess = document.getElementById("even-less")!;
-    let evenMore = document.getElementById("even-more")!;
-    let countElement = document.getElementById("count")!;
+  useEffect(() => {
+    if (!demo) return;
 
-    const myApp = new FlowDemo(container, config);
-    myApp.init();
-
-    let restart = debounce(myApp.restart, 400);
-
-    countElement.innerText = `${config.nInstances * 2}`;
+    demo.init();
+    let restart = debounce(demo.restart, 400);
 
     const addInstances = (count: any) => {
       config.nInstances += count;
       config.nInstances = Math.max(500, config.nInstances);
-      countElement.innerText = `${config.nInstances * 2}`;
+      counterRef.current!.innerText = `${config.nInstances * 2}`;
       let scale = 1 - Math.min(1, (config.nInstances - 500) / 50000) * 0.8;
       config.scale = scale;
       restart();
@@ -50,11 +55,11 @@ const Flow = () => {
       addInstances(2000);
     };
 
-    less.addEventListener("click", handleLess);
-    more.addEventListener("click", handleMore);
-    evenLess.addEventListener("click", handleEvenLess);
-    evenMore.addEventListener("click", handleEvenMore);
-  }, []);
+    lessRef.current!.onclick = handleLess;
+    moreRef.current!.onclick = handleMore;
+    evenLessRef.current!.onclick = handleEvenLess;
+    evenMoreRef.current!.onclick = handleEvenMore;
+  }, [demo]);
 
   return (
     <>
@@ -64,6 +69,7 @@ const Flow = () => {
           height: 500px !important;
         `}
         id="flow-demo"
+        ref={containerRef}
       >
         <br />
         <br />
@@ -80,13 +86,23 @@ const Flow = () => {
           bottom: 0px;
         `}
       >
-        <button id="less">less</button>
-        <button id="more">more</button>
+        <button id="less" ref={lessRef}>
+          less
+        </button>
+        <button id="more" ref={moreRef}>
+          more
+        </button>
 
-        <button id="even-less">even-less</button>
-        <button id="even-more">even-more</button>
+        <button id="even-less" ref={evenLessRef}>
+          even-less
+        </button>
+        <button id="even-more" ref={evenMoreRef}>
+          even-more
+        </button>
 
-        <button id="count">count</button>
+        <p id="count" ref={counterRef}>
+          count
+        </p>
       </div>
     </>
   );
