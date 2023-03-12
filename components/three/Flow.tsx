@@ -106,20 +106,12 @@ const Flow = () => {
   function createSpheres(scene: THREE.Scene) {
     // base geometry //
 
-    // create a simple square shape. We duplicate the top left and bottom right
     let baseGeometry = new THREE.BufferGeometry();
-
-    // vertices because each vertex needs to appear once per triangle.
-    const vertices = new Float32Array([
-      -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0,
-
-      1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0,
-    ]);
 
     // itemSize = 3 because there are 3 values (components) per vertex
     baseGeometry.setAttribute(
       "position",
-      new THREE.BufferAttribute(vertices, 3)
+      new THREE.SphereGeometry(2, 32, 32).attributes.position
     );
 
     // instance and mesh //
@@ -134,16 +126,19 @@ const Flow = () => {
       fragmentShader: fragmentShader,
       vertexShader: vertexShader,
       uniforms: {
-        uTime: new THREE.Uniform(0),
+        uTime: { value: 0 },
+        uHold: { value: 0 },
+        uMouse: { value: new THREE.Vector2() },
+        uScale: { value: 1 },
       },
     });
-    let material2 = new THREE.MeshBasicMaterial();
-    let mesh = new THREE.Mesh(instancedGeometry, material2);
+
+    let mesh = new THREE.Mesh(instancedGeometry, material);
     scene.add(mesh);
 
     // geometry attributes //
 
-    // 1. Create the values for each instance
+    // 1. create the values for each instance
     let aCurve = [];
     let aColor = [];
     let colors = [new THREE.Color("#ff3030"), new THREE.Color("#121214")];
@@ -159,11 +154,11 @@ const Flow = () => {
       aColor.push(color.r, color.g, color.b);
     }
 
-    // 2. Transform the array to float32
+    // 2. transform the array to float32
     let aCurveFloat32 = new Float32Array(aCurve);
     let aColorFloat32 = new Float32Array(aColor);
 
-    // 3. Create te instanced Buffer Attribute of size three
+    // 3. create te instanced Buffer Attribute of size three
     instancedGeometry.setAttribute(
       "aCurve",
       new THREE.InstancedBufferAttribute(aCurveFloat32, 4, false)
