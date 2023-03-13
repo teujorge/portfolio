@@ -1,9 +1,21 @@
 import Image from "next/image";
 import ProfileImg from "../public/images/profile.jpg";
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 
 export const About = () => {
+  const blobAnimation = keyframes`
+  0% {
+    border-radius: 50% 60% 90% 40%/80% 40% 90% 70%;
+  }
+  50% {
+    border-radius: 70% 50% 30% 70%/30% 90% 50% 60%;
+  }
+  100% {
+    border-radius: 50% 60% 90% 40%/80% 40% 90% 70%;
+  }
+`;
+
   return (
     <div className="section">
       <h2>about me</h2>
@@ -36,8 +48,9 @@ export const About = () => {
             background-color: black;
             filter: grayscale(1);
             transition: border-radius 0.2s ease, filter 0.5s ease;
+            animation: ${blobAnimation} 10s ease-in-out infinite;
 
-            &:hover {
+            :hover {
               border-radius: 10px;
               filter: grayscale(0);
             }
