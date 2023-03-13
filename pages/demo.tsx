@@ -12,12 +12,14 @@ import {
 import Link from "next/link";
 import Wave from "@/components/three/Wave";
 import Flow from "@/components/three/flow/Flow";
+import EarthInteractive from "@/components/3DEarth/EarthInteractive";
 
 enum Demo {
   orbit = "Mouse Orbit",
   grid = "Chaos Grid",
   wave = "Ball Wave",
   flow = "Form Flow",
+  earth = "3D Earth",
 }
 
 type DemoContextType = {
@@ -72,6 +74,9 @@ export default function Demonstration() {
 
       case Demo.flow:
         return <Flow />;
+
+      case Demo.earth:
+        return <EarthInteractive />;
     }
   }
 
@@ -142,6 +147,15 @@ export default function Demonstration() {
             onClick={() => setWhichDemo(Demo.flow)}
           >
             {Demo.flow}
+          </h2>
+
+          <h2
+            css={css`
+              font-weight: ${whichDemo === Demo.earth ? 900 : 100};
+            `}
+            onClick={() => setWhichDemo(Demo.earth)}
+          >
+            {Demo.earth}
           </h2>
         </div>
 
