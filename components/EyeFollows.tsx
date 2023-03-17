@@ -67,6 +67,8 @@ const EyeFollows = () => {
       css={css`
         position: relative;
 
+        padding-top: 11px;
+
         width: ${sizeEye}px;
         height: ${sizeEye}px;
 
@@ -78,10 +80,10 @@ const EyeFollows = () => {
 
         @media (prefers-color-scheme: dark) {
           svg {
-            fill: white;
-
             width: ${sizeEye}px;
             height: ${sizeEye}px;
+
+            fill: white;
           }
         }
       `}
