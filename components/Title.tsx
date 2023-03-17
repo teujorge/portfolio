@@ -7,7 +7,16 @@ export const Title = () => {
     <div
       className="section"
       css={css`
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
         min-height: 100vh;
+
+        @media (max-width: 800px) {
+          flex-direction: column;
+        }
       `}
     >
       {/* headers */}
@@ -47,7 +56,22 @@ export const Title = () => {
       </div>
 
       {/* eye */}
-      <EyeFollows />
+
+      <div
+        css={css`
+          padding: 20px;
+
+          border-radius: var(--border-radius);
+          background-color: white;
+          box-shadow: 0px 0px 8px var(--shadow-color);
+
+          @media (prefers-color-scheme: dark) {
+            background-color: black;
+          }
+        `}
+      >
+        <EyeFollows />
+      </div>
     </div>
   );
 };
