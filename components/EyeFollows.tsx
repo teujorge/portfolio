@@ -18,49 +18,49 @@ const maxInnerMovement = sizeInnerEye / 6;
 const EyeFollows = () => {
   const innerEyeRef = useRef<HTMLDivElement>(null);
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [eyeTranslation, setEyeTranslation] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    function handleMouseMove(event: MouseEvent) {
-      setMousePosition({ x: event.clientX, y: event.clientY });
+    function moveEye(event: MouseEvent) {
+      const innerEyeRect = innerEyeRef.current?.getBoundingClientRect();
+      if (!innerEyeRect) return css``;
+
+      const eyePosition = {
+        x: innerEyeRect.left + innerEyeRect.width / 2,
+        y: innerEyeRect.top + innerEyeRect.height / 2,
+      };
+
+      const directionToLook = {
+        x: event.clientX - eyePosition.x,
+        y: event.clientY - eyePosition.y,
+      };
+
+      const MOVE_DELTA = 0.000000000001;
+
+      if (directionToLook.x > 0) {
+        eyeTranslation.x += MOVE_DELTA;
+        eyeTranslation.x = Math.min(directionToLook.x, maxInnerMovement);
+      } else if (directionToLook.x < 0) {
+        eyeTranslation.x -= MOVE_DELTA;
+        eyeTranslation.x = Math.max(directionToLook.x, -maxInnerMovement);
+      }
+
+      if (directionToLook.y > 0) {
+        eyeTranslation.y += MOVE_DELTA;
+        eyeTranslation.y = Math.min(directionToLook.y, maxInnerMovement);
+      } else if (directionToLook.y < 0) {
+        eyeTranslation.y -= MOVE_DELTA;
+        eyeTranslation.y = Math.max(directionToLook.y, -maxInnerMovement);
+      }
+
+      setEyeTranslation({ ...eyeTranslation });
     }
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", moveEye);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", moveEye);
     };
-  }, []);
-
-  function moveEye(): SerializedStyles {
-    const innerEyeRect = innerEyeRef.current?.getBoundingClientRect();
-    if (!innerEyeRect) return css``;
-
-    const eyePosition = {
-      x: innerEyeRect.left + innerEyeRect.width / 2,
-      y: innerEyeRect.top + innerEyeRect.height / 2,
-    };
-
-    const directionToLook = {
-      x: mousePosition.x - eyePosition.x,
-      y: mousePosition.y - eyePosition.y,
-    };
-
-    if (directionToLook.x > 0) {
-      directionToLook.x = Math.min(directionToLook.x, maxInnerMovement);
-    } else {
-      directionToLook.x = Math.max(directionToLook.x, -maxInnerMovement);
-    }
-
-    if (directionToLook.y > 0) {
-      directionToLook.y = Math.min(directionToLook.y, maxInnerMovement);
-    } else {
-      directionToLook.y = Math.max(directionToLook.y, -maxInnerMovement);
-    }
-
-    return css`
-      transform: translate(${directionToLook.x}px, ${directionToLook.y}px);
-    `;
-  }
+  }, [eyeTranslation]);
 
   return (
     <div
@@ -73,7 +73,7 @@ const EyeFollows = () => {
         border-radius: 50%;
 
         :hover > div {
-          transform: translate(0px, 0px);
+          transform: translate(0px, 0px) !important;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -103,8 +103,8 @@ const EyeFollows = () => {
           border-color: white;
           border-radius: 50%;
 
-          ${moveEye()}
-          transition: transform 1s ease;
+          transform: translate(${eyeTranslation.x}px, ${eyeTranslation.y}px);
+          transition: transform 1s ease-in-out;
 
           @media (prefers-color-scheme: dark) {
             border-color: black;
