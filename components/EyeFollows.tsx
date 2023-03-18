@@ -1,7 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css, SerializedStyles } from "@emotion/react";
-
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const outerEyeSvg = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -9,110 +6,80 @@ const outerEyeSvg = (
   </svg>
 );
 
-const sizeEye = 200;
-const sizeInnerEye = sizeEye / 2.5;
-const borderInnerEye = 10;
-const posInnerEye = sizeEye / 2 - sizeInnerEye / 2;
-const maxInnerMovement = sizeInnerEye / 6;
-
 const EyeFollows = () => {
-  const innerEyeRef = useRef<HTMLDivElement>(null);
-
-  const [eyeTranslation, setEyeTranslation] = useState({ x: 0, y: 0 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    function moveEye(event: MouseEvent) {
-      const innerEyeRect = innerEyeRef.current?.getBoundingClientRect();
-      if (!innerEyeRect) return css``;
+    const canvasContext = canvasRef.current!.getContext("2d")!;
 
-      const eyePosition = {
-        x: innerEyeRect.left + innerEyeRect.width / 2,
-        y: innerEyeRect.top + innerEyeRect.height / 2,
-      };
+    // object to hold mouse coords
+    const lookAt = { x: 150, y: 75 };
 
-      const directionToLook = {
-        x: event.clientX - eyePosition.x,
-        y: event.clientY - eyePosition.y,
-      };
-
-      const MOVE_DELTA = 0.000000000001;
-
-      if (directionToLook.x > 0) {
-        eyeTranslation.x += MOVE_DELTA;
-        eyeTranslation.x = Math.min(directionToLook.x, maxInnerMovement);
-      } else if (directionToLook.x < 0) {
-        eyeTranslation.x -= MOVE_DELTA;
-        eyeTranslation.x = Math.max(directionToLook.x, -maxInnerMovement);
-      }
-
-      if (directionToLook.y > 0) {
-        eyeTranslation.y += MOVE_DELTA;
-        eyeTranslation.y = Math.min(directionToLook.y, maxInnerMovement);
-      } else if (directionToLook.y < 0) {
-        eyeTranslation.y -= MOVE_DELTA;
-        eyeTranslation.y = Math.max(directionToLook.y, -maxInnerMovement);
-      }
-
-      setEyeTranslation({ ...eyeTranslation });
-    }
-
-    window.addEventListener("mousemove", moveEye);
-    return () => {
-      window.removeEventListener("mousemove", moveEye);
+    // details need to make eye look at mouse coords
+    const eye = {
+      radius: 50,
+      iris: 30,
+      // limits of movement
+      limMin: -0.1,
+      limMax: 1.1,
     };
-  }, [eyeTranslation]);
+
+    // add mouse move listener to whole page
+    addEventListener("mousemove", (e) => {
+      // make mouse coords relative to the canvas  ignoring scroll in this case
+      const bounds = canvasRef.current!.getBoundingClientRect();
+      lookAt.x = e.pageX - bounds.left; // - scrollX;
+      lookAt.y = e.pageY - bounds.top; // - scrollY;
+
+      canvasContext.clearRect(0, 0, 300, 150);
+      drawEyes(lookAt);
+    });
+
+    drawEyes(lookAt);
+
+    function drawEyes(lookAt: { x: number; y: number }) {
+      var { x, y } = lookAt;
+
+      // normalize lookAt range from 0 to 1 across and down canvas
+      x /= canvasRef.current!.width;
+      y /= canvasRef.current!.height;
+
+      // limit eye movement to -0.1 to 1.1  or what ever you prefer
+      x = x < eye.limMin ? eye.limMin : x > eye.limMax ? eye.limMax : x;
+      y = y < eye.limMin ? eye.limMin : y > eye.limMax ? eye.limMax : y;
+
+      // move lookAt so that 0.5 is center
+      x -= 0.5;
+      y -= 0.5;
+
+      // get range of movement of iris
+      const range = (eye.radius - eye.iris) * 2;
+
+      // scale the lookAt to the range of movement
+      x *= range;
+      y *= range;
+
+      // iris
+      canvasContext.fillStyle = "blue";
+      canvasContext.beginPath();
+      canvasContext.arc(75 + x, 75 + y, eye.iris, 0, Math.PI * 2, false);
+      canvasContext.fill();
+
+      // pupil
+      canvasContext.fillStyle = "black";
+      canvasContext.beginPath();
+      canvasContext.arc(75 + x, 75 + y, 15, 0, Math.PI * 2, false);
+      canvasContext.fill();
+
+      // turn the clip off by restoring canvas state
+      canvasContext.restore();
+    }
+  }, []);
 
   return (
-    <div
-      css={css`
-        position: relative;
-
-        padding-top: 11px;
-
-        width: ${sizeEye}px;
-        height: ${sizeEye}px;
-
-        border-radius: 50%;
-
-        :hover > div {
-          transform: translate(0px, 0px) !important;
-        }
-
-        @media (prefers-color-scheme: dark) {
-          svg {
-            width: ${sizeEye}px;
-            height: ${sizeEye}px;
-
-            fill: white;
-          }
-        }
-      `}
-    >
+    <div>
       {outerEyeSvg}
-
-      <div
-        ref={innerEyeRef}
-        css={css`
-          position: absolute;
-
-          top: ${posInnerEye}px;
-          left: ${posInnerEye}px;
-
-          width: ${sizeInnerEye}px;
-          height: ${sizeInnerEye}px;
-
-          border: ${borderInnerEye}px solid;
-          border-color: white;
-          border-radius: 50%;
-
-          transform: translate(${eyeTranslation.x}px, ${eyeTranslation.y}px);
-          transition: transform 1s ease-in-out;
-
-          @media (prefers-color-scheme: dark) {
-            border-color: black;
-          }
-        `}
-      />
+      <canvas ref={canvasRef} id="canvas" width="150" height="150" />
     </div>
   );
 };
