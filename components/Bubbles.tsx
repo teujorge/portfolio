@@ -68,7 +68,10 @@ const Bubbles = ({
         return;
       }
 
-      if (size === -1 || speed === -1) resetBubble(true);
+      if (size === -1 || speed === -1) {
+        resetBubble(true);
+        return;
+      }
 
       let position = { ...initialPosition };
       const direction = {
@@ -117,7 +120,8 @@ const Bubbles = ({
       setSpeed(randSpeed());
       setColor(randColor());
 
-      const newInitialPosition = randInitialPosition();
+      const firstTimeResetting = firstReset && isFirstTime;
+      const newInitialPosition = randInitialPosition(firstTimeResetting);
       setInitialPosition({ ...newInitialPosition });
 
       const newFinalPosition = randFinalPosition(newInitialPosition);
@@ -130,14 +134,14 @@ const Bubbles = ({
       return (window.innerWidth * p) / 100;
     }
 
-    function randInitialPosition(): Position {
+    function randInitialPosition(firstTime: boolean): Position {
       const pos = {
         x:
           Math.random() * window.innerWidth -
           widthPercentageToPixels(maxSize) / 2,
         y: window.innerHeight + blur + widthPercentageToPixels(maxSize) / 2,
       };
-      if (isFirstTime) pos.y = Math.random() * window.innerHeight;
+      if (firstTime) pos.y = Math.random() * window.innerHeight;
 
       return pos;
     }
