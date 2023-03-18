@@ -56,22 +56,7 @@ export const Title = () => {
       </div>
 
       {/* eye */}
-
-      <div
-        css={css`
-          padding: 20px;
-
-          border-radius: var(--border-radius);
-          background-color: white;
-          box-shadow: 0px 0px 8px var(--shadow-color);
-
-          @media (prefers-color-scheme: dark) {
-            background-color: black;
-          }
-        `}
-      >
-        <EyeFollows />
-      </div>
+      <EyeFollows />
     </div>
   );
 };
