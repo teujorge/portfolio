@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css, keyframes } from "@emotion/react";
-import { useRef, useState } from "react";
+import { css } from "@emotion/react";
+import { useRef, useState, useEffect, UIEvent } from "react";
 
 type Position = {
   x: number;
@@ -14,23 +14,29 @@ type ColorRGBA = {
   a: number;
 };
 
-const Bubbles = ({
-  quantity = 4,
-  blur = 100, // px
-  minSpeed = 25, // px/s
-  maxSpeed = 75, // px/s
-  minSize = 10, // window width %
-  maxSize = 55, // window width %,
-}: {
+type BubblesProps = {
   quantity?: number;
   blur?: number;
   minSpeed?: number;
   maxSpeed?: number;
   minSize?: number;
   maxSize?: number;
-}) => {
-  // single bubble component
-  const Bubble = ({ bubbleId }: { bubbleId: string }) => {
+};
+
+const Bubbles = ({
+  quantity = 5,
+  blur = 90, // px
+  minSpeed = 10, // px/s
+  maxSpeed = 20, // px/s
+  minSize = 5, // window width %
+  maxSize = 50, // window width %,
+}: BubblesProps) => {
+  // BUBBlE
+  const Bubble = ({ screenSize }: { screenSize: Position }) => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    const [isFirstTime, setIsFirstTime] = useState(true);
+
     const [initialPosition, setInitialPosition] = useState<Position>({
       x: -maxSize - blur,
       y: -maxSize - blur,
@@ -48,12 +54,67 @@ const Bubbles = ({
       a: 0,
     });
 
-    const [size, setSize] = useState<number>(0);
+    const [size, setSize] = useState<number>(-1);
+    const [speed, setSpeed] = useState<number>(-1);
 
-    const bubbleRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      if (!canvas) {
+        return;
+      }
 
-    function resetBubble() {
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        return;
+      }
+
+      if (size === -1 || speed === -1) resetBubble(true);
+
+      let position = { ...initialPosition };
+      const direction = {
+        x: finalPosition.x - initialPosition.x,
+        y: finalPosition.y - initialPosition.y,
+      };
+      const directionLength = Math.sqrt(direction.x ** 2 + direction.y ** 2);
+      direction.x /= directionLength;
+      direction.y /= directionLength;
+
+      if (Number.isNaN(direction.x)) {
+        direction.x = 1;
+      }
+      if (Number.isNaN(direction.y)) {
+        direction.y = 1;
+      }
+
+      const animId = window.requestAnimationFrame(function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 60 fps
+        position.x += (direction.x * speed) / 60;
+        position.y += (direction.y * speed) / 60;
+
+        if (position.y + size < 0) {
+          resetBubble();
+          return;
+        }
+
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, size / 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+        ctx.filter = `blur(${blur}px)`;
+        ctx.fill();
+
+        window.requestAnimationFrame(animate);
+      });
+
+      return () => {
+        window.cancelAnimationFrame(animId);
+      };
+    }, [initialPosition, finalPosition, size, color, speed]);
+
+    function resetBubble(firstReset = false) {
       setSize(randSize());
+      setSpeed(randSpeed());
       setColor(randColor());
 
       const newInitialPosition = randInitialPosition();
@@ -61,19 +122,28 @@ const Bubbles = ({
 
       const newFinalPosition = randFinalPosition(newInitialPosition);
       setFinalPosition({ ...newFinalPosition });
+
+      if (!firstReset && isFirstTime) setIsFirstTime(false);
+    }
+
+    function widthPercentageToPixels(p: number): number {
+      return (window.innerWidth * p) / 100;
     }
 
     function randInitialPosition(): Position {
-      return {
+      const pos = {
         x:
           Math.random() * window.innerWidth -
           widthPercentageToPixels(maxSize) / 2,
-        y: window.innerHeight + blur,
+        y: window.innerHeight + blur + widthPercentageToPixels(maxSize) / 2,
       };
+      if (isFirstTime) pos.y = Math.random() * window.innerHeight;
+
+      return pos;
     }
 
     function randFinalPosition(origin: Position): Position {
-      return {
+      const pos = {
         x:
           Math.random() * window.innerWidth -
           widthPercentageToPixels(maxSize) / 2 -
@@ -85,26 +155,23 @@ const Bubbles = ({
             widthPercentageToPixels(maxSize) +
             blur),
       };
+      return pos;
     }
 
     function randSpeed(): number {
-      const speed = Math.random() * maxSpeed + minSpeed;
+      const speed = Math.random() * (maxSpeed - minSpeed) + minSpeed;
       return speed > 0 ? speed : 1;
     }
 
     function randSize(): number {
-      const percentage = Math.random() * maxSize + minSize;
-      const size = widthPercentageToPixels(percentage);
+      const percentage = Math.random() * (maxSize - minSize) + minSize;
+      const size = (window.innerWidth * percentage) / 100;
       return size >= 0 ? size : 0;
     }
 
-    function widthPercentageToPixels(p: number): number {
-      return (window.innerWidth * p) / 100;
-    }
-
     function randColor(): ColorRGBA {
-      const minOpacity = 0.25;
-      const maxOpacity = 0.75;
+      const minOpacity = 0.3;
+      const maxOpacity = 0.7;
 
       return {
         r: Math.random() * 200,
@@ -114,68 +181,42 @@ const Bubbles = ({
       };
     }
 
-    function calcAnimTime(): number {
-      if (size < 10) return 50;
-
-      const dx = finalPosition.x - initialPosition.x;
-      const dy = finalPosition.y - initialPosition.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      // v = d/t
-      const time = distance / randSpeed();
-
-      const sToMs = 1000;
-      return time * sToMs;
-    }
-
-    const floatAnim = keyframes`
-    0% {
-        transform: translate(0px, 0px);
-    }
-
-    100% {
-        transform: translate(
-          ${finalPosition.x}px,
-          ${finalPosition.y}px
-        );
-    }
-    `;
-
     return (
-      <div
-        id={bubbleId}
-        ref={bubbleRef}
-        onAnimationIteration={resetBubble}
+      <canvas
+        ref={canvasRef}
+        width={screenSize.x}
+        height={screenSize.y}
         css={css`
           z-index: -5;
           position: fixed;
-          top: ${initialPosition.y}px;
-          left: ${initialPosition.x}px;
-
-          width: ${size}px;
-          height: ${size}px;
-          border-radius: 50%;
-          background-color: rgba(
-            ${color.r},
-            ${color.g},
-            ${color.b},
-            ${color.a}
-          );
-
-          filter: blur(${blur}px);
-          animation: ${floatAnim} ${calcAnimTime()}ms linear infinite;
+          top: 0;
+          left: 0;
         `}
       />
     );
   };
 
+  // BUBBLE
+
+  const [screenSize, setScreenSize] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    handleResize();
+
+    function handleResize() {
+      setScreenSize({ x: window.innerWidth, y: window.innerHeight });
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   let bubbles: JSX.Element[] = [];
+
   for (let i = 0; i < quantity; i++) {
     bubbles.push(
-      <Bubble
-        key={`floating-bubble-${i}`}
-        bubbleId={`floating-bubble-id-${i}`}
-      />
+      <Bubble key={`floating-bubble-${i}`} screenSize={screenSize} />
     );
   }
 
