@@ -104,7 +104,7 @@ const Bubbles = ({
         ctx.beginPath();
         ctx.arc(position.x, position.y, size / 2, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
-        ctx.filter = `blur(${blur}px)`;
+        // ctx.filter = `blur(${blur}px)`;
         ctx.fill();
 
         window.requestAnimationFrame(animate);
@@ -195,6 +195,7 @@ const Bubbles = ({
           position: fixed;
           top: 0;
           left: 0;
+          filter: blur(${blur}px);
         `}
       />
     );
