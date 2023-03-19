@@ -57,6 +57,12 @@ export const Contact = () => {
           method="POST"
           data-netlify="true"
         >
+          <input
+            type="hidden"
+            name="form-name"
+            value="portfolio-contact-form"
+          />
+
           <label className="reveal" htmlFor="name">
             Name:
           </label>
