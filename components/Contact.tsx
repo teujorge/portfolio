@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { DescPos, IconButton } from "./IconButton";
+import IconEmail from "../public/svg/envelope";
 
 export const Contact = () => {
   return (
-    <div className="section">
+    <div id="contact-section" className="section">
       <h2>get in touch</h2>
 
       <div
@@ -28,21 +30,22 @@ export const Contact = () => {
             justify-content: center;
             align-content: center;
 
+            width: 350px;
+            @media (max-width: 600px) {
+              width: 225px;
+            }
+
             label,
             input,
             textarea,
             button {
               font-family: inherit;
-              width: 350px;
+              width: 100%;
 
               background: none;
               outline: none;
               border: 1px solid transparent;
               border-radius: var(--border-radius);
-
-              @media (max-width: 600px) {
-                width: 225px;
-              }
             }
 
             label {
@@ -64,22 +67,6 @@ export const Contact = () => {
 
             textarea {
               resize: vertical;
-            }
-
-            button {
-              cursor: pointer;
-              font-size: 14px;
-              font-weight: 500;
-
-              margin-top: 20px;
-              padding: 10px;
-
-              color: var(--background-color);
-              background-color: var(--primary-color);
-
-              :hover {
-                background-color: var(--primary-color-high);
-              }
             }
           `}
           name="portfolio-contact-form"
@@ -107,9 +94,44 @@ export const Contact = () => {
           </label>
           <textarea className="reveal" name="message" required />
 
-          <button className="reveal" type="submit">
-            Send
-          </button>
+          <div
+            css={css`
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+
+              margin-top: 20px;
+
+              button {
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 500;
+
+                padding: 10px;
+                margin-right: 5px;
+
+                color: var(--background-color);
+                background-color: var(--primary-color);
+
+                :hover {
+                  background-color: var(--primary-color-high);
+                }
+              }
+            `}
+          >
+            <button className="reveal" type="submit">
+              Send
+            </button>
+
+            <IconButton
+              href={"mailto:mrljorge@outlook.com"}
+              src={IconEmail}
+              size={40}
+              desc="Email App"
+              descPos={DescPos.bot}
+            />
+          </div>
         </form>
       </div>
     </div>

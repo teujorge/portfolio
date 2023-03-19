@@ -4,9 +4,16 @@ import IconLinkedIn from "../public/svg/linkedin";
 import IconResume from "../public/svg/file";
 import { css } from "@emotion/react";
 import { DescPos, IconButton } from "./IconButton";
+import { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */
 
 export const LeftBar = () => {
+  const [resumeLink, setResumeLink] = useState("/resume");
+
+  useEffect(() => {
+    setResumeLink(window.location.origin + "/resume.pdf");
+  }, []);
+
   return (
     <div
       css={css`
@@ -43,7 +50,11 @@ export const LeftBar = () => {
       />
 
       <IconButton
-        href={"mailto:mrljorge@outlook.com"}
+        href={() => {
+          document
+            .getElementById("contact-section")!
+            .scrollIntoView({ behavior: "smooth" });
+        }}
         src={IconEmail}
         size={40}
         desc="Email"
@@ -51,7 +62,7 @@ export const LeftBar = () => {
       />
 
       <IconButton
-        href={"https://resume.io/r/gtFDsZNxN"}
+        href={resumeLink}
         src={IconResume}
         size={40}
         desc="Resume"

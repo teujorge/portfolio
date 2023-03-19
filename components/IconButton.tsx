@@ -16,7 +16,7 @@ export const IconButton = ({
   descPos = DescPos.bot,
 }: {
   src: JSX.Element;
-  href: string;
+  href: string | Function;
   size?: number;
   desc: string;
   descPos?: DescPos;
@@ -63,90 +63,107 @@ export const IconButton = ({
       break;
   }
 
-  return (
-    <a href={href} target="_blank" rel="noreferrer">
-      <div
-        css={css`
-          position: relative;
+  const iconElement = (
+    <div
+      css={css`
+        position: relative;
 
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-          margin: 4px !important;
-          padding: ${padding}px;
-          width: ${size}px;
-          height: ${size}px;
+        margin: 4px !important;
+        padding: ${padding}px;
+        width: ${size}px;
+        height: ${size}px;
 
-          border-radius: 50%;
-          background-color: black;
+        border-radius: 50%;
+        background-color: black;
 
-          transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease;
+
+        svg {
+          z-index: 100;
+          width: ${width}px;
+          height: ${width}px;
+          fill: white;
+          transition: fill 0.2s ease;
+        }
+
+        :hover {
+          background-color: white;
 
           svg {
-            z-index: 100;
-            width: ${width}px;
-            height: ${width}px;
-            fill: white;
-            transition: fill 0.2s ease;
+            fill: black;
+          }
+
+          div {
+            opacity: 1;
+          }
+        }
+
+        @media (prefers-color-scheme: light) {
+          background-color: white;
+
+          svg {
+            fill: black;
           }
 
           :hover {
-            background-color: white;
+            background-color: black;
 
             svg {
-              fill: black;
-            }
-
-            div {
-              opacity: 1;
+              fill: white;
             }
           }
+        }
+      `}
+    >
+      {/* icon */}
+      {src}
 
-          @media (prefers-color-scheme: light) {
-            background-color: white;
+      {/* label */}
+      <div
+        css={css`
+          pointer-events: none;
+          position: absolute;
+          text-align: center;
+          ${descriptionPositionStyle}
 
-            svg {
-              fill: black;
-            }
+          margin: 4px;
+          padding: 8px;
+          width: 100px;
 
-            :hover {
-              background-color: black;
+          opacity: 0;
+          border-radius: var(--border-radius);
+          color: var(--background-color);
+          background-color: var(--foreground-color);
+          transition: opacity 0.2s ease;
 
-              svg {
-                fill: white;
-              }
-            }
-          }
+          box-shadow: 0px 0px 8px var(--shadow-color);
         `}
       >
-        {/* icon */}
-        {src}
-
-        {/* label */}
-        <div
-          css={css`
-            pointer-events: none;
-            position: absolute;
-            text-align: center;
-            ${descriptionPositionStyle}
-
-            margin: 4px;
-            padding: 8px;
-            width: 100px;
-
-            opacity: 0;
-            border-radius: var(--border-radius);
-            color: var(--background-color);
-            background-color: var(--foreground-color);
-            transition: opacity 0.2s ease;
-
-            box-shadow: 0px 0px 8px var(--shadow-color);
-          `}
-        >
-          {desc}
-        </div>
+        {desc}
       </div>
-    </a>
+    </div>
+  );
+
+  if (typeof href === "string") {
+    return (
+      <a href={href} target="_blank" rel="noreferrer">
+        {iconElement}
+      </a>
+    );
+  }
+
+  return (
+    <div
+      css={css`
+        cursor: pointer;
+      `}
+      onClick={() => href()}
+    >
+      {iconElement}
+    </div>
   );
 };

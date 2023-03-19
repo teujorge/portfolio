@@ -30,14 +30,7 @@ export const Title = () => {
           h1 {
             font-size: calc(20px + 4vw);
             font-weight: black;
-
-            background: linear-gradient(to right, #d87300, #da1b60);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            @media (prefer-color=scheme: dark) {
-              background: linear-gradient(to right, #ff8a00, #ec1d69);
-            }
+            color: var(--primary-color);
           }
 
           h3 {
