@@ -20,12 +20,14 @@ type BubbleParams = {
   maxSpeed: number;
   minSize: number;
   maxSize: number;
+  colors?: ColorRGBA[];
 };
 
 class Bubble {
   blur: number;
   size!: number;
   speed!: number;
+  colors?: ColorRGBA[];
 
   minSize: number;
   maxSize: number;
@@ -38,8 +40,17 @@ class Bubble {
   position!: Vector;
   destination!: Vector;
 
-  constructor({ blur, minSpeed, maxSpeed, minSize, maxSize }: BubbleParams) {
+  constructor({
+    blur,
+    minSpeed,
+    maxSpeed,
+    minSize,
+    maxSize,
+    colors,
+  }: BubbleParams) {
     this.blur = blur;
+    this.colors = colors;
+
     this.minSize = minSize;
     this.maxSize = maxSize;
 
@@ -53,6 +64,7 @@ class Bubble {
     this.size = this.randSize();
     this.speed = this.randSpeed();
     this.color = this.randColor();
+    console.log("rand", this.color);
 
     const newInitialPosition = this.randInitialPosition(firstReset);
     this.position = newInitialPosition;
@@ -105,8 +117,14 @@ class Bubble {
   }
 
   randColor(): ColorRGBA {
-    const minOpacity = 0.3;
-    const maxOpacity = 0.7;
+    if (this.colors) {
+      let randIndex = Math.round(Math.random() * this.colors.length - 1);
+      if (randIndex < 0) randIndex = 0;
+      return this.colors[randIndex];
+    }
+
+    const minOpacity = 0.4;
+    const maxOpacity = 0.8;
 
     return {
       r: Math.random() * 200,
@@ -137,15 +155,17 @@ type BubblesProps = {
   maxSpeed?: number;
   minSize?: number;
   maxSize?: number;
+  colors?: ColorRGBA[];
 };
 
 const Bubbles = ({
   quantity = 5,
   blur = 100, // px
-  minSpeed = 10, // px/s
-  maxSpeed = 20, // px/s
+  minSpeed = 5, // px/s
+  maxSpeed = 25, // px/s
   minSize = 15, // window width %
   maxSize = 55, // window width %,
+  colors,
 }: BubblesProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [screenSize, setScreenSize] = useState({ x: 0, y: 0 });
@@ -161,6 +181,7 @@ const Bubbles = ({
           maxSpeed: maxSpeed,
           minSize: minSize,
           maxSize: maxSize,
+          colors: colors,
         })
       );
     }
@@ -179,7 +200,7 @@ const Bubbles = ({
       return;
     }
 
-    const floatAnimId = window.requestAnimationFrame(function animate() {
+    const floatAnimId = window.requestAnimationFrame(function animate(dt) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       bubbles.forEach((bubble) => {
@@ -190,10 +211,9 @@ const Bubbles = ({
         }
 
         // move bubble up
-        const fps = 60;
         const direction = bubble.getMoveDirection();
-        bubble.position.x += (direction.x * bubble.speed) / fps;
-        bubble.position.y += (direction.y * bubble.speed) / fps;
+        bubble.position.x += direction.x * bubble.speed * (dt / 6000000);
+        bubble.position.y += direction.y * bubble.speed * (dt / 6000000);
 
         // draw bubble
         ctx.beginPath();
