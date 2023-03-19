@@ -140,12 +140,12 @@ type BubblesProps = {
 };
 
 const Bubbles = ({
-  quantity = 6,
-  blur = 90, // px
-  minSpeed = 5, // px/s
+  quantity = 5,
+  blur = 100, // px
+  minSpeed = 10, // px/s
   maxSpeed = 20, // px/s
-  minSize = 5, // window width %
-  maxSize = 50, // window width %,
+  minSize = 15, // window width %
+  maxSize = 55, // window width %,
 }: BubblesProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [screenSize, setScreenSize] = useState({ x: 0, y: 0 });
@@ -206,7 +206,6 @@ const Bubbles = ({
         );
 
         ctx.fillStyle = `rgba(${bubble.color.r}, ${bubble.color.g}, ${bubble.color.b}, ${bubble.color.a})`;
-        // ctx.filter = `blur(${blur}px)`;
         ctx.fill();
       });
 
