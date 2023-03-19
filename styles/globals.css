@@ -1,9 +1,4 @@
 @font-face {
-  font-family: ProximaNova;
-  src: url("../public/fonts/ProximaNova.otf");
-}
-
-@font-face {
   font-family: Nunito;
   src: url("../public/fonts/Nunito.ttf");
 }
@@ -15,9 +10,6 @@
   --background-color: #f0f0f0;
   --off-background-color: #e0e0e075;
   --shadow-color: #00000020;
-  /* --default-font: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace; */
   --default-font: Nunito;
 }
 
