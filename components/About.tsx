@@ -80,11 +80,13 @@ export const About = () => {
           `}
         >
           <p className="reveal">
-            I am an innovative Software Engineer with a proven track record of
-            identifying issues and achieving solutions to satisfy project
-            requirements. Committed to working as a collaborative and positive
-            team member, striving to utilize my knowledge and expertise for
-            optimal engineering results.
+            Whether I&apos;m designing and building fun games or working on
+            complex web apps, I&apos;m constantly pushing myself to develop my
+            software skills and take on new challenges. I believe that software
+            engineering is more than just a job — it&apos;s a passion. And
+            I&apos;m excited to share that passion with you through my
+            portfolio. Explore my projects and experience, and let&apos;s
+            engineer great things together!
           </p>
 
           <p className="reveal">
