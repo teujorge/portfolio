@@ -16,7 +16,7 @@ export const Contact = () => {
           background-color: var(--off-background-color);
           box-shadow: 0px 0px 8px var(--shadow-color);
 
-          @media (max-width: 700px) {
+          @media (max-width: 600px) {
             padding: 20px;
           }
         `}
@@ -33,8 +33,16 @@ export const Contact = () => {
             textarea,
             button {
               font-family: inherit;
+              width: 350px;
 
-              width: 300px;
+              background: none;
+              outline: none;
+              border: 1px solid transparent;
+              border-radius: var(--border-radius);
+
+              @media (max-width: 600px) {
+                width: 225px;
+              }
             }
 
             label {
@@ -43,14 +51,35 @@ export const Contact = () => {
 
             input,
             textarea {
-              margin-top: 10px;
+              margin-top: 5px;
               margin-bottom: 10px;
               padding: 10px;
+
+              background-color: var(--background-color);
+
+              :focus {
+                border: 1px solid var(--primary-color);
+              }
+            }
+
+            textarea {
+              resize: vertical;
             }
 
             button {
+              cursor: pointer;
+              font-size: 14px;
+              font-weight: 500;
+
               margin-top: 20px;
               padding: 10px;
+
+              color: var(--background-color);
+              background-color: var(--primary-color);
+
+              :hover {
+                background-color: var(--primary-color-high);
+              }
             }
           `}
           name="portfolio-contact-form"
