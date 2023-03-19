@@ -43,9 +43,7 @@ export const About = () => {
             align-items: center;
             margin: 10px !important;
             margin-inline: auto !important;
-            padding: 3px;
-            border-radius: 50%;
-            background-color: black;
+            border: 3px solid var(--foreground-color);
             filter: grayscale(1);
             transition: border-radius 0.2s ease, filter 0.5s ease;
             animation: ${blobAnimation} 10s ease-in-out infinite;
@@ -53,10 +51,6 @@ export const About = () => {
             :hover {
               border-radius: 10px;
               filter: grayscale(0);
-            }
-
-            @media (prefers-color-scheme: dark) {
-              background-color: white;
             }
           `}
           src={ProfileImg}
