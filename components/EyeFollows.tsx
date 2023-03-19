@@ -22,6 +22,7 @@ const EyeFollows = () => {
     const eye = {
       radius: 50,
       iris: 30,
+      pupil: 15,
       // limits of movement
       limMin: 0.1,
       limMax: 0.9,
@@ -34,7 +35,7 @@ const EyeFollows = () => {
       lookAt.x = e.pageX - bounds.left - scrollX;
       lookAt.y = e.pageY - bounds.top - scrollY;
 
-      canvasContext.clearRect(0, 0, 300, 150);
+      canvasContext.clearRect(0, 0, SIZE, SIZE);
       drawEyes(lookAt);
     });
 
@@ -65,13 +66,27 @@ const EyeFollows = () => {
       // iris
       canvasContext.fillStyle = "blue";
       canvasContext.beginPath();
-      canvasContext.arc(75 + x, 75 + y, eye.iris, 0, Math.PI * 2, false);
+      canvasContext.arc(
+        SIZE / 2 + x,
+        SIZE / 2 + y,
+        eye.iris,
+        0,
+        Math.PI * 2,
+        false
+      );
       canvasContext.fill();
 
       // pupil
       canvasContext.fillStyle = "black";
       canvasContext.beginPath();
-      canvasContext.arc(75 + x, 75 + y, 15, 0, Math.PI * 2, false);
+      canvasContext.arc(
+        SIZE / 2 + x,
+        SIZE / 2 + y,
+        eye.pupil,
+        0,
+        Math.PI * 2,
+        false
+      );
       canvasContext.fill();
 
       // turn the clip off by restoring canvas state
@@ -79,7 +94,8 @@ const EyeFollows = () => {
     }
   }, []);
 
-  const SIZE = 150;
+  const PADDING = 20;
+  const SIZE = 150 + PADDING * 2;
 
   return (
     <div
@@ -87,12 +103,16 @@ const EyeFollows = () => {
         position: relative;
 
         margin: 20px;
+        padding: ${PADDING}px;
 
         min-width: ${SIZE}px;
         max-width: ${SIZE}px;
 
         min-height: ${SIZE}px;
         max-height: ${SIZE}px;
+
+        border-radius: var(--border-radius);
+        background-color: var(--off-background-color);
 
         svg {
           fill: white;
