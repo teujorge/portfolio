@@ -28,7 +28,7 @@ export const Title = () => {
           margin: 20px;
 
           h1 {
-            font-size: calc(20px + 5vw);
+            font-size: calc(20px + 4vw);
             font-weight: black;
 
             background: linear-gradient(to right, #d87300, #da1b60);
@@ -41,9 +41,16 @@ export const Title = () => {
           }
 
           h3 {
-            font-size: calc(20px + 1vw);
+            font-size: calc(18px + 1vw);
             font-weight: 400;
             opacity: 0.9;
+          }
+
+          @media (max-width: 900px) {
+            h1,
+            h3 {
+              text-align: center;
+            }
           }
         `}
       >
