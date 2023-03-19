@@ -43,7 +43,7 @@ export const About = () => {
             align-items: center;
             margin: 10px !important;
             margin-inline: auto !important;
-            border: 3px solid var(--foreground-color);
+            border: 3px solid var(--primary-color);
             filter: grayscale(1);
             transition: border-radius 0.2s ease, filter 0.5s ease;
             animation: ${blobAnimation} 10s ease-in-out infinite;
