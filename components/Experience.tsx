@@ -40,16 +40,12 @@ export const Experience = () => {
           align-items: center;
 
           margin: 40px;
-          border-left: 2px solid purple;
+          border-left: 2px solid var(--primary-color);
 
           @media (max-width: 800px) {
             flex-direction: column;
             margin: 0px;
             border-left: 0px solid transparent !important;
-          }
-
-          @media (prefers-color-scheme: dark) {
-            border-left: 2px solid cyan;
           }
         `}
       >
