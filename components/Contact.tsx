@@ -56,15 +56,20 @@ export const Contact = () => {
           name="portfolio-contact-form"
           method="POST"
           data-netlify="true"
-          action="thank-you"
         >
-          <label className="reveal">Name:</label>
+          <label className="reveal" htmlFor="name">
+            Name:
+          </label>
           <input className="reveal" type="text" name="name" required />
 
-          <label className="reveal">Email:</label>
+          <label className="reveal" htmlFor="email">
+            Email:
+          </label>
           <input className="reveal" type="email" name="email" required />
 
-          <label className="reveal">Message:</label>
+          <label className="reveal" htmlFor="message">
+            Message:
+          </label>
           <textarea className="reveal" name="message" required />
 
           <button className="reveal" type="submit">
