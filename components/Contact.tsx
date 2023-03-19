@@ -3,12 +3,6 @@ import { css } from "@emotion/react";
 import { FormEvent } from "react";
 
 export const Contact = () => {
-  function submitContactForm(event: FormEvent) {
-    event.preventDefault();
-
-    console.log(event);
-  }
-
   return (
     <div className="section">
       <h2>get in touch</h2>
@@ -63,7 +57,6 @@ export const Contact = () => {
           name="portfolio-contact-form"
           method="POST"
           data-netlify="true"
-          onSubmit={submitContactForm}
         >
           <label className="reveal">Name:</label>
           <input className="reveal" type="text" name="name" />
