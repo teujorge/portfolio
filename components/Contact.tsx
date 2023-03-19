@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { FormEvent } from "react";
 
 export const Contact = () => {
   return (
@@ -57,15 +56,16 @@ export const Contact = () => {
           name="portfolio-contact-form"
           method="POST"
           data-netlify="true"
+          action="thank-you"
         >
           <label className="reveal">Name:</label>
-          <input className="reveal" type="text" name="name" />
+          <input className="reveal" type="text" name="name" required />
 
           <label className="reveal">Email:</label>
-          <input className="reveal" type="email" name="email" />
+          <input className="reveal" type="email" name="email" required />
 
           <label className="reveal">Message:</label>
-          <textarea className="reveal" name="message" />
+          <textarea className="reveal" name="message" required />
 
           <button className="reveal" type="submit">
             Send
