@@ -45,7 +45,7 @@ export default function Home() {
           Browse through my projects and accomplishments to learn more about my skills and expertise.`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/mjIcon.png" />
       </Head>
 
       <Bubbles />
