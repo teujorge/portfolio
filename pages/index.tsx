@@ -1,5 +1,7 @@
+import Bubbles from "@/components/Bubbles";
 import Head from "next/head";
 import { About } from "@/components/About";
+import { Contact } from "@/components/Contact";
 import { css } from "@emotion/react";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
@@ -9,7 +11,6 @@ import { Projects } from "@/components/Projects";
 import { Title } from "@/components/Title";
 import { useEffect } from "react";
 import { World } from "@/components/World";
-import Bubbles from "@/components/Bubbles";
 /** @jsxImportSource @emotion/react */
 
 export default function Home() {
@@ -58,6 +59,7 @@ export default function Home() {
         <Experience />
         <Education />
         <World />
+        <Contact />
       </main>
     </>
   );
