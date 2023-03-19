@@ -14,7 +14,7 @@ export const Title = () => {
 
         min-height: 100vh;
 
-        @media (max-width: 800px) {
+        @media (max-width: 900px) {
           flex-direction: column;
         }
       `}
@@ -22,13 +22,13 @@ export const Title = () => {
       {/* headers */}
       <div
         css={css`
-          min-height: 40vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
+          margin: 20px;
 
           h1 {
-            font-size: calc(20px + 6vw);
+            font-size: calc(20px + 5vw);
             font-weight: black;
 
             background: linear-gradient(to right, #d87300, #da1b60);
@@ -41,18 +41,14 @@ export const Title = () => {
           }
 
           h3 {
-            font-size: calc(20px + 3vw);
+            font-size: calc(20px + 1vw);
             font-weight: 400;
-          }
-
-          p {
-            font-size: 18px;
+            opacity: 0.9;
           }
         `}
       >
-        <p>Hi, my name is</p>
         <h1>Matheus Jorge.</h1>
-        <h3>I engineer things!</h3>
+        <h3>An engineer who sees the big picture and the small details!</h3>
       </div>
 
       {/* eye */}
