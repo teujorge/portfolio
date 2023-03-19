@@ -10,6 +10,8 @@
   --background-color: #f0f0f0;
   --off-background-color: #e0e0e075;
   --shadow-color: #00000020;
+  --primary-color: #8e0076;
+  --primary-color-high: #a9008c;
   --default-font: Nunito;
 }
 
@@ -53,13 +55,13 @@ h2 {
 .reveal {
   opacity: 0;
   transform: translateX(-100%);
-  transition: all 0.35s ease !important;
+  transition: all 0.3s ease !important;
 }
 
 .revealShowing {
   opacity: 1;
   transform: translateX(0%);
-  transition: all 0.35s ease !important;
+  transition: all 0.3s ease !important;
 }
 
 .revealSolarSystem * {
@@ -82,6 +84,8 @@ h2 {
     --background-color: #121212;
     --off-background-color: #20202075;
     --shadow-color: #00000050;
+    --primary-color: #00d2d2;
+    --primary-color-high: #00f5f5;
   }
 
   html {

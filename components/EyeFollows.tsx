@@ -113,6 +113,7 @@ const EyeFollows = () => {
 
         border-radius: var(--border-radius);
         background-color: var(--off-background-color);
+        box-shadow: 0px 0px 8px var(--shadow-color);
 
         svg {
           fill: white;
