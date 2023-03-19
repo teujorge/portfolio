@@ -177,11 +177,7 @@ export const World = () => {
             height: 10px;
 
             border-radius: 50%;
-            background-color: #04aa6d;
-
-            @media (prefers-color-scheme: dark) {
-              filter: invert(1);
-            }
+            background-color: var(--primary-color);
           `}
         />
 
@@ -229,14 +225,14 @@ export const World = () => {
           border-radius: 50px;
           background-color: #e8e8e8;
           outline: none; /* Remove outline */
-          opacity: 0.65; /* Set transparency (for mouse-over effects on hover) */
+          opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
           -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
           transition: all 0.2s ease;
 
           /* mouse-over effects */
           :hover,
           :active {
-            opacity: 1; /* fully shown on mouse-over */
+            opacity: 0.9; /* fully shown on mouse-over */
           }
 
           ::before {
@@ -267,17 +263,13 @@ export const World = () => {
 
             opacity: 1;
             border-radius: var(--border-radius);
-            background: #04aa6d;
+            background: var(--primary-color);
 
             transition: all 0.2s ease;
           }
           ::-webkit-slider-thumb:hover,
           ::-webkit-slider-thumb:active {
             transform: scale(1.1);
-          }
-
-          @media (prefers-color-scheme: dark) {
-            filter: invert(1);
           }
         `}
         type="range"
