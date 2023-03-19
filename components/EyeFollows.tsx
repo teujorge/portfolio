@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import { useEffect, useRef } from "react";
 
 const outerEyeSvg = (
@@ -20,16 +23,16 @@ const EyeFollows = () => {
       radius: 50,
       iris: 30,
       // limits of movement
-      limMin: -0.1,
-      limMax: 1.1,
+      limMin: 0.1,
+      limMax: 0.9,
     };
 
     // add mouse move listener to whole page
     addEventListener("mousemove", (e) => {
       // make mouse coords relative to the canvas  ignoring scroll in this case
       const bounds = canvasRef.current!.getBoundingClientRect();
-      lookAt.x = e.pageX - bounds.left; // - scrollX;
-      lookAt.y = e.pageY - bounds.top; // - scrollY;
+      lookAt.x = e.pageX - bounds.left - scrollX;
+      lookAt.y = e.pageY - bounds.top - scrollY;
 
       canvasContext.clearRect(0, 0, 300, 150);
       drawEyes(lookAt);
@@ -76,10 +79,39 @@ const EyeFollows = () => {
     }
   }, []);
 
+  const SIZE = 150;
+
   return (
-    <div>
+    <div
+      css={css`
+        position: relative;
+
+        margin: 20px;
+
+        min-width: ${SIZE}px;
+        max-width: ${SIZE}px;
+
+        min-height: ${SIZE}px;
+        max-height: ${SIZE}px;
+
+        svg {
+          fill: white;
+          transform: translateY(8px);
+        }
+      `}
+    >
       {outerEyeSvg}
-      <canvas ref={canvasRef} id="canvas" width="150" height="150" />
+      <canvas
+        css={css`
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        `}
+        ref={canvasRef}
+        id="canvas"
+        width={`${SIZE}`}
+        height={`${SIZE}`}
+      />
     </div>
   );
 };
