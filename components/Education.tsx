@@ -79,6 +79,10 @@ const School = ({
           width: 40px;
           height: 40px;
 
+          @media (max-width: 800px) {
+            margin-right: 0px;
+          }
+
           @media (prefers-color-scheme: dark) {
             fill: white;
           }
