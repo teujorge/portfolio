@@ -9,6 +9,7 @@ import { Projects } from "@/components/Projects";
 import { Title } from "@/components/Title";
 import { useEffect } from "react";
 import { World } from "@/components/World";
+import LabeledEarth from "@/components/LabeledEarth";
 import Bubbles from "@/components/Bubbles";
 import Link from "next/link";
 /** @jsxImportSource @emotion/react */
@@ -73,6 +74,7 @@ export default function Home() {
         <Projects />
         <Education />
         <World />
+        <LabeledEarth />
       </main>
     </>
   );
