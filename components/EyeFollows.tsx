@@ -9,80 +9,119 @@ const outerEyeSvg = (
   </svg>
 );
 
+type Vector = { x: number; y: number };
+
 const EyeFollows = () => {
+  const PADDING = 20;
+  const SIZE = 150 + PADDING * 2;
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvasContext = canvasRef.current!.getContext("2d")!;
 
-    // object to hold mouse coords
-    const lookAt = { x: 150, y: 75 };
-
     // details need to make eye look at mouse coords
     const eye = {
       radius: 50,
-      iris: 30,
-      pupil: 15,
-      // limits of movement
-      limMin: 0.1,
-      limMax: 0.9,
+      iris: 27,
+      pupil: 17,
+      reflection: 8,
     };
+
+    const origin = { x: SIZE / 2, y: SIZE / 2 };
+
+    const maxDistance = 20;
+    const limMinX = origin.x - maxDistance;
+    const limMaxX = origin.x + maxDistance;
+    const limMinY = origin.y - maxDistance;
+    const limMaxY = origin.y + maxDistance;
+
+    const eyePos: Vector = { ...origin };
+    const mousePos: Vector = { ...origin };
 
     // add mouse move listener to whole page
     addEventListener("mousemove", (e) => {
       // make mouse coords relative to the canvas  ignoring scroll in this case
       const bounds = canvasRef.current!.getBoundingClientRect();
-      lookAt.x = e.pageX - bounds.left - scrollX;
-      lookAt.y = e.pageY - bounds.top - scrollY;
+      const x = e.pageX - bounds.left - scrollX;
+      const y = e.pageY - bounds.top - scrollY;
 
-      canvasContext.clearRect(0, 0, SIZE, SIZE);
-      drawEyes(lookAt);
+      mousePos.x = x;
+      mousePos.y = y;
     });
 
-    drawEyes(lookAt);
+    let startTime = 0;
+    const eyeAnimId = requestAnimationFrame(function animate(currentTime) {
+      const dt = (currentTime - startTime) / 100;
 
-    function drawEyes(lookAt: { x: number; y: number }) {
-      var { x, y } = lookAt;
-
-      // normalize lookAt range from 0 to 1 across and down canvas
-      x /= canvasRef.current!.width;
-      y /= canvasRef.current!.height;
-
-      // limit eye movement to -0.1 to 1.1  or what ever you prefer
-      x = x < eye.limMin ? eye.limMin : x > eye.limMax ? eye.limMax : x;
-      y = y < eye.limMin ? eye.limMin : y > eye.limMax ? eye.limMax : y;
-
-      // move lookAt so that 0.5 is center
-      x -= 0.5;
-      y -= 0.5;
-
-      // get range of movement of iris
-      const range = (eye.radius - eye.iris) * 2;
-
-      // scale the lookAt to the range of movement
-      x *= range;
-      y *= range;
-
-      // iris
-      canvasContext.fillStyle = "blue";
-      canvasContext.beginPath();
-      canvasContext.arc(
-        SIZE / 2 + x,
-        SIZE / 2 + y,
-        eye.iris,
+      canvasContext.clearRect(
         0,
-        Math.PI * 2,
-        false
+        0,
+        canvasRef.current!.width,
+        canvasRef.current!.height
       );
+
+      // direction and distance between
+      // where we need to be and where we are
+      const move: Vector = {
+        x: mousePos.x - eyePos.x,
+        y: mousePos.y - eyePos.y,
+      };
+      let distance: number = Math.sqrt(move.x ** 2 + move.y ** 2);
+      if (distance <= 0) distance = 1;
+      const direction: Vector = {
+        x: move.x / distance,
+        y: move.y / distance,
+      };
+
+      if (distance > maxDistance * 2) {
+        distance = maxDistance;
+      }
+
+      // move
+      const speed = distance;
+      const dx = direction.x * speed * dt;
+      const dy = direction.y * speed * dt;
+      const newX = eyePos.x + dx;
+      const newY = eyePos.y + dy;
+
+      // x limit
+      if (newX < limMinX) {
+        eyePos.x = limMinX;
+      } else if (newX > limMaxX) {
+        eyePos.x = limMaxX;
+      } else {
+        eyePos.x = newX;
+      }
+
+      // y limit
+      if (newY < limMinY) {
+        eyePos.y = limMinY;
+      } else if (newY > limMaxY) {
+        eyePos.y = limMaxY;
+      } else {
+        eyePos.y = newY;
+      }
+
+      // draw iris
+      canvasContext.fillStyle = "black";
+      canvasContext.beginPath();
+      canvasContext.arc(eyePos.x, eyePos.y, eye.iris, 0, Math.PI * 2, false);
       canvasContext.fill();
 
-      // pupil
+      // draw pupil
+      canvasContext.fillStyle = "white";
+      canvasContext.beginPath();
+      canvasContext.arc(eyePos.x, eyePos.y, eye.pupil, 0, Math.PI * 2, false);
+      canvasContext.fill();
+
+      // draw reflection
       canvasContext.fillStyle = "black";
       canvasContext.beginPath();
       canvasContext.arc(
-        SIZE / 2 + x,
-        SIZE / 2 + y,
-        eye.pupil,
+        eyePos.x + eye.pupil - eye.iris - 2,
+        eyePos.y + eye.pupil - eye.iris - 2,
+        eye.reflection,
         0,
         Math.PI * 2,
         false
@@ -91,11 +130,15 @@ const EyeFollows = () => {
 
       // turn the clip off by restoring canvas state
       canvasContext.restore();
-    }
-  }, []);
 
-  const PADDING = 20;
-  const SIZE = 150 + PADDING * 2;
+      startTime = currentTime;
+      requestAnimationFrame(animate);
+    });
+
+    return () => {
+      cancelAnimationFrame(eyeAnimId);
+    };
+  }, []);
 
   return (
     <div

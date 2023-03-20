@@ -64,7 +64,6 @@ class Bubble {
     this.size = this.randSize();
     this.speed = this.randSpeed();
     this.color = this.randColor();
-    console.log("rand", this.color);
 
     const newInitialPosition = this.randInitialPosition(firstReset);
     this.position = newInitialPosition;
@@ -74,25 +73,25 @@ class Bubble {
   }
 
   widthPercentageToPixels(p: number): number {
-    return (window.innerWidth * p) / 100;
+    return (innerWidth * p) / 100;
   }
 
   randInitialPosition(firstTime: boolean): Vector {
     const pos = {
-      x: Math.random() * window.innerWidth,
+      x: Math.random() * innerWidth,
       y:
-        window.innerHeight +
+        innerHeight +
         this.blur +
         this.widthPercentageToPixels(this.maxSize) / 2,
     };
-    if (firstTime) pos.y = Math.random() * window.innerHeight;
+    if (firstTime) pos.y = Math.random() * innerHeight;
 
     return pos;
   }
 
   randFinalPosition(origin: Vector): Vector {
     const pos = {
-      x: Math.random() * window.innerWidth,
+      x: Math.random() * innerWidth,
       y:
         -1 *
         (origin.y +
@@ -112,7 +111,7 @@ class Bubble {
   randSize(): number {
     const percentage =
       Math.random() * (this.maxSize - this.minSize) + this.minSize;
-    const size = (window.innerWidth * percentage) / 100;
+    const size = (innerWidth * percentage) / 100;
     return size >= 0 ? size : 0;
   }
 
@@ -200,8 +199,10 @@ const Bubbles = ({
       return;
     }
 
-    const floatAnimId = window.requestAnimationFrame(function animate(dt) {
+    let startTime = 0;
+    const floatAnimId = requestAnimationFrame(function animate(currentTime) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const dt = (currentTime - startTime) / 1000;
 
       bubbles.forEach((bubble) => {
         // check if in view
@@ -212,8 +213,8 @@ const Bubbles = ({
 
         // move bubble up
         const direction = bubble.getMoveDirection();
-        bubble.position.x += direction.x * bubble.speed * (dt / 6000000);
-        bubble.position.y += direction.y * bubble.speed * (dt / 6000000);
+        bubble.position.x += direction.x * bubble.speed * dt;
+        bubble.position.y += direction.y * bubble.speed * dt;
 
         // draw bubble
         ctx.beginPath();
@@ -229,18 +230,19 @@ const Bubbles = ({
         ctx.fill();
       });
 
-      window.requestAnimationFrame(animate);
+      startTime = currentTime;
+      requestAnimationFrame(animate);
     });
 
     handleResize();
     function handleResize() {
-      setScreenSize({ x: window.innerWidth, y: window.innerHeight });
+      setScreenSize({ x: innerWidth, y: innerHeight });
     }
-    window.addEventListener("resize", handleResize);
+    addEventListener("resize", handleResize);
 
     return () => {
-      window.cancelAnimationFrame(floatAnimId);
-      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(floatAnimId);
+      removeEventListener("resize", handleResize);
     };
   }, [bubbles]);
 
