@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import { css, keyframes } from "@emotion/react";
+
 import Image from "next/image";
 import worldMap from "public/images/world-map.png";
-import { css, keyframes } from "@emotion/react";
 import { useEffect, useState } from "react";
 
 export const World = () => {
@@ -125,13 +126,11 @@ export const World = () => {
 
   return (
     <div
-      className="reveal section"
       css={css`
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        overflow: visible;
       `}
     >
       {/* interactive map */}
