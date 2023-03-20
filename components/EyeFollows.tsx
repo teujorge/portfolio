@@ -41,6 +41,8 @@ const EyeFollows = () => {
 
     // add mouse move listener to whole page
     addEventListener("mousemove", (e) => {
+      if (!canvasRef || !canvasRef.current) return;
+
       // make mouse coords relative to the canvas  ignoring scroll in this case
       const bounds = canvasRef.current!.getBoundingClientRect();
       const x = e.pageX - bounds.left - scrollX;
