@@ -1,5 +1,9 @@
-import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
+import IconCity from "../public/svg/city";
+import IconMountainSun from "../public/svg/mountain-sun";
+import IconMountain from "../public/svg/mountain";
 
 const School = ({
   school,
@@ -8,6 +12,7 @@ const School = ({
   country,
   date,
   description,
+  icon,
 }: {
   school: string;
   degree: string;
@@ -15,39 +20,72 @@ const School = ({
   country: string;
   date: string;
   description: string;
+  icon?: JSX.Element;
 }) => {
   return (
     <div
+      className="reveal"
       css={css`
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         margin: 40px;
 
+        border-right: 2px solid var(--primary-color);
+
         @media (max-width: 800px) {
+          flex-direction: column;
           margin-left: 10px;
           margin-right: 10px;
+
+          border-right: 0px solid transparent;
         }
       `}
     >
       <div
-        className="reveal"
         css={css`
-          margin: 10px;
-          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: left;
 
-          p {
-            font-style: italic;
+          margin: 40px;
+          @media (max-width: 800px) {
+            margin-bottom: 10px;
           }
         `}
       >
-        <h3>
+        <h3 className="reveal">
           {degree}, {school}, {city}, {country}
         </h3>
         <p className="reveal">{date ? date : "current"}</p>
+        <p
+          className="reveal"
+          css={css`
+            margin: 10px;
+          `}
+        >
+          {description}
+        </p>
       </div>
-      <p className="reveal">{description}</p>
+      <div
+        className="reveal"
+        css={css`
+          display: flex;
+
+          margin-right: 40px;
+
+          width: 40px;
+          height: 40px;
+
+          @media (prefers-color-scheme: dark) {
+            fill: white;
+          }
+        `}
+      >
+        {icon && icon}
+      </div>
     </div>
   );
 };
@@ -55,7 +93,7 @@ const School = ({
 export const Education = () => {
   return (
     <div className="section">
-      <h2>education</h2>
+      <h2>Education</h2>
 
       <School
         school={"University of Vermont"}
@@ -73,9 +111,10 @@ export const Education = () => {
           learning, innovation, and sustainability. Outside of 
           the classroom, I worked in the Universities' 
           Fabrication Laboratory, enjoyed outdoor activities 
-          like skiing and hiking, and explored the local food 
-          and culture scene.
+          like skiing and hiking, and explored the food and 
+          culture scene.
         `}
+        icon={IconMountain}
       />
 
       <School
@@ -88,12 +127,12 @@ export const Education = () => {
           Mexico City is a vibrant metropolis in the heart of 
           Mexico, with a  rich history and culture. Studying 
           in Mexico City for my last year of high school has 
-          exposed me to a new range of cultural traditions, 
-          from the Aztec ruins at Teotihuacan to the colorful 
-          neighborhoods of Coyoacán and Roma. I have also had 
-          the chance to practice your Spanish language skills 
-          and engage with the local community.
+          exposed me to a new range of cultural traditions 
+          and amazing foods. I have also had the chance to 
+          practice my Spanish language skills and engage with 
+          the local community.
         `}
+        icon={IconCity}
       />
 
       <School
@@ -112,6 +151,7 @@ export const Education = () => {
           with a diverse student body, and explore amazing 
           landmarks.
         `}
+        icon={IconMountainSun}
       />
     </div>
   );
