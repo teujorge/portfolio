@@ -15,7 +15,7 @@ export const IWasHere = () => {
 
   return (
     <div className="section">
-      <h2>Where I've Been</h2>
+      <h2>Where I&apos;ve Been</h2>
       <div
         className="reveal"
         css={css`
