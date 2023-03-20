@@ -36,8 +36,8 @@ const School = ({
 
         @media (max-width: 800px) {
           flex-direction: column;
-          margin-left: 10px;
-          margin-right: 10px;
+          margin-left: 0px;
+          margin-right: 0px;
 
           border-right: 0px solid transparent;
         }
@@ -52,7 +52,7 @@ const School = ({
 
           margin: 40px;
           @media (max-width: 800px) {
-            margin-bottom: 10px;
+            margin: 10px;
           }
         `}
       >
