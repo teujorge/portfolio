@@ -7,7 +7,7 @@ import { Experience } from "@/components/Experience";
 import { inView } from "@/utils/inView";
 import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
-import { Title } from "@/components/Title";
+import { Title } from "@/components/landing-section/Title";
 import { useEffect } from "react";
 import { IWasHere } from "@/components/where-ive-been/WhereIveBeen";
 
