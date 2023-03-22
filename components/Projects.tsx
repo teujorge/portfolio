@@ -139,7 +139,7 @@ export const Projects = () => {
 
   return (
     <div className="section">
-      <h2>projects</h2>
+      <h2>Projects</h2>
 
       <Project
         title={"Co Pilot"}

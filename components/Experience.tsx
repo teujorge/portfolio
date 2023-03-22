@@ -1,8 +1,9 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import IconCode from "../public/svg/code";
 import IconDiagram from "../public/svg/diagram";
 import IconTerminal from "../public/svg/terminal";
-import { css } from "@emotion/react";
-/** @jsxImportSource @emotion/react */
 
 export const Experience = () => {
   const Job = ({
@@ -45,7 +46,7 @@ export const Experience = () => {
           @media (max-width: 800px) {
             flex-direction: column;
             margin: 0px;
-            border-left: 0px solid transparent !important;
+            border-left: 0px solid transparent;
           }
         `}
       >
@@ -72,7 +73,7 @@ export const Experience = () => {
             }
 
             @media (prefers-color-scheme: dark) {
-              filter: invert();
+              fill: white;
             }
           `}
         >
@@ -94,11 +95,11 @@ export const Experience = () => {
             }
           `}
         >
-          <h4>
+          <h3>
             {title}
             {employer ? `, ${employer}` : ""}
             {city ? `, ${city}` : ""}
-          </h4>
+          </h3>
           <p
             css={css`
               font-size: 13px;
@@ -128,7 +129,7 @@ export const Experience = () => {
 
   return (
     <div className="section">
-      <h2>experience</h2>
+      <h2>Experience</h2>
 
       <Job
         icon={IconCode}

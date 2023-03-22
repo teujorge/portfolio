@@ -24,21 +24,21 @@ type BubbleParams = {
 };
 
 class Bubble {
-  blur: number;
-  size!: number;
-  speed!: number;
-  colors?: ColorRGBA[];
+  blur: number; // px
+  size!: number; // px
+  speed!: number; // p/s
+  colors?: ColorRGBA[]; // list of rgba
 
-  minSize: number;
-  maxSize: number;
+  minSize: number; // % of width
+  maxSize: number; // % of width
 
-  minSpeed: number;
-  maxSpeed: number;
+  minSpeed: number; // px/s
+  maxSpeed: number; // px/s
 
-  color!: ColorRGBA;
+  color!: ColorRGBA; // rgba
 
-  position!: Vector;
-  destination!: Vector;
+  position!: Vector; // spawn point
+  destination!: Vector; // move vector
 
   constructor({
     blur,
@@ -73,17 +73,16 @@ class Bubble {
   }
 
   widthPercentageToPixels(p: number): number {
-    return (innerWidth * p) / 100;
+    const pixels = (innerWidth * p) / 100;
+    return pixels;
   }
 
   randInitialPosition(firstTime: boolean): Vector {
     const pos = {
       x: Math.random() * innerWidth,
-      y:
-        innerHeight +
-        this.blur +
-        this.widthPercentageToPixels(this.maxSize) / 2,
+      y: innerHeight + this.size + this.blur,
     };
+
     if (firstTime) pos.y = Math.random() * innerHeight;
 
     return pos;
@@ -92,13 +91,9 @@ class Bubble {
   randFinalPosition(origin: Vector): Vector {
     const pos = {
       x: Math.random() * innerWidth,
-      y:
-        -1 *
-        (origin.y +
-          Math.random() * this.widthPercentageToPixels(this.maxSize) +
-          this.widthPercentageToPixels(this.maxSize) +
-          this.blur),
+      y: -origin.y,
     };
+
     return pos;
   }
 
@@ -111,8 +106,7 @@ class Bubble {
   randSize(): number {
     const percentage =
       Math.random() * (this.maxSize - this.minSize) + this.minSize;
-    const size = (innerWidth * percentage) / 100;
-    return size >= 0 ? size : 0;
+    return percentage >= 0 ? this.widthPercentageToPixels(percentage) : 0;
   }
 
   randColor(): ColorRGBA {

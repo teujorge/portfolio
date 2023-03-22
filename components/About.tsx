@@ -18,7 +18,7 @@ export const About = () => {
 
   return (
     <div className="section">
-      <h2>about me</h2>
+      <h2>About Me</h2>
       <div
         className="reveal"
         css={css`
