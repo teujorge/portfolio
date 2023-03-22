@@ -15,7 +15,7 @@ export const IWasHere = () => {
 
   return (
     <div className="section">
-      <h2>Where I&apos;ve Been</h2>
+      <h2>Where I&apos;ve Lived</h2>
       <div
         className="reveal"
         css={css`
@@ -57,9 +57,15 @@ export const IWasHere = () => {
           {is3D ? (
             <div
               css={css`
+                cursor: grab;
+
                 width: 75vw;
                 height: 75vw;
                 max-height: 75vh;
+
+                :active {
+                  cursor: grabbing;
+                }
               `}
             >
               <LabeledEarth />
