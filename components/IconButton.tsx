@@ -36,29 +36,29 @@ export const IconButton = ({
   switch (descPos) {
     case DescPos.top:
       descriptionPositionStyle = css`
-        bottom: ${size + 5}px;
-        left: -25px;
+        bottom: ${size + 10}px;
+        left: ${-size / 2}px;
       `;
       break;
 
     case DescPos.bot:
       descriptionPositionStyle = css`
-        top: ${size + 5}px;
-        left: -25px;
+        top: ${size + 10}px;
+        left: ${-size / 2}px;
       `;
       break;
 
     case DescPos.left:
       descriptionPositionStyle = css`
-        top: calc(25% - 12px);
-        right: ${size + 5}px;
+        top: 0px;
+        right: ${size + 10}px;
       `;
       break;
 
     case DescPos.right:
       descriptionPositionStyle = css`
-        top: calc(25% - 12px);
-        left: ${size + 5}px;
+        top: 0px;
+        left: ${size + 10}px;
       `;
       break;
   }
@@ -130,7 +130,6 @@ export const IconButton = ({
           text-align: center;
           ${descriptionPositionStyle}
 
-          margin: 4px;
           padding: 8px;
           width: 100px;
 
