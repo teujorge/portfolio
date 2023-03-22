@@ -9,7 +9,7 @@ import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
 import { Title } from "@/components/landing-section/Title";
 import { useEffect } from "react";
-import { IWasHere } from "@/components/where-ive-been/WhereIveBeen";
+import { IWasHere } from "@/components/where-ive-lived/WhereIveLived";
 
 export default function Home() {
   // handle in view animation
