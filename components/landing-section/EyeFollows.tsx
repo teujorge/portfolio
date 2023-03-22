@@ -13,7 +13,7 @@ type Vector = { x: number; y: number };
 
 const EyeFollows = () => {
   const PADDING = 20;
-  const SIZE = 150 + PADDING * 2;
+  const SIZE = 175 + PADDING * 2;
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -23,9 +23,9 @@ const EyeFollows = () => {
     // details need to make eye look at mouse coords
     const eye = {
       radius: 50,
-      iris: 27,
-      pupil: 17,
-      reflection: 8,
+      iris: 32,
+      pupil: 20,
+      reflection: 10,
     };
 
     const origin = { x: SIZE / 2, y: SIZE / 2 };

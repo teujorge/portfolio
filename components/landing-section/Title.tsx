@@ -29,7 +29,7 @@ export const Title = () => {
           margin: 20px;
 
           h1 {
-            font-size: calc(20px + 4vw);
+            font-size: calc(30px + 4vw);
             font-weight: black;
             color: var(--primary-color);
           }
@@ -41,6 +41,8 @@ export const Title = () => {
           }
 
           @media (max-width: 900px) {
+            margin: 10px;
+
             h1,
             h3 {
               text-align: center;
@@ -48,7 +50,7 @@ export const Title = () => {
           }
         `}
       >
-        <h1>Matheus Jorge.</h1>
+        <h1>Matheus Jorge</h1>
         <h3>An engineer who sees the big picture and the small details!</h3>
       </div>
 
