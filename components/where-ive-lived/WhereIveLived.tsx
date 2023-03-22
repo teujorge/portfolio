@@ -1,16 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+import delay from "@/utils/delay";
 import { LabeledEarth } from "./LabeledEarth";
-import { World } from "./World";
 import { Toggle } from "../Toggle";
 import { useState } from "react";
+import { World } from "./World";
 
 export const IWasHere = () => {
   const [is3D, setIs3D] = useState(true);
+  const [earthLoaded, setEarthLoaded] = useState(false);
 
   function changeDimensions(onOff: boolean) {
     setIs3D(onOff);
+
+    if (!onOff) setEarthLoaded(false);
   }
 
   return (
@@ -63,12 +67,20 @@ export const IWasHere = () => {
                 height: 75vw;
                 max-height: 75vh;
 
+                filter: grayscale(${earthLoaded ? 0 : 1})
+                  blur(${earthLoaded ? 0 : 200}px);
+                transition: filter 0.5s ease-in;
+
                 :active {
                   cursor: grabbing;
                 }
               `}
             >
-              <LabeledEarth />
+              <LabeledEarth
+                onLoad={() => {
+                  delay(50).then(() => setEarthLoaded(true));
+                }}
+              />
             </div>
           ) : (
             <div
