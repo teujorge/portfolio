@@ -6,6 +6,7 @@ import { RealisticEarth } from "./RealisticEarth";
 export const Title = () => {
   return (
     <div
+      id="home"
       className="section"
       css={css`
         display: flex;

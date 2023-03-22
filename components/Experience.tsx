@@ -65,6 +65,11 @@ export const Experience = () => {
             width: 40px;
             height: 40px;
 
+            svg {
+              width: 40px;
+              height: 40px;
+            }
+
             @media (max-width: 800px) {
               margin-top: 40px;
               margin-bottom: 0px;
@@ -128,7 +133,7 @@ export const Experience = () => {
   };
 
   return (
-    <div className="section">
+    <div id="experience" className="section">
       <h2>Experience</h2>
 
       <Job

@@ -76,6 +76,8 @@ const School = ({
           {description}
         </p>
       </div>
+
+      {/* icon */}
       <div
         className="reveal"
         css={css`
@@ -85,6 +87,11 @@ const School = ({
 
           width: 40px;
           height: 40px;
+
+          svg {
+            width: 40px;
+            height: 40px;
+          }
 
           @media (max-width: 800px) {
             margin-right: 0px;
@@ -103,7 +110,7 @@ const School = ({
 
 export const Education = () => {
   return (
-    <div className="section">
+    <div id="education" className="section">
       <h2>Education</h2>
 
       <School

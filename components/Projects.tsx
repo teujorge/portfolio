@@ -7,7 +7,6 @@ import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
 import ShowMovieMatter from "../public/images/demos/movie_matter.png";
 import ShowCoPilot from "../public/images/demos/co_pilot.gif";
 import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
-import ShowWaterTag from "../public/images/demos/water_tag.gif";
 import { css } from "@emotion/react";
 import { IconButton } from "./IconButton";
 /** @jsxImportSource @emotion/react */
@@ -62,8 +61,8 @@ export const Projects = () => {
           }
 
           @media (max-width: 800px) {
-            margin-top: 20px;
-            margin-bottom: 10px;
+            margin-top: 25px;
+            margin-bottom: 15px;
             margin-left: 10px;
             margin-right: 10px;
           }
@@ -138,7 +137,7 @@ export const Projects = () => {
   };
 
   return (
-    <div className="section">
+    <div id="projects" className="section">
       <h2>Projects</h2>
 
       <Project
@@ -251,28 +250,6 @@ export const Projects = () => {
             key={"atlas-arena-github"}
             src={IconGithub}
             href={"https://github.com/teujorge/atlas"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
-
-      <Project
-        title={"Water Wars"}
-        media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
-        desc={`
-          Water Wars is an exciting twist on the classic laser 
-          tag game. Players wear water-sensitive vests and use 
-          water guns to soak their opponents in three different 
-          game modes. With its engaging game play and unique 
-          water-based mechanics, Water Wars is perfect for 
-          players of all ages.
-        `}
-        tech={["Arduino", "Embedded System"]}
-        icons={[
-          <IconButton
-            key={"water-wars-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/Arduino-Water-Belt"}
             desc={"GitHub"}
           />,
         ]}

@@ -17,8 +17,8 @@ export const About = () => {
 `;
 
   return (
-    <div className="section">
-      <h2>About Me</h2>
+    <div id="about" className="section">
+      <h2>Background</h2>
       <div
         className="reveal"
         css={css`
@@ -82,34 +82,6 @@ export const About = () => {
             portfolio. Explore my projects and experience, and let&apos;s
             engineer great things together!
           </p>
-
-          <p className="reveal">
-            Here are a few technologies I have enjoyed working with:
-          </p>
-
-          <div
-            className="reveal"
-            css={css`
-              display: flex;
-              margin: 12px !important;
-
-              & ul {
-                margin-left: 16px;
-                margin-right: 16px;
-              }
-            `}
-          >
-            <ul>
-              <li>Python</li>
-              <li>Arduino</li>
-              <li>Flutter</li>
-            </ul>
-            <ul>
-              <li>React</li>
-              <li>NextJS</li>
-              <li>TypeScript</li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>

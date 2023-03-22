@@ -5,7 +5,7 @@ import IconEmail from "../public/svg/envelope";
 
 export const Contact = () => {
   return (
-    <div id="contact-section" className="section">
+    <div id="contact" className="section">
       <h2>Get In Touch</h2>
 
       <div

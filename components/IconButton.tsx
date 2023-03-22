@@ -37,14 +37,14 @@ export const IconButton = ({
     case DescPos.top:
       descriptionPositionStyle = css`
         bottom: ${size + 10}px;
-        left: ${-size / 2}px;
+        left: ${-100 / 2 + size / 2}px;
       `;
       break;
 
     case DescPos.bot:
       descriptionPositionStyle = css`
         top: ${size + 10}px;
-        left: ${-size / 2}px;
+        left: ${-100 / 2 + size / 2}px;
       `;
       break;
 

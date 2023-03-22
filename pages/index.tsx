@@ -5,11 +5,13 @@ import { Contact } from "@/components/Contact";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
 import { inView } from "@/utils/inView";
-import { LeftBar } from "@/components/LeftBar";
+import { Footer } from "@/components/nav/Footer";
 import { Projects } from "@/components/Projects";
 import { Title } from "@/components/landing-section/Title";
 import { useEffect } from "react";
 import { IWasHere } from "@/components/where-ive-lived/WhereIveLived";
+import { Skills } from "@/components/Skills";
+import { Header } from "@/components/nav/Header";
 
 export default function Home() {
   // handle in view animation
@@ -48,17 +50,21 @@ export default function Home() {
       </Head>
 
       <Bubbles />
-      <LeftBar />
+
+      <Header />
 
       <main>
         <Title />
         <About />
+        <Skills />
         <Projects />
         <Experience />
         <Education />
         <IWasHere />
         <Contact />
       </main>
+
+      <Footer />
     </>
   );
 }
