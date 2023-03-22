@@ -95,11 +95,11 @@ export const Experience = () => {
             }
           `}
         >
-          <h4>
+          <h3>
             {title}
             {employer ? `, ${employer}` : ""}
             {city ? `, ${city}` : ""}
-          </h4>
+          </h3>
           <p
             css={css`
               font-size: 13px;

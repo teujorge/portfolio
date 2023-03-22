@@ -59,7 +59,14 @@ const School = ({
         <h3 className="reveal">
           {degree}, {school}, {city}, {country}
         </h3>
-        <p className="reveal">{date ? date : "current"}</p>
+        <p
+          className="reveal"
+          css={css`
+            font-size: 13px;
+          `}
+        >
+          {date ? date : "current"}
+        </p>
         <p
           className="reveal"
           css={css`
