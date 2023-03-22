@@ -1,6 +1,6 @@
 import Spline from "@splinetool/react-spline";
 
-export const SplineEarth = () => {
+export const LabeledEarth = () => {
   return (
     <Spline scene="https://prod.spline.design/iObAZqQpvcJObaJt/scene.splinecode" />
   );

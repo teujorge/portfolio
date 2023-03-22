@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import { SplineEarth } from "./SplineEarth";
+import { LabeledEarth } from "./LabeledEarth";
 import { World } from "./World";
 import { Toggle } from "../Toggle";
 import { useState } from "react";
@@ -62,7 +62,7 @@ export const IWasHere = () => {
                 max-height: 75vh;
               `}
             >
-              <SplineEarth />
+              <LabeledEarth />
             </div>
           ) : (
             <div

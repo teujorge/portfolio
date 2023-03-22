@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import EyeFollows from "./EyeFollows";
+import { RealisticEarth } from "./RealisticEarth";
 
 export const Title = () => {
   return (
