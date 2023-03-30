@@ -15,35 +15,27 @@ import { IconButton } from "./IconButton";
 import { useEffect, useState } from "react";
 import { inViewPercentage } from "@/utils/inView";
 
-interface ProjectProps {
+interface ProjectDescriptionProps {
   title: string;
-  media: { src: StaticImageData; alt: string };
+
   desc: string;
   tech: string[];
   icons: JSX.Element[];
 }
 
-const Project = ({ title, media, desc, tech, icons }: ProjectProps) => {
-  const IMAGE_WIDTH_L = 400;
-  const IMAGE_WIDTH_S = 250;
+interface ProjectImageProps {
+  title: string;
+  media: { src: StaticImageData; alt: string };
+}
+
+const ProjectDescription = ({
+  title,
+
+  desc,
+  tech,
+  icons,
+}: ProjectDescriptionProps) => {
   const PROJECT_ID = `project-item-${title}`;
-
-  const [imageHeight, setImageHeight] = useState(0);
-
-  useEffect(() => {
-    const projectElement = document.getElementById(PROJECT_ID)!;
-
-    function handleScroll() {
-      let percentage = inViewPercentage(projectElement);
-      percentage = Math.max(0, percentage); // handle < 0 percentage
-      percentage = Math.min(100, percentage); // handle > 100 percentage
-
-      setImageHeight(percentage);
-    }
-
-    document.addEventListener("scroll", handleScroll);
-    return () => document.removeEventListener("scroll", handleScroll);
-  }, []);
 
   let technologies = "";
 
@@ -61,13 +53,15 @@ const Project = ({ title, media, desc, tech, icons }: ProjectProps) => {
       // className="reveal"
       css={css`
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        /* margin: 40px; */
+
+        margin: 20px;
         padding: 20px;
         /* border-radius: 20px; */
         /* background-color: var(--off-background-color); */
         /* box-shadow: 0px 0px 8px var(--shadow-color); */
+        width: 40vw;
         min-height: 100vh;
 
         p {
@@ -86,78 +80,109 @@ const Project = ({ title, media, desc, tech, icons }: ProjectProps) => {
         }
       `}
     >
-      {/* left column */}
-      <div
+      {/* project title */}
+      <h3
+        // className="reveal"
         css={css`
-          flex: 1;
-          display: flex;
-          flex-direction: column;
+          margin: 10px;
+          text-align: left;
+
+          @media (max-width: 1000px) {
+            text-align: center;
+          }
         `}
       >
-        {/* project title */}
-        <h3
-          // className="reveal"
-          css={css`
-            margin: 10px;
-            text-align: left;
+        {title}
+      </h3>
 
-            @media (max-width: 1000px) {
-              text-align: center;
-            }
-          `}
-        >
-          {title}
-        </h3>
-
-        <p
-        // className="reveal"
-        >
-          {desc}
-        </p>
-        <p
-        // className="reveal"
-        >
-          {technologies}
-        </p>
-        <div
-          // className="reveal"
-          css={css`
-            display: flex;
-            margin: 10px;
-            width: fit-content;
-          `}
-        >
-          {iconButtons}
-        </div>
-      </div>
-
-      {/* right column space */}
+      <p
+      // className="reveal"
+      >
+        {desc}
+      </p>
+      <p
+      // className="reveal"
+      >
+        {technologies}
+      </p>
       <div
+        // className="reveal"
         css={css`
-          flex: 1;
           display: flex;
-          height: 100vh;
+          margin: 10px;
+          width: fit-content;
         `}
-      />
+      >
+        {iconButtons}
+      </div>
+    </div>
+  );
+};
 
-      {/* right column fixed */}
+const ProjectImage = ({ title, media }: ProjectImageProps) => {
+  const IMAGE_WIDTH_L = 400;
+  const IMAGE_WIDTH_S = 250;
+  const PROJECT_ID = `project-item-${title}`;
+
+  const [imageHeight, setImageHeight] = useState(0);
+  const [imageOpacity, setImageOpacity] = useState(0);
+
+  useEffect(() => {
+    const projectElement = document.getElementById(PROJECT_ID)!;
+
+    function handleScroll() {
+      const percentageInView = inViewPercentage(projectElement);
+
+      // determines scale
+      let height = Math.max(0, percentageInView); // handle < 0 percentage
+      height = Math.min(100, percentageInView); // handle > 100 percentage
+
+      // determines opacity
+      let opacity = 1;
+      if (percentageInView > 100) opacity = (200 - percentageInView) / 100;
+      else if (percentageInView < -100) opacity = 0;
+
+      setImageHeight(height);
+      setImageOpacity(opacity);
+    }
+
+    document.addEventListener("scroll", handleScroll);
+    return () => document.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div
+      css={css`
+        position: fixed;
+        top: 0px;
+        right: 0px;
+
+        overflow: hidden;
+        width: 50vw;
+        height: 100vh;
+        background-color: var(--off-background-color);
+
+        opacity: ${imageOpacity};
+        transform-origin: top;
+        transform: scaleY(${imageHeight / 100});
+
+        transition: all 0s ease;
+      `}
+    >
+      {/* anti scale */}
       <div
         css={css`
-          position: fixed;
-          top: 0px;
-          right: 0px;
-
           display: flex;
-          flex-direction: column;
           justify-content: center;
           align-items: center;
 
-          overflow: hidden;
           width: 50vw;
           height: 100vh;
-          background-color: red;
+
           transform-origin: top;
-          transform: scaleY(${imageHeight / 100});
+          transform: scaleY(${1 / (imageHeight / 100)});
+
+          transition: all 0s ease;
         `}
       >
         {/* image demo */}
@@ -189,145 +214,196 @@ const Project = ({ title, media, desc, tech, icons }: ProjectProps) => {
 
 export const Projects = () => {
   return (
-    <div className="section">
+    <div
+      className="section"
+      css={css`
+        margin-top: 250px;
+        margin-bottom: 250px;
+
+        h2 {
+          z-index: 2;
+        }
+      `}
+    >
       <h2>Projects</h2>
 
-      <Project
-        title={"Co Pilot"}
-        media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
-        desc={`
-          [In-Development] This platform connects users with skilled 
-          freelancers to efficiently complete their projects. With 
-          intuitive tools and a streamlined user experience, users 
-          can easily create and collaborate on projects, as well as 
-          submit project proposals and receive bids from qualified 
-          freelancers. Authentication through Google and seamless 
-          payment processing via Stripe make it easy to get started 
-          and manage projects from start to finish.
-        `}
-        tech={["NextJS", "DB", "API"]}
-        icons={[
-          <IconButton
-            key={"co-pilot-platform"}
-            src={IconDemo}
-            href={"https://co-pilot.netlify.app"}
-            desc={"Demo"}
-          />,
-          <IconButton
-            key={"co-pilot-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/co-pilot-web"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
+      <div
+        css={css`
+          position: relative;
 
-      <Project
-        title={"Zid Product Manager"}
-        media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
-        desc={`
-          The Zid Platform Dashboard is a powerful web application 
-          designed to help users manage their products with ease. The 
-          dashboard provides centralized location for viewing and 
-          editing product details and includes robust filtering 
-          options for quick and efficient navigation.
-        `}
-        tech={["React", "DB", "API"]}
-        icons={[
-          <IconButton
-            key={"zid-platform"}
-            src={IconDemo}
-            href={"https://zid-products-staging.netlify.app/login"}
-            desc={"Demo"}
-          />,
-        ]}
-      />
+          display: flex;
+          flex-direction: row;
+          align-items: center;
 
-      <Project
-        title={"MovieMatter"}
-        media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
-        desc={`
-          This media hub app is a must-have for movie and TV show 
-          enthusiasts. Using the TMDB API, the app provides users with 
-          personalized recommendations for movies, TV shows, and 
-          celebrities. The app also allows users to create personalized 
-          lists of their favorite media, making it easy to keep track 
-          of what they've watched and what they want to see next.
-        `}
-        tech={["Dart", "Flutter", "API"]}
-        icons={[
-          <IconButton
-            key={"movie-matter-app-store"}
-            src={IconApple}
-            href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
-            desc={"Apple Store"}
-          />,
-          <IconButton
-            key={"movie-matter-google-store"}
-            src={IconGoogle}
-            href={
-              "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
-            }
-            desc={"Google Store"}
-          />,
-          <IconButton
-            key={"movie-matter-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/MovieMatter"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
+          margin-top: 50px;
+          margin-bottom: 50px;
 
-      <Project
-        title={"Atlas Arena"}
-        media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
-        desc={`[In-Development] Atlas is a thrilling pixel-art game 
-          where players take on the role of Atlas, defending their 
-          home from endless waves of enemies. Players can choose to be 
-          a Knight, a Mage, or an Archer, each with unique abilities 
-          and skills to master. The game features challenging game 
-          play, with increasingly difficult levels and a variety of 
-          enemies to defeat.
+          width: 90vw;
         `}
-        tech={["Dart", "Flutter", "FlameGame"]}
-        icons={[
-          <IconButton
-            key={"atlas-arena-demo"}
-            src={IconDemo}
-            href={"https://teujorge.github.io/atlas/"}
-            desc={"Demo"}
-          />,
-          <IconButton
-            key={"atlas-arena-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/atlas"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
+      >
+        {/* left column */}
+        <div>
+          <ProjectDescription
+            title={"Co Pilot"}
+            desc={`
+            [In-Development] This platform connects users with skilled 
+            freelancers to efficiently complete their projects. With 
+            intuitive tools and a streamlined user experience, users 
+            can easily create and collaborate on projects, as well as 
+            submit project proposals and receive bids from qualified 
+            freelancers. Authentication through Google and seamless 
+            payment processing via Stripe make it easy to get started 
+            and manage projects from start to finish.
+          `}
+            tech={["NextJS", "DB", "API"]}
+            icons={[
+              <IconButton
+                key={"co-pilot-platform"}
+                src={IconDemo}
+                href={"https://co-pilot.netlify.app"}
+                desc={"Demo"}
+              />,
+              <IconButton
+                key={"co-pilot-github"}
+                src={IconGithub}
+                href={"https://github.com/teujorge/co-pilot-web"}
+                desc={"GitHub"}
+              />,
+            ]}
+          />
 
-      <Project
-        title={"Water Wars"}
-        media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
-        desc={`
-          Water Wars is an exciting twist on the classic laser 
-          tag game. Players wear water-sensitive vests and use 
-          water guns to soak their opponents in three different 
-          game modes. With its engaging game play and unique 
-          water-based mechanics, Water Wars is perfect for 
-          players of all ages.
-        `}
-        tech={["Arduino", "Embedded System"]}
-        icons={[
-          <IconButton
-            key={"water-wars-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/Arduino-Water-Belt"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
+          <ProjectDescription
+            title={"Zid Product Manager"}
+            desc={`
+            The Zid Platform Dashboard is a powerful web application 
+            designed to help users manage their products with ease. The 
+            dashboard provides centralized location for viewing and 
+            editing product details and includes robust filtering 
+            options for quick and efficient navigation.
+          `}
+            tech={["React", "DB", "API"]}
+            icons={[
+              <IconButton
+                key={"zid-platform"}
+                src={IconDemo}
+                href={"https://zid-products-staging.netlify.app/login"}
+                desc={"Demo"}
+              />,
+            ]}
+          />
+
+          <ProjectDescription
+            title={"MovieMatter"}
+            desc={`
+            This media hub app is a must-have for movie and TV show 
+            enthusiasts. Using the TMDB API, the app provides users with 
+            personalized recommendations for movies, TV shows, and 
+            celebrities. The app also allows users to create personalized 
+            lists of their favorite media, making it easy to keep track 
+            of what they've watched and what they want to see next.
+          `}
+            tech={["Dart", "Flutter", "API"]}
+            icons={[
+              <IconButton
+                key={"movie-matter-app-store"}
+                src={IconApple}
+                href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
+                desc={"Apple Store"}
+              />,
+              <IconButton
+                key={"movie-matter-google-store"}
+                src={IconGoogle}
+                href={
+                  "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
+                }
+                desc={"Google Store"}
+              />,
+              <IconButton
+                key={"movie-matter-github"}
+                src={IconGithub}
+                href={"https://github.com/teujorge/MovieMatter"}
+                desc={"GitHub"}
+              />,
+            ]}
+          />
+
+          <ProjectDescription
+            title={"Atlas Arena"}
+            desc={`[In-Development] Atlas is a thrilling pixel-art game 
+            where players take on the role of Atlas, defending their 
+            home from endless waves of enemies. Players can choose to be 
+            a Knight, a Mage, or an Archer, each with unique abilities 
+            and skills to master. The game features challenging game 
+            play, with increasingly difficult levels and a variety of 
+            enemies to defeat.
+          `}
+            tech={["Dart", "Flutter", "FlameGame"]}
+            icons={[
+              <IconButton
+                key={"atlas-arena-demo"}
+                src={IconDemo}
+                href={"https://teujorge.github.io/atlas/"}
+                desc={"Demo"}
+              />,
+              <IconButton
+                key={"atlas-arena-github"}
+                src={IconGithub}
+                href={"https://github.com/teujorge/atlas"}
+                desc={"GitHub"}
+              />,
+            ]}
+          />
+
+          <ProjectDescription
+            title={"Water Wars"}
+            desc={`
+            Water Wars is an exciting twist on the classic laser 
+            tag game. Players wear water-sensitive vests and use 
+            water guns to soak their opponents in three different 
+            game modes. With its engaging game play and unique 
+            water-based mechanics, Water Wars is perfect for 
+            players of all ages.
+          `}
+            tech={["Arduino", "Embedded System"]}
+            icons={[
+              <IconButton
+                key={"water-wars-github"}
+                src={IconGithub}
+                href={"https://github.com/teujorge/Arduino-Water-Belt"}
+                desc={"GitHub"}
+              />,
+            ]}
+          />
+        </div>
+
+        {/* right column */}
+        <div>
+          <ProjectImage
+            title={"Co Pilot"}
+            media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
+          />
+
+          <ProjectImage
+            title={"Zid Product Manager"}
+            media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
+          />
+
+          <ProjectImage
+            title={"MovieMatter"}
+            media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
+          />
+
+          <ProjectImage
+            title={"Atlas Arena"}
+            media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
+          />
+
+          <ProjectImage
+            title={"Water Wars"}
+            media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
