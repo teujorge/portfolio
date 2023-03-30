@@ -127,11 +127,16 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
   const [imageHeight, setImageHeight] = useState(0);
   const [imageOpacity, setImageOpacity] = useState(0);
 
+  const firstTitle = "Co Pilot";
+  const lastTitle = "Water Wars";
+
   useEffect(() => {
     const projectElement = document.getElementById(PROJECT_ID)!;
 
     function handleScroll() {
-      const percentageInView = inViewPercentage(projectElement);
+      let percentageInView = inViewPercentage(projectElement);
+
+      if (window.innerWidth <= 1000) percentageInView += 25;
 
       // determines scale
       let height = Math.max(0, percentageInView); // handle < 0 percentage
@@ -139,8 +144,10 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 
       // determines opacity
       let opacity = 1;
-      if (percentageInView > 100) opacity = (200 - percentageInView) / 100;
-      else if (percentageInView < -100) opacity = 0;
+      const pastDelta = title === lastTitle ? 200 : 250;
+      if (percentageInView > 100) {
+        opacity = (pastDelta - percentageInView) / 100;
+      } else if (percentageInView < 0) opacity = 0;
 
       setImageHeight(height);
       setImageOpacity(opacity);
@@ -161,12 +168,20 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
         width: 50vw;
         height: 100vh;
         background-color: var(--off-background-color);
+        backdrop-filter: blur(20px);
 
         opacity: ${imageOpacity};
         transform-origin: top;
         transform: scaleY(${imageHeight / 100});
 
         transition: all 0s ease;
+
+        @media (max-width: 1000px) {
+          z-index: 3;
+
+          width: 100vw;
+          height: 50vh;
+        }
       `}
     >
       {/* anti scale */}
@@ -183,6 +198,11 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
           transform: scaleY(${1 / (imageHeight / 100)});
 
           transition: all 0s ease;
+
+          @media (max-width: 1000px) {
+            width: 100vw;
+            height: 50vh;
+          }
         `}
       >
         {/* image demo */}
@@ -239,6 +259,10 @@ export const Projects = () => {
           margin-bottom: 50px;
 
           width: 90vw;
+
+          @media (max-width: 1000px) {
+            flex-direction: column;
+          }
         `}
       >
         {/* left column */}
