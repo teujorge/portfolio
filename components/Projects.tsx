@@ -50,7 +50,7 @@ const ProjectDescription = ({
   return (
     <div
       id={PROJECT_ID}
-      // className="reveal"
+      className="reveal"
       css={css`
         display: flex;
         flex-direction: column;
@@ -58,9 +58,6 @@ const ProjectDescription = ({
 
         margin: 20px;
         padding: 20px;
-        /* border-radius: 20px; */
-        /* background-color: var(--off-background-color); */
-        /* box-shadow: 0px 0px 8px var(--shadow-color); */
         width: 40vw;
         min-height: 100vh;
 
@@ -69,20 +66,13 @@ const ProjectDescription = ({
         }
 
         @media (max-width: 1000px) {
-          flex-direction: column;
-        }
-
-        @media (max-width: 800px) {
-          margin-top: 20px;
-          margin-bottom: 10px;
-          margin-left: 10px;
-          margin-right: 10px;
+          width: auto;
         }
       `}
     >
       {/* project title */}
       <h3
-        // className="reveal"
+        className="reveal"
         css={css`
           margin: 10px;
           text-align: left;
@@ -95,18 +85,10 @@ const ProjectDescription = ({
         {title}
       </h3>
 
-      <p
-      // className="reveal"
-      >
-        {desc}
-      </p>
-      <p
-      // className="reveal"
-      >
-        {technologies}
-      </p>
+      <p className="reveal">{desc}</p>
+      <p className="reveal">{technologies}</p>
       <div
-        // className="reveal"
+        className="reveal"
         css={css`
           display: flex;
           margin: 10px;
@@ -120,8 +102,8 @@ const ProjectDescription = ({
 };
 
 const ProjectImage = ({ title, media }: ProjectImageProps) => {
-  const IMAGE_WIDTH_L = 400;
-  const IMAGE_WIDTH_S = 250;
+  const IMAGE_WIDTH_L = 500;
+  const IMAGE_WIDTH_S = 300;
   const PROJECT_ID = `project-item-${title}`;
 
   const [imageHeight, setImageHeight] = useState(0);
@@ -180,7 +162,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
           z-index: 3;
 
           width: 100vw;
-          height: 50vh;
+          height: 40vh;
         }
       `}
     >
@@ -201,7 +183,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 
           @media (max-width: 1000px) {
             width: 100vw;
-            height: 50vh;
+            height: 40vh;
           }
         `}
       >
