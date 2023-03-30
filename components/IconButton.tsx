@@ -83,7 +83,7 @@ export const IconButton = ({
         transition: background-color 0.2s ease;
 
         svg {
-          z-index: 100;
+          z-index: 2;
           width: ${width}px;
           height: ${width}px;
           fill: white;
