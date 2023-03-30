@@ -30,3 +30,10 @@ export function inView({
     }
   }
 }
+
+export function inViewPercentage(element: HTMLElement): number {
+  const windowHeight = window.innerHeight;
+  const elementRect = element.getBoundingClientRect();
+
+  return 100 - (100 * (elementRect.bottom - windowHeight)) / windowHeight;
+}

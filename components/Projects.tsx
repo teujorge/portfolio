@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import IconApple from "../public/svg/apple-store";
 import IconDemo from "../public/svg/eye";
 import IconGithub from "../public/svg/github";
@@ -8,135 +11,183 @@ import ShowMovieMatter from "../public/images/demos/movie_matter.png";
 import ShowCoPilot from "../public/images/demos/co_pilot.gif";
 import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
 import ShowWaterTag from "../public/images/demos/water_tag.gif";
-import { css } from "@emotion/react";
 import { IconButton } from "./IconButton";
-/** @jsxImportSource @emotion/react */
+import { useEffect, useState } from "react";
+import { inViewPercentage } from "@/utils/inView";
 
-export const Projects = () => {
-  const Project = ({
-    title,
-    media,
-    desc,
-    tech,
-    icons,
-  }: {
-    title: string;
-    media: { src: StaticImageData; alt: string };
-    desc: string;
-    tech: string[];
-    icons: JSX.Element[];
-  }) => {
-    const IMAGE_WIDTH_L = 400;
-    const IMAGE_WIDTH_S = 250;
+interface ProjectProps {
+  title: string;
+  media: { src: StaticImageData; alt: string };
+  desc: string;
+  tech: string[];
+  icons: JSX.Element[];
+}
 
-    let technologies = "";
+const Project = ({ title, media, desc, tech, icons }: ProjectProps) => {
+  const IMAGE_WIDTH_L = 400;
+  const IMAGE_WIDTH_S = 250;
+  const PROJECT_ID = `project-item-${title}`;
 
-    for (let i = 0; i < tech.length - 1; i++) {
-      technologies += tech[i] + " - ";
+  const [imageHeight, setImageHeight] = useState(0);
+
+  useEffect(() => {
+    const projectElement = document.getElementById(PROJECT_ID)!;
+
+    function handleScroll() {
+      let percentage = inViewPercentage(projectElement);
+      percentage = Math.max(0, percentage); // handle < 0 percentage
+      percentage = Math.min(100, percentage); // handle > 100 percentage
+
+      setImageHeight(percentage);
     }
-    technologies += tech[tech.length - 1];
 
-    let iconButtons: JSX.Element[] = [];
-    icons.forEach((icon) => iconButtons.push(icon));
+    document.addEventListener("scroll", handleScroll);
+    return () => document.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return (
+  let technologies = "";
+
+  for (let i = 0; i < tech.length - 1; i++) {
+    technologies += tech[i] + " - ";
+  }
+  technologies += tech[tech.length - 1];
+
+  let iconButtons: JSX.Element[] = [];
+  icons.forEach((icon) => iconButtons.push(icon));
+
+  return (
+    <div
+      id={PROJECT_ID}
+      // className="reveal"
+      css={css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* margin: 40px; */
+        padding: 20px;
+        /* border-radius: 20px; */
+        /* background-color: var(--off-background-color); */
+        /* box-shadow: 0px 0px 8px var(--shadow-color); */
+        min-height: 100vh;
+
+        p {
+          margin-top: 20px;
+        }
+
+        @media (max-width: 1000px) {
+          flex-direction: column;
+        }
+
+        @media (max-width: 800px) {
+          margin-top: 20px;
+          margin-bottom: 10px;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      `}
+    >
+      {/* left column */}
       <div
-        className="reveal"
         css={css`
+          flex: 1;
           display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 40px;
-          padding: 20px;
-          border-radius: 20px;
-          background-color: var(--off-background-color);
-
-          box-shadow: 0px 0px 8px var(--shadow-color);
-
-          p {
-            margin-top: 20px;
-          }
-
-          @media (max-width: 1000px) {
-            flex-direction: column;
-          }
-
-          @media (max-width: 800px) {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-          }
+          flex-direction: column;
         `}
       >
-        <div>
-          {/* project title */}
-          <h3
-            className="reveal"
-            css={css`
-              margin: 10px;
-              text-align: left;
-
-              @media (max-width: 1000px) {
-                text-align: center;
-              }
-            `}
-          >
-            {title}
-          </h3>
-
-          {/* image demo */}
-          <Image
-            className="reveal"
-            css={css`
-              object-fit: contain;
-              margin: 20px;
-              width: ${IMAGE_WIDTH_L}px;
-              height: ${IMAGE_WIDTH_L * (media.src.height / media.src.width)}px;
-
-              border: none;
-              border-radius: 12px;
-
-              @media (max-width: 1100px) {
-                margin: 15px;
-                width: ${IMAGE_WIDTH_S}px;
-                height: ${IMAGE_WIDTH_S *
-                (media.src.height / media.src.width)}px;
-              }
-            `}
-            src={media.src}
-            alt={media.alt}
-            unoptimized={true}
-          />
-        </div>
-
-        {/* descriptions */}
-        <div
+        {/* project title */}
+        <h3
+          // className="reveal"
           css={css`
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            margin: 10px;
+            text-align: left;
+
+            @media (max-width: 1000px) {
+              text-align: center;
+            }
           `}
         >
-          <p className="reveal">{desc}</p>
-          <p className="reveal">{technologies}</p>
-          <div
-            className="reveal"
-            css={css`
-              display: flex;
-              margin: 10px;
-              width: fit-content;
-            `}
-          >
-            {iconButtons}
-          </div>
+          {title}
+        </h3>
+
+        <p
+        // className="reveal"
+        >
+          {desc}
+        </p>
+        <p
+        // className="reveal"
+        >
+          {technologies}
+        </p>
+        <div
+          // className="reveal"
+          css={css`
+            display: flex;
+            margin: 10px;
+            width: fit-content;
+          `}
+        >
+          {iconButtons}
         </div>
       </div>
-    );
-  };
 
+      {/* right column space */}
+      <div
+        css={css`
+          flex: 1;
+          display: flex;
+          height: 100vh;
+        `}
+      />
+
+      {/* right column fixed */}
+      <div
+        css={css`
+          position: fixed;
+          top: 0px;
+          right: 0px;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          overflow: hidden;
+          width: 50vw;
+          height: 100vh;
+          background-color: red;
+          transform-origin: top;
+          transform: scaleY(${imageHeight / 100});
+        `}
+      >
+        {/* image demo */}
+        <Image
+          // className="reveal"
+          css={css`
+            object-fit: contain;
+            margin: 20px;
+            width: ${IMAGE_WIDTH_L}px;
+            height: ${IMAGE_WIDTH_L * (media.src.height / media.src.width)}px;
+
+            border: none;
+            border-radius: 12px;
+
+            @media (max-width: 1100px) {
+              margin: 15px;
+              width: ${IMAGE_WIDTH_S}px;
+              height: ${IMAGE_WIDTH_S * (media.src.height / media.src.width)}px;
+            }
+          `}
+          src={media.src}
+          alt={media.alt}
+          unoptimized={true}
+        />
+      </div>
+    </div>
+  );
+};
+
+export const Projects = () => {
   return (
     <div className="section">
       <h2>Projects</h2>
