@@ -70,8 +70,6 @@ const ProjectDescription = ({
           width: auto;
           justify-content: flex-end;
         }
-
-        background-color: red;
       `}
     >
       {/* project title */}
