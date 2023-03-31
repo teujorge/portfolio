@@ -55,6 +55,7 @@ const ProjectDescription = ({
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
 
         margin: 20px;
         padding: 20px;
@@ -67,7 +68,10 @@ const ProjectDescription = ({
 
         @media (max-width: 1000px) {
           width: auto;
+          justify-content: flex-end;
         }
+
+        background-color: red;
       `}
     >
       {/* project title */}
@@ -105,6 +109,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
   const IMAGE_WIDTH_L = 500;
   const IMAGE_WIDTH_S = 300;
   const PROJECT_ID = `project-item-${title}`;
+  const PROJECT_IMAGE_ID = `project-image-wrapper-${title}`;
 
   const [imageHeight, setImageHeight] = useState(0);
   const [imageOpacity, setImageOpacity] = useState(0);
@@ -113,12 +118,13 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
   const lastTitle = "Water Wars";
 
   useEffect(() => {
-    const projectElement = document.getElementById(PROJECT_ID)!;
+    const projectDescElement = document.getElementById(PROJECT_ID)!;
+
+    const projectImageWrapperElement =
+      document.getElementById(PROJECT_IMAGE_ID)!;
 
     function handleScroll() {
-      let percentageInView = inViewPercentage(projectElement);
-
-      if (window.innerWidth <= 1000) percentageInView += 25;
+      let percentageInView = inViewPercentage(projectDescElement);
 
       // determines scale
       let height = Math.max(0, percentageInView); // handle < 0 percentage
@@ -126,10 +132,48 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 
       // determines opacity
       let opacity = 1;
-      const pastDelta = title === lastTitle ? 200 : 250;
-      if (percentageInView > 100) {
-        opacity = (pastDelta - percentageInView) / 100;
-      } else if (percentageInView < 0) opacity = 0;
+
+      if (percentageInView > 100) opacity = (200 - percentageInView) / 100;
+      else if (percentageInView < 0) opacity = 0;
+
+      // first project item
+      if (title === firstTitle) {
+        const projectDescRect = projectDescElement.getBoundingClientRect();
+
+        // move top when projects section is scrolling into view
+        if (projectDescRect.top > 0) {
+          projectImageWrapperElement.style.top = `${projectDescRect.top}px`;
+        }
+
+        // stay on top 0px
+        else {
+          projectImageWrapperElement.style.top = "0px";
+        }
+      }
+
+      // second project item
+      else if (title === lastTitle) {
+        const projectDescRect = projectDescElement.getBoundingClientRect();
+
+        // move bottom when projects section is scrolling out of view
+        if (projectDescRect.bottom <= window.innerHeight) {
+          projectImageWrapperElement.style.top = `${
+            projectDescRect.bottom - window.innerHeight
+          }px`;
+
+          console.log(projectImageWrapperElement.style);
+        }
+
+        // stay on top 0px
+        else {
+          projectImageWrapperElement.style.top = "0px";
+        }
+      }
+
+      // stay on top 0px
+      else {
+        projectImageWrapperElement.style.top = "0px";
+      }
 
       setImageHeight(height);
       setImageOpacity(opacity);
@@ -141,9 +185,10 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 
   return (
     <div
+      id={`project-image-wrapper-${title}`}
       css={css`
         position: fixed;
-        top: 0px;
+        /* top: 0px; */
         right: 0px;
 
         overflow: hidden;
@@ -217,6 +262,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 export const Projects = () => {
   return (
     <div
+      id="projects-section"
       className="section"
       css={css`
         margin-top: 250px;
