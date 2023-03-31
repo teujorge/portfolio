@@ -50,7 +50,7 @@ const ProjectDescription = ({
   return (
     <div
       id={PROJECT_ID}
-      // className="reveal"
+      className="reveal"
       css={css`
         display: flex;
         flex-direction: column;
@@ -58,9 +58,6 @@ const ProjectDescription = ({
 
         margin: 20px;
         padding: 20px;
-        /* border-radius: 20px; */
-        /* background-color: var(--off-background-color); */
-        /* box-shadow: 0px 0px 8px var(--shadow-color); */
         width: 40vw;
         min-height: 100vh;
 
@@ -69,20 +66,13 @@ const ProjectDescription = ({
         }
 
         @media (max-width: 1000px) {
-          flex-direction: column;
-        }
-
-        @media (max-width: 800px) {
-          margin-top: 20px;
-          margin-bottom: 10px;
-          margin-left: 10px;
-          margin-right: 10px;
+          width: auto;
         }
       `}
     >
       {/* project title */}
       <h3
-        // className="reveal"
+        className="reveal"
         css={css`
           margin: 10px;
           text-align: left;
@@ -95,18 +85,10 @@ const ProjectDescription = ({
         {title}
       </h3>
 
-      <p
-      // className="reveal"
-      >
-        {desc}
-      </p>
-      <p
-      // className="reveal"
-      >
-        {technologies}
-      </p>
+      <p className="reveal">{desc}</p>
+      <p className="reveal">{technologies}</p>
       <div
-        // className="reveal"
+        className="reveal"
         css={css`
           display: flex;
           margin: 10px;
@@ -120,18 +102,23 @@ const ProjectDescription = ({
 };
 
 const ProjectImage = ({ title, media }: ProjectImageProps) => {
-  const IMAGE_WIDTH_L = 400;
-  const IMAGE_WIDTH_S = 250;
+  const IMAGE_WIDTH_L = 500;
+  const IMAGE_WIDTH_S = 300;
   const PROJECT_ID = `project-item-${title}`;
 
   const [imageHeight, setImageHeight] = useState(0);
   const [imageOpacity, setImageOpacity] = useState(0);
 
+  const firstTitle = "Co Pilot";
+  const lastTitle = "Water Wars";
+
   useEffect(() => {
     const projectElement = document.getElementById(PROJECT_ID)!;
 
     function handleScroll() {
-      const percentageInView = inViewPercentage(projectElement);
+      let percentageInView = inViewPercentage(projectElement);
+
+      if (window.innerWidth <= 1000) percentageInView += 25;
 
       // determines scale
       let height = Math.max(0, percentageInView); // handle < 0 percentage
@@ -139,8 +126,10 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 
       // determines opacity
       let opacity = 1;
-      if (percentageInView > 100) opacity = (200 - percentageInView) / 100;
-      else if (percentageInView < -100) opacity = 0;
+      const pastDelta = title === lastTitle ? 200 : 250;
+      if (percentageInView > 100) {
+        opacity = (pastDelta - percentageInView) / 100;
+      } else if (percentageInView < 0) opacity = 0;
 
       setImageHeight(height);
       setImageOpacity(opacity);
@@ -161,12 +150,20 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
         width: 50vw;
         height: 100vh;
         background-color: var(--off-background-color);
+        backdrop-filter: blur(20px);
 
         opacity: ${imageOpacity};
         transform-origin: top;
         transform: scaleY(${imageHeight / 100});
 
         transition: all 0s ease;
+
+        @media (max-width: 1000px) {
+          z-index: 3;
+
+          width: 100vw;
+          height: 40vh;
+        }
       `}
     >
       {/* anti scale */}
@@ -183,6 +180,11 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
           transform: scaleY(${1 / (imageHeight / 100)});
 
           transition: all 0s ease;
+
+          @media (max-width: 1000px) {
+            width: 100vw;
+            height: 40vh;
+          }
         `}
       >
         {/* image demo */}
@@ -239,6 +241,10 @@ export const Projects = () => {
           margin-bottom: 50px;
 
           width: 90vw;
+
+          @media (max-width: 1000px) {
+            flex-direction: column;
+          }
         `}
       >
         {/* left column */}
