@@ -54,15 +54,19 @@ export const Title = () => {
             margin: 30px;
 
             p {
-              margin-top: 20px;
+              font-size: 1.75rem;
             }
 
             @media (max-width: 800px) {
               margin: 10px;
+
+              p {
+                font-size: 1.25rem;
+              }
             }
           `}
         >
-          <h3>
+          <p>
             Whether I&apos;m designing and building fun games or working on
             complex web apps, I&apos;m constantly pushing myself to develop my
             software skills and take on new challenges. I believe that software
@@ -70,7 +74,7 @@ export const Title = () => {
             I&apos;m excited to share that passion with you through my
             portfolio. Explore my projects and experience, and let&apos;s
             engineer great things together!
-          </h3>
+          </p>
         </div>
       </div>
     </div>
