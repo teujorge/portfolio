@@ -236,7 +236,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
             height: fit-content;
             max-height: 90%;
 
-            /* border-radius: 12px; */
+            border-radius: 12px;
             /* box-shadow: 0px 0px 10px var(--shadow-color); */
 
             @media (max-width: 1100px) {
@@ -290,7 +290,7 @@ export const Projects = () => {
           <ProjectDescription
             title={"Co Pilot"}
             desc={`
-            [In-Development] This platform connects users with skilled 
+            [In-Redesign] This platform connects users with skilled 
             freelancers to efficiently complete their projects. With 
             intuitive tools and a streamlined user experience, users 
             can easily create and collaborate on projects, as well as 
@@ -373,7 +373,7 @@ export const Projects = () => {
 
           <ProjectDescription
             title={"Atlas Arena"}
-            desc={`[In-Development] Atlas is a thrilling pixel-art game 
+            desc={`[In-Beta] Atlas is a thrilling pixel-art game 
             where players take on the role of Atlas, defending their 
             home from endless waves of enemies. Players can choose to be 
             a Knight, a Mage, or an Archer, each with unique abilities 
@@ -387,8 +387,15 @@ export const Projects = () => {
                 key={"atlas-arena-demo"}
                 src={IconDemo}
                 href={"https://teujorge.github.io/atlas/"}
-                desc={"Demo"}
+                desc={"Web Demo"}
               />,
+              <IconButton
+                key={"atlas-arena-beta"}
+                src={IconApple}
+                href={"https://testflight.apple.com/join/GC3yVQk6"}
+                desc={"Beta"}
+              />,
+
               <IconButton
                 key={"atlas-arena-github"}
                 src={IconGithub}
