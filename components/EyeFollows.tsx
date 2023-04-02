@@ -102,20 +102,28 @@ const EyeFollows = ({ size }: { size: number }) => {
         eyePos.y = newY;
       }
 
+      // css color vars
+      const colorBg = getComputedStyle(canvasContext.canvas).getPropertyValue(
+        "--background-color"
+      );
+      const colorFg = getComputedStyle(canvasContext.canvas).getPropertyValue(
+        "--foreground-color"
+      );
+
       // draw iris
-      canvasContext.fillStyle = "black";
+      canvasContext.fillStyle = colorBg;
       canvasContext.beginPath();
       canvasContext.arc(eyePos.x, eyePos.y, eye.iris, 0, Math.PI * 2, false);
       canvasContext.fill();
 
       // draw pupil
-      canvasContext.fillStyle = "white";
+      canvasContext.fillStyle = colorFg;
       canvasContext.beginPath();
       canvasContext.arc(eyePos.x, eyePos.y, eye.pupil, 0, Math.PI * 2, false);
       canvasContext.fill();
 
       // draw reflection
-      canvasContext.fillStyle = "black";
+      canvasContext.fillStyle = colorBg;
       canvasContext.beginPath();
       canvasContext.arc(
         eyePos.x + eye.pupil - eye.iris - size / 40,
