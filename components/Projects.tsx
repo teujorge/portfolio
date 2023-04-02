@@ -25,6 +25,7 @@ interface ProjectDescriptionProps {
 interface ProjectImageProps {
   title: string;
   media: { src: StaticImageData; alt: string };
+  isMobile: boolean;
 }
 
 const ProjectDescription = ({
@@ -101,7 +102,7 @@ const ProjectDescription = ({
   );
 };
 
-const ProjectImage = ({ title, media }: ProjectImageProps) => {
+const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
   const PROJECT_ID = `project-item-${title}`;
   const PROJECT_IMAGE_ID = `project-image-wrapper-${title}`;
 
@@ -179,9 +180,10 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 
   return (
     <div
+      className={isMobile ? "reveal" : ""}
       id={`project-image-wrapper-${title}`}
       css={css`
-        position: fixed;
+        position: ${isMobile ? "relative" : "fixed"};
         /* top: 0px; */
         right: 0px;
 
@@ -189,9 +191,9 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
         width: 50vw;
         height: 100vh;
 
-        opacity: ${imageOpacity};
+        opacity: ${isMobile ? 1 : imageOpacity};
         transform-origin: top;
-        transform: scaleY(${imageHeight / 100});
+        transform: scaleY(${isMobile ? 1 : imageHeight / 100});
 
         transition: all 0s;
 
@@ -214,7 +216,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
           height: 100vh;
 
           transform-origin: top;
-          transform: scaleY(${1 / (imageHeight / 100)});
+          transform: scaleY(${isMobile ? 1 : 1 / (imageHeight / 100)});
 
           transition: all 0s;
 
@@ -252,183 +254,215 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
 };
 
 export const Projects = () => {
-  return (
-    <div
-      id="projects-section"
-      className="section"
-      css={css`
-        margin-top: 250px;
-        margin-bottom: 250px;
+  const [isMobile, setIsMobile] = useState(false);
 
-        h2 {
-          z-index: 2;
-        }
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+    handleResize(); // set initial state based on window width
+    window.addEventListener("resize", handleResize); // update state on window resize
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const projectDescriptions = [
+    <ProjectDescription
+      title={"Co Pilot"}
+      desc={`
+        [In-Redesign] This platform connects users with skilled 
+        freelancers to efficiently complete their projects. With 
+        intuitive tools and a streamlined user experience, users 
+        can easily create and collaborate on projects, as well as 
+        submit project proposals and receive bids from qualified 
+        freelancers. Authentication through Google and seamless 
+        payment processing via Stripe make it easy to get started 
+        and manage projects from start to finish.
       `}
-    >
+      tech={["NextJS", "DB", "API"]}
+      icons={[
+        <IconButton
+          key={"co-pilot-platform"}
+          src={IconDemo}
+          href={"https://co-pilot.netlify.app"}
+          desc={"Demo"}
+        />,
+        <IconButton
+          key={"co-pilot-github"}
+          src={IconGithub}
+          href={"https://github.com/teujorge/co-pilot-web"}
+          desc={"GitHub"}
+        />,
+      ]}
+    />,
+
+    <ProjectDescription
+      title={"Zid Product Manager"}
+      desc={`
+        The Zid Platform Dashboard is a powerful web application 
+        designed to help users manage their products with ease. The 
+        dashboard provides centralized location for viewing and 
+        editing product details and includes robust filtering 
+        options for quick and efficient navigation.
+      `}
+      tech={["React", "DB", "API"]}
+      icons={[
+        <IconButton
+          key={"zid-platform"}
+          src={IconDemo}
+          href={"https://zid-products-staging.netlify.app/login"}
+          desc={"Demo"}
+        />,
+      ]}
+    />,
+    <ProjectDescription
+      title={"MovieMatter"}
+      desc={`
+        This media hub app is a must-have for movie and TV show 
+        enthusiasts. Using the TMDB API, the app provides users with 
+        personalized recommendations for movies, TV shows, and 
+        celebrities. The app also allows users to create personalized 
+        lists of their favorite media, making it easy to keep track 
+        of what they've watched and what they want to see next.
+      `}
+      tech={["Dart", "Flutter", "API"]}
+      icons={[
+        <IconButton
+          key={"movie-matter-app-store"}
+          src={IconApple}
+          href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
+          desc={"Apple Store"}
+        />,
+        <IconButton
+          key={"movie-matter-google-store"}
+          src={IconGoogle}
+          href={
+            "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
+          }
+          desc={"Google Store"}
+        />,
+        <IconButton
+          key={"movie-matter-github"}
+          src={IconGithub}
+          href={"https://github.com/teujorge/MovieMatter"}
+          desc={"GitHub"}
+        />,
+      ]}
+    />,
+
+    <ProjectDescription
+      title={"Atlas Arena"}
+      desc={`[In-Beta] Atlas is a thrilling pixel-art game 
+        where players take on the role of Atlas, defending their 
+        home from endless waves of enemies. Players can choose to be 
+        a Knight, a Mage, or an Archer, each with unique abilities 
+        and skills to master. The game features challenging game 
+        play, with increasingly difficult levels and a variety of 
+        enemies to defeat.
+      `}
+      tech={["Dart", "Flutter", "FlameGame"]}
+      icons={[
+        <IconButton
+          key={"atlas-arena-demo"}
+          src={IconDemo}
+          href={"https://teujorge.github.io/atlas/"}
+          desc={"Web Demo"}
+        />,
+        <IconButton
+          key={"atlas-arena-beta"}
+          src={IconApple}
+          href={"https://testflight.apple.com/join/GC3yVQk6"}
+          desc={"Beta"}
+        />,
+
+        <IconButton
+          key={"atlas-arena-github"}
+          src={IconGithub}
+          href={"https://github.com/teujorge/atlas"}
+          desc={"GitHub"}
+        />,
+      ]}
+    />,
+  ];
+
+  const projectImages = [
+    <ProjectImage
+      title={"Co Pilot"}
+      media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
+      isMobile={isMobile}
+    />,
+
+    <ProjectImage
+      title={"Zid Product Manager"}
+      media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
+      isMobile={isMobile}
+    />,
+
+    <ProjectImage
+      title={"MovieMatter"}
+      media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
+      isMobile={isMobile}
+    />,
+
+    <ProjectImage
+      title={"Atlas Arena"}
+      media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
+      isMobile={isMobile}
+    />,
+  ];
+
+  return (
+    <div id="projects-section" className="section">
       <h2>Projects</h2>
 
-      <div
-        css={css`
-          position: relative;
+      {isMobile ? (
+        // mobile
+        projectDescriptions.map((desc, index) => (
+          <div
+            key={`project-${index}`}
+            css={css`
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            `}
+          >
+            <div>{desc}</div>
+            <div>{projectImages[index]}</div>
+          </div>
+        ))
+      ) : (
+        // desktop
+        <div
+          css={css`
+            position: relative;
 
-          display: flex;
-          flex-direction: row;
-          align-items: center;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
 
-          margin-top: 50px;
-          margin-bottom: 50px;
+            margin-top: 50px;
+            margin-bottom: 50px;
 
-          width: 90vw;
-
-          @media (max-width: 1000px) {
-            flex-direction: column;
-          }
-        `}
-      >
-        {/* left column */}
-        <div>
-          <ProjectDescription
-            title={"Co Pilot"}
-            desc={`
-            [In-Redesign] This platform connects users with skilled 
-            freelancers to efficiently complete their projects. With 
-            intuitive tools and a streamlined user experience, users 
-            can easily create and collaborate on projects, as well as 
-            submit project proposals and receive bids from qualified 
-            freelancers. Authentication through Google and seamless 
-            payment processing via Stripe make it easy to get started 
-            and manage projects from start to finish.
+            width: 90vw;
           `}
-            tech={["NextJS", "DB", "API"]}
-            icons={[
-              <IconButton
-                key={"co-pilot-platform"}
-                src={IconDemo}
-                href={"https://co-pilot.netlify.app"}
-                desc={"Demo"}
-              />,
-              <IconButton
-                key={"co-pilot-github"}
-                src={IconGithub}
-                href={"https://github.com/teujorge/co-pilot-web"}
-                desc={"GitHub"}
-              />,
-            ]}
-          />
+        >
+          {/* left column */}
+          <div>
+            {projectDescriptions.map((desc, index) => (
+              <div key={`project-desc-${index}`}>{desc}</div>
+            ))}
+          </div>
 
-          <ProjectDescription
-            title={"Zid Product Manager"}
-            desc={`
-            The Zid Platform Dashboard is a powerful web application 
-            designed to help users manage their products with ease. The 
-            dashboard provides centralized location for viewing and 
-            editing product details and includes robust filtering 
-            options for quick and efficient navigation.
-          `}
-            tech={["React", "DB", "API"]}
-            icons={[
-              <IconButton
-                key={"zid-platform"}
-                src={IconDemo}
-                href={"https://zid-products-staging.netlify.app/login"}
-                desc={"Demo"}
-              />,
-            ]}
-          />
-
-          <ProjectDescription
-            title={"MovieMatter"}
-            desc={`
-            This media hub app is a must-have for movie and TV show 
-            enthusiasts. Using the TMDB API, the app provides users with 
-            personalized recommendations for movies, TV shows, and 
-            celebrities. The app also allows users to create personalized 
-            lists of their favorite media, making it easy to keep track 
-            of what they've watched and what they want to see next.
-          `}
-            tech={["Dart", "Flutter", "API"]}
-            icons={[
-              <IconButton
-                key={"movie-matter-app-store"}
-                src={IconApple}
-                href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
-                desc={"Apple Store"}
-              />,
-              <IconButton
-                key={"movie-matter-google-store"}
-                src={IconGoogle}
-                href={
-                  "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
-                }
-                desc={"Google Store"}
-              />,
-              <IconButton
-                key={"movie-matter-github"}
-                src={IconGithub}
-                href={"https://github.com/teujorge/MovieMatter"}
-                desc={"GitHub"}
-              />,
-            ]}
-          />
-
-          <ProjectDescription
-            title={"Atlas Arena"}
-            desc={`[In-Beta] Atlas is a thrilling pixel-art game 
-            where players take on the role of Atlas, defending their 
-            home from endless waves of enemies. Players can choose to be 
-            a Knight, a Mage, or an Archer, each with unique abilities 
-            and skills to master. The game features challenging game 
-            play, with increasingly difficult levels and a variety of 
-            enemies to defeat.
-          `}
-            tech={["Dart", "Flutter", "FlameGame"]}
-            icons={[
-              <IconButton
-                key={"atlas-arena-demo"}
-                src={IconDemo}
-                href={"https://teujorge.github.io/atlas/"}
-                desc={"Web Demo"}
-              />,
-              <IconButton
-                key={"atlas-arena-beta"}
-                src={IconApple}
-                href={"https://testflight.apple.com/join/GC3yVQk6"}
-                desc={"Beta"}
-              />,
-
-              <IconButton
-                key={"atlas-arena-github"}
-                src={IconGithub}
-                href={"https://github.com/teujorge/atlas"}
-                desc={"GitHub"}
-              />,
-            ]}
-          />
+          {/* right column */}
+          <div>
+            {projectImages.map((image, index) => (
+              <div key={`project-image-${index}`}>{image}</div>
+            ))}
+          </div>
         </div>
-
-        {/* right column */}
-        <div>
-          <ProjectImage
-            title={"Co Pilot"}
-            media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
-          />
-
-          <ProjectImage
-            title={"Zid Product Manager"}
-            media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
-          />
-
-          <ProjectImage
-            title={"MovieMatter"}
-            media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
-          />
-
-          <ProjectImage
-            title={"Atlas Arena"}
-            media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };
