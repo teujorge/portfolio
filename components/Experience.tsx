@@ -65,6 +65,12 @@ export const Experience = () => {
             width: 40px;
             height: 40px;
 
+            svg {
+              width: 40px;
+              height: 40px;
+              fill: black;
+            }
+
             @media (max-width: 800px) {
               margin-top: 40px;
               margin-bottom: 0px;
@@ -73,7 +79,9 @@ export const Experience = () => {
             }
 
             @media (prefers-color-scheme: dark) {
-              fill: white;
+              svg {
+                fill: white;
+              }
             }
           `}
         >
