@@ -193,7 +193,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
         transform-origin: top;
         transform: scaleY(${imageHeight / 100});
 
-        transition: all 0s ease;
+        transition: all 0s;
 
         @media (max-width: 1000px) {
           z-index: 3;
@@ -216,7 +216,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
           transform-origin: top;
           transform: scaleY(${1 / (imageHeight / 100)});
 
-          transition: all 0s ease;
+          transition: all 0s;
 
           @media (max-width: 1000px) {
             width: 100vw;
@@ -236,8 +236,8 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
             height: fit-content;
             max-height: 90%;
 
-            border: none;
-            border-radius: 12px;
+            /* border-radius: 12px; */
+            /* box-shadow: 0px 0px 10px var(--shadow-color); */
 
             @media (max-width: 1100px) {
               margin: 45px;
