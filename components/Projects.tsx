@@ -254,6 +254,9 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 
             @media (max-width: 1100px) {
               margin: 45px;
+
+              max-width: calc(90% - 20px);
+              max-height: calc(90% - 20px);
             }
           `}
           src={media.src}
