@@ -28,6 +28,8 @@ interface ProjectImageProps {
   isMobile: boolean;
 }
 
+const MOBILE_WIDTH = 1000;
+
 const ProjectDescription = ({
   title,
   desc,
@@ -65,9 +67,9 @@ const ProjectDescription = ({
           margin-top: 20px;
         }
 
-        @media (max-width: 1000px) {
+        @media (max-width: ${MOBILE_WIDTH}px) {
           width: auto;
-          justify-content: flex-end;
+          min-height: none;
         }
       `}
     >
@@ -78,7 +80,7 @@ const ProjectDescription = ({
           margin: 10px;
           text-align: left;
 
-          @media (max-width: 1000px) {
+          @media (max-width: ${MOBILE_WIDTH}px) {
             text-align: center;
           }
         `}
@@ -113,6 +115,8 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
   const lastTitle = "Atlas Arena";
 
   useEffect(() => {
+    if (isMobile) return;
+
     const projectDescElement = document.getElementById(PROJECT_ID)!;
 
     const projectImageWrapperElement =
@@ -197,7 +201,7 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 
         transition: all 0s;
 
-        @media (max-width: 1000px) {
+        @media (max-width: ${MOBILE_WIDTH}px) {
           z-index: 3;
 
           width: 100vw;
@@ -220,7 +224,7 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 
           transition: all 0s;
 
-          @media (max-width: 1000px) {
+          @media (max-width: ${MOBILE_WIDTH}px) {
             width: 100vw;
             height: 40vh;
           }
@@ -258,7 +262,7 @@ export const Projects = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
+      setIsMobile(window.innerWidth <= MOBILE_WIDTH);
     };
     handleResize(); // set initial state based on window width
     window.addEventListener("resize", handleResize); // update state on window resize
@@ -428,8 +432,8 @@ export const Projects = () => {
               align-items: center;
             `}
           >
-            <div>{desc}</div>
-            <div>{projectImages[index]}</div>
+            {desc}
+            {projectImages[index]}
           </div>
         ))
       ) : (
