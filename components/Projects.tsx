@@ -188,7 +188,6 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
       id={`project-image-wrapper-${title}`}
       css={css`
         position: ${isMobile ? "relative" : "fixed"};
-        /* top: 0px; */
         right: 0px;
 
         overflow: hidden;
