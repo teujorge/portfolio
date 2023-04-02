@@ -13,21 +13,24 @@ type Vector = { x: number; y: number };
 
 const EyeFollows = ({ size }: { size: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const SF = 2;
 
   useEffect(() => {
     const canvasContext = canvasRef.current!.getContext("2d")!;
 
+    const _size = size * SF;
+
     // eye part sizes
     const eye = {
-      radius: size / 3,
-      iris: size / 7,
-      pupil: size / 10,
-      reflection: size / 23,
+      radius: _size / 3,
+      iris: _size / 7,
+      pupil: _size / 10,
+      reflection: _size / 23,
     };
 
-    const origin = { x: size / 2, y: size / 2 };
+    const origin = { x: _size / 2, y: _size / 2 };
 
-    const maxDistance = size / 7;
+    const maxDistance = _size / 7;
     const limMinX = origin.x - maxDistance;
     const limMaxX = origin.x + maxDistance;
     const limMinY = origin.y - maxDistance;
@@ -42,8 +45,8 @@ const EyeFollows = ({ size }: { size: number }) => {
 
       // make mouse coords relative to the canvas  ignoring scroll in this case
       const bounds = canvasRef.current!.getBoundingClientRect();
-      const x = e.pageX - bounds.left - scrollX;
-      const y = e.pageY - bounds.top - scrollY;
+      const x = (e.pageX - bounds.left - scrollX) * SF;
+      const y = (e.pageY - bounds.top - scrollY) * SF;
 
       mousePos.x = x;
       mousePos.y = y;
@@ -126,8 +129,8 @@ const EyeFollows = ({ size }: { size: number }) => {
       canvasContext.fillStyle = colorBg;
       canvasContext.beginPath();
       canvasContext.arc(
-        eyePos.x + eye.pupil - eye.iris - size / 40,
-        eyePos.y + eye.pupil - eye.iris - size / 40,
+        eyePos.x + eye.pupil - eye.iris - _size / 40,
+        eyePos.y + eye.pupil - eye.iris - _size / 40,
         eye.reflection,
         0,
         Math.PI * 2,
@@ -241,11 +244,14 @@ const EyeFollows = ({ size }: { size: number }) => {
           position: absolute;
           top: 0px;
           left: 0px;
+
+          width: 100%;
+          height: 100%;
         `}
         ref={canvasRef}
         id="canvas"
-        width={`${size}`}
-        height={`${size}`}
+        width={`${size * SF}`}
+        height={`${size * SF}`}
       />
     </div>
   );
