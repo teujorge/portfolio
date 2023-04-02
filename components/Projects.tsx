@@ -102,8 +102,6 @@ const ProjectDescription = ({
 };
 
 const ProjectImage = ({ title, media }: ProjectImageProps) => {
-  // const IMAGE_WIDTH_L = 500;
-  // const IMAGE_WIDTH_S = 300;
   const PROJECT_ID = `project-item-${title}`;
   const PROJECT_IMAGE_ID = `project-image-wrapper-${title}`;
 
