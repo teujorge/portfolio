@@ -1,11 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+
 import { DescPos, IconButton } from "./IconButton";
 import IconEmail from "../public/svg/envelope";
+import EyeFollows from "./EyeFollows";
 
 export const Contact = () => {
   return (
-    <div id="contact-section" className="section">
+    <div
+      id="contact-section"
+      className="section"
+      css={css`
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        overflow-y: hidden;
+      `}
+    >
       <h2>Get In Touch</h2>
 
       <div
@@ -133,6 +143,38 @@ export const Contact = () => {
             />
           </div>
         </form>
+      </div>
+
+      {/* eye */}
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+
+          transform: translateY(75px);
+        `}
+      >
+        <p
+          css={css`
+            z-index: 1;
+            font-style: italic;
+            font-size: 0.8rem;
+
+            transform: translateY(-25px);
+
+            span {
+              font-style: normal;
+              font-weight: bold;
+            }
+          `}
+        >
+          an engineer who <span>sees</span> the big picture and the small
+          details!
+        </p>
+        <EyeFollows size={150} />
       </div>
     </div>
   );

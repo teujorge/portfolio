@@ -1,13 +1,12 @@
 import Bubbles from "@/components/Bubbles";
 import Head from "next/head";
-import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
 import { inView } from "@/utils/inView";
 import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
-import { Title } from "@/components/landing-section/Title";
+import { Title } from "@/components/Title";
 import { useEffect } from "react";
 import { IWasHere } from "@/components/where-ive-lived/WhereIveLived";
 
@@ -52,7 +51,6 @@ export default function Home() {
 
       <main>
         <Title />
-        <About />
         <Projects />
         <Experience />
         <Education />

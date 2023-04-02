@@ -20,7 +20,7 @@ const School = ({
   country: string;
   date: string;
   description: string;
-  icon?: JSX.Element;
+  icon: JSX.Element;
 }) => {
   return (
     <div
@@ -86,16 +86,24 @@ const School = ({
           width: 40px;
           height: 40px;
 
+          svg {
+            width: 40px;
+            height: 40px;
+            fill: black;
+          }
+
           @media (max-width: 800px) {
             margin-right: 0px;
           }
 
           @media (prefers-color-scheme: dark) {
-            fill: white;
+            svg {
+              fill: white;
+            }
           }
         `}
       >
-        {icon && icon}
+        {icon}
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import EyeFollows from "./EyeFollows";
-import { RealisticEarth } from "./RealisticEarth";
 
 export const Title = () => {
   return (
@@ -51,11 +49,30 @@ export const Title = () => {
         `}
       >
         <h1>Matheus Jorge</h1>
-        <h3>An engineer who sees the big picture and the small details!</h3>
-      </div>
+        <div
+          css={css`
+            margin: 30px;
 
-      {/* eye */}
-      <EyeFollows />
+            p {
+              margin-top: 20px;
+            }
+
+            @media (max-width: 800px) {
+              margin: 10px;
+            }
+          `}
+        >
+          <h3>
+            Whether I&apos;m designing and building fun games or working on
+            complex web apps, I&apos;m constantly pushing myself to develop my
+            software skills and take on new challenges. I believe that software
+            engineering is more than just a job — it&apos;s a passion. And
+            I&apos;m excited to share that passion with you through my
+            portfolio. Explore my projects and experience, and let&apos;s
+            engineer great things together!
+          </h3>
+        </div>
+      </div>
     </div>
   );
 };

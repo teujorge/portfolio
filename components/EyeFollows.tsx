@@ -11,26 +11,26 @@ const outerEyeSvg = (
 
 type Vector = { x: number; y: number };
 
-const EyeFollows = () => {
-  const PADDING = 20;
-  const SIZE = 175 + PADDING * 2;
-
+const EyeFollows = ({ size }: { size: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const SF = 2;
 
   useEffect(() => {
     const canvasContext = canvasRef.current!.getContext("2d")!;
 
-    // details need to make eye look at mouse coords
+    const _size = size * SF;
+
+    // eye part sizes
     const eye = {
-      radius: 50,
-      iris: 32,
-      pupil: 20,
-      reflection: 10,
+      radius: _size / 3,
+      iris: _size / 7,
+      pupil: _size / 10,
+      reflection: _size / 23,
     };
 
-    const origin = { x: SIZE / 2, y: SIZE / 2 };
+    const origin = { x: _size / 2, y: _size / 2 };
 
-    const maxDistance = 20;
+    const maxDistance = _size / 7;
     const limMinX = origin.x - maxDistance;
     const limMaxX = origin.x + maxDistance;
     const limMinY = origin.y - maxDistance;
@@ -45,8 +45,8 @@ const EyeFollows = () => {
 
       // make mouse coords relative to the canvas  ignoring scroll in this case
       const bounds = canvasRef.current!.getBoundingClientRect();
-      const x = e.pageX - bounds.left - scrollX;
-      const y = e.pageY - bounds.top - scrollY;
+      const x = (e.pageX - bounds.left - scrollX) * SF;
+      const y = (e.pageY - bounds.top - scrollY) * SF;
 
       mousePos.x = x;
       mousePos.y = y;
@@ -81,7 +81,7 @@ const EyeFollows = () => {
       }
 
       // move
-      const speed = distance;
+      const speed = distance * 1.25;
       const dx = direction.x * speed * dt;
       const dy = direction.y * speed * dt;
       const newX = eyePos.x + dx;
@@ -105,24 +105,32 @@ const EyeFollows = () => {
         eyePos.y = newY;
       }
 
+      // css color vars
+      const colorBg = getComputedStyle(canvasContext.canvas).getPropertyValue(
+        "--background-color"
+      );
+      const colorFg = getComputedStyle(canvasContext.canvas).getPropertyValue(
+        "--foreground-color"
+      );
+
       // draw iris
-      canvasContext.fillStyle = "black";
+      canvasContext.fillStyle = colorBg;
       canvasContext.beginPath();
       canvasContext.arc(eyePos.x, eyePos.y, eye.iris, 0, Math.PI * 2, false);
       canvasContext.fill();
 
       // draw pupil
-      canvasContext.fillStyle = "white";
+      canvasContext.fillStyle = colorFg;
       canvasContext.beginPath();
       canvasContext.arc(eyePos.x, eyePos.y, eye.pupil, 0, Math.PI * 2, false);
       canvasContext.fill();
 
       // draw reflection
-      canvasContext.fillStyle = "black";
+      canvasContext.fillStyle = colorBg;
       canvasContext.beginPath();
       canvasContext.arc(
-        eyePos.x + eye.pupil - eye.iris - 2,
-        eyePos.y + eye.pupil - eye.iris - 2,
+        eyePos.x + eye.pupil - eye.iris - _size / 40,
+        eyePos.y + eye.pupil - eye.iris - _size / 40,
         eye.reflection,
         0,
         Math.PI * 2,
@@ -142,41 +150,108 @@ const EyeFollows = () => {
     };
   }, []);
 
+  const widthLash = 12;
+  const heightLash = 32;
+  const spacingLash = size / 5;
+
   return (
     <div
       css={css`
         position: relative;
 
-        margin: 20px;
-        padding: ${PADDING}px;
+        min-width: ${size}px;
+        max-width: ${size}px;
 
-        min-width: ${SIZE}px;
-        max-width: ${SIZE}px;
-
-        min-height: ${SIZE}px;
-        max-height: ${SIZE}px;
-
-        border-radius: var(--border-radius);
-        background-color: var(--off-background-color);
-        box-shadow: 0px 0px 8px var(--shadow-color);
+        min-height: ${size}px;
+        max-height: ${size}px;
 
         svg {
-          fill: white;
+          fill: var(--foreground-color);
           transform: translateY(8px);
         }
       `}
     >
       {outerEyeSvg}
+
+      {/* eye lashes */}
+      <div
+        css={css`
+          > div {
+            z-index: 0;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: ${widthLash}px;
+            height: ${heightLash}px;
+
+            transform-origin: center;
+
+            border-radius: var(--border-radius);
+            background-color: var(--foreground-color);
+          }
+        `}
+      >
+        <div
+          css={css`
+            transform: translate(
+                ${(1 / 2) * spacingLash - widthLash / 2}px,
+                4px
+              )
+              rotate(-45deg);
+          `}
+        />
+        <div
+          css={css`
+            transform: translate(
+                ${(3 / 2) * spacingLash - widthLash / 2}px,
+                -14px
+              )
+              rotate(-22deg);
+          `}
+        />
+        <div
+          css={css`
+            transform: translate(
+                ${(5 / 2) * spacingLash - widthLash / 2}px,
+                -20px
+              )
+              rotate(0deg);
+          `}
+        />
+        <div
+          css={css`
+            transform: translate(
+                ${(7 / 2) * spacingLash - widthLash / 2}px,
+                -14px
+              )
+              rotate(22deg);
+          `}
+        />
+        <div
+          css={css`
+            transform: translate(
+                ${(9 / 2) * spacingLash - widthLash / 2}px,
+                4px
+              )
+              rotate(45deg);
+          `}
+        />
+      </div>
+
       <canvas
         css={css`
           position: absolute;
           top: 0px;
           left: 0px;
+
+          width: 100%;
+          height: 100%;
         `}
         ref={canvasRef}
         id="canvas"
-        width={`${SIZE}`}
-        height={`${SIZE}`}
+        width={`${size * SF}`}
+        height={`${size * SF}`}
       />
     </div>
   );
