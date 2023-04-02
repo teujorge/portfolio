@@ -51,7 +51,7 @@ const ProjectDescription = ({
   return (
     <div
       id={PROJECT_ID}
-      className="reveal"
+      // className="reveal"
       css={css`
         display: flex;
         flex-direction: column;
@@ -75,7 +75,7 @@ const ProjectDescription = ({
     >
       {/* project title */}
       <h3
-        className="reveal"
+        // className="reveal"
         css={css`
           margin: 10px;
           text-align: left;
@@ -88,10 +88,18 @@ const ProjectDescription = ({
         {title}
       </h3>
 
-      <p className="reveal">{desc}</p>
-      <p className="reveal">{technologies}</p>
+      <p
+      // className="reveal"
+      >
+        {desc}
+      </p>
+      <p
+      // className="reveal"
+      >
+        {technologies}
+      </p>
       <div
-        className="reveal"
+        // className="reveal"
         css={css`
           display: flex;
           margin: 10px;
@@ -184,7 +192,7 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 
   return (
     <div
-      className={isMobile ? "reveal" : ""}
+      // className={isMobile ? "reveal" : ""}
       id={`project-image-wrapper-${title}`}
       css={css`
         position: ${isMobile ? "relative" : "fixed"};
@@ -262,6 +270,7 @@ export const Projects = () => {
   useEffect(() => {
     const handleResize = () => {
       const _isMobile = window.innerWidth <= MOBILE_WIDTH;
+      console.log(_isMobile, isMobile);
       if (isMobile !== _isMobile) setIsMobile(_isMobile);
     };
     handleResize(); // set initial state
@@ -270,7 +279,7 @@ export const Projects = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
   const projectDescriptions = [
     <ProjectDescription
