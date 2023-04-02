@@ -69,7 +69,7 @@ const ProjectDescription = ({
 
         @media (max-width: ${MOBILE_WIDTH}px) {
           width: auto;
-          min-height: none;
+          min-height: 0px;
         }
       `}
     >
@@ -261,10 +261,12 @@ export const Projects = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= MOBILE_WIDTH);
+      const _isMobile = window.innerWidth <= MOBILE_WIDTH;
+      if (isMobile !== _isMobile) setIsMobile(_isMobile);
     };
-    handleResize(); // set initial state based on window width
-    window.addEventListener("resize", handleResize); // update state on window resize
+    handleResize(); // set initial state
+
+    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -433,6 +435,11 @@ export const Projects = () => {
           >
             {desc}
             {projectImages[index]}
+            <div
+              css={css`
+                height: 50px;
+              `}
+            />
           </div>
         ))
       ) : (
