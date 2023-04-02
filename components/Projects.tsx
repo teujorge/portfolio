@@ -6,11 +6,10 @@ import IconDemo from "../public/svg/eye";
 import IconGithub from "../public/svg/github";
 import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
-import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
-import ShowMovieMatter from "../public/images/demos/movie_matter.png";
-import ShowCoPilot from "../public/images/demos/co_pilot.gif";
-import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
-import ShowWaterTag from "../public/images/demos/water_tag.gif";
+import ShowAtlasArena from "../public/images/demos/demo-atlas.webp";
+import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
+import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
+import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
 import { IconButton } from "./IconButton";
 import { useEffect, useState } from "react";
 import { inViewPercentage } from "@/utils/inView";
@@ -30,7 +29,6 @@ interface ProjectImageProps {
 
 const ProjectDescription = ({
   title,
-
   desc,
   tech,
   icons,
@@ -104,8 +102,8 @@ const ProjectDescription = ({
 };
 
 const ProjectImage = ({ title, media }: ProjectImageProps) => {
-  const IMAGE_WIDTH_L = 500;
-  const IMAGE_WIDTH_S = 300;
+  // const IMAGE_WIDTH_L = 500;
+  // const IMAGE_WIDTH_S = 300;
   const PROJECT_ID = `project-item-${title}`;
   const PROJECT_IMAGE_ID = `project-image-wrapper-${title}`;
 
@@ -113,7 +111,7 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
   const [imageOpacity, setImageOpacity] = useState(0);
 
   const firstTitle = "Co Pilot";
-  const lastTitle = "Water Wars";
+  const lastTitle = "Atlas Arena";
 
   useEffect(() => {
     const projectDescElement = document.getElementById(PROJECT_ID)!;
@@ -192,8 +190,6 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
         overflow: hidden;
         width: 50vw;
         height: 100vh;
-        background-color: var(--off-background-color);
-        backdrop-filter: blur(20px);
 
         opacity: ${imageOpacity};
         transform-origin: top;
@@ -232,25 +228,25 @@ const ProjectImage = ({ title, media }: ProjectImageProps) => {
       >
         {/* image demo */}
         <Image
-          // className="reveal"
           css={css`
             object-fit: contain;
-            margin: 20px;
-            width: ${IMAGE_WIDTH_L}px;
-            height: ${IMAGE_WIDTH_L * (media.src.height / media.src.width)}px;
+
+            margin: 50px;
+
+            width: fit-content;
+            max-width: 90%;
+            height: fit-content;
+            max-height: 90%;
 
             border: none;
             border-radius: 12px;
 
             @media (max-width: 1100px) {
-              margin: 15px;
-              width: ${IMAGE_WIDTH_S}px;
-              height: ${IMAGE_WIDTH_S * (media.src.height / media.src.width)}px;
+              margin: 45px;
             }
           `}
           src={media.src}
           alt={media.alt}
-          unoptimized={true}
         />
       </div>
     </div>
@@ -403,27 +399,6 @@ export const Projects = () => {
               />,
             ]}
           />
-
-          <ProjectDescription
-            title={"Water Wars"}
-            desc={`
-            Water Wars is an exciting twist on the classic laser 
-            tag game. Players wear water-sensitive vests and use 
-            water guns to soak their opponents in three different 
-            game modes. With its engaging game play and unique 
-            water-based mechanics, Water Wars is perfect for 
-            players of all ages.
-          `}
-            tech={["Arduino", "Embedded System"]}
-            icons={[
-              <IconButton
-                key={"water-wars-github"}
-                src={IconGithub}
-                href={"https://github.com/teujorge/Arduino-Water-Belt"}
-                desc={"GitHub"}
-              />,
-            ]}
-          />
         </div>
 
         {/* right column */}
@@ -446,11 +421,6 @@ export const Projects = () => {
           <ProjectImage
             title={"Atlas Arena"}
             media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
-          />
-
-          <ProjectImage
-            title={"Water Wars"}
-            media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
           />
         </div>
       </div>
