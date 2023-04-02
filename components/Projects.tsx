@@ -274,6 +274,7 @@ export const Projects = () => {
 
   const projectDescriptions = [
     <ProjectDescription
+      key={"project-description-co-pilot"}
       title={"Co Pilot"}
       desc={`
         [In-Redesign] This platform connects users with skilled 
@@ -303,6 +304,7 @@ export const Projects = () => {
     />,
 
     <ProjectDescription
+      key={"project-description-zid"}
       title={"Zid Product Manager"}
       desc={`
         The Zid Platform Dashboard is a powerful web application 
@@ -322,6 +324,7 @@ export const Projects = () => {
       ]}
     />,
     <ProjectDescription
+      key={"project-description-movie-matter"}
       title={"MovieMatter"}
       desc={`
         This media hub app is a must-have for movie and TV show 
@@ -357,6 +360,7 @@ export const Projects = () => {
     />,
 
     <ProjectDescription
+      key={"project-description-atlas"}
       title={"Atlas Arena"}
       desc={`[In-Beta] Atlas is a thrilling pixel-art game 
         where players take on the role of Atlas, defending their 
@@ -393,24 +397,28 @@ export const Projects = () => {
 
   const projectImages = [
     <ProjectImage
+      key={"project-image-co-pilot"}
       title={"Co Pilot"}
       media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
       isMobile={isMobile}
     />,
 
     <ProjectImage
+      key={"project-image-zid"}
       title={"Zid Product Manager"}
       media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
       isMobile={isMobile}
     />,
 
     <ProjectImage
+      key={"project-image-movie-matter"}
       title={"MovieMatter"}
       media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
       isMobile={isMobile}
     />,
 
     <ProjectImage
+      key={"project-image-atlas"}
       title={"Atlas Arena"}
       media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
       isMobile={isMobile}
@@ -459,18 +467,10 @@ export const Projects = () => {
           `}
         >
           {/* left column */}
-          <div>
-            {projectDescriptions.map((desc, index) => (
-              <div key={`project-desc-${index}`}>{desc}</div>
-            ))}
-          </div>
+          <div>{projectDescriptions.map((desc, index) => desc)}</div>
 
           {/* right column */}
-          <div>
-            {projectImages.map((image, index) => (
-              <div key={`project-image-${index}`}>{image}</div>
-            ))}
-          </div>
+          <div>{projectImages.map((image, index) => image)}</div>
         </div>
       )}
     </div>
