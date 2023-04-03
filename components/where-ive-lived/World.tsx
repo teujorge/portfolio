@@ -2,7 +2,7 @@
 import { css, keyframes } from "@emotion/react";
 
 import Image from "next/image";
-import worldMap from "public/images/world-map.png";
+import worldMap from "public/images/world-map.webp";
 import { useEffect, useState } from "react";
 
 export const World = () => {
