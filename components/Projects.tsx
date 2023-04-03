@@ -65,8 +65,11 @@ const ProjectDescription = ({
         }
 
         @media (max-width: ${MOBILE_WIDTH}px) {
+          margin-left: 0px;
+          margin-right: 0px;
           margin-top: 50px;
           margin-bottom: 0px;
+          padding: 10px;
           width: auto;
           min-height: 0px;
 
