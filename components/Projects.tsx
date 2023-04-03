@@ -192,6 +192,8 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
       <Image
         className="reveal"
         css={css`
+          object-fit: contain;
+
           width: fit-content;
           height: fit-content;
 
@@ -211,21 +213,20 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
     <div
       id={`project-image-wrapper-${title}`}
       css={css`
-        position: ${isMobile ? "relative" : "fixed"};
+        position: fixed;
         right: 0px;
 
         overflow: hidden;
         width: 50vw;
-        height: 100vh;
+        height: ${imageHeight}vh;
 
         opacity: ${imageOpacity};
-        transform-origin: top;
-        transform: scaleY(${imageHeight / 100});
-
-        transition: all 0s;
+        /* transform-origin: top; */
+        /* transform: scaleY(${imageHeight / 100}); */
+        /* transition: all 0s; */
       `}
     >
-      {/* anti scale */}
+      {/* fixed height */}
       <div
         css={css`
           display: flex;
@@ -235,13 +236,11 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
           width: 50vw;
           height: 100vh;
 
-          transform-origin: top;
-          transform: scaleY(${1 / (imageHeight / 100)});
-
-          transition: all 0s;
+          /* transform-origin: top; */
+          /* transform: scaleY(${1 / (imageHeight / 100)}); */
+          /* transition: all 0s; */
         `}
       >
-        {/* image demo */}
         <Image
           css={css`
             object-fit: contain;
