@@ -1,6 +1,32 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { createContext, useEffect, useState } from "react";
+
+export const MOBILE_WIDTH = 1000;
+
+export const AppContext = createContext({ isMobile: false });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const [isMobile, setIsMobile] = useState(false);
+
+  // handle mobile v. desktop
+  useEffect(() => {
+    const handleResize = () => {
+      const _isMobile = window.innerWidth <= MOBILE_WIDTH;
+      console.log(_isMobile, isMobile);
+      if (isMobile !== _isMobile) setIsMobile(_isMobile);
+    };
+    handleResize(); // set initial state
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobile]);
+
+  return (
+    <AppContext.Provider value={{ isMobile: isMobile }}>
+      <Component {...pageProps} />
+    </AppContext.Provider>
+  );
 }
