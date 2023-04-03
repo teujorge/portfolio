@@ -11,13 +11,13 @@ import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
 import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
 import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
 import { IconButton } from "./IconButton";
-import { useContext, useEffect, useState } from "react";
+import { RefObject, useContext, useEffect, useRef, useState } from "react";
 import { inViewPercentage } from "@/utils/inView";
-import { AppContext, MOBILE_WIDTH } from "@/pages/_app";
+import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
+import delay from "@/utils/delay";
 
 interface ProjectDescriptionProps {
   title: string;
-
   desc: string;
   tech: string[];
   icons: JSX.Element[];
@@ -27,6 +27,7 @@ interface ProjectImageProps {
   title: string;
   media: { src: StaticImageData; alt: string };
   isMobile: boolean;
+  descRef: RefObject<HTMLDivElement>;
 }
 
 const ProjectDescription = ({
@@ -35,8 +36,6 @@ const ProjectDescription = ({
   tech,
   icons,
 }: ProjectDescriptionProps) => {
-  const PROJECT_ID = `project-item-${title}`;
-
   let technologies = "";
 
   for (let i = 0; i < tech.length - 1; i++) {
@@ -49,7 +48,6 @@ const ProjectDescription = ({
 
   return (
     <div
-      id={PROJECT_ID}
       className="reveal"
       css={css`
         display: flex;
@@ -109,9 +107,13 @@ const ProjectDescription = ({
   );
 };
 
-const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
-  const PROJECT_ID = `project-item-${title}`;
-  const PROJECT_IMAGE_ID = `project-image-wrapper-${title}`;
+const ProjectImage = ({
+  descRef,
+  title,
+  media,
+  isMobile,
+}: ProjectImageProps) => {
+  const projectImageWrapperRef = useRef<HTMLDivElement>(null);
 
   const [imageHeight, setImageHeight] = useState(0);
   const [imageOpacity, setImageOpacity] = useState(0);
@@ -122,12 +124,11 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
   useEffect(() => {
     if (isMobile) return;
 
-    const projectDescElement = document.getElementById(PROJECT_ID)!;
+    const projectDescElement = descRef.current!;
 
-    const projectImageWrapperElement =
-      document.getElementById(PROJECT_IMAGE_ID)!;
+    const projectImageWrapperElement = projectImageWrapperRef.current!;
 
-    function handleScroll() {
+    async function handleScroll() {
       let percentageInView = inViewPercentage(projectDescElement);
 
       // determines scale
@@ -160,9 +161,9 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
         const projectDescRect = projectDescElement.getBoundingClientRect();
 
         // move bottom when projects section is scrolling out of view
-        if (projectDescRect.bottom <= window.innerHeight) {
+        if (projectDescRect.bottom <= windowSize.height) {
           projectImageWrapperElement.style.top = `${
-            projectDescRect.bottom - window.innerHeight
+            projectDescRect.bottom - windowSize.height
           }px`;
 
           console.log(projectImageWrapperElement.style);
@@ -181,6 +182,8 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 
       setImageHeight(height);
       setImageOpacity(opacity);
+
+      await delay(10);
     }
 
     document.addEventListener("scroll", handleScroll);
@@ -211,19 +214,19 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 
   return (
     <div
-      id={`project-image-wrapper-${title}`}
+      ref={projectImageWrapperRef}
       css={css`
         position: fixed;
         right: 0px;
-
         overflow: hidden;
+
         width: 50vw;
         height: ${imageHeight}vh;
-
         opacity: ${imageOpacity};
+
         /* transform-origin: top; */
         /* transform: scaleY(${imageHeight / 100}); */
-        /* transition: all 0s; */
+        transition: all 0.1s;
       `}
     >
       {/* fixed height */}
@@ -265,11 +268,17 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 export const Projects = () => {
   const { isMobile } = useContext(AppContext);
 
+  const descRef1 = useRef<HTMLDivElement>(null);
+  const descRef2 = useRef<HTMLDivElement>(null);
+  const descRef3 = useRef<HTMLDivElement>(null);
+  const descRef4 = useRef<HTMLDivElement>(null);
+
   const projectDescriptions = [
-    <ProjectDescription
-      key={"project-description-co-pilot"}
-      title={"Co Pilot"}
-      desc={`
+    <div ref={descRef1}>
+      <ProjectDescription
+        key={"project-description-co-pilot"}
+        title={"Co Pilot"}
+        desc={`
         [In-Redesign] This platform connects users with skilled 
         freelancers to efficiently complete their projects. With 
         intuitive tools and a streamlined user experience, users 
@@ -279,47 +288,52 @@ export const Projects = () => {
         payment processing via Stripe make it easy to get started 
         and manage projects from start to finish.
       `}
-      tech={["NextJS", "DB", "API"]}
-      icons={[
-        <IconButton
-          key={"co-pilot-platform"}
-          src={IconDemo}
-          href={"https://co-pilot.netlify.app"}
-          desc={"Demo"}
-        />,
-        <IconButton
-          key={"co-pilot-github"}
-          src={IconGithub}
-          href={"https://github.com/teujorge/co-pilot-web"}
-          desc={"GitHub"}
-        />,
-      ]}
-    />,
+        tech={["NextJS", "DB", "API"]}
+        icons={[
+          <IconButton
+            key={"co-pilot-platform"}
+            src={IconDemo}
+            href={"https://co-pilot.netlify.app"}
+            desc={"Demo"}
+          />,
+          <IconButton
+            key={"co-pilot-github"}
+            src={IconGithub}
+            href={"https://github.com/teujorge/co-pilot-web"}
+            desc={"GitHub"}
+          />,
+        ]}
+      />
+    </div>,
 
-    <ProjectDescription
-      key={"project-description-zid"}
-      title={"Zid Product Manager"}
-      desc={`
+    <div ref={descRef2}>
+      <ProjectDescription
+        key={"project-description-zid"}
+        title={"Zid Product Manager"}
+        desc={`
         The Zid Platform Dashboard is a powerful web application 
         designed to help users manage their products with ease. The 
         dashboard provides centralized location for viewing and 
         editing product details and includes robust filtering 
         options for quick and efficient navigation.
       `}
-      tech={["React", "DB", "API"]}
-      icons={[
-        <IconButton
-          key={"zid-platform"}
-          src={IconDemo}
-          href={"https://zid-products-staging.netlify.app/login"}
-          desc={"Demo"}
-        />,
-      ]}
-    />,
-    <ProjectDescription
-      key={"project-description-movie-matter"}
-      title={"MovieMatter"}
-      desc={`
+        tech={["React", "DB", "API"]}
+        icons={[
+          <IconButton
+            key={"zid-platform"}
+            src={IconDemo}
+            href={"https://zid-products-staging.netlify.app/login"}
+            desc={"Demo"}
+          />,
+        ]}
+      />
+    </div>,
+
+    <div ref={descRef3}>
+      <ProjectDescription
+        key={"project-description-movie-matter"}
+        title={"MovieMatter"}
+        desc={`
         This media hub app is a must-have for movie and TV show 
         enthusiasts. Using the TMDB API, the app provides users with 
         personalized recommendations for movies, TV shows, and 
@@ -327,35 +341,37 @@ export const Projects = () => {
         lists of their favorite media, making it easy to keep track 
         of what they've watched and what they want to see next.
       `}
-      tech={["Dart", "Flutter", "API"]}
-      icons={[
-        <IconButton
-          key={"movie-matter-app-store"}
-          src={IconApple}
-          href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
-          desc={"Apple Store"}
-        />,
-        <IconButton
-          key={"movie-matter-google-store"}
-          src={IconGoogle}
-          href={
-            "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
-          }
-          desc={"Google Store"}
-        />,
-        <IconButton
-          key={"movie-matter-github"}
-          src={IconGithub}
-          href={"https://github.com/teujorge/MovieMatter"}
-          desc={"GitHub"}
-        />,
-      ]}
-    />,
+        tech={["Dart", "Flutter", "API"]}
+        icons={[
+          <IconButton
+            key={"movie-matter-app-store"}
+            src={IconApple}
+            href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
+            desc={"Apple Store"}
+          />,
+          <IconButton
+            key={"movie-matter-google-store"}
+            src={IconGoogle}
+            href={
+              "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
+            }
+            desc={"Google Store"}
+          />,
+          <IconButton
+            key={"movie-matter-github"}
+            src={IconGithub}
+            href={"https://github.com/teujorge/MovieMatter"}
+            desc={"GitHub"}
+          />,
+        ]}
+      />
+    </div>,
 
-    <ProjectDescription
-      key={"project-description-atlas"}
-      title={"Atlas Arena"}
-      desc={`[In-Beta] Atlas is a thrilling pixel-art game 
+    <div ref={descRef4}>
+      <ProjectDescription
+        key={"project-description-atlas"}
+        title={"Atlas Arena"}
+        desc={`[In-Beta] Atlas is a thrilling pixel-art game 
         where players take on the role of Atlas, defending their 
         home from endless waves of enemies. Players can choose to be 
         a Knight, a Mage, or an Archer, each with unique abilities 
@@ -363,33 +379,35 @@ export const Projects = () => {
         play, with increasingly difficult levels and a variety of 
         enemies to defeat.
       `}
-      tech={["Dart", "Flutter", "FlameGame"]}
-      icons={[
-        <IconButton
-          key={"atlas-arena-demo"}
-          src={IconDemo}
-          href={"https://teujorge.github.io/atlas/"}
-          desc={"Web Demo"}
-        />,
-        <IconButton
-          key={"atlas-arena-beta"}
-          src={IconApple}
-          href={"https://testflight.apple.com/join/GC3yVQk6"}
-          desc={"Beta"}
-        />,
+        tech={["Dart", "Flutter", "FlameGame"]}
+        icons={[
+          <IconButton
+            key={"atlas-arena-demo"}
+            src={IconDemo}
+            href={"https://teujorge.github.io/atlas/"}
+            desc={"Web Demo"}
+          />,
+          <IconButton
+            key={"atlas-arena-beta"}
+            src={IconApple}
+            href={"https://testflight.apple.com/join/GC3yVQk6"}
+            desc={"Beta"}
+          />,
 
-        <IconButton
-          key={"atlas-arena-github"}
-          src={IconGithub}
-          href={"https://github.com/teujorge/atlas"}
-          desc={"GitHub"}
-        />,
-      ]}
-    />,
+          <IconButton
+            key={"atlas-arena-github"}
+            src={IconGithub}
+            href={"https://github.com/teujorge/atlas"}
+            desc={"GitHub"}
+          />,
+        ]}
+      />
+    </div>,
   ];
 
   const projectImages = [
     <ProjectImage
+      descRef={descRef1}
       key={"project-image-co-pilot"}
       title={"Co Pilot"}
       media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
@@ -397,6 +415,7 @@ export const Projects = () => {
     />,
 
     <ProjectImage
+      descRef={descRef2}
       key={"project-image-zid"}
       title={"Zid Product Manager"}
       media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
@@ -404,6 +423,7 @@ export const Projects = () => {
     />,
 
     <ProjectImage
+      descRef={descRef3}
       key={"project-image-movie-matter"}
       title={"MovieMatter"}
       media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
@@ -411,6 +431,7 @@ export const Projects = () => {
     />,
 
     <ProjectImage
+      descRef={descRef4}
       key={"project-image-atlas"}
       title={"Atlas Arena"}
       media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
