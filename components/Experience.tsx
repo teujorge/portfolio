@@ -143,10 +143,10 @@ export const Experience = () => {
         icon={IconCode}
         title={"Freelance Software Engineer"}
         desc={[
-          `Increased efficiency and profitability for 
+          `Increased profitability for 
           Zid store owners by developing a web-based 
           dashboard that streamlined inventory management 
-          resulting in a 2x efficiency in editing products.`,
+          resulting in a dramatic increase in efficiency when editing products.`,
 
           `Improved user experience and functionality 
           for multiple clients by utilizing strong 
@@ -154,7 +154,7 @@ export const Experience = () => {
           to detail to deliver high-quality software 
           solutions on time and within budget.`,
 
-          `Led the development and launch of Co Pilot, 
+          `Led the development and deployment of Co Pilot, 
           a web-based platform that connects individuals 
           with freelance professionals.`,
         ]}
@@ -197,8 +197,8 @@ export const Experience = () => {
           in a 15% reduction in software defects.`,
 
           `Programmed autonomous processes to efficiently 
-          test systems, improving testing rigour and 
-          increasing testing efficiency by 50%.`,
+          test systems, improving testing rigor and 
+          increasing testing efficiency by 20%.`,
         ]}
       />
     </div>
