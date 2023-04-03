@@ -11,8 +11,9 @@ import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
 import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
 import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
 import { IconButton } from "./IconButton";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { inViewPercentage } from "@/utils/inView";
+import { AppContext, MOBILE_WIDTH } from "@/pages/_app";
 
 interface ProjectDescriptionProps {
   title: string;
@@ -27,8 +28,6 @@ interface ProjectImageProps {
   media: { src: StaticImageData; alt: string };
   isMobile: boolean;
 }
-
-const MOBILE_WIDTH = 1000;
 
 const ProjectDescription = ({
   title,
@@ -51,7 +50,7 @@ const ProjectDescription = ({
   return (
     <div
       id={PROJECT_ID}
-      // className="reveal"
+      className="reveal"
       css={css`
         display: flex;
         flex-direction: column;
@@ -68,38 +67,36 @@ const ProjectDescription = ({
         }
 
         @media (max-width: ${MOBILE_WIDTH}px) {
+          margin-top: 50px;
+          margin-bottom: 0px;
           width: auto;
           min-height: 0px;
+
+          h3 {
+            text-align: center;
+          }
+
+          p {
+            text-align: center;
+          }
         }
       `}
     >
       {/* project title */}
       <h3
-        // className="reveal"
+        className="reveal"
         css={css`
           margin: 10px;
           text-align: left;
-
-          @media (max-width: ${MOBILE_WIDTH}px) {
-            text-align: center;
-          }
         `}
       >
         {title}
       </h3>
 
-      <p
-      // className="reveal"
-      >
-        {desc}
-      </p>
-      <p
-      // className="reveal"
-      >
-        {technologies}
-      </p>
+      <p className="reveal">{desc}</p>
+      <p className="reveal">{technologies}</p>
       <div
-        // className="reveal"
+        className="reveal"
         css={css`
           display: flex;
           margin: 10px;
@@ -190,9 +187,28 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
     return () => document.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (isMobile) {
+    return (
+      <Image
+        className="reveal"
+        css={css`
+          width: fit-content;
+          height: fit-content;
+
+          max-width: calc(90% - 20px);
+          max-height: calc(90% - 20px);
+
+          border-radius: 12px;
+          box-shadow: 0px 0px 10px var(--shadow-color);
+        `}
+        src={media.src}
+        alt={media.alt}
+      />
+    );
+  }
+
   return (
     <div
-      // className={isMobile ? "reveal" : ""}
       id={`project-image-wrapper-${title}`}
       css={css`
         position: ${isMobile ? "relative" : "fixed"};
@@ -202,18 +218,11 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
         width: 50vw;
         height: 100vh;
 
-        opacity: ${isMobile ? 1 : imageOpacity};
+        opacity: ${imageOpacity};
         transform-origin: top;
-        transform: scaleY(${isMobile ? 1 : imageHeight / 100});
+        transform: scaleY(${imageHeight / 100});
 
         transition: all 0s;
-
-        @media (max-width: ${MOBILE_WIDTH}px) {
-          z-index: 3;
-
-          width: 100vw;
-          height: 40vh;
-        }
       `}
     >
       {/* anti scale */}
@@ -227,14 +236,9 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
           height: 100vh;
 
           transform-origin: top;
-          transform: scaleY(${isMobile ? 1 : 1 / (imageHeight / 100)});
+          transform: scaleY(${1 / (imageHeight / 100)});
 
           transition: all 0s;
-
-          @media (max-width: ${MOBILE_WIDTH}px) {
-            width: 100vw;
-            height: 40vh;
-          }
         `}
       >
         {/* image demo */}
@@ -242,22 +246,14 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
           css={css`
             object-fit: contain;
 
-            margin: 50px;
-
             width: fit-content;
-            max-width: 90%;
             height: fit-content;
+
+            max-width: 90%;
             max-height: 90%;
 
             border-radius: 12px;
-            /* box-shadow: 0px 0px 10px var(--shadow-color); */
-
-            @media (max-width: 1100px) {
-              margin: 45px;
-
-              max-width: calc(90% - 20px);
-              max-height: calc(90% - 20px);
-            }
+            box-shadow: 0px 0px 10px var(--shadow-color);
           `}
           src={media.src}
           alt={media.alt}
@@ -268,21 +264,7 @@ const ProjectImage = ({ title, media, isMobile }: ProjectImageProps) => {
 };
 
 export const Projects = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const _isMobile = window.innerWidth <= MOBILE_WIDTH;
-      console.log(_isMobile, isMobile);
-      if (isMobile !== _isMobile) setIsMobile(_isMobile);
-    };
-    handleResize(); // set initial state
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isMobile]);
+  const { isMobile } = useContext(AppContext);
 
   const projectDescriptions = [
     <ProjectDescription
