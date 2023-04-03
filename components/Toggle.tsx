@@ -86,6 +86,7 @@ export const Toggle = ({
             border-radius: 50%;
 
             background-color: var(--primary-color);
+            box-shadow: 0px 0px 8px var(--shadow-color);
           `}
         />
         <p
