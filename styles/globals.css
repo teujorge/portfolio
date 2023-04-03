@@ -54,7 +54,7 @@ h2 {
 
 .reveal {
   opacity: 0;
-  transform: translateX(-100%);
+  transform: translateX(-10%);
   transition: all 0.3s ease !important;
 }
 
@@ -62,10 +62,6 @@ h2 {
   opacity: 1;
   transform: translateX(0%);
   transition: all 0.3s ease !important;
-}
-
-.revealSolarSystem * {
-  filter: blur(0px) !important;
 }
 
 .section {
