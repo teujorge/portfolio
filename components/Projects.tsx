@@ -274,9 +274,8 @@ export const Projects = () => {
   const descRef4 = useRef<HTMLDivElement>(null);
 
   const projectDescriptions = [
-    <div ref={descRef1}>
+    <div ref={descRef1} key={"project-description-co-pilot"}>
       <ProjectDescription
-        key={"project-description-co-pilot"}
         title={"Co Pilot"}
         desc={`
         [In-Redesign] This platform connects users with skilled 
@@ -306,9 +305,8 @@ export const Projects = () => {
       />
     </div>,
 
-    <div ref={descRef2}>
+    <div ref={descRef2} key={"project-description-zid"}>
       <ProjectDescription
-        key={"project-description-zid"}
         title={"Zid Product Manager"}
         desc={`
         The Zid Platform Dashboard is a powerful web application 
@@ -329,9 +327,8 @@ export const Projects = () => {
       />
     </div>,
 
-    <div ref={descRef3}>
+    <div ref={descRef3} key={"project-description-movie-matter"}>
       <ProjectDescription
-        key={"project-description-movie-matter"}
         title={"MovieMatter"}
         desc={`
         This media hub app is a must-have for movie and TV show 
@@ -367,9 +364,8 @@ export const Projects = () => {
       />
     </div>,
 
-    <div ref={descRef4}>
+    <div ref={descRef4} key={"project-description-atlas"}>
       <ProjectDescription
-        key={"project-description-atlas"}
         title={"Atlas Arena"}
         desc={`[In-Beta] Atlas is a thrilling pixel-art game 
         where players take on the role of Atlas, defending their 
