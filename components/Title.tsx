@@ -54,7 +54,7 @@ export const Title = () => {
             margin: 30px;
 
             p {
-              font-size: 1.75rem;
+              font-size: 1.7rem;
             }
 
             @media (max-width: 800px) {

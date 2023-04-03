@@ -451,6 +451,8 @@ export const Projects = () => {
               flex-direction: column;
               justify-content: center;
               align-items: center;
+
+              max-width: calc(95vw - 20px);
             `}
           >
             {desc}
