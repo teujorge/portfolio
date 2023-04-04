@@ -15,6 +15,7 @@ import { RefObject, useContext, useEffect, useRef, useState } from "react";
 import { inViewPercentage } from "@/utils/inView";
 import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
 import delay from "@/utils/delay";
+import gsap from "gsap";
 
 interface ProjectDescriptionProps {
   title: string;
@@ -116,10 +117,8 @@ const ProjectImage = ({
   media,
   isMobile,
 }: ProjectImageProps) => {
-  const projectImageWrapperRef = useRef<HTMLDivElement>(null);
-
-  const [imageHeight, setImageHeight] = useState(0);
-  const [imageOpacity, setImageOpacity] = useState(0);
+  const projectImageOutWrapperRef = useRef<HTMLDivElement>(null);
+  const projectImageInWrapperRef = useRef<HTMLDivElement>(null);
 
   const firstTitle = "Co Pilot";
   const lastTitle = "Atlas Arena";
@@ -129,7 +128,8 @@ const ProjectImage = ({
 
     const projectDescElement = descRef.current!;
 
-    const projectImageWrapperElement = projectImageWrapperRef.current!;
+    const projectImageOutWrapperElement = projectImageOutWrapperRef.current!;
+    const projectImageInWrapperElement = projectImageInWrapperRef.current!;
 
     async function handleScroll() {
       let percentageInView = inViewPercentage(projectDescElement);
@@ -150,12 +150,18 @@ const ProjectImage = ({
 
         // move top when projects section is scrolling into view
         if (projectDescRect.top > 0) {
-          projectImageWrapperElement.style.top = `${projectDescRect.top}px`;
+          gsap.to(projectImageOutWrapperElement, {
+            top: projectDescRect.top,
+            duration: 0,
+          });
         }
 
         // stay on top 0px
         else {
-          projectImageWrapperElement.style.top = "0px";
+          gsap.to(projectImageOutWrapperElement, {
+            top: 0,
+            duration: 0,
+          });
         }
       }
 
@@ -165,28 +171,43 @@ const ProjectImage = ({
 
         // move bottom when projects section is scrolling out of view
         if (projectDescRect.bottom <= windowSize.height) {
-          projectImageWrapperElement.style.top = `${
-            projectDescRect.bottom - windowSize.height
-          }px`;
-
-          console.log(projectImageWrapperElement.style);
+          gsap.to(projectImageOutWrapperElement, {
+            top: projectDescRect.bottom - windowSize.height,
+            duration: 0,
+          });
         }
 
         // stay on top 0px
         else {
-          projectImageWrapperElement.style.top = "0px";
+          gsap.to(projectImageOutWrapperElement, {
+            top: 0,
+            duration: 0,
+          });
         }
       }
 
       // stay on top 0px
       else {
-        projectImageWrapperElement.style.top = "0px";
+        gsap.to(projectImageOutWrapperElement, {
+          top: 0,
+          duration: 0,
+        });
       }
 
-      setImageHeight(height);
-      setImageOpacity(opacity);
+      gsap.to(projectImageOutWrapperElement, {
+        transformOrigin: "top",
+        scaleY: height / 100,
+        opacity: opacity,
+        duration: 0,
+      });
 
-      await delay(10);
+      gsap.to(projectImageInWrapperElement, {
+        transformOrigin: "top",
+        scaleY: 1 / (height / 100),
+        duration: 0,
+      });
+
+      // await delay(10);
     }
 
     document.addEventListener("scroll", handleScroll);
@@ -211,41 +232,32 @@ const ProjectImage = ({
         `}
         src={media.src}
         alt={media.alt}
+        priority
       />
     );
   }
 
   return (
     <div
-      ref={projectImageWrapperRef}
+      ref={projectImageOutWrapperRef}
       css={css`
         position: fixed;
         right: 0px;
         overflow: hidden;
 
         width: 50vw;
-        height: ${imageHeight}vh;
-        /* height: 100vh; */
-        opacity: ${imageOpacity};
-
-        /* transform-origin: top; */
-        /* transform: scaleY(${imageHeight / 100}); */
-        transition: all 0.01s;
+        height: 100vh;
       `}
     >
       {/* fixed height */}
       <div
+        ref={projectImageInWrapperRef}
         css={css`
           display: flex;
-          justify-content: center;
           align-items: center;
 
           width: 50vw;
           height: 100vh;
-
-          /* transform-origin: top; */
-          /* transform: scaleY(${1 / (imageHeight / 100)}); */
-          /* transition: all 0.01s; */
         `}
       >
         <Image
@@ -260,6 +272,8 @@ const ProjectImage = ({
 
             border-radius: 12px;
             box-shadow: 0px 0px 10px var(--shadow-color);
+
+            transition: all 0s;
           `}
           src={media.src}
           alt={media.alt}
