@@ -225,11 +225,12 @@ const ProjectImage = ({
 
         width: 50vw;
         height: ${imageHeight}vh;
+        /* height: 100vh; */
         opacity: ${imageOpacity};
 
         /* transform-origin: top; */
         /* transform: scaleY(${imageHeight / 100}); */
-        transition: all 0.1s;
+        transition: all 0.01s;
       `}
     >
       {/* fixed height */}
@@ -244,7 +245,7 @@ const ProjectImage = ({
 
           /* transform-origin: top; */
           /* transform: scaleY(${1 / (imageHeight / 100)}); */
-          /* transition: all 0s; */
+          /* transition: all 0.01s; */
         `}
       >
         <Image
