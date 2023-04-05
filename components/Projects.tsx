@@ -11,11 +11,11 @@ import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
 import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
 import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
 import { IconButton } from "./IconButton";
-import { RefObject, useContext, useEffect, useRef, useState } from "react";
+import { RefObject, useContext, useEffect, useRef } from "react";
 import { inViewPercentage } from "@/utils/inView";
 import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
-import delay from "@/utils/delay";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 interface ProjectDescriptionProps {
   title: string;
@@ -176,12 +176,14 @@ const ProjectImage = ({
         scaleY: 1 / (height / 100),
         duration: ANIM_DURATION,
       });
-
-      // await delay(10);
     }
 
-    document.addEventListener("scroll", handleScroll);
-    return () => document.removeEventListener("scroll", handleScroll);
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.observe({
+      target: window,
+      type: "scroll",
+      onChangeY: handleScroll,
+    });
   }, []);
 
   if (isMobile) {
@@ -202,6 +204,7 @@ const ProjectImage = ({
         `}
         src={media.src}
         alt={media.alt}
+        priority
       />
     );
   }
@@ -232,6 +235,8 @@ const ProjectImage = ({
         <Image
           css={css`
             object-fit: contain;
+
+            margin-left: 10px;
 
             width: fit-content;
             height: fit-content;
