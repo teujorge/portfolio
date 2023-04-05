@@ -25,10 +25,10 @@ interface ProjectDescriptionProps {
 }
 
 interface ProjectImageProps {
-  title: string;
   media: { src: StaticImageData; alt: string };
   isMobile: boolean;
   descRef: RefObject<HTMLDivElement>;
+  wrapperRef: RefObject<HTMLDivElement>;
 }
 
 const ProjectDescription = ({
@@ -113,19 +113,19 @@ const ProjectDescription = ({
 
 const ProjectImage = ({
   descRef,
-  title,
+  wrapperRef,
   media,
   isMobile,
 }: ProjectImageProps) => {
   const projectImageOutWrapperRef = useRef<HTMLDivElement>(null);
   const projectImageInWrapperRef = useRef<HTMLDivElement>(null);
 
-  const firstTitle = "Co Pilot";
-  const lastTitle = "Atlas Arena";
+  const ANIM_DURATION = 0;
 
   useEffect(() => {
     if (isMobile) return;
 
+    const wrapperElement = wrapperRef.current!;
     const projectDescElement = descRef.current!;
 
     const projectImageOutWrapperElement = projectImageOutWrapperRef.current!;
@@ -134,77 +134,47 @@ const ProjectImage = ({
     async function handleScroll() {
       let percentageInView = inViewPercentage(projectDescElement);
 
-      // determines scale
+      // determine scale
       let height = Math.max(0, percentageInView); // handle < 0 percentage
       height = Math.min(100, percentageInView); // handle > 100 percentage
 
-      // determines opacity
-      let opacity = 1;
+      // for sticky effect
+      const wrapperRect = wrapperElement.getBoundingClientRect();
 
-      if (percentageInView > 100) opacity = (200 - percentageInView) / 100;
-      else if (percentageInView < 0) opacity = 0;
-
-      // first project item
-      if (title === firstTitle) {
-        const projectDescRect = projectDescElement.getBoundingClientRect();
-
-        // move top when projects section is scrolling into view
-        if (projectDescRect.top > 0) {
-          gsap.to(projectImageOutWrapperElement, {
-            top: projectDescRect.top,
-            duration: 0,
-          });
-        }
-
-        // stay on top 0px
-        else {
-          gsap.to(projectImageOutWrapperElement, {
-            top: 0,
-            duration: 0,
-          });
-        }
+      // move top when projects section is scrolling into view
+      if (wrapperRect.top > 0) {
+        gsap.to(projectImageOutWrapperElement, {
+          top: wrapperRect.top,
+          duration: ANIM_DURATION,
+        });
       }
 
-      // second project item
-      else if (title === lastTitle) {
-        const projectDescRect = projectDescElement.getBoundingClientRect();
-
-        // move bottom when projects section is scrolling out of view
-        if (projectDescRect.bottom <= windowSize.height) {
-          gsap.to(projectImageOutWrapperElement, {
-            top: projectDescRect.bottom - windowSize.height,
-            duration: 0,
-          });
-        }
-
-        // stay on top 0px
-        else {
-          gsap.to(projectImageOutWrapperElement, {
-            top: 0,
-            duration: 0,
-          });
-        }
+      // move bottom when projects section is scrolling out of view
+      else if (wrapperRect.bottom <= windowSize.height) {
+        gsap.to(projectImageOutWrapperElement, {
+          top: wrapperRect.bottom - windowSize.height,
+          duration: ANIM_DURATION,
+        });
       }
 
       // stay on top 0px
       else {
         gsap.to(projectImageOutWrapperElement, {
           top: 0,
-          duration: 0,
+          duration: ANIM_DURATION,
         });
       }
 
       gsap.to(projectImageOutWrapperElement, {
         transformOrigin: "top",
         scaleY: height / 100,
-        opacity: opacity,
-        duration: 0,
+        duration: ANIM_DURATION,
       });
 
       gsap.to(projectImageInWrapperElement, {
         transformOrigin: "top",
         scaleY: 1 / (height / 100),
-        duration: 0,
+        duration: ANIM_DURATION,
       });
 
       // await delay(10);
@@ -232,7 +202,6 @@ const ProjectImage = ({
         `}
         src={media.src}
         alt={media.alt}
-        priority
       />
     );
   }
@@ -277,6 +246,7 @@ const ProjectImage = ({
           `}
           src={media.src}
           alt={media.alt}
+          priority
         />
       </div>
     </div>
@@ -285,6 +255,8 @@ const ProjectImage = ({
 
 export const Projects = () => {
   const { isMobile } = useContext(AppContext);
+
+  const projectsDesktopRef = useRef<HTMLDivElement>(null);
 
   const descRef1 = useRef<HTMLDivElement>(null);
   const descRef2 = useRef<HTMLDivElement>(null);
@@ -422,32 +394,32 @@ export const Projects = () => {
   const projectImages = [
     <ProjectImage
       descRef={descRef1}
+      wrapperRef={projectsDesktopRef}
       key={"project-image-co-pilot"}
-      title={"Co Pilot"}
       media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
       isMobile={isMobile}
     />,
 
     <ProjectImage
       descRef={descRef2}
+      wrapperRef={projectsDesktopRef}
       key={"project-image-zid"}
-      title={"Zid Product Manager"}
       media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
       isMobile={isMobile}
     />,
 
     <ProjectImage
       descRef={descRef3}
+      wrapperRef={projectsDesktopRef}
       key={"project-image-movie-matter"}
-      title={"MovieMatter"}
       media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
       isMobile={isMobile}
     />,
 
     <ProjectImage
       descRef={descRef4}
+      wrapperRef={projectsDesktopRef}
       key={"project-image-atlas"}
-      title={"Atlas Arena"}
       media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
       isMobile={isMobile}
     />,
@@ -483,6 +455,7 @@ export const Projects = () => {
       ) : (
         // desktop
         <div
+          ref={projectsDesktopRef}
           css={css`
             position: relative;
 
