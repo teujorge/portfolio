@@ -16,7 +16,6 @@ export default function App({ Component, pageProps }: AppProps) {
       windowSize.height = window.innerHeight;
 
       const _isMobile = window.innerWidth <= MOBILE_WIDTH;
-      console.log(_isMobile, isMobile);
       if (isMobile !== _isMobile) setIsMobile(_isMobile);
     }
     handleResize(); // set initial state
