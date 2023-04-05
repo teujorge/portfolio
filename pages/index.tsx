@@ -23,7 +23,7 @@ export default function Home() {
     function handleScroll() {
       inView({
         elements: revealElements,
-        elementVisibleThreshold: 100,
+        elementVisibleThreshold: 75,
         inViewFn: (e, i) => {
           e.classList.add("revealShowing");
         },
