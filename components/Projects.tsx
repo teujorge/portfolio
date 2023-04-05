@@ -140,9 +140,16 @@ const ProjectImage = ({
         height = Math.min(100, percentageInView); // handle > 100 percentage
       }
 
-      // animate height
+      // determine brightness
+      let brightness = 1;
+      if (percentageInView > 100) {
+        brightness = Math.min(1, 1 - (percentageInView / 100 - 1) / 2); // handle > 100 percentage
+      }
+
+      // animate
       gsap.to(projectImageOutWrapperElement, {
         height: `${height}vh`,
+        filter: `brightness(${brightness})`,
         duration: ANIM_DURATION,
       });
 
