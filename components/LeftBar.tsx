@@ -1,11 +1,12 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
 import IconEmail from "../public/svg/envelope";
 import IconGithub from "../public/svg/github";
 import IconLinkedIn from "../public/svg/linkedin";
 import IconResume from "../public/svg/file";
-import { css } from "@emotion/react";
 import { DescPos, IconButton } from "./IconButton";
 import { useEffect, useState } from "react";
-/** @jsxImportSource @emotion/react */
 
 export const LeftBar = () => {
   const [resumeLink, setResumeLink] = useState("/resume");

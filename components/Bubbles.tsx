@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useRef, useState, useEffect } from "react";
+
+import { useEffect, useRef, useState } from "react";
 
 type Vector = {
   x: number;

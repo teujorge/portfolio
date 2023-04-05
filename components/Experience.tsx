@@ -4,8 +4,8 @@ import { css } from "@emotion/react";
 import IconCode from "../public/svg/code";
 import IconSystem from "../public/svg/nodes";
 import IconTerminal from "../public/svg/terminal";
-import { useContext } from "react";
 import { AppContext } from "@/pages/_app";
+import { useContext } from "react";
 
 const Job = ({
   icon,

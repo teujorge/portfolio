@@ -2,10 +2,10 @@
 import { css } from "@emotion/react";
 
 import IconCity from "../public/svg/city";
-import IconMountainSun from "../public/svg/mountain-sun";
 import IconMountain from "../public/svg/mountain";
-import { useContext } from "react";
+import IconMountainSun from "../public/svg/mountain-sun";
 import { AppContext } from "@/pages/_app";
+import { useContext } from "react";
 
 const School = ({
   school,

@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+import gsap from "gsap";
 import IconApple from "../public/svg/apple-store";
 import IconDemo from "../public/svg/eye";
 import IconGithub from "../public/svg/github";
 import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
 import ShowAtlasArena from "../public/images/demos/demo-atlas.webp";
-import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
 import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
+import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
-import { IconButton } from "./IconButton";
-import { RefObject, useContext, useEffect, useRef } from "react";
-import { inViewPercentage } from "@/utils/inView";
 import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
-import gsap from "gsap";
+import { IconButton } from "./IconButton";
+import { inViewPercentage } from "@/utils/inView";
+import { RefObject, useContext, useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 interface ProjectDescriptionProps {
@@ -120,8 +120,6 @@ const ProjectImage = ({
   const projectImageOutWrapperRef = useRef<HTMLDivElement>(null);
   const projectImageInWrapperRef = useRef<HTMLDivElement>(null);
 
-  const ANIM_DURATION = 0;
-
   useEffect(() => {
     if (isMobile) return;
 
@@ -131,6 +129,7 @@ const ProjectImage = ({
     const projectImageOutWrapperElement = projectImageOutWrapperRef.current!;
     const projectImageInWrapperElement = projectImageInWrapperRef.current!;
 
+    const ANIM_DURATION = 0;
     async function handleScroll() {
       let percentageInView = inViewPercentage(projectDescElement);
 
