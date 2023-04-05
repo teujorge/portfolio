@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 import IconCode from "../public/svg/code";
-import IconDiagram from "../public/svg/diagram";
+import IconSystem from "../public/svg/nodes";
 import IconTerminal from "../public/svg/terminal";
 
 export const Experience = () => {
@@ -186,7 +186,7 @@ export const Experience = () => {
       />
 
       <Job
-        icon={IconDiagram}
+        icon={IconSystem}
         title={"Systems Engineer Intern"}
         employer={"BendixKing"}
         city={"Albuquerque"}
