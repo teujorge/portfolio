@@ -128,7 +128,6 @@ export const IconButton = ({
           pointer-events: none;
           position: absolute;
           text-align: center;
-          ${descriptionPositionStyle}
 
           padding: 8px;
           width: 100px;
@@ -140,6 +139,8 @@ export const IconButton = ({
           transition: opacity 0.2s ease;
 
           box-shadow: 0px 0px 8px var(--shadow-color);
+
+          ${descriptionPositionStyle}
         `}
       >
         {desc}

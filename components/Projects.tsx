@@ -12,7 +12,7 @@ import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
 import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
 import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
-import { IconButton } from "./IconButton";
+import { DescPos, IconButton } from "./IconButton";
 import { inViewPercentage } from "@/utils/inView";
 import { RefObject, useContext, useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -374,12 +374,14 @@ export const Projects = () => {
             src={IconDemo}
             href={"https://teujorge.github.io/atlas/"}
             desc={"Web Demo"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
           <IconButton
             key={"atlas-arena-beta"}
             src={IconApple}
             href={"https://testflight.apple.com/join/GC3yVQk6"}
             desc={"Beta"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
 
           <IconButton
@@ -387,6 +389,7 @@ export const Projects = () => {
             src={IconGithub}
             href={"https://github.com/teujorge/atlas"}
             desc={"GitHub"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
         ]}
       />
