@@ -134,9 +134,18 @@ const ProjectImage = ({
     async function handleScroll() {
       let percentageInView = inViewPercentage(projectDescElement);
 
-      // determine scale
-      let height = Math.max(0, percentageInView); // handle < 0 percentage
-      height = Math.min(100, percentageInView); // handle > 100 percentage
+      // determine height
+      let height = 0;
+      if (percentageInView > -100 && percentageInView < 200) {
+        height = Math.max(0, percentageInView); // handle < 0 percentage
+        height = Math.min(100, percentageInView); // handle > 100 percentage
+      }
+
+      // animate height
+      gsap.to(projectImageOutWrapperElement, {
+        height: `${height}vh`,
+        duration: ANIM_DURATION,
+      });
 
       // for sticky effect
       const wrapperRect = wrapperElement.getBoundingClientRect();
@@ -164,20 +173,9 @@ const ProjectImage = ({
           duration: ANIM_DURATION,
         });
       }
-
-      gsap.to(projectImageOutWrapperElement, {
-        transformOrigin: "top",
-        scaleY: height / 100,
-        duration: ANIM_DURATION,
-      });
-
-      gsap.to(projectImageInWrapperElement, {
-        transformOrigin: "top",
-        scaleY: 1 / (height / 100),
-        duration: ANIM_DURATION,
-      });
     }
 
+    // scroll listener
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.observe({
       target: window,
