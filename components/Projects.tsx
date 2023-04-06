@@ -1,159 +1,291 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
+import gsap from "gsap";
 import IconApple from "../public/svg/apple-store";
 import IconDemo from "../public/svg/eye";
 import IconGithub from "../public/svg/github";
 import IconGoogle from "../public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
-import ShowAtlasArena from "../public/images/demos/atlas_arena.gif";
-import ShowMovieMatter from "../public/images/demos/movie_matter.png";
-import ShowCoPilot from "../public/images/demos/co_pilot.gif";
-import ShowZidDashboard from "../public/images/demos/zid_dashboard.gif";
-import ShowWaterTag from "../public/images/demos/water_tag.gif";
-import { css } from "@emotion/react";
-import { IconButton } from "./IconButton";
-/** @jsxImportSource @emotion/react */
+import ShowAtlasArena from "../public/images/demos/demo-atlas.webp";
+import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
+import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
+import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
+import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
+import { DescPos, IconButton } from "./IconButton";
+import { inViewPercentage } from "@/utils/inView";
+import { RefObject, useContext, useEffect, useRef } from "react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-export const Projects = () => {
-  const Project = ({
-    title,
-    media,
-    desc,
-    tech,
-    icons,
-  }: {
-    title: string;
-    media: { src: StaticImageData; alt: string };
-    desc: string;
-    tech: string[];
-    icons: JSX.Element[];
-  }) => {
-    const IMAGE_WIDTH_L = 400;
-    const IMAGE_WIDTH_S = 250;
+interface ProjectDescriptionProps {
+  title: string;
+  desc: string;
+  tech: string[];
+  icons: JSX.Element[];
+}
 
-    let technologies = "";
+interface ProjectImageProps {
+  media: { src: StaticImageData; alt: string };
+  isMobile: boolean;
+  descRef: RefObject<HTMLDivElement>;
+  wrapperRef: RefObject<HTMLDivElement>;
+}
 
-    for (let i = 0; i < tech.length - 1; i++) {
-      technologies += tech[i] + " - ";
-    }
-    technologies += tech[tech.length - 1];
+const ProjectDescription = ({
+  title,
+  desc,
+  tech,
+  icons,
+}: ProjectDescriptionProps) => {
+  let technologies = "";
 
-    let iconButtons: JSX.Element[] = [];
-    icons.forEach((icon) => iconButtons.push(icon));
+  for (let i = 0; i < tech.length - 1; i++) {
+    technologies += tech[i] + " - ";
+  }
+  technologies += tech[tech.length - 1];
 
-    return (
+  let iconButtons: JSX.Element[] = [];
+  icons.forEach((icon) => iconButtons.push(icon));
+
+  return (
+    <div
+      className="reveal"
+      css={css`
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin: 20px;
+        padding: 20px;
+        width: 40vw;
+        min-height: 100vh;
+
+        p {
+          margin-top: 20px;
+        }
+
+        @media (max-width: ${MOBILE_WIDTH}px) {
+          margin-left: 0px;
+          margin-right: 0px;
+          margin-top: 50px;
+          margin-bottom: 0px;
+          padding: 10px;
+          width: auto;
+          min-height: 0px;
+
+          h3 {
+            text-align: center;
+          }
+
+          p {
+            text-align: center;
+          }
+        }
+      `}
+    >
+      {/* project title */}
+      <h3
+        className="reveal"
+        css={css`
+          margin: 10px;
+          text-align: left;
+        `}
+      >
+        {title}
+      </h3>
+
+      <p className="reveal">{desc}</p>
+      <p className="reveal">{technologies}</p>
       <div
         className="reveal"
         css={css`
           display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 40px;
-          padding: 20px;
-          border-radius: 20px;
-          background-color: var(--off-background-color);
-
-          box-shadow: 0px 0px 8px var(--shadow-color);
-
-          p {
-            margin-top: 20px;
-          }
-
-          @media (max-width: 1000px) {
-            flex-direction: column;
-          }
-
-          @media (max-width: 800px) {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            margin-left: 10px;
-            margin-right: 10px;
-          }
+          margin: 10px;
+          width: fit-content;
         `}
       >
-        <div>
-          {/* project title */}
-          <h3
-            className="reveal"
-            css={css`
-              margin: 10px;
-              text-align: left;
-
-              @media (max-width: 1000px) {
-                text-align: center;
-              }
-            `}
-          >
-            {title}
-          </h3>
-
-          {/* image demo */}
-          <Image
-            className="reveal"
-            css={css`
-              object-fit: contain;
-              margin: 20px;
-              width: ${IMAGE_WIDTH_L}px;
-              height: ${IMAGE_WIDTH_L * (media.src.height / media.src.width)}px;
-
-              border: none;
-              border-radius: 12px;
-
-              @media (max-width: 1100px) {
-                margin: 15px;
-                width: ${IMAGE_WIDTH_S}px;
-                height: ${IMAGE_WIDTH_S *
-                (media.src.height / media.src.width)}px;
-              }
-            `}
-            src={media.src}
-            alt={media.alt}
-            unoptimized={true}
-          />
-        </div>
-
-        {/* descriptions */}
-        <div
-          css={css`
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          `}
-        >
-          <p className="reveal">{desc}</p>
-          <p className="reveal">{technologies}</p>
-          <div
-            className="reveal"
-            css={css`
-              display: flex;
-              margin: 10px;
-              width: fit-content;
-            `}
-          >
-            {iconButtons}
-          </div>
-        </div>
+        {iconButtons}
       </div>
+    </div>
+  );
+};
+
+const ProjectImage = ({
+  descRef,
+  wrapperRef,
+  media,
+  isMobile,
+}: ProjectImageProps) => {
+  const projectImageOutWrapperRef = useRef<HTMLDivElement>(null);
+  const projectImageInWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const wrapperElement = wrapperRef.current!;
+    const projectDescElement = descRef.current!;
+
+    const projectImageOutWrapperElement = projectImageOutWrapperRef.current!;
+    const projectImageInWrapperElement = projectImageInWrapperRef.current!;
+
+    const ANIM_DURATION = 0;
+    async function handleScroll() {
+      let percentageInView = inViewPercentage(projectDescElement);
+
+      // determine height
+      let height = 0;
+      if (percentageInView > -100 && percentageInView < 200) {
+        height = Math.max(0, percentageInView); // handle < 0 percentage
+        height = Math.min(100, percentageInView); // handle > 100 percentage
+      }
+
+      // determine brightness
+      let brightness = 1;
+      if (percentageInView > 100) {
+        brightness = Math.min(1, 1 - (percentageInView / 100 - 1) / 2); // handle > 100 percentage
+      }
+
+      // animate
+      gsap.to(projectImageOutWrapperElement, {
+        height: `${height}vh`,
+        filter: `brightness(${brightness})`,
+        duration: ANIM_DURATION,
+      });
+
+      // for sticky effect
+      const wrapperRect = wrapperElement.getBoundingClientRect();
+
+      // move top when projects section is scrolling into view
+      if (wrapperRect.top > 0) {
+        gsap.to(projectImageOutWrapperElement, {
+          top: wrapperRect.top,
+          duration: ANIM_DURATION,
+        });
+      }
+
+      // move bottom when projects section is scrolling out of view
+      else if (wrapperRect.bottom <= windowSize.height) {
+        gsap.to(projectImageOutWrapperElement, {
+          top: wrapperRect.bottom - windowSize.height,
+          duration: ANIM_DURATION,
+        });
+      }
+
+      // stay on top 0px
+      else {
+        gsap.to(projectImageOutWrapperElement, {
+          top: 0,
+          duration: ANIM_DURATION,
+        });
+      }
+    }
+
+    // scroll listener
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.observe({
+      target: window,
+      type: "scroll",
+      onChangeY: handleScroll,
+    });
+  }, []);
+
+  if (isMobile) {
+    return (
+      <Image
+        className="reveal"
+        css={css`
+          object-fit: contain;
+
+          width: fit-content;
+          height: fit-content;
+
+          max-width: calc(90% - 20px);
+          max-height: calc(90% - 20px);
+
+          border-radius: 12px;
+          box-shadow: 0px 0px 10px var(--shadow-color);
+        `}
+        src={media.src}
+        alt={media.alt}
+        priority
+      />
     );
-  };
+  }
 
   return (
-    <div className="section">
-      <h2>Projects</h2>
+    <div
+      ref={projectImageOutWrapperRef}
+      css={css`
+        position: fixed;
+        right: 0px;
+        overflow: hidden;
 
-      <Project
-        title={"Co Pilot"}
-        media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
-        desc={`
-          [In-Development] This platform connects users with skilled 
-          freelancers to efficiently complete their projects. With 
-          intuitive tools and a streamlined user experience, users 
-          can easily create and collaborate on projects, as well as 
-          submit project proposals and receive bids from qualified 
-          freelancers. Authentication through Google and seamless 
-          payment processing via Stripe make it easy to get started 
-          and manage projects from start to finish.
+        width: 50vw;
+        height: 100vh;
+      `}
+    >
+      {/* fixed height */}
+      <div
+        ref={projectImageInWrapperRef}
+        css={css`
+          display: flex;
+          align-items: center;
+
+          width: 50vw;
+          height: 100vh;
         `}
+      >
+        <Image
+          css={css`
+            object-fit: contain;
+
+            margin-left: 10px;
+
+            width: fit-content;
+            height: fit-content;
+
+            max-width: 90%;
+            max-height: 90%;
+
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px var(--shadow-color);
+
+            transition: all 0s;
+          `}
+          src={media.src}
+          alt={media.alt}
+          priority
+        />
+      </div>
+    </div>
+  );
+};
+
+export const Projects = () => {
+  const { isMobile } = useContext(AppContext);
+
+  const projectsDesktopRef = useRef<HTMLDivElement>(null);
+
+  const descRef1 = useRef<HTMLDivElement>(null);
+  const descRef2 = useRef<HTMLDivElement>(null);
+  const descRef3 = useRef<HTMLDivElement>(null);
+  const descRef4 = useRef<HTMLDivElement>(null);
+
+  const projectDescriptions = [
+    <div ref={descRef1} key={"project-description-co-pilot"}>
+      <ProjectDescription
+        title={"Co Pilot"}
+        desc={`
+        [In-Redesign] This platform connects users with skilled 
+        freelancers to efficiently complete their projects. With 
+        intuitive tools and a streamlined user experience, users 
+        can easily create and collaborate on projects, as well as 
+        submit project proposals and receive bids from qualified 
+        freelancers. Authentication through Google and seamless 
+        payment processing via Stripe make it easy to get started 
+        and manage projects from start to finish.
+      `}
         tech={["NextJS", "DB", "API"]}
         icons={[
           <IconButton
@@ -170,17 +302,18 @@ export const Projects = () => {
           />,
         ]}
       />
+    </div>,
 
-      <Project
+    <div ref={descRef2} key={"project-description-zid"}>
+      <ProjectDescription
         title={"Zid Product Manager"}
-        media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
         desc={`
-          The Zid Platform Dashboard is a powerful web application 
-          designed to help users manage their products with ease. The 
-          dashboard provides centralized location for viewing and 
-          editing product details and includes robust filtering 
-          options for quick and efficient navigation.
-        `}
+        The Zid Platform Dashboard is a powerful web application 
+        designed to help users manage their products with ease. The 
+        dashboard provides centralized location for viewing and 
+        editing product details and includes robust filtering 
+        options for quick and efficient navigation.
+      `}
         tech={["React", "DB", "API"]}
         icons={[
           <IconButton
@@ -191,18 +324,19 @@ export const Projects = () => {
           />,
         ]}
       />
+    </div>,
 
-      <Project
+    <div ref={descRef3} key={"project-description-movie-matter"}>
+      <ProjectDescription
         title={"MovieMatter"}
-        media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
         desc={`
-          This media hub app is a must-have for movie and TV show 
-          enthusiasts. Using the TMDB API, the app provides users with 
-          personalized recommendations for movies, TV shows, and 
-          celebrities. The app also allows users to create personalized 
-          lists of their favorite media, making it easy to keep track 
-          of what they've watched and what they want to see next.
-        `}
+        This media hub app is a must-have for movie and TV show 
+        enthusiasts. Using the TMDB API, the app provides users with 
+        personalized recommendations for movies, TV shows, and 
+        celebrities. The app also allows users to create personalized 
+        lists of their favorite media, making it easy to keep track 
+        of what they've watched and what they want to see next.
+      `}
         tech={["Dart", "Flutter", "API"]}
         icons={[
           <IconButton
@@ -227,56 +361,133 @@ export const Projects = () => {
           />,
         ]}
       />
+    </div>,
 
-      <Project
+    <div ref={descRef4} key={"project-description-atlas"}>
+      <ProjectDescription
         title={"Atlas Arena"}
-        media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
-        desc={`[In-Development] Atlas is a thrilling pixel-art game 
-          where players take on the role of Atlas, defending their 
-          home from endless waves of enemies. Players can choose to be 
-          a Knight, a Mage, or an Archer, each with unique abilities 
-          and skills to master. The game features challenging game 
-          play, with increasingly difficult levels and a variety of 
-          enemies to defeat.
-        `}
+        desc={`[In-Beta] Atlas is a thrilling pixel-art game 
+        where players take on the role of Atlas, defending their 
+        home from endless waves of enemies. Players can choose to be 
+        a Knight, a Mage, or an Archer, each with unique abilities 
+        and skills to master. The game features challenging game 
+        play, with increasingly difficult levels and a variety of 
+        enemies to defeat.
+      `}
         tech={["Dart", "Flutter", "FlameGame"]}
         icons={[
           <IconButton
             key={"atlas-arena-demo"}
             src={IconDemo}
             href={"https://teujorge.github.io/atlas/"}
-            desc={"Demo"}
+            desc={"Web Demo"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
+          <IconButton
+            key={"atlas-arena-beta"}
+            src={IconApple}
+            href={"https://testflight.apple.com/join/GC3yVQk6"}
+            desc={"Beta"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
+          />,
+
           <IconButton
             key={"atlas-arena-github"}
             src={IconGithub}
             href={"https://github.com/teujorge/atlas"}
             desc={"GitHub"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
         ]}
       />
+    </div>,
+  ];
 
-      <Project
-        title={"Water Wars"}
-        media={{ src: ShowWaterTag, alt: "water-tag-prototype" }}
-        desc={`
-          Water Wars is an exciting twist on the classic laser 
-          tag game. Players wear water-sensitive vests and use 
-          water guns to soak their opponents in three different 
-          game modes. With its engaging game play and unique 
-          water-based mechanics, Water Wars is perfect for 
-          players of all ages.
-        `}
-        tech={["Arduino", "Embedded System"]}
-        icons={[
-          <IconButton
-            key={"water-wars-github"}
-            src={IconGithub}
-            href={"https://github.com/teujorge/Arduino-Water-Belt"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
+  const projectImages = [
+    <ProjectImage
+      descRef={descRef1}
+      wrapperRef={projectsDesktopRef}
+      key={"project-image-co-pilot"}
+      media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
+      isMobile={isMobile}
+    />,
+
+    <ProjectImage
+      descRef={descRef2}
+      wrapperRef={projectsDesktopRef}
+      key={"project-image-zid"}
+      media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
+      isMobile={isMobile}
+    />,
+
+    <ProjectImage
+      descRef={descRef3}
+      wrapperRef={projectsDesktopRef}
+      key={"project-image-movie-matter"}
+      media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
+      isMobile={isMobile}
+    />,
+
+    <ProjectImage
+      descRef={descRef4}
+      wrapperRef={projectsDesktopRef}
+      key={"project-image-atlas"}
+      media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
+      isMobile={isMobile}
+    />,
+  ];
+
+  return (
+    <div id="projects-section" className="section">
+      <h2>Projects</h2>
+
+      {isMobile ? (
+        // mobile
+        projectDescriptions.map((desc, index) => (
+          <div
+            key={`project-${index}`}
+            css={css`
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+
+              max-width: calc(95vw - 20px);
+            `}
+          >
+            {desc}
+            {projectImages[index]}
+            <div
+              css={css`
+                height: 50px;
+              `}
+            />
+          </div>
+        ))
+      ) : (
+        // desktop
+        <div
+          ref={projectsDesktopRef}
+          css={css`
+            position: relative;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            margin-top: 50px;
+            margin-bottom: 50px;
+
+            width: 90vw;
+          `}
+        >
+          {/* left column */}
+          <div>{projectDescriptions.map((desc, index) => desc)}</div>
+
+          {/* right column */}
+          <div>{projectImages.map((image, index) => image)}</div>
+        </div>
+      )}
     </div>
   );
 };

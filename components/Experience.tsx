@@ -2,55 +2,60 @@
 import { css } from "@emotion/react";
 
 import IconCode from "../public/svg/code";
-import IconDiagram from "../public/svg/diagram";
+import IconSystem from "../public/svg/nodes";
 import IconTerminal from "../public/svg/terminal";
+import { AppContext } from "@/pages/_app";
+import { useContext } from "react";
 
-export const Experience = () => {
-  const Job = ({
-    icon,
-    title,
-    employer,
-    start,
-    end,
-    city,
-    desc,
-  }: {
-    icon: any;
-    title: string;
-    employer?: string;
-    start?: string;
-    end?: string;
-    city?: string;
-    desc: string[];
-  }) => {
-    const date = start
-      ? end
-        ? `${start} - ${end}`
-        : `${start}`
-      : end
-      ? `${end}`
-      : "current";
+const Job = ({
+  icon,
+  title,
+  employer,
+  start,
+  end,
+  city,
+  desc,
+}: {
+  icon: any;
+  title: string;
+  employer?: string;
+  start?: string;
+  end?: string;
+  city?: string;
+  desc: string[];
+}) => {
+  const { isMobile } = useContext(AppContext);
 
-    return (
-      <div
-        className="reveal"
-        css={css`
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
+  const date = start
+    ? end
+      ? `${start} - ${end}`
+      : `${start}`
+    : end
+    ? `${end}`
+    : "current";
 
-          margin: 40px;
-          border-left: 2px solid var(--primary-color);
+  return (
+    <div
+      className="reveal"
+      css={css`
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
 
-          @media (max-width: 800px) {
-            flex-direction: column;
-            margin: 0px;
-            border-left: 0px solid transparent;
-          }
-        `}
-      >
-        {/* icon */}
+        margin: 40px;
+        border-left: 2px solid var(--primary-color);
+
+        @media (max-width: 800px) {
+          flex-direction: column;
+          margin-left: 0px;
+          margin-right: 0px;
+          border-left: 0px solid transparent;
+        }
+      `}
+    >
+      {/* icon */}
+      {!isMobile && (
         <div
           className="reveal"
           css={css`
@@ -87,54 +92,56 @@ export const Experience = () => {
         >
           {icon}
         </div>
+      )}
 
-        {/* texts */}
-        <div
-          className="reveal"
+      {/* texts */}
+      <div
+        className="reveal"
+        css={css`
+          margin: 40px;
+
+          p {
+            margin-top: 4px;
+          }
+
+          @media (max-width: 800px) {
+            margin: 10px;
+          }
+        `}
+      >
+        <h3>
+          {title}
+          {employer ? `, ${employer}` : ""}
+          {city ? `, ${city}` : ""}
+        </h3>
+        <p
           css={css`
-            margin: 40px;
-
-            p {
-              margin-top: 4px;
-            }
-
-            @media (max-width: 800px) {
-              margin: 10px;
-            }
+            font-size: 13px;
           `}
         >
-          <h3>
-            {title}
-            {employer ? `, ${employer}` : ""}
-            {city ? `, ${city}` : ""}
-          </h3>
-          <p
-            css={css`
-              font-size: 13px;
-            `}
-          >
-            {date ? date : "current"}
-          </p>
-          <ul>
-            {desc.map((description, index) => (
-              <div
-                key={`description-${title}-${index}`}
-                className="reveal"
-                css={css`
-                  margin: 20px;
-                `}
-              >
-                <li>
-                  <p>{description}</p>
-                </li>
-              </div>
-            ))}
-          </ul>
-        </div>
+          {date ? date : "current"}
+        </p>
+        <ul>
+          {desc.map((description, index) => (
+            <div
+              key={`description-${title}-${index}`}
+              className="reveal"
+              css={css`
+                margin: 20px;
+              `}
+            >
+              <li>
+                <p>{description}</p>
+              </li>
+            </div>
+          ))}
+        </ul>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
+export const Experience = () => {
   return (
     <div className="section">
       <h2>Experience</h2>
@@ -143,10 +150,10 @@ export const Experience = () => {
         icon={IconCode}
         title={"Freelance Software Engineer"}
         desc={[
-          `Increased efficiency and profitability for 
+          `Increased profitability for 
           Zid store owners by developing a web-based 
           dashboard that streamlined inventory management 
-          resulting in a 2x efficiency in editing products.`,
+          resulting in a dramatic increase in efficiency when editing products.`,
 
           `Improved user experience and functionality 
           for multiple clients by utilizing strong 
@@ -154,7 +161,7 @@ export const Experience = () => {
           to detail to deliver high-quality software 
           solutions on time and within budget.`,
 
-          `Led the development and launch of Co Pilot, 
+          `Led the development and deployment of Co Pilot, 
           a web-based platform that connects individuals 
           with freelance professionals.`,
         ]}
@@ -186,7 +193,7 @@ export const Experience = () => {
       />
 
       <Job
-        icon={IconDiagram}
+        icon={IconSystem}
         title={"Systems Engineer Intern"}
         employer={"BendixKing"}
         city={"Albuquerque"}
@@ -197,8 +204,8 @@ export const Experience = () => {
           in a 15% reduction in software defects.`,
 
           `Programmed autonomous processes to efficiently 
-          test systems, improving testing rigour and 
-          increasing testing efficiency by 50%.`,
+          test systems, improving testing rigor and 
+          increasing testing efficiency by 20%.`,
         ]}
       />
     </div>

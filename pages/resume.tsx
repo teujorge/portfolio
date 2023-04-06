@@ -10,8 +10,6 @@ const Resume = () => {
     setResumeLink(window.location.origin + "/resume.pdf");
   }, []);
 
-  console.log(resumeLink);
-
   return (
     <object
       css={css`

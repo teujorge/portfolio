@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useRef, useState, useEffect, UIEvent } from "react";
+
+import { useEffect, useRef, useState } from "react";
 
 type Vector = {
   x: number;
@@ -80,7 +81,7 @@ class Bubble {
   randInitialPosition(firstTime: boolean): Vector {
     const pos = {
       x: Math.random() * innerWidth,
-      y: innerHeight + this.size + this.blur,
+      y: innerHeight + (this.size + this.blur) / 2,
     };
 
     if (firstTime) pos.y = Math.random() * innerHeight;
@@ -200,7 +201,8 @@ const Bubbles = ({
 
       bubbles.forEach((bubble) => {
         // check if in view
-        if (bubble.position.y + bubble.size < 0) {
+        const bubbleY = bubble.position.y + (bubble.size + bubble.blur) / 2;
+        if (bubbleY < 0) {
           bubble.resetBubble();
           return;
         }

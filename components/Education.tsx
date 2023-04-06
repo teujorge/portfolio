@@ -2,8 +2,10 @@
 import { css } from "@emotion/react";
 
 import IconCity from "../public/svg/city";
-import IconMountainSun from "../public/svg/mountain-sun";
 import IconMountain from "../public/svg/mountain";
+import IconMountainSun from "../public/svg/mountain-sun";
+import { AppContext } from "@/pages/_app";
+import { useContext } from "react";
 
 const School = ({
   school,
@@ -22,6 +24,8 @@ const School = ({
   description: string;
   icon: JSX.Element;
 }) => {
+  const { isMobile } = useContext(AppContext);
+
   return (
     <div
       className="reveal"
@@ -76,35 +80,37 @@ const School = ({
           {description}
         </p>
       </div>
-      <div
-        className="reveal"
-        css={css`
-          display: flex;
+      {!isMobile && (
+        <div
+          className="reveal"
+          css={css`
+            display: flex;
 
-          margin-right: 40px;
+            margin-right: 40px;
 
-          width: 40px;
-          height: 40px;
-
-          svg {
             width: 40px;
             height: 40px;
-            fill: black;
-          }
 
-          @media (max-width: 800px) {
-            margin-right: 0px;
-          }
-
-          @media (prefers-color-scheme: dark) {
             svg {
-              fill: white;
+              width: 40px;
+              height: 40px;
+              fill: black;
             }
-          }
-        `}
-      >
-        {icon}
-      </div>
+
+            @media (max-width: 800px) {
+              margin-right: 0px;
+            }
+
+            @media (prefers-color-scheme: dark) {
+              svg {
+                fill: white;
+              }
+            }
+          `}
+        >
+          {icon}
+        </div>
+      )}
     </div>
   );
 };

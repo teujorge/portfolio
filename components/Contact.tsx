@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import { DescPos, IconButton } from "./IconButton";
-import IconEmail from "../public/svg/envelope";
 import EyeFollows from "./EyeFollows";
+import IconEmail from "../public/svg/envelope";
+import { DescPos, IconButton } from "./IconButton";
 
 export const Contact = () => {
   return (

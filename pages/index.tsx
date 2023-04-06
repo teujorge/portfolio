@@ -7,10 +7,13 @@ import { inView } from "@/utils/inView";
 import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
 import { Title } from "@/components/Title";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { IWasHere } from "@/components/where-ive-lived/WhereIveLived";
+import { AppContext } from "./_app";
 
 export default function Home() {
+  const { isMobile } = useContext(AppContext);
+
   // handle in view animation
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -20,7 +23,7 @@ export default function Home() {
     function handleScroll() {
       inView({
         elements: revealElements,
-        elementVisibleThreshold: 100,
+        elementVisibleThreshold: 75,
         inViewFn: (e, i) => {
           e.classList.add("revealShowing");
         },
@@ -31,7 +34,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
@@ -43,7 +46,7 @@ export default function Home() {
           Browse through my projects and accomplishments to learn more about my skills and expertise.`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/mjIcon.png" />
+        <link rel="icon" href="/images/mjIcon.webp" />
       </Head>
 
       <Bubbles />
