@@ -66,7 +66,10 @@ export const Contact = () => {
             textarea {
               margin-top: 5px;
               margin-bottom: 10px;
-              padding: 10px;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              padding-left: 14px;
+              padding-right: 14px;
 
               background-color: var(--background-color);
 
@@ -77,6 +80,12 @@ export const Contact = () => {
 
             textarea {
               resize: vertical;
+              overflow-y: overlay;
+              min-height: 120px;
+            }
+
+            textarea::-webkit-scrollbar {
+              width: 0px;
             }
           `}
           name="portfolio-contact-form"
