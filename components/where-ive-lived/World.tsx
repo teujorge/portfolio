@@ -195,7 +195,7 @@ export const World = () => {
             justify-content: center;
             align-items: center;
 
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             color: #101010;
             background-color: #ffffffdd;
 

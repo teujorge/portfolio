@@ -203,7 +203,7 @@ const ProjectImage = ({
           max-width: calc(90% - 20px);
           max-height: calc(90% - 20px);
 
-          border-radius: 12px;
+          border-radius: var(--border-radius);
           box-shadow: 0px 0px 10px var(--shadow-color);
         `}
         src={media.src}
@@ -248,7 +248,7 @@ const ProjectImage = ({
             max-width: 90%;
             max-height: 90%;
 
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             box-shadow: 0px 0px 10px var(--shadow-color);
 
             transition: all 0s;

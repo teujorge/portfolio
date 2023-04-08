@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import IconEmail from "../public/svg/envelope";
+import IconMessage from "../public/svg/message";
 import IconGithub from "../public/svg/github";
 import IconLinkedIn from "../public/svg/linkedin";
 import IconResume from "../public/svg/file";
@@ -56,9 +56,9 @@ export const LeftBar = () => {
             .getElementById("contact-section")!
             .scrollIntoView({ behavior: "smooth" });
         }}
-        src={IconEmail}
+        src={IconMessage}
         size={40}
-        desc="Email"
+        desc="Message"
         descPos={DescPos.right}
       />
 
