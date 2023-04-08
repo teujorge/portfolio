@@ -277,7 +277,7 @@ export const Projects = () => {
       <ProjectDescription
         title={"Co Pilot"}
         desc={`
-        [In-Redesign] This platform connects users with skilled 
+        This platform connects users with skilled 
         freelancers to efficiently complete their projects. With 
         intuitive tools and a streamlined user experience, users 
         can easily create and collaborate on projects, as well as 
