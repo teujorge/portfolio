@@ -47,8 +47,7 @@ export const Contact = () => {
 
             label,
             input,
-            textarea,
-            button {
+            textarea {
               font-family: inherit;
               width: 100%;
 
@@ -87,6 +86,10 @@ export const Contact = () => {
             textarea::-webkit-scrollbar {
               width: 0px;
             }
+
+            button {
+              width: 100%;
+            }
           `}
           name="portfolio-contact-form"
           method="POST"
@@ -121,22 +124,6 @@ export const Contact = () => {
               align-items: center;
 
               margin-top: 20px;
-
-              button {
-                cursor: pointer;
-                font-size: 14px;
-                font-weight: 500;
-
-                padding: 10px;
-                margin-right: 5px;
-
-                color: var(--background-color);
-                background-color: var(--primary-color);
-
-                :hover {
-                  background-color: var(--primary-color-high);
-                }
-              }
             `}
           >
             <button className="reveal" type="submit">
