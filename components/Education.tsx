@@ -34,19 +34,19 @@ const School = ({
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        margin: 40px;
 
+        margin: 30px;
         border-right: 2px solid var(--primary-color);
 
         @media (max-width: 800px) {
           flex-direction: column;
           margin-left: 0px;
           margin-right: 0px;
-
           border-right: 0px solid transparent;
         }
       `}
     >
+      {/* texts */}
       <div
         css={css`
           display: flex;
@@ -54,15 +54,20 @@ const School = ({
           justify-content: center;
           align-items: left;
 
-          margin: 40px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          margin-left: 30px;
+          margin-right: 30px;
+
           @media (max-width: 800px) {
-            margin: 10px;
+            margin-left: 0px;
+            margin-right: 0px;
           }
         `}
       >
-        <h3 className="reveal">
+        <h4 className="reveal">
           {degree}, {school}, {city}, {country}
-        </h3>
+        </h4>
         <p
           className="reveal"
           css={css`
@@ -117,8 +122,8 @@ const School = ({
 
 export const Education = () => {
   return (
-    <div className="section">
-      <h2>Education</h2>
+    <div className="subsection">
+      <h3>Education</h3>
 
       <School
         school={"University of Vermont"}

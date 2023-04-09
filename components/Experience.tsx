@@ -43,7 +43,7 @@ const Job = ({
         justify-content: center;
         align-items: center;
 
-        margin: 40px;
+        margin: 30px;
         border-left: 2px solid var(--primary-color);
 
         @media (max-width: 800px) {
@@ -61,11 +61,7 @@ const Job = ({
           css={css`
             display: flex;
 
-            margin-top: 0px;
-            margin-bottom: 0px;
-            margin-left: 40px;
-            margin-right: 40px;
-            margin-right: 0px;
+            margin-left: 30px;
 
             width: 40px;
             height: 40px;
@@ -74,13 +70,6 @@ const Job = ({
               width: 40px;
               height: 40px;
               fill: black;
-            }
-
-            @media (max-width: 800px) {
-              margin-top: 40px;
-              margin-bottom: 0px;
-              margin-left: 0px;
-              margin-right: 0px;
             }
 
             @media (prefers-color-scheme: dark) {
@@ -98,22 +87,26 @@ const Job = ({
       <div
         className="reveal"
         css={css`
-          margin: 40px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          margin-left: 30px;
+          margin-right: 30px;
 
           p {
             margin-top: 4px;
           }
 
           @media (max-width: 800px) {
-            margin: 10px;
+            margin-left: 0px;
+            margin-right: 0px;
           }
         `}
       >
-        <h3>
+        <h4>
           {title}
           {employer ? `, ${employer}` : ""}
           {city ? `, ${city}` : ""}
-        </h3>
+        </h4>
         <p
           css={css`
             font-size: 13px;
@@ -143,8 +136,8 @@ const Job = ({
 
 export const Experience = () => {
   return (
-    <div className="section">
-      <h2>Experience</h2>
+    <div className="subsection">
+      <h3>Experience</h3>
 
       <Job
         icon={IconCode}

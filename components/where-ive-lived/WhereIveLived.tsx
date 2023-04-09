@@ -18,8 +18,8 @@ export const IWasHere = () => {
   }
 
   return (
-    <div className="section">
-      <h2>Where I&apos;ve Lived</h2>
+    <div className="subsection">
+      <h3>Where I&apos;ve Lived</h3>
       <div
         className="reveal"
         css={css`
