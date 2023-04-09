@@ -293,12 +293,14 @@ export const Projects = () => {
             src={IconDemo}
             href={"https://co-pilot.netlify.app"}
             desc={"Demo"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
           <IconButton
             key={"co-pilot-github"}
             src={IconGithub}
             href={"https://github.com/teujorge/co-pilot-web"}
             desc={"GitHub"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
         ]}
       />
@@ -321,6 +323,7 @@ export const Projects = () => {
             src={IconDemo}
             href={"https://zid-products-staging.netlify.app/login"}
             desc={"Demo"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
         ]}
       />
@@ -344,6 +347,7 @@ export const Projects = () => {
             src={IconApple}
             href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
             desc={"Apple Store"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
           <IconButton
             key={"movie-matter-google-store"}
@@ -352,12 +356,14 @@ export const Projects = () => {
               "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
             }
             desc={"Google Store"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
           <IconButton
             key={"movie-matter-github"}
             src={IconGithub}
             href={"https://github.com/teujorge/MovieMatter"}
             desc={"GitHub"}
+            descPos={isMobile ? DescPos.top : DescPos.bot}
           />,
         ]}
       />
