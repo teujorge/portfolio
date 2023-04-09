@@ -45,11 +45,41 @@ a {
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 1.875rem;
   text-align: center;
   text-decoration: underline;
   margin-top: 50px;
   margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.1rem;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  padding: 10px;
+  margin-right: 5px;
+
+  background: none;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+
+  color: var(--background-color);
+  background-color: var(--primary-color);
+}
+
+button:hover {
+  background-color: var(--primary-color-high);
 }
 
 .reveal {
@@ -65,13 +95,21 @@ h2 {
 }
 
 .section {
+  padding: 80px;
+  max-width: var(--max-width);
+}
+
+.subsection {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.section,
+.subsection {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  padding: 80px;
-  max-width: var(--max-width);
 }
 
 @media (prefers-color-scheme: dark) {
