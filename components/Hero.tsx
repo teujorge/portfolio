@@ -5,7 +5,11 @@ import delay from "@/utils/delay";
 import { useEffect, useState } from "react";
 
 export const Hero = () => {
+  const HEADERS = ["Engineer", "Front End", "Web Dev"];
+
+  const [isTyping, setIsTyping] = useState(true);
   const [currentHeaderText, setCurrentHeaderText] = useState("");
+  const [currentHeaderIndex, setCurrentHeaderIndex] = useState(0);
 
   const blinkAnimation = keyframes`
     0% {
@@ -21,43 +25,40 @@ export const Hero = () => {
 
   useEffect(() => {
     updateHeader();
-  }, []);
+  }, [currentHeaderText]);
 
   async function updateHeader() {
-    const HEADERS = ["Software Engineer", "Front End", "Web Dev"];
+    let headerIndex = currentHeaderIndex;
+    let currentHeader = currentHeaderText;
+    let typing = isTyping;
 
-    let headerIndex = 0;
-    let currentHeader = "";
-    let typing = true;
-
-    while (true) {
-      if (typing) await delay(250);
-      else await delay(100);
-
-      // begin erasing
-      if (currentHeader.length >= HEADERS[headerIndex].length) {
-        await delay(1000);
-        typing = false;
-      }
-
-      // next header
-      else if (currentHeader.length === 0) {
-        await delay(500);
-        typing = true;
-        headerIndex++;
-        if (headerIndex >= HEADERS.length) {
-          headerIndex = 0;
-        }
-      }
-
-      if (typing) {
-        currentHeader += HEADERS[headerIndex][currentHeader.length];
-      } else {
-        currentHeader = currentHeader.substring(0, currentHeader.length - 1);
-      }
-
-      setCurrentHeaderText(currentHeader);
+    // begin erasing
+    if (currentHeader.length >= HEADERS[headerIndex].length) {
+      await delay(1000);
+      typing = false;
     }
+
+    // next header
+    else if (currentHeader.length === 0) {
+      await delay(500);
+      typing = true;
+      headerIndex++;
+      if (headerIndex >= HEADERS.length) {
+        headerIndex = 0;
+      }
+    }
+
+    if (typing) {
+      currentHeader += HEADERS[headerIndex][currentHeader.length];
+      await delay(250);
+    } else {
+      currentHeader = currentHeader.substring(0, currentHeader.length - 1);
+      await delay(100);
+    }
+
+    setIsTyping(typing);
+    setCurrentHeaderText(currentHeader);
+    setCurrentHeaderIndex(headerIndex);
   }
 
   return (
@@ -73,19 +74,16 @@ export const Hero = () => {
         min-height: 100vh;
 
         h1 {
-          font-size: calc(30px + 4vw);
-          font-weight: black;
-          /* color: var(--primary-color); */
-          text-align: left;
+          font-size: calc(40px + 5vw);
+          text-align: center;
           width: 100%;
         }
 
         p {
-          font-size: calc(40px + 4vw);
+          font-size: calc(20px + 3vw);
           margin-top: 10px;
-          margin-bottom: 30px;
           min-height: 2.5rem;
-          text-align: left;
+          text-align: center;
           width: 100%;
         }
 
@@ -93,18 +91,10 @@ export const Hero = () => {
           margin-top: 20px;
           width: fit-content;
         }
-
-        @media (max-width: 1000px) {
-          h1 {
-            text-align: center;
-          }
-
-          p {
-            text-align: center;
-          }
-        }
       `}
     >
+      <h1>Matheus Jorge</h1>
+
       <p>
         {currentHeaderText}
         <span
@@ -119,8 +109,6 @@ export const Hero = () => {
           `}
         />
       </p>
-
-      <h1>Matheus Jorge</h1>
 
       <div
         css={css`
@@ -141,7 +129,7 @@ export const Hero = () => {
             ?.scrollIntoView({ behavior: "smooth" })
         }
       >
-        View My Projects
+        View Projects
       </button>
     </div>
   );
