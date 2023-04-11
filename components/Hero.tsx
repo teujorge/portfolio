@@ -117,7 +117,7 @@ export const Hero = () => {
           width: 80%;
           height: 5px;
 
-          border-radius: 50%;
+          border-radius: var(--border-radius);
           background-color: var(--primary-color);
         `}
       />
