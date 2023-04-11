@@ -34,7 +34,7 @@ const Resume = () => {
         <a
           css={css`
             text-decoration: underline;
-            transition: color 0.2s ease;
+            transition: color 0.3s ease;
 
             :hover {
               color: var(--primary-color);

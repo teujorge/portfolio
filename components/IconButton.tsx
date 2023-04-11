@@ -80,14 +80,14 @@ export const IconButton = ({
         border-radius: 50%;
         background-color: black;
 
-        transition: background-color 0.2s ease;
+        transition: background-color 0.3s ease;
 
         svg {
           z-index: 2;
           width: ${width}px;
           height: ${width}px;
           fill: white;
-          transition: fill 0.2s ease;
+          transition: fill 0.3s ease;
         }
 
         :hover {
@@ -136,7 +136,7 @@ export const IconButton = ({
           border-radius: var(--border-radius);
           color: var(--background-color);
           background-color: var(--foreground-color);
-          transition: opacity 0.2s ease;
+          transition: opacity 0.3s ease;
 
           box-shadow: 0px 0px 8px var(--shadow-color);
 

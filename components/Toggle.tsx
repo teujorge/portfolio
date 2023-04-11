@@ -52,7 +52,7 @@ export const Toggle = ({
           height: ${height}px;
 
           transform: translateX(${state ? -width / 4 : width / 4}px);
-          transition: transform 0.2s ease;
+          transition: transform 0.3s ease;
 
           p {
             display: flex;
@@ -66,7 +66,7 @@ export const Toggle = ({
             width: ${width / 3}px;
 
             color: var(--background-color);
-            transition: opacity 0.2s ease;
+            transition: opacity 0.3s ease;
           }
         `}
         onClick={handleToggle}

@@ -225,8 +225,8 @@ export const World = () => {
           background-color: #e8e8e8;
           outline: none; /* Remove outline */
           opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-          -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
-          transition: all 0.2s ease;
+          -webkit-transition: 0.3s; /* 0.2 seconds transition on hover */
+          transition: all 0.3s ease;
 
           /* mouse-over effects */
           :hover,
@@ -264,7 +264,7 @@ export const World = () => {
             border-radius: var(--border-radius);
             background: var(--primary-color);
 
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
           }
           ::-webkit-slider-thumb:hover,
           ::-webkit-slider-thumb:active {
