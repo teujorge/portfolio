@@ -1,15 +1,13 @@
 import Bubbles from "@/components/Bubbles";
 import Head from "next/head";
+import { About } from "@/components/About";
+import { AppContext } from "./_app";
 import { Contact } from "@/components/Contact";
-import { Education } from "@/components/Education";
-import { Experience } from "@/components/Experience";
 import { inView } from "@/utils/inView";
 import { LeftBar } from "@/components/LeftBar";
 import { Projects } from "@/components/Projects";
-import { Title } from "@/components/Title";
+import { Hero } from "@/components/Hero";
 import { useContext, useEffect } from "react";
-import { IWasHere } from "@/components/where-ive-lived/WhereIveLived";
-import { AppContext } from "./_app";
 
 export default function Home() {
   const { isMobile } = useContext(AppContext);
@@ -53,11 +51,9 @@ export default function Home() {
       <LeftBar />
 
       <main>
-        <Title />
+        <Hero />
         <Projects />
-        <Experience />
-        <Education />
-        <IWasHere />
+        <About />
         <Contact />
       </main>
     </>
