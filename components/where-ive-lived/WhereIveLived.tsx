@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
+import TwoFinger from "@/public/svg/two-finger";
 import delay from "@/utils/delay";
 import { LabeledEarth } from "./LabeledEarth";
 import { Toggle } from "../Toggle";
@@ -44,6 +45,7 @@ export const IWasHere = () => {
 
         <div
           css={css`
+            position: relative;
             overflow: hidden;
 
             display: flex;
@@ -58,6 +60,29 @@ export const IWasHere = () => {
             box-shadow: 0px 0px 8px var(--shadow-color);
           `}
         >
+          {is3D && (
+            <div
+              css={css`
+                position: absolute;
+                bottom: 30px;
+                right: 30px;
+
+                width: 40px;
+                height: 40px;
+
+                transform: scaleX(-1) rotate(40deg);
+
+                svg {
+                  width: 40px;
+                  height: 40px;
+                  fill: var(--foreground-color);
+                }
+              `}
+            >
+              {TwoFinger}
+            </div>
+          )}
+
           {is3D ? (
             <div
               css={css`
