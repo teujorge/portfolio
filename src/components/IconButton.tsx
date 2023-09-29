@@ -1,25 +1,22 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+"use client";
 
-export enum DescPos {
-  top = "top",
-  bot = "bottom",
-  left = "left",
-  right = "right",
-}
+/** @jsxImportSource @emotion/react */
+import { Position } from "@/utils/position";
+import { css } from "@emotion/react";
+import Link from "next/link";
 
 export const IconButton = ({
   src,
   href,
   size = 50,
   desc,
-  descPos = DescPos.bot,
+  descPos = Position.bot,
 }: {
   src: JSX.Element;
-  href: string | Function;
+  href: string;
   size?: number;
   desc: string;
-  descPos?: DescPos;
+  descPos?: Position;
 }) => {
   // size = padding + width
   // |---- size ----|
@@ -31,139 +28,74 @@ export const IconButton = ({
   // thus, p = .25 size
   const padding = size * 0.25;
 
-  let descriptionPositionStyle = css``;
+  let descriptionPositionStyle = {};
 
   switch (descPos) {
-    case DescPos.top:
-      descriptionPositionStyle = css`
-        bottom: ${size + 10}px;
-        left: ${-size / 2}px;
-      `;
+    case Position.top:
+      descriptionPositionStyle = {
+        bottom: size + 10,
+        left: -size / 2,
+      };
       break;
 
-    case DescPos.bot:
-      descriptionPositionStyle = css`
-        top: ${size + 10}px;
-        left: ${-size / 2}px;
-      `;
+    case Position.bot:
+      descriptionPositionStyle = {
+        top: size + 10,
+        left: -size / 2,
+      };
       break;
 
-    case DescPos.left:
-      descriptionPositionStyle = css`
-        top: 0px;
-        right: ${size + 10}px;
-      `;
+    case Position.left:
+      descriptionPositionStyle = { top: 0, right: size + 10 };
       break;
 
-    case DescPos.right:
-      descriptionPositionStyle = css`
-        top: 0px;
-        left: ${size + 10}px;
-      `;
+    case Position.right:
+      descriptionPositionStyle = { top: 0, left: size + 10 };
       break;
   }
 
   const iconElement = (
     <div
-      css={css`
-        position: relative;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        margin: 4px !important;
-        padding: ${padding}px;
-        width: ${size}px;
-        height: ${size}px;
-
-        border-radius: 50%;
-        background-color: black;
-
-        transition: background-color 0.3s ease;
-
-        svg {
-          z-index: 2;
-          width: ${width}px;
-          height: ${width}px;
-          fill: white;
-          transition: fill 0.3s ease;
-        }
-
-        :hover {
-          background-color: white;
-
-          svg {
-            fill: black;
-          }
-
-          div {
-            opacity: 1;
-          }
-        }
-
-        @media (prefers-color-scheme: light) {
-          background-color: white;
-
-          svg {
-            fill: black;
-          }
-
-          :hover {
-            background-color: black;
-
-            svg {
-              fill: white;
-            }
-          }
-        }
-      `}
+      className="relative flex justify-center items-center m-1 bg-white transition-colors duration-300 hover:bg-black dark:bg-black dark:hover:bg-white rounded-full"
+      style={{
+        padding: padding,
+        width: size,
+        height: size,
+      }}
     >
       {/* icon */}
-      {src}
+      <div
+        className="fill-current text-black transition-colors duration-300 hover:text-white dark:text-white dark:hover:text-black"
+        style={{ width: width, height: width }}
+      >
+        {src}
+      </div>
 
       {/* label */}
       <div
-        css={css`
-          pointer-events: none;
-          position: absolute;
-          text-align: center;
-
-          padding: 8px;
-          width: 100px;
-
-          opacity: 0;
-          border-radius: var(--border-radius);
-          color: var(--background-color);
-          background-color: var(--foreground-color);
-          transition: opacity 0.3s ease;
-
-          box-shadow: 0px 0px 8px var(--shadow-color);
-
-          ${descriptionPositionStyle}
-        `}
+        className="pointer-events-none absolute text-center px-2 w-24 opacity-0 rounded-[var(--border-radius)] text-[var(--background-color)] bg-[var(--foreground-color)] transition-opacity duration-300 shadow-md"
+        style={descriptionPositionStyle}
       >
         {desc}
       </div>
     </div>
   );
 
-  if (typeof href === "string") {
+  if (href.includes("#")) {
+    return <Link href={href}>{iconElement}</Link>;
+  }
+
+  if (href.includes("resume") || href.includes("#")) {
     return (
-      <a href={href} target="_blank" rel="noreferrer">
+      <Link href={href} target="_blank" rel="noreferrer">
         {iconElement}
-      </a>
+      </Link>
     );
   }
 
   return (
-    <div
-      css={css`
-        cursor: pointer;
-      `}
-      onClick={() => href()}
-    >
+    <a href={href} target="_blank" rel="noreferrer">
       {iconElement}
-    </div>
+    </a>
   );
 };

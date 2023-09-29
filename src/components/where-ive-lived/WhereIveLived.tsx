@@ -1,7 +1,9 @@
+"use client";
+
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import TwoFinger from "@/public/svg/two-finger";
+import TwoFinger from "~/public/svg/two-finger";
 import delay from "@/utils/delay";
 import { LabeledEarth } from "./LabeledEarth";
 import { Toggle } from "../Toggle";
@@ -21,20 +23,8 @@ export const IWasHere = () => {
   return (
     <div className="subsection">
       <h3>Where I&apos;ve Lived</h3>
-      <div
-        className="reveal"
-        css={css`
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        `}
-      >
-        <div
-          css={css`
-            margin: 10px;
-          `}
-        >
+      <div className="reveal flex flex-col justify-center items-center">
+        <div className="m-3">
           <Toggle
             leftText="2D"
             rightText="3D"
@@ -43,63 +33,26 @@ export const IWasHere = () => {
           />
         </div>
 
-        <div
-          css={css`
-            position: relative;
-            overflow: hidden;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            padding: 0px;
-
-            border-radius: var(--border-radius);
-            background-color: var(--off-background-color);
-            box-shadow: 0px 0px 8px var(--shadow-color);
-          `}
-        >
+        <div className="relative overflow-hidden flex flex-col justify-center items-center p-0 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-[var(--shadow-color)]">
+          {/* use finger to move icon */}
           {is3D && (
-            <div
-              css={css`
-                position: absolute;
-                bottom: 30px;
-                right: 30px;
-
-                width: 40px;
-                height: 40px;
-
-                transform: scaleX(-1) rotate(40deg);
-
-                svg {
-                  width: 40px;
-                  height: 40px;
-                  fill: var(--foreground-color);
-                }
-              `}
-            >
+            <div className="absolute bottom-8 right-10 w-10 h-10 -scale-x-100 -rotate-45 fill-[var(--foreground-color)]">
               {TwoFinger}
             </div>
           )}
 
           {is3D ? (
             <div
-              css={css`
-                cursor: grab;
-
-                width: 75vw;
-                height: 75vw;
-                max-height: 75vh;
-
-                filter: grayscale(${earthLoaded ? 0 : 1})
-                  blur(${earthLoaded ? 0 : 200}px);
-                transition: filter 0.5s ease-in;
-
-                :active {
-                  cursor: grabbing;
-                }
-              `}
+              className="cursor-grab active:cursor-grabbing"
+              style={{
+                width: "75vw",
+                height: "75vw",
+                maxHeight: "75vh",
+                filter: `grayscale(${earthLoaded ? 0 : 1}) blur(${
+                  earthLoaded ? 0 : 200
+                }px)`,
+                transition: "filter 0.5s ease-in",
+              }}
             >
               <LabeledEarth
                 onLoad={() => {
@@ -109,10 +62,10 @@ export const IWasHere = () => {
             </div>
           ) : (
             <div
-              css={css`
-                width: 75vw;
-                height: auto;
-              `}
+              style={{
+                width: "75vw",
+                height: "auto",
+              }}
             >
               <World />
             </div>

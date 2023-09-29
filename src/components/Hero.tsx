@@ -1,5 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css, keyframes } from "@emotion/react";
+"use client";
 
 import delay from "@/utils/delay";
 import { useEffect, useState } from "react";
@@ -10,18 +9,6 @@ export const Hero = () => {
   const [isTyping, setIsTyping] = useState(true);
   const [currentHeaderText, setCurrentHeaderText] = useState("");
   const [currentHeaderIndex, setCurrentHeaderIndex] = useState(0);
-
-  const blinkAnimation = keyframes`
-    0% {
-      background-color: var(--primary-color);
-    }
-    50% {
-      background-color: transparent;
-    }
-    100% {
-      background-color: var(--primary-color);
-    }
-  `;
 
   useEffect(() => {
     updateHeader();
@@ -50,10 +37,10 @@ export const Hero = () => {
 
     if (typing) {
       currentHeader += HEADERS[headerIndex][currentHeader.length];
-      await delay(250);
+      await delay(Math.random() * 200 + 100);
     } else {
       currentHeader = currentHeader.substring(0, currentHeader.length - 1);
-      await delay(100);
+      await delay(60);
     }
 
     setIsTyping(typing);
@@ -62,65 +49,15 @@ export const Hero = () => {
   }
 
   return (
-    <div
-      className="section"
-      css={css`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    <div className="section flex flex-col justify-center items-center w-full min-h-screen">
+      <h1 className="text-center w-full text-9xl font-bold">Matheus Jorge</h1>
 
-        width: 100%;
-        min-height: 100vh;
-
-        h1 {
-          font-size: calc(40px + 5vw);
-          text-align: center;
-          width: 100%;
-        }
-
-        p {
-          font-size: calc(20px + 3vw);
-          margin-top: 10px;
-          min-height: 2.5rem;
-          text-align: center;
-          width: 100%;
-        }
-
-        button {
-          margin-top: 20px;
-          width: fit-content;
-        }
-      `}
-    >
-      <h1>Matheus Jorge</h1>
-
-      <p>
+      <p className="text-center w-full text-6xl font-thin mt-8">
         {currentHeaderText}
-        <span
-          css={css`
-            width: 20px;
-            height: 4px;
-            display: inline-block;
-            border-radius: var(--border-radius);
-            background-color: var(--primary-color);
-            transform: translateY(2px);
-            animation: ${blinkAnimation} 1s infinite;
-          `}
-        />
+        <span className="w-5 h-1 inline-block rounded-[var(--border-radius)] bg-[var(--primary-color)] transform translate-y-[2px] animate-pulse" />
       </p>
 
-      <div
-        css={css`
-          margin: 80px;
-
-          width: 80%;
-          height: 5px;
-
-          border-radius: var(--border-radius);
-          background-color: var(--primary-color);
-        `}
-      />
+      <div className="mt-20 w-[80%] h-1 rounded-[var(--border-radius)] bg-[var(--primary-color)]" />
 
       <button
         onClick={() =>
@@ -128,6 +65,7 @@ export const Hero = () => {
             .getElementById("projects-section")
             ?.scrollIntoView({ behavior: "smooth" })
         }
+        className="mt-5"
       >
         View Projects
       </button>

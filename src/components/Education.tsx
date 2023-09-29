@@ -1,12 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-
-import IconCity from "~/public/svg/city";
-import IconMountain from "~/public/svg/mountain";
-import IconMountainSun from "~/public/svg/mountain-sun";
-import { AppContext } from "@/app/app";
-import { useContext } from "react";
-
 const School = ({
   school,
   degree,
@@ -14,7 +5,6 @@ const School = ({
   country,
   date,
   description,
-  icon,
 }: {
   school: string;
   degree: string;
@@ -22,100 +12,16 @@ const School = ({
   country: string;
   date: string;
   description: string;
-  icon: JSX.Element;
 }) => {
-  const { isMobile } = useContext(AppContext);
-
   return (
-    <div
-      className="reveal"
-      css={css`
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        margin: 30px;
-        border-right: 2px solid var(--primary-color);
-
-        @media (max-width: 800px) {
-          flex-direction: column;
-          margin-left: 0px;
-          margin-right: 0px;
-          border-right: 0px solid transparent;
-        }
-      `}
-    >
-      {/* texts */}
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: left;
-
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-left: 30px;
-          margin-right: 30px;
-
-          @media (max-width: 800px) {
-            margin-left: 0px;
-            margin-right: 0px;
-          }
-        `}
-      >
+    <div className="reveal flex flex-row items-center justify-center border-[var(--primary-color)] md:m-6 md:p-4  md:border-r-2">
+      <div className="flex flex-col justify-center items-start mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5">
         <h4 className="reveal">
           {degree}, {school}, {city}, {country}
         </h4>
-        <p
-          className="reveal"
-          css={css`
-            font-size: 13px;
-          `}
-        >
-          {date ? date : "current"}
-        </p>
-        <p
-          className="reveal"
-          css={css`
-            margin: 10px;
-          `}
-        >
-          {description}
-        </p>
+        <p className="reveal text-xs">{date ? date : "current"}</p>
+        <p className="reveal m-2.5">{description}</p>
       </div>
-      {!isMobile && (
-        <div
-          className="reveal"
-          css={css`
-            display: flex;
-
-            margin-right: 40px;
-
-            width: 40px;
-            height: 40px;
-
-            svg {
-              width: 40px;
-              height: 40px;
-              fill: black;
-            }
-
-            @media (max-width: 800px) {
-              margin-right: 0px;
-            }
-
-            @media (prefers-color-scheme: dark) {
-              svg {
-                fill: white;
-              }
-            }
-          `}
-        >
-          {icon}
-        </div>
-      )}
     </div>
   );
 };
@@ -144,7 +50,6 @@ export const Education = () => {
           like skiing and hiking, and explored the food and 
           culture scene.
         `}
-        icon={IconMountain}
       />
 
       <School
@@ -155,14 +60,13 @@ export const Education = () => {
         date={"2015-2016"}
         description={`
           Mexico City is a vibrant metropolis in the heart of 
-          Mexico, with a  rich history and culture. Studying 
+          Mexico, with a rich history and culture. Studying 
           in Mexico City for my last year of high school has 
           exposed me to a new range of cultural traditions 
           and amazing foods. I have also had the chance to 
           practice my Spanish language skills and engage with 
           the local community.
         `}
-        icon={IconCity}
       />
 
       <School
@@ -181,7 +85,6 @@ export const Education = () => {
           with a diverse student body, and explore amazing 
           landmarks.
         `}
-        icon={IconMountainSun}
       />
     </div>
   );

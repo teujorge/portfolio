@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: Nunito;
-  src: url("~/public/fonts/Nunito.ttf");
-}
-
 :root {
   --max-width: 1200px;
   --border-radius: 30px;
@@ -27,7 +22,6 @@
 
 html,
 body {
-  font-family: var(--default-font);
   max-width: 100vw;
   overflow-x: hidden;
 }
@@ -79,12 +73,12 @@ button {
   border-radius: var(--border-radius);
 
   color: var(--background-color);
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: var(--primary-color-high);
+  background-color: var(--primary-color-high) !important;
 }
 
 .reveal {
@@ -115,6 +109,68 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.timeline-slider {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  padding: 10px;
+  width: 80%;
+  max-width: 80vw;
+  height: 24px;
+  border-radius: 50px;
+  background-color: #e8e8e8;
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.3s; /* 0.2 seconds transition on hover */
+  transition: all 0.3s ease;
+
+
+}
+
+.timeline-slider:hover,
+.timeline-slider:active {
+  opacity: 0.9; /* fully shown on mouse-over */
+}
+
+.timeline-slider::before {
+  content: "";
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  opacity: 0.75;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #f7f7f7,
+    transparent
+  );
+}
+
+.timeline-slider::-webkit-slider-thumb {
+  z-index: 20;
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+
+  width: 40px;
+  height: 14px;
+
+  opacity: 1;
+  border-radius: var(--border-radius);
+  background: var(--primary-color);
+
+  transition: all 0.3s ease;
+}
+.timeline-slider::-webkit-slider-thumb:hover,
+.timeline-slider::-webkit-slider-thumb:active {
+  transform: scale(1.1);
 }
 
 @media (prefers-color-scheme: dark) {

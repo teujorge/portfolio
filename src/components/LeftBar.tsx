@@ -1,45 +1,21 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+"use client";
 
 import IconMessage from "~/public/svg/message";
 import IconGithub from "~/public/svg/github";
 import IconLinkedIn from "~/public/svg/linkedin";
 import IconResume from "~/public/svg/file";
-import { DescPos, IconButton } from "./IconButton";
-import { useEffect, useState } from "react";
+import { IconButton } from "./IconButton";
+import { Position } from "@/utils/position";
 
 export const LeftBar = () => {
-  const [resumeLink, setResumeLink] = useState("/resume");
-
-  useEffect(() => {
-    setResumeLink(window.location.origin + "/resume.pdf");
-  }, []);
-
   return (
-    <div
-      css={css`
-        z-index: 100;
-        position: fixed;
-        top: 0px;
-        left: 0px;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: left;
-
-        margin: 0px !important;
-
-        width: 50px;
-        height: 100vh;
-      `}
-    >
+    <div className="z-50 fixed top-0 left-0 flex flex-col justify-center items-start w-12 h-screen">
       <IconButton
         href={"https://github.com/teujorge"}
         src={IconGithub}
         size={40}
         desc="GitHub"
-        descPos={DescPos.right}
+        descPos={Position.right}
       />
 
       <IconButton
@@ -47,27 +23,23 @@ export const LeftBar = () => {
         src={IconLinkedIn}
         size={40}
         desc="LinkedIn"
-        descPos={DescPos.right}
+        descPos={Position.right}
       />
 
       <IconButton
-        href={() => {
-          document
-            .getElementById("contact-section")!
-            .scrollIntoView({ behavior: "smooth" });
-        }}
+        href={"#contact-me"}
         src={IconMessage}
         size={40}
         desc="Message"
-        descPos={DescPos.right}
+        descPos={Position.right}
       />
 
       <IconButton
-        href={resumeLink}
+        href={"/resume.pdf"}
         src={IconResume}
         size={40}
         desc="Resume"
-        descPos={DescPos.right}
+        descPos={Position.right}
       />
     </div>
   );

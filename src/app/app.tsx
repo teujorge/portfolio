@@ -1,6 +1,8 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
+import { inView } from "@/utils/inView";
+import BubblesBg from "@/components/BubblesBg";
 
 export const MOBILE_WIDTH = 1000;
 export const windowSize = { width: 0, height: 0 };
@@ -9,8 +11,9 @@ export const AppContext = createContext({ isMobile: false });
 export default function App({ children }: { children: React.ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
 
-  // handle mobile v. desktop
   useEffect(() => {
+    window.scrollTo({ top: 0 });
+
     function handleResize() {
       windowSize.width = window.innerWidth;
       windowSize.height = window.innerHeight;
@@ -20,14 +23,28 @@ export default function App({ children }: { children: React.ReactNode }) {
     }
     handleResize(); // set initial state
 
+    function handleScroll() {
+      inView({
+        elements: document.querySelectorAll(".reveal"),
+        elementVisibleThreshold: 75,
+        inViewFn: (e, i) => {
+          e.classList.add("revealShowing");
+        },
+      });
+    }
+
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isMobile]);
 
   return (
     <AppContext.Provider value={{ isMobile: isMobile }}>
+      {/* <BubblesBg /> */}
       {children}
     </AppContext.Provider>
   );

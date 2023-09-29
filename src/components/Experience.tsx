@@ -1,14 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-
-import IconCode from "~/public/svg/code";
-import IconSystem from "~/public/svg/nodes";
-import IconTerminal from "~/public/svg/terminal";
-import { AppContext } from "@/app/app";
-import { useContext } from "react";
-
 const Job = ({
-  icon,
   title,
   employer,
   start,
@@ -16,7 +6,6 @@ const Job = ({
   city,
   desc,
 }: {
-  icon: any;
   title: string;
   employer?: string;
   start?: string;
@@ -24,8 +13,6 @@ const Job = ({
   city?: string;
   desc: string[];
 }) => {
-  const { isMobile } = useContext(AppContext);
-
   const date = start
     ? end
       ? `${start} - ${end}`
@@ -35,95 +22,21 @@ const Job = ({
     : "current";
 
   return (
-    <div
-      className="reveal"
-      css={css`
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        margin: 30px;
-        border-left: 2px solid var(--primary-color);
-
-        @media (max-width: 800px) {
-          flex-direction: column;
-          margin-left: 0px;
-          margin-right: 0px;
-          border-left: 0px solid transparent;
-        }
-      `}
-    >
-      {/* icon */}
-      {!isMobile && (
-        <div
-          className="reveal"
-          css={css`
-            display: flex;
-
-            margin-left: 30px;
-
-            width: 40px;
-            height: 40px;
-
-            svg {
-              width: 40px;
-              height: 40px;
-              fill: black;
-            }
-
-            @media (prefers-color-scheme: dark) {
-              svg {
-                fill: white;
-              }
-            }
-          `}
-        >
-          {icon}
-        </div>
-      )}
-
-      {/* texts */}
-      <div
-        className="reveal"
-        css={css`
-          margin-top: 10px;
-          margin-bottom: 10px;
-          margin-left: 30px;
-          margin-right: 30px;
-
-          p {
-            margin-top: 4px;
-          }
-
-          @media (max-width: 800px) {
-            margin-left: 0px;
-            margin-right: 0px;
-          }
-        `}
-      >
-        <h4>
+    <div className="reveal flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-6 md:p-4 md:border-l-2">
+      <div className="reveal flex flex-col items-start text-left mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5">
+        <h4 className="font-black">
           {title}
           {employer ? `, ${employer}` : ""}
           {city ? `, ${city}` : ""}
         </h4>
-        <p
-          css={css`
-            font-size: 13px;
-          `}
-        >
-          {date ? date : "current"}
-        </p>
+        <p className="text-xs mt-1">{date ? date : "current"}</p>
         <ul>
           {desc.map((description, index) => (
             <div
               key={`description-${title}-${index}`}
-              className="reveal"
-              css={css`
-                margin: 20px;
-              `}
+              className="reveal mt-5 ml-6"
             >
-              <li>
+              <li className="list-disc">
                 <p>{description}</p>
               </li>
             </div>
@@ -140,7 +53,6 @@ export const Experience = () => {
       <h3>Experience</h3>
 
       <Job
-        icon={IconCode}
         title={"Freelance Software Engineer"}
         desc={[
           `Increased profitability for 
@@ -161,7 +73,6 @@ export const Experience = () => {
       />
 
       <Job
-        icon={IconTerminal}
         title={"Test Software Engineer"}
         employer={"Honeywell Aerospace"}
         city={"Clearwater"}
@@ -186,7 +97,6 @@ export const Experience = () => {
       />
 
       <Job
-        icon={IconSystem}
         title={"Systems Engineer Intern"}
         employer={"BendixKing"}
         city={"Albuquerque"}

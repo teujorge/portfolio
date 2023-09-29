@@ -1,3 +1,5 @@
+"use client";
+
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
@@ -12,10 +14,11 @@ import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
 import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
 import { AppContext, MOBILE_WIDTH, windowSize } from "@/app/app";
-import { DescPos, IconButton } from "./IconButton";
+import { IconButton } from "./IconButton";
 import { inViewPercentage } from "@/utils/inView";
 import { RefObject, useContext, useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Position } from "@/utils/position";
 
 interface ProjectDescriptionProps {
   title: string;
@@ -293,14 +296,14 @@ export const Projects = () => {
             src={IconDemo}
             href={"https://co-pilot.netlify.app"}
             desc={"Demo"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
           <IconButton
             key={"co-pilot-github"}
             src={IconGithub}
             href={"https://github.com/teujorge/co-pilot-web"}
             desc={"GitHub"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
         ]}
       />
@@ -323,7 +326,7 @@ export const Projects = () => {
             src={IconDemo}
             href={"https://zid-products-staging.netlify.app/login"}
             desc={"Demo"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
         ]}
       />
@@ -347,7 +350,7 @@ export const Projects = () => {
             src={IconApple}
             href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
             desc={"Apple Store"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
           <IconButton
             key={"movie-matter-google-store"}
@@ -356,14 +359,14 @@ export const Projects = () => {
               "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
             }
             desc={"Google Store"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
           <IconButton
             key={"movie-matter-github"}
             src={IconGithub}
             href={"https://github.com/teujorge/MovieMatter"}
             desc={"GitHub"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
         ]}
       />
@@ -387,14 +390,14 @@ export const Projects = () => {
             src={IconDemo}
             href={"https://teujorge.github.io/atlas/"}
             desc={"Web Demo"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
           <IconButton
             key={"atlas-arena-beta"}
             src={IconApple}
             href={"https://testflight.apple.com/join/GC3yVQk6"}
             desc={"Beta"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
 
           <IconButton
@@ -402,7 +405,7 @@ export const Projects = () => {
             src={IconGithub}
             href={"https://github.com/teujorge/atlas"}
             desc={"GitHub"}
-            descPos={isMobile ? DescPos.top : DescPos.bot}
+            descPos={isMobile ? Position.top : Position.bot}
           />,
         ]}
       />

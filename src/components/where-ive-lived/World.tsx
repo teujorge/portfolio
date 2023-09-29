@@ -1,5 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css, keyframes } from "@emotion/react";
+"use client";
 
 import Image from "next/image";
 import worldMap from "public/images/world-map.webp";
@@ -115,47 +114,26 @@ export const World = () => {
   // t = d/v
   const timeToTravel = distanceToTravel / mapVelocity;
 
-  const shimmerAnimation = keyframes` 
-    0% {
-      left: -110%;
-    }
-    100% {
-      left: 110%;
-    }
-  `;
-
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      `}
-    >
+    <div className="flex flex-col justify-center items-center">
       {/* interactive map */}
       <div
-        css={css`
-          position: relative;
-          width: ${mapWidth}px;
-          height: ${mapHeight}px;
-        `}
+        className="relative"
+        style={{
+          width: mapWidth,
+          height: mapHeight,
+        }}
       >
         {/* world map */}
         <Image
-          css={css`
-            z-index: 1;
-            transform: translate(
+          className="z-0 invert dark:invert-0"
+          style={{
+            transform: `translate(
               ${mapWidth / 2 - CITIES_LIVED[currentCityIndex].position.x}px,
               ${mapHeight / 2 - CITIES_LIVED[currentCityIndex].position.y}px
-            );
-            transition: transform ${timeToTravel}s ease;
-
-            filter: invert(1);
-            @media (prefers-color-scheme: dark) {
-              filter: invert(0);
-            }
-          `}
+            )`,
+            transition: `transform ${timeToTravel}s ease`,
+          }}
           src={worldMap}
           alt="world-map"
           quality={1}
@@ -164,45 +142,22 @@ export const World = () => {
           priority
         />
 
-        {/* location dot marker */}
+        {/* location marker */}
         <div
-          css={css`
-            z-index: 11;
-            position: absolute;
-            top: ${mapHeight / 2 - 5}px;
-            left: ${mapWidth / 2 - 5}px;
-
-            width: 10px;
-            height: 10px;
-
-            border-radius: 50%;
-            background-color: var(--primary-color);
-          `}
+          className="z-10 absolute w-3 h-3 rounded-full bg-[var(--primary-color)]"
+          style={{
+            top: mapHeight / 2 - 5,
+            left: mapWidth / 2 - 5,
+          }}
         />
 
-        {/* location dot label */}
+        {/* location label */}
         <div
-          css={css`
-            margin: 0px !important;
-            padding: 6px;
-
-            z-index: 10;
-            position: absolute;
-            top: ${mapHeight / 2}px;
-            left: ${mapWidth / 2}px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            border-radius: var(--border-radius);
-            color: #101010;
-            background-color: #ffffffdd;
-
-            @media (prefers-color-scheme: dark) {
-              filter: invert(1);
-            }
-          `}
+          className="z-10 absolute flex justify-center items-center p-2 rounded-[var(--border-radius)] text-[#101010] bg-[#ffffffdd] dark:invert"
+          style={{
+            top: `${mapHeight / 2}px`,
+            left: `${mapWidth / 2}px`,
+          }}
         >
           <p>{CITIES_LIVED[currentCityIndex].name}</p>
         </div>
@@ -210,67 +165,7 @@ export const World = () => {
 
       {/* slider to change time */}
       <input
-        css={css`
-          overflow: hidden;
-          position: relative;
-          cursor: pointer;
-          z-index: 10;
-          -webkit-appearance: none; /* Override default CSS styles */
-          appearance: none;
-          padding: 10px;
-          width: 80%;
-          max-width: 80vw;
-          height: 24px;
-          border-radius: 50px;
-          background-color: #e8e8e8;
-          outline: none; /* Remove outline */
-          opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-          -webkit-transition: 0.3s; /* 0.2 seconds transition on hover */
-          transition: all 0.3s ease;
-
-          /* mouse-over effects */
-          :hover,
-          :active {
-            opacity: 0.9; /* fully shown on mouse-over */
-          }
-
-          ::before {
-            content: "";
-            position: absolute;
-            z-index: 10;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            opacity: 0.75;
-            background: linear-gradient(
-              to right,
-              transparent,
-              #f7f7f7,
-              transparent
-            );
-            animation: ${shimmerAnimation} 3s infinite;
-          }
-
-          ::-webkit-slider-thumb {
-            z-index: 20;
-            -webkit-appearance: none; /* Override default look */
-            appearance: none;
-
-            width: 40px;
-            height: 14px;
-
-            opacity: 1;
-            border-radius: var(--border-radius);
-            background: var(--primary-color);
-
-            transition: all 0.3s ease;
-          }
-          ::-webkit-slider-thumb:hover,
-          ::-webkit-slider-thumb:active {
-            transform: scale(1.1);
-          }
-        `}
+        className="timeline-slider"
         type="range"
         min={0}
         max={CITIES_LIVED.length - 1}
@@ -286,11 +181,7 @@ export const World = () => {
       />
 
       {/* time label for input range slider */}
-      <p
-        css={css`
-          padding: 10px;
-        `}
-      >
+      <p className="p-2">
         Where I was in {CITIES_LIVED[currentCityIndex].year}
       </p>
     </div>

@@ -1,7 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+"use client";
 
-import { useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 
 const outerEyeSvg = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -154,100 +153,77 @@ const EyeFollows = ({ size }: { size: number }) => {
   const heightLash = 32;
   const spacingLash = size / 5;
 
+  const EYE_LASH_STYLE: CSSProperties = {
+    zIndex: 0,
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: `${widthLash}px`,
+    height: `${heightLash}px`,
+    borderRadius: "var(--border-radius)",
+    backgroundColor: "var(--foreground-color)",
+    transformOrigin: "center",
+  };
+
   return (
     <div
-      css={css`
-        position: relative;
-
-        min-width: ${size}px;
-        max-width: ${size}px;
-
-        min-height: ${size}px;
-        max-height: ${size}px;
-
-        svg {
-          fill: var(--foreground-color);
-          transform: translateY(8px);
-        }
-      `}
+      style={{
+        position: "relative",
+        width: size,
+        height: size,
+        transform: `translateY(${size / 3}px)`,
+      }}
     >
-      {outerEyeSvg}
-
-      {/* eye lashes */}
-      <div
-        css={css`
-          > div {
-            z-index: 0;
-            position: absolute;
-            top: 0px;
-            left: 0px;
-
-            width: ${widthLash}px;
-            height: ${heightLash}px;
-
-            transform-origin: center;
-
-            border-radius: var(--border-radius);
-            background-color: var(--foreground-color);
-          }
-        `}
-      >
-        <div
-          css={css`
-            transform: translate(
-                ${(1 / 2) * spacingLash - widthLash / 2}px,
-                4px
-              )
-              rotate(-45deg);
-          `}
-        />
-        <div
-          css={css`
-            transform: translate(
-                ${(3 / 2) * spacingLash - widthLash / 2}px,
-                -14px
-              )
-              rotate(-22deg);
-          `}
-        />
-        <div
-          css={css`
-            transform: translate(
-                ${(5 / 2) * spacingLash - widthLash / 2}px,
-                -20px
-              )
-              rotate(0deg);
-          `}
-        />
-        <div
-          css={css`
-            transform: translate(
-                ${(7 / 2) * spacingLash - widthLash / 2}px,
-                -14px
-              )
-              rotate(22deg);
-          `}
-        />
-        <div
-          css={css`
-            transform: translate(
-                ${(9 / 2) * spacingLash - widthLash / 2}px,
-                4px
-              )
-              rotate(45deg);
-          `}
-        />
+      <div className="fill-[var(--foreground-color)] translate-y-2">
+        {outerEyeSvg}
       </div>
 
-      <canvas
-        css={css`
-          position: absolute;
-          top: 0px;
-          left: 0px;
+      {/* eye lashes */}
+      <>
+        <div
+          style={{
+            ...EYE_LASH_STYLE,
+            transform: `translateX(${
+              (1 / 2) * spacingLash - widthLash / 2
+            }px) translateY(1px) rotate(-45deg)`,
+          }}
+        />
+        <div
+          style={{
+            ...EYE_LASH_STYLE,
+            transform: `translateX(${
+              (3 / 2) * spacingLash - widthLash / 2
+            }px) translateY(-14px) rotate(-22deg)`,
+          }}
+        />
+        <div
+          style={{
+            ...EYE_LASH_STYLE,
+            transform: `translateX(${
+              (5 / 2) * spacingLash - widthLash / 2
+            }px) translateY(-20px) rotate(0deg)`,
+          }}
+        />
+        <div
+          style={{
+            ...EYE_LASH_STYLE,
+            transform: `translateX(${
+              (7 / 2) * spacingLash - widthLash / 2
+            }px) translateY(-14px) rotate(22deg)`,
+          }}
+        />
+        <div
+          style={{
+            ...EYE_LASH_STYLE,
+            transform: `translateX(${
+              (9 / 2) * spacingLash - widthLash / 2
+            }px) translateY(1px) rotate(45deg)`,
+          }}
+        />
+      </>
 
-          width: 100%;
-          height: 100%;
-        `}
+      <canvas
+        className="absolute top-0 left-0 w-full h-full"
         ref={canvasRef}
         id="canvas"
         width={`${size * SF}`}

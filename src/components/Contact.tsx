@@ -1,96 +1,20 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-
 import EyeFollows from "./EyeFollows";
 import IconEmail from "~/public/svg/envelope";
-import { DescPos, IconButton } from "./IconButton";
+import { Position } from "@/utils/position";
+import { IconButton } from "./IconButton";
 
 export const Contact = () => {
+  const INPUT_STYLES =
+    "reveal w-full bg-[var(--background-color)] outline-none border border-transparent rounded-[var(--border-radius)] mt-1.5 mb-2.5 px-3.5 py-2.5 focus:border-[var(--primary-color)]";
+  const LABEL_STYLES = "reveal mt-2.5";
+
   return (
-    <div
-      id="contact-section"
-      className="section"
-      css={css`
-        margin-bottom: 0px;
-        padding-bottom: 0px;
-        overflow-y: hidden;
-      `}
-    >
+    <div id="contact-me" className="section mb-0 pb-0 overflow-y-hidden">
       <h2>Get In Touch</h2>
 
-      <div
-        className="reveal"
-        css={css`
-          margin: 20px;
-          padding: 40px;
-
-          border-radius: var(--border-radius);
-          background-color: var(--off-background-color);
-          box-shadow: 0px 0px 8px var(--shadow-color);
-
-          @media (max-width: 600px) {
-            padding: 20px;
-          }
-        `}
-      >
+      <div className="reveal m-4 p-4 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md md:p-10">
         <form
-          css={css`
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-content: center;
-
-            width: 350px;
-            @media (max-width: 600px) {
-              width: 225px;
-            }
-
-            label,
-            input,
-            textarea {
-              font-family: inherit;
-              width: 100%;
-
-              background: none;
-              outline: none;
-              border: 1px solid transparent;
-              border-radius: var(--border-radius);
-            }
-
-            label {
-              margin-top: 10px;
-            }
-
-            input,
-            textarea {
-              margin-top: 5px;
-              margin-bottom: 10px;
-              padding-top: 10px;
-              padding-bottom: 10px;
-              padding-left: 14px;
-              padding-right: 14px;
-
-              background-color: var(--background-color);
-
-              :focus {
-                border: 1px solid var(--primary-color);
-              }
-            }
-
-            textarea {
-              resize: vertical;
-              overflow-y: overlay;
-              min-height: 120px;
-            }
-
-            textarea::-webkit-scrollbar {
-              width: 0px;
-            }
-
-            button {
-              width: 100%;
-            }
-          `}
+          className="flex flex-col justify-center align-content-center w-3/4 md:w-96"
           name="portfolio-contact-form"
           method="POST"
           data-netlify="true"
@@ -101,32 +25,27 @@ export const Contact = () => {
             value="portfolio-contact-form"
           />
 
-          <label className="reveal" htmlFor="name">
+          <label className={LABEL_STYLES} htmlFor="name">
             Name:
           </label>
-          <input className="reveal" type="text" name="name" required />
+          <input className={INPUT_STYLES} type="text" name="name" required />
 
-          <label className="reveal" htmlFor="email">
+          <label className={LABEL_STYLES} htmlFor="email">
             Email:
           </label>
-          <input className="reveal" type="email" name="email" required />
+          <input className={INPUT_STYLES} type="email" name="email" required />
 
-          <label className="reveal" htmlFor="message">
+          <label className={LABEL_STYLES} htmlFor="message">
             Message:
           </label>
-          <textarea className="reveal" name="message" required />
+          <textarea
+            className={`${INPUT_STYLES} resize-y overflow-y-auto min-h-30`}
+            name="message"
+            required
+          />
 
-          <div
-            css={css`
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-
-              margin-top: 20px;
-            `}
-          >
-            <button className="reveal" type="submit">
+          <div className="flex flex-row justify-center items-center mt-5">
+            <button className="reveal w-full" type="submit">
               Send
             </button>
 
@@ -135,40 +54,16 @@ export const Contact = () => {
               src={IconEmail}
               size={40}
               desc="Email App"
-              descPos={DescPos.bot}
+              descPos={Position.bot}
             />
           </div>
         </form>
       </div>
 
-      {/* eye */}
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-
-          transform: translateY(75px);
-        `}
-      >
-        <p
-          css={css`
-            z-index: 1;
-            font-style: italic;
-            font-size: 0.8rem;
-
-            transform: translateY(-25px);
-
-            span {
-              font-style: normal;
-              font-weight: bold;
-            }
-          `}
-        >
-          an engineer who <span>sees</span> the big picture and the small
-          details!
+      <div className="flex flex-col justify-center items-center text-center transform translate-y-18.75">
+        <p className="z-10 italic text-sm transform -translate-y-6.25">
+          an engineer who <span className="font-bold">sees</span> the big
+          picture and the small details!
         </p>
         <EyeFollows size={150} />
       </div>

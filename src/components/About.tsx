@@ -1,6 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-
 import { Experience } from "./Experience";
 import { Education } from "./Education";
 import { IWasHere } from "./where-ive-lived/WhereIveLived";
@@ -10,14 +7,7 @@ export const About = () => {
     <div className="section">
       <h2>About</h2>
 
-      <p
-        css={css`
-          padding-top: 10px;
-          padding-bottom: 60px;
-          padding-left: 30px;
-          padding-right: 30px;
-        `}
-      >
+      <p className="pt-3 pb-16 pl-8 pr-8">
         Whether I&apos;m designing and building fun games or working on complex
         web apps, I&apos;m constantly pushing myself to develop my software
         skills and take on new challenges. I believe that software engineering
