@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 
 import EyeFollows from "./EyeFollows";
-import IconEmail from "../public/svg/envelope";
+import IconEmail from "~/public/svg/envelope";
 import { DescPos, IconButton } from "./IconButton";
 
 export const Contact = () => {

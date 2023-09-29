@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import IconMessage from "../public/svg/message";
-import IconGithub from "../public/svg/github";
-import IconLinkedIn from "../public/svg/linkedin";
-import IconResume from "../public/svg/file";
+import IconMessage from "~/public/svg/message";
+import IconGithub from "~/public/svg/github";
+import IconLinkedIn from "~/public/svg/linkedin";
+import IconResume from "~/public/svg/file";
 import { DescPos, IconButton } from "./IconButton";
 import { useEffect, useState } from "react";
 

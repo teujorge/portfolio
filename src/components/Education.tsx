@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
-import IconCity from "../public/svg/city";
-import IconMountain from "../public/svg/mountain";
-import IconMountainSun from "../public/svg/mountain-sun";
-import { AppContext } from "@/pages/_app";
+import IconCity from "~/public/svg/city";
+import IconMountain from "~/public/svg/mountain";
+import IconMountainSun from "~/public/svg/mountain-sun";
+import { AppContext } from "@/app/app";
 import { useContext } from "react";
 
 const School = ({

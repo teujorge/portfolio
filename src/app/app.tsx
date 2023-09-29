@@ -1,12 +1,12 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+"use client";
+
 import { createContext, useEffect, useState } from "react";
 
 export const MOBILE_WIDTH = 1000;
 export const windowSize = { width: 0, height: 0 };
 export const AppContext = createContext({ isMobile: false });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ children }: { children: React.ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
 
   // handle mobile v. desktop
@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <AppContext.Provider value={{ isMobile: isMobile }}>
-      <Component {...pageProps} />
+      {children}
     </AppContext.Provider>
   );
 }

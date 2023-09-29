@@ -1,7 +1,9 @@
+"use client";
+
 import Bubbles from "@/components/Bubbles";
 import Head from "next/head";
 import { About } from "@/components/About";
-import { AppContext } from "./_app";
+import { AppContext } from "./app";
 import { Contact } from "@/components/Contact";
 import { inView } from "@/utils/inView";
 import { LeftBar } from "@/components/LeftBar";

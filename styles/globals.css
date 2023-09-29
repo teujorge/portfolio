@@ -1,6 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: Nunito;
-  src: url("../public/fonts/Nunito.ttf");
+  src: url("~/public/fonts/Nunito.ttf");
 }
 
 :root {

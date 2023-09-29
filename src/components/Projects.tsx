@@ -2,16 +2,16 @@
 import { css } from "@emotion/react";
 
 import gsap from "gsap";
-import IconApple from "../public/svg/apple-store";
-import IconDemo from "../public/svg/eye";
-import IconGithub from "../public/svg/github";
-import IconGoogle from "../public/svg/play-store";
+import IconApple from "~/public/svg/apple-store";
+import IconDemo from "~/public/svg/eye";
+import IconGithub from "~/public/svg/github";
+import IconGoogle from "~/public/svg/play-store";
 import Image, { StaticImageData } from "next/image";
-import ShowAtlasArena from "../public/images/demos/demo-atlas.webp";
-import ShowCoPilot from "../public/images/demos/demo-co-pilot.webp";
-import ShowMovieMatter from "../public/images/demos/demo-movie-matter.webp";
-import ShowZidDashboard from "../public/images/demos/demo-zid.webp";
-import { AppContext, MOBILE_WIDTH, windowSize } from "@/pages/_app";
+import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
+import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
+import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
+import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
+import { AppContext, MOBILE_WIDTH, windowSize } from "@/app/app";
 import { DescPos, IconButton } from "./IconButton";
 import { inViewPercentage } from "@/utils/inView";
 import { RefObject, useContext, useEffect, useRef } from "react";
