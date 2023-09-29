@@ -1,8 +1,6 @@
 "use client";
 
-/** @jsxImportSource @emotion/react */
 import { Position } from "@/utils/position";
-import { css } from "@emotion/react";
 import Link from "next/link";
 
 export const IconButton = ({

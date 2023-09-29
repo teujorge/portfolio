@@ -1,8 +1,5 @@
 "use client";
 
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-
 import TwoFinger from "~/public/svg/two-finger";
 import delay from "@/utils/delay";
 import { LabeledEarth } from "./LabeledEarth";

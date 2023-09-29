@@ -1,8 +1,5 @@
 "use client";
 
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-
 import gsap from "gsap";
 import IconApple from "~/public/svg/apple-store";
 import IconDemo from "~/public/svg/eye";
@@ -13,12 +10,13 @@ import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
 import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
 import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
-import { AppContext, MOBILE_WIDTH, windowSize } from "@/app/app";
+import { AppContext, windowSize } from "@/app/app";
 import { IconButton } from "./IconButton";
 import { inViewPercentage } from "@/utils/inView";
 import { RefObject, useContext, useEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { Position } from "@/utils/position";
+import React from "react";
 
 interface ProjectDescriptionProps {
   title: string;
@@ -43,7 +41,7 @@ const ProjectDescription = ({
   let technologies = "";
 
   for (let i = 0; i < tech.length - 1; i++) {
-    technologies += tech[i] + " - ";
+    technologies += tech[i] + " • ";
   }
   technologies += tech[tech.length - 1];
 
@@ -51,64 +49,14 @@ const ProjectDescription = ({
   icons.forEach((icon) => iconButtons.push(icon));
 
   return (
-    <div
-      className="reveal"
-      css={css`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        margin: 20px;
-        padding: 20px;
-        width: 40vw;
-        min-height: 100vh;
-
-        p {
-          margin-top: 20px;
-        }
-
-        @media (max-width: ${MOBILE_WIDTH}px) {
-          margin-left: 0px;
-          margin-right: 0px;
-          margin-top: 50px;
-          margin-bottom: 0px;
-          padding: 10px;
-          width: auto;
-          min-height: 0px;
-
-          h3 {
-            text-align: center;
-          }
-
-          p {
-            text-align: center;
-          }
-        }
-      `}
-    >
-      {/* project title */}
-      <h3
-        className="reveal"
-        css={css`
-          margin: 10px;
-          text-align: left;
-        `}
-      >
-        {title}
-      </h3>
-
-      <p className="reveal">{desc}</p>
-      <p className="reveal">{technologies}</p>
-      <div
-        className="reveal"
-        css={css`
-          display: flex;
-          margin: 10px;
-          width: fit-content;
-        `}
-      >
-        {iconButtons}
+    <div className="reveal flex flex-col justify-center items-center ml-0 mr-0 mt-12 mb-0 p-3 w-auto lg:m-5 lg:p-5 lg:w-[40vw] lg:min-h-screen">
+      <h3 className="m-2.5 text-left">{title}</h3>
+      <p className="m-2.5">{desc}</p>
+      <p className="m-2.5">{technologies}</p>
+      <div className="flex m-2.5 w-[fit-content]">
+        {icons.map((icon, index) => (
+          <React.Fragment key={index}>{icon}</React.Fragment>
+        ))}
       </div>
     </div>
   );
@@ -196,19 +144,12 @@ const ProjectImage = ({
   if (isMobile) {
     return (
       <Image
-        className="reveal"
-        css={css`
-          object-fit: contain;
-
-          width: fit-content;
-          height: fit-content;
-
-          max-width: calc(90% - 20px);
-          max-height: calc(90% - 20px);
-
-          border-radius: var(--border-radius);
-          box-shadow: 0px 0px 10px var(--shadow-color);
-        `}
+        className="reveal w-fit h-fit object-contain rounded-[var(--border-radius)] shadow-md"
+        style={{
+          maxWidth: "calc(90% - 20px)",
+          maxHeight: "calc(90% - 20px)",
+          boxShadow: "0px 0px 10px var(--shadow-color)",
+        }}
         src={media.src}
         alt={media.alt}
         priority
@@ -219,43 +160,19 @@ const ProjectImage = ({
   return (
     <div
       ref={projectImageOutWrapperRef}
-      css={css`
-        position: fixed;
-        right: 0px;
-        overflow: hidden;
-
-        width: 50vw;
-        height: 100vh;
-      `}
+      className="fixed right-0 overflow-hidden w-1/2 h-screen"
     >
-      {/* fixed height */}
       <div
         ref={projectImageInWrapperRef}
-        css={css`
-          display: flex;
-          align-items: center;
-
-          width: 50vw;
-          height: 100vh;
-        `}
+        className="flex items-center w-full h-screen"
       >
         <Image
-          css={css`
-            object-fit: contain;
-
-            margin-left: 10px;
-
-            width: fit-content;
-            height: fit-content;
-
-            max-width: 90%;
-            max-height: 90%;
-
-            border-radius: var(--border-radius);
-            box-shadow: 0px 0px 10px var(--shadow-color);
-
-            transition: all 0s;
-          `}
+          className="object-contain ml-2.5 w-fit h-fit rounded-[var(--border-radius)] shadow-md transition-none"
+          style={{
+            maxWidth: "90%",
+            maxHeight: "90%",
+            boxShadow: "0px 0px 10px var(--shadow-color)",
+          }}
           src={media.src}
           alt={media.alt}
           priority
@@ -455,46 +372,30 @@ export const Projects = () => {
         projectDescriptions.map((desc, index) => (
           <div
             key={`project-${index}`}
-            css={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-
-              max-width: calc(95vw - 20px);
-            `}
+            className="flex flex-col justify-center items-center"
+            style={{
+              width: "calc(95vw - 20px)",
+            }}
           >
             {desc}
             {projectImages[index]}
-            <div
-              css={css`
-                height: 50px;
-              `}
-            />
+            <div className="h-12" />
           </div>
         ))
       ) : (
         // desktop
         <div
           ref={projectsDesktopRef}
-          css={css`
-            position: relative;
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            margin-top: 50px;
-            margin-bottom: 50px;
-
-            width: 90vw;
-          `}
+          className="relative flex flex-row items-center my-12"
+          style={{
+            width: "90vw",
+          }}
         >
           {/* left column */}
-          <div>{projectDescriptions.map((desc, index) => desc)}</div>
+          <div>{projectDescriptions.map((desc, _) => desc)}</div>
 
           {/* right column */}
-          <div>{projectImages.map((image, index) => image)}</div>
+          <div>{projectImages.map((image, _) => image)}</div>
         </div>
       )}
     </div>

@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { inView } from "@/utils/inView";
 import BubblesBg from "@/components/BubblesBg";
 
-export const MOBILE_WIDTH = 1000;
+export const MOBILE_WIDTH = 1024;
 export const windowSize = { width: 0, height: 0 };
 export const AppContext = createContext({ isMobile: false });
 
