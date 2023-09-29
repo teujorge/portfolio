@@ -1,5 +1,4 @@
 import App from "./app";
-import { LeftBar } from "@/components/LeftBar";
 import { Nunito } from "next/font/google";
 import "~/styles/globals.css";
 
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunito.className}>
       <App>
-        <LeftBar />
         <body>{children}</body>
       </App>
     </html>

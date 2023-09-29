@@ -3,6 +3,7 @@
 import { createContext, useEffect, useState } from "react";
 import { inView } from "@/utils/inView";
 import BubblesBg from "@/components/BubblesBg";
+import { LeftBar } from "@/components/LeftBar";
 
 export const MOBILE_WIDTH = 1024;
 export const windowSize = { width: 0, height: 0 };
@@ -44,7 +45,8 @@ export default function App({ children }: { children: React.ReactNode }) {
 
   return (
     <AppContext.Provider value={{ isMobile: isMobile }}>
-      {/* <BubblesBg /> */}
+      <BubblesBg className="-z-10" />
+      <LeftBar />
       {children}
     </AppContext.Provider>
   );

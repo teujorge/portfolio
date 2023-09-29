@@ -2,6 +2,4 @@
 
 import Bubbles from "bubbles-bg";
 
-export default function BubblesBg() {
-  return <Bubbles quantity={10} />;
-}
+export default Bubbles;
