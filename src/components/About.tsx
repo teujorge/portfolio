@@ -1,5 +1,5 @@
-import { Experience } from "./Experience";
-import { Education } from "./Education";
+import { Experience } from "./experience/Experience";
+import { Education } from "./education/Education";
 import { IWasHere } from "./where-ive-lived/WhereIveLived";
 
 export const About = () => {
@@ -13,7 +13,7 @@ export const About = () => {
         skills and take on new challenges. I believe that software engineering
         is more than just a job — it&apos;s a passion. And I&apos;m excited to
         share that passion with you through my portfolio. Explore my projects
-        and experience, and let&apos;s engineer great things together!
+        and experiences, and let&apos;s engineer great things together!
       </p>
 
       <Experience />

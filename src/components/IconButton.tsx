@@ -2,76 +2,75 @@
 
 import { Position } from "@/utils/position";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export const IconButton = ({
   src,
   href,
-  size = 50,
   desc,
   descPos = Position.bot,
 }: {
   src: JSX.Element;
   href: string;
-  size?: number;
   desc: string;
   descPos?: Position;
 }) => {
-  // size = padding + width
-  // |---- size ----|
-  // |--|        |--| paddings
-  //    |--------|    width
+  const [descriptionPositionStyle, setDescriptionPositionStyle] = useState({});
 
-  // let, w = .5 size
-  const width = size * 0.5;
-  // thus, p = .25 size
-  const padding = size * 0.25;
+  const iconRef = useRef<HTMLDivElement>(null);
 
-  let descriptionPositionStyle = {};
+  useEffect(() => {
+    if (iconRef.current) {
+      const { offsetWidth, offsetHeight } = iconRef.current;
 
-  switch (descPos) {
-    case Position.top:
-      descriptionPositionStyle = {
-        bottom: size + 10,
-        left: -size / 2,
-      };
-      break;
+      let newStyle = {};
+      const labelPadding = 4;
 
-    case Position.bot:
-      descriptionPositionStyle = {
-        top: size + 10,
-        left: -size / 2,
-      };
-      break;
-
-    case Position.left:
-      descriptionPositionStyle = { top: 0, right: size + 10 };
-      break;
-
-    case Position.right:
-      descriptionPositionStyle = { top: 0, left: size + 10 };
-      break;
-  }
+      switch (descPos) {
+        case Position.top:
+          newStyle = {
+            bottom: offsetHeight,
+            left: -offsetWidth / 2,
+          };
+          break;
+        case Position.bot:
+          newStyle = {
+            top: offsetHeight,
+            left: -offsetWidth / 2,
+          };
+          break;
+        case Position.left:
+          newStyle = {
+            top: `calc(50% - ${offsetHeight / 2}px)`,
+            right: offsetWidth + labelPadding,
+          };
+          break;
+        case Position.right:
+          newStyle = {
+            top: `calc(50% - ${offsetHeight / 2}px)`,
+            left: offsetWidth + labelPadding,
+          };
+          break;
+        default:
+          throw new Error(`Invalid position: ${descPos}`);
+      }
+      setDescriptionPositionStyle(newStyle);
+    }
+  }, [descPos]);
 
   const iconElement = (
     <div
-      className="relative flex justify-center items-center m-1 bg-white transition-colors duration-300 hover:bg-black dark:bg-black dark:hover:bg-white rounded-full"
-      style={{
-        padding: padding,
-        width: size,
-        height: size,
-      }}
+      ref={iconRef}
+      className="icon-button relative flex justify-center items-center m-1 p-3 bg-white duration-300 dark:bg-black rounded-full transition-all"
     >
       {/* icon */}
-      <div
-        className="fill-current text-black transition-colors duration-300 hover:text-white dark:text-white dark:hover:text-black"
-        style={{ width: width, height: width }}
-      >
+      <div className="fill-current text-black duration-300 dark:text-white">
         {src}
       </div>
 
       {/* label */}
       <div
-        className="pointer-events-none absolute text-center px-2 w-24 opacity-0 rounded-[var(--border-radius)] text-[var(--background-color)] bg-[var(--foreground-color)] transition-opacity duration-300 shadow-md"
+        className="icon-button-label pointer-events-none absolute text-center my-1 p-2 w-24 rounded-[var(--border-radius)] text-white bg-black"
         style={descriptionPositionStyle}
       >
         {desc}

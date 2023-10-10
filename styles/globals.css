@@ -111,6 +111,15 @@ button:hover {
   align-items: center;
 }
 
+.icon-button-label {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.icon-button:hover .icon-button-label {
+  opacity: 1;
+}
+
 .timeline-slider {
   overflow: hidden;
   position: relative;

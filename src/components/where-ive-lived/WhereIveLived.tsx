@@ -1,6 +1,6 @@
 "use client";
 
-import TwoFinger from "~/public/svg/two-finger";
+import { SvgTwoFingers } from "~/public/svg/two-fingers";
 import delay from "@/utils/delay";
 import { LabeledEarth } from "./LabeledEarth";
 import { Toggle } from "../Toggle";
@@ -34,7 +34,7 @@ export const IWasHere = () => {
           {/* use finger to move icon */}
           {is3D && (
             <div className="absolute bottom-8 right-10 w-10 h-10 -scale-x-100 -rotate-45 fill-[var(--foreground-color)]">
-              {TwoFinger}
+              <SvgTwoFingers className="w-10 h-10" />
             </div>
           )}
 

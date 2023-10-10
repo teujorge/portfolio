@@ -1,5 +1,5 @@
 import EyeFollows from "./EyeFollows";
-import IconEmail from "~/public/svg/envelope";
+import { SvgEnvelope } from "~/public/svg/envelope";
 import { Position } from "@/utils/position";
 import { IconButton } from "./IconButton";
 
@@ -51,8 +51,7 @@ export const Contact = () => {
 
             <IconButton
               href={"mailto:mrljorge@outlook.com"}
-              src={IconEmail}
-              size={40}
+              src={<SvgEnvelope className="w-6 h-6" />}
               desc="Email App"
               descPos={Position.bot}
             />
