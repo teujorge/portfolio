@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { IconButton } from "../IconButton";
-import { ProjectDescription } from "./ProjectDescription";
-import { ProjectImage } from "./ProjectImage";
-import { useRef } from "react";
-import { SvgEye } from "~/public/svg/eye";
-import { SvgGithub } from "~/public/svg/github";
-import { SvgPlayStore } from "~/public/svg/play-store";
+import { MOBILE_WIDTH } from "@/app/app";
+import { useEffect, useRef, useState } from "react";
 import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
 import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
 import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
-import { MOBILE_WIDTH, windowSize } from "@/app/app";
+import { SvgEye } from "~/public/svg/eye";
+import { SvgGithub } from "~/public/svg/github";
+import { SvgPlayStore } from "~/public/svg/play-store";
+import { IconButton } from "../IconButton";
+import { ProjectDescription } from "./ProjectDescription";
+import { ProjectImage } from "./ProjectImage";
 
 export const Projects = () => {
   const iconClassName = "w-6 h-6";

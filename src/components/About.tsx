@@ -1,5 +1,5 @@
-import { Experience } from "./experience/Experience";
 import { Education } from "./education/Education";
+import { Experience } from "./experience/Experience";
 import { IWasHere } from "./where-ive-lived/WhereIveLived";
 
 export const About = () => {

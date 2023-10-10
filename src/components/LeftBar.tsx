@@ -1,11 +1,11 @@
 "use client";
 
-import { SvgMessage } from "~/public/svg/message";
+import { Position } from "@/utils/position";
+import { SvgFile } from "~/public/svg/file";
 import { SvgGithub } from "~/public/svg/github";
 import { SvgLinkedIn } from "~/public/svg/linkedin";
-import { SvgFile } from "~/public/svg/file";
+import { SvgMessage } from "~/public/svg/message";
 import { IconButton } from "./IconButton";
-import { Position } from "@/utils/position";
 
 export const LeftBar = () => {
   const iconClassName = "w-6 h-6";

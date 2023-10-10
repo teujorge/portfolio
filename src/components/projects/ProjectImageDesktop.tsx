@@ -1,12 +1,11 @@
 "use client";
 
-import gsap from "gsap";
-import Image from "next/image";
-import React from "react";
 import { windowSize } from "@/app/app";
 import { inViewPercentage } from "@/utils/inView";
-import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Image from "next/image";
+import React, { useEffect, useRef } from "react";
 import { ProjectImageProps } from "./ProjectImage";
 
 export const ProjectImageDesktop = ({

@@ -1,10 +1,10 @@
 "use client";
 
-import { SvgTwoFingers } from "~/public/svg/two-fingers";
 import delay from "@/utils/delay";
-import { LabeledEarth } from "./LabeledEarth";
-import { Toggle } from "../Toggle";
 import { useState } from "react";
+import { SvgTwoFingers } from "~/public/svg/two-fingers";
+import { Toggle } from "../Toggle";
+import { LabeledEarth } from "./LabeledEarth";
 import { World } from "./World";
 
 export const IWasHere = () => {

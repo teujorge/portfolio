@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { toggleExpansion } from "@/utils/expansion";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 export const Job = ({
   title,

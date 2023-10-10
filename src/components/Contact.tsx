@@ -1,6 +1,6 @@
-import EyeFollows from "./EyeFollows";
-import { SvgEnvelope } from "~/public/svg/envelope";
 import { Position } from "@/utils/position";
+import { SvgEnvelope } from "~/public/svg/envelope";
+import EyeFollows from "./EyeFollows";
 import { IconButton } from "./IconButton";
 
 export const Contact = () => {
