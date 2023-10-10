@@ -9,7 +9,7 @@ import { Position } from "@/utils/position";
 
 export const LeftBar = () => {
   return (
-    <div className="z-50 fixed top-0 left-0 flex flex-col justify-center items-start w-12 h-screen">
+    <header className="z-50 fixed top-0 left-0 flex flex-col justify-center items-start w-12 h-screen">
       <IconButton
         href={"https://github.com/teujorge"}
         src={IconGithub}
@@ -41,6 +41,6 @@ export const LeftBar = () => {
         desc="Resume"
         descPos={Position.right}
       />
-    </div>
+    </header>
   );
 };
