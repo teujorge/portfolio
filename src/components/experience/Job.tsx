@@ -1,6 +1,6 @@
 "use client";
 
-import { toggleExpansion } from "@/utils/expansion";
+import { useExpansion } from "@/utils/useExpansion";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 
@@ -22,23 +22,11 @@ export const Job = ({
   const descriptionRef = useRef<HTMLUListElement>(null);
   const descriptionContainerRef = useRef<HTMLDivElement>(null);
 
+  const toggleExpansion = useExpansion(descriptionRef.current!);
+
   useEffect(() => {
     const descElem = descriptionRef.current!;
-    const descContainerElem = descriptionContainerRef.current!;
-
     gsap.set(descElem, { height: 0, opacity: 0 });
-
-    function toggleDescription() {
-      toggleExpansion(descriptionRef);
-    }
-
-    descContainerElem.addEventListener("mouseenter", toggleDescription);
-    descContainerElem.addEventListener("mouseleave", toggleDescription);
-
-    return () => {
-      descContainerElem.removeEventListener("mouseenter", toggleDescription);
-      descContainerElem.removeEventListener("mouseleave", toggleDescription);
-    };
   }, []);
 
   const date = start
@@ -51,8 +39,10 @@ export const Job = ({
 
   return (
     <div
+      onMouseEnter={toggleExpansion}
+      onMouseLeave={toggleExpansion}
       ref={descriptionContainerRef}
-      className="reveal flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-6 md:p-4 md:border-l-2"
+      className="reveal flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-4 md:p-2 md:border-l-2"
     >
       <div className="reveal flex flex-col items-start text-left mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5">
         <h4 className="font-black">

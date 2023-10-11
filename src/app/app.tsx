@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import BubblesBg from "@/components/BubblesBg";
 import { LeftBar } from "@/components/LeftBar";
 import { inView } from "@/utils/inView";
-import { useEffect } from "react";
 
 export const MOBILE_WIDTH = 1024;
 export const windowSize = { width: 0, height: 0 };
