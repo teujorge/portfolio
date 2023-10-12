@@ -45,7 +45,7 @@ export const Job = ({
       className="reveal flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-4 md:p-2 md:border-l-2"
     >
       <div className="reveal flex flex-col items-start text-left mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5">
-        <h4 className="font-black">
+        <h4 className="text-lg font-bold">
           {title}
           {employer ? `, ${employer}` : ""}
           {city ? `, ${city}` : ""}

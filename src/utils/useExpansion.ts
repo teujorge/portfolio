@@ -11,14 +11,14 @@ export function useExpansion(expandableElement: HTMLElement) {
       gsap.to(expandableElement, {
         height: "auto",
         opacity: 1,
-        duration: 0.3,
+        duration: 0.25,
         ease: "ease",
       });
     } else {
       gsap.to(expandableElement, {
         height: 0,
         opacity: 0,
-        duration: 0.3,
+        duration: 0.15,
         ease: "ease",
       });
     }

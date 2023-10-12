@@ -37,7 +37,7 @@ export const School = ({
       className="reveal flex flex-row items-center justify-center border-[var(--primary-color)] md:m-4 md:p-2 md:border-r-2"
     >
       <div className="flex flex-col justify-center items-start my-2.5 md:mx-7.5">
-        <h4 className="reveal font-black text-right w-full">
+        <h4 className="reveal text-lg font-bold text-right w-full">
           {degree}, {school}, {city}, {country}
         </h4>
         <p className="reveal text-xs text-right w-full">
