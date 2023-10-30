@@ -35,11 +35,19 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100svh;
+  padding: 1rem;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+h1 {
+  font-size: 8rem;
+  text-align: center;
+  font-weight: bold;
 }
 
 h2 {
@@ -190,7 +198,11 @@ button:hover {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
+  h1 {
+    font-size: 6rem;
+  }
+
   .section {
     padding: 50px;
   }
