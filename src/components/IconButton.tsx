@@ -70,7 +70,7 @@ export const IconButton = ({
 
       {/* label */}
       <div
-        className="icon-button-label pointer-events-none absolute text-center my-1 p-2 w-24 rounded-[var(--border-radius)] text-white bg-black"
+        className="z-50 icon-button-label pointer-events-none absolute text-center my-1 p-2 w-24 rounded-[var(--border-radius)] text-white bg-black"
         style={descriptionPositionStyle}
       >
         {desc}

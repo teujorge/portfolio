@@ -205,7 +205,7 @@ export const Projects = () => {
 
   return (
     <div id="projects-section" className="section">
-      <h2>Projects</h2>
+      <h2>Side Projects</h2>
 
       {isMobile ? (
         // mobile

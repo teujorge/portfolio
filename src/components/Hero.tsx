@@ -3,54 +3,54 @@
 import delay from "@/utils/delay";
 import { useEffect, useState } from "react";
 
-export const Hero = () => {
-  const HEADERS = ["Engineer", "Front End", "Web Dev"];
+const HEADERS = ["Engineer", "Front End", "Web Dev"];
 
+export const Hero = () => {
   const [isTyping, setIsTyping] = useState(true);
   const [currentHeaderText, setCurrentHeaderText] = useState("");
   const [currentHeaderIndex, setCurrentHeaderIndex] = useState(0);
 
   useEffect(() => {
-    updateHeader();
-  }, [currentHeaderText]);
+    async function updateHeader() {
+      let headerIndex = currentHeaderIndex;
+      let currentHeader = currentHeaderText;
+      let typing = isTyping;
 
-  async function updateHeader() {
-    let headerIndex = currentHeaderIndex;
-    let currentHeader = currentHeaderText;
-    let typing = isTyping;
-
-    // begin erasing
-    if (currentHeader.length >= HEADERS[headerIndex].length) {
-      await delay(1000);
-      typing = false;
-    }
-
-    // next header
-    else if (currentHeader.length === 0) {
-      await delay(500);
-      typing = true;
-      headerIndex++;
-      if (headerIndex >= HEADERS.length) {
-        headerIndex = 0;
+      // begin erasing
+      if (currentHeader.length >= HEADERS[headerIndex].length) {
+        await delay(1000);
+        typing = false;
       }
+
+      // next header
+      else if (currentHeader.length === 0) {
+        await delay(500);
+        typing = true;
+        headerIndex++;
+        if (headerIndex >= HEADERS.length) {
+          headerIndex = 0;
+        }
+      }
+
+      if (typing) {
+        currentHeader += HEADERS[headerIndex][currentHeader.length];
+        await delay(Math.random() * 200 + 100);
+      } else {
+        currentHeader = currentHeader.substring(0, currentHeader.length - 1);
+        await delay(60);
+      }
+
+      setIsTyping(typing);
+      setCurrentHeaderText(currentHeader);
+      setCurrentHeaderIndex(headerIndex);
     }
 
-    if (typing) {
-      currentHeader += HEADERS[headerIndex][currentHeader.length];
-      await delay(Math.random() * 200 + 100);
-    } else {
-      currentHeader = currentHeader.substring(0, currentHeader.length - 1);
-      await delay(60);
-    }
-
-    setIsTyping(typing);
-    setCurrentHeaderText(currentHeader);
-    setCurrentHeaderIndex(headerIndex);
-  }
+    updateHeader();
+  }, [currentHeaderIndex, currentHeaderText, isTyping]);
 
   return (
     <div className="section flex flex-col justify-center items-center w-full min-h-screen">
-      <h1 className="text-center w-full text-9xl font-bold">Matheus Jorge</h1>
+      <h1>Matheus Jorge</h1>
 
       <p className="text-center w-full text-6xl font-thin mt-8">
         {currentHeaderText}

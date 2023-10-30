@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { CSSProperties, useEffect, useRef } from "react";
 
 const outerEyeSvg = (
@@ -15,7 +16,8 @@ const EyeFollows = ({ size }: { size: number }) => {
   const SF = 2;
 
   useEffect(() => {
-    const canvasContext = canvasRef.current!.getContext("2d")!;
+    const canvasContext = canvasRef.current?.getContext("2d");
+    if (!canvasContext) return;
 
     const _size = size * SF;
 
@@ -43,7 +45,7 @@ const EyeFollows = ({ size }: { size: number }) => {
       if (!canvasRef || !canvasRef.current) return;
 
       // make mouse coords relative to the canvas  ignoring scroll in this case
-      const bounds = canvasRef.current!.getBoundingClientRect();
+      const bounds = canvasRef.current.getBoundingClientRect();
       const x = (e.pageX - bounds.left - scrollX) * SF;
       const y = (e.pageY - bounds.top - scrollY) * SF;
 
@@ -53,13 +55,15 @@ const EyeFollows = ({ size }: { size: number }) => {
 
     let startTime = 0;
     const eyeAnimId = requestAnimationFrame(function animate(currentTime) {
+      if (!canvasRef || !canvasRef.current) return;
+
       const dt = (currentTime - startTime) / 100;
 
       canvasContext.clearRect(
         0,
         0,
-        canvasRef.current!.width,
-        canvasRef.current!.height
+        canvasRef.current.width,
+        canvasRef.current.height
       );
 
       // direction and distance between
@@ -138,7 +142,7 @@ const EyeFollows = ({ size }: { size: number }) => {
       canvasContext.fill();
 
       // turn the clip off by restoring canvas state
-      canvasContext.restore();
+      // canvasContext.restore();
 
       startTime = currentTime;
       requestAnimationFrame(animate);
@@ -147,7 +151,7 @@ const EyeFollows = ({ size }: { size: number }) => {
     return () => {
       cancelAnimationFrame(eyeAnimId);
     };
-  }, []);
+  }, [size]);
 
   const widthLash = 12;
   const heightLash = 32;
@@ -166,7 +170,8 @@ const EyeFollows = ({ size }: { size: number }) => {
   };
 
   return (
-    <div
+    <Link
+      href="/easter-eggs"
       style={{
         position: "relative",
         width: size,
@@ -229,7 +234,7 @@ const EyeFollows = ({ size }: { size: number }) => {
         width={`${size * SF}`}
         height={`${size * SF}`}
       />
-    </div>
+    </Link>
   );
 };
 

@@ -7,11 +7,11 @@ import { SvgLinkedIn } from "~/public/svg/linkedin";
 import { SvgMessage } from "~/public/svg/message";
 import { IconButton } from "./IconButton";
 
-export const LeftBar = () => {
+export const LinksBar = () => {
   const iconClassName = "w-6 h-6";
 
   return (
-    <header className="z-50 fixed top-0 left-0 flex flex-col justify-center items-start w-12 h-screen">
+    <header className="z-30 md:fixed md:top-0 md:left-0 flex flex-row md:flex-col justify-center items-start w-full md:w-12 md:h-screen my-4">
       <IconButton
         href={"https://github.com/teujorge"}
         src={<SvgGithub className={iconClassName} />}

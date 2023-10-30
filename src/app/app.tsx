@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import BubblesBg from "@/components/BubblesBg";
-import { LeftBar } from "@/components/LeftBar";
+import { LinksBar } from "@/components/LinksBar";
 import { inView } from "@/utils/inView";
 
 export const MOBILE_WIDTH = 1024;
@@ -39,7 +39,7 @@ export default function App({ children }: { children: React.ReactNode }) {
     <>
       <BubblesBg className="-z-10" />
       {children}
-      <LeftBar />
+      <LinksBar />
     </>
   );
 }
