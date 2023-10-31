@@ -122,8 +122,6 @@ export function TriangleSimulation() {
       isRunning: true,
       totalIterations: inputIterations,
       currentIteration: 0,
-      withSwitchWins: 0,
-      withoutSwitchWins: 0,
     }));
 
     // if it's the first iteration, choose a random starting point
@@ -174,8 +172,6 @@ export function TriangleSimulation() {
       isRunning: false,
       totalIterations: inputIterations,
       currentIteration: 0,
-      withSwitchWins: 0,
-      withoutSwitchWins: 0,
       vertices: [...VERTICES],
     }));
     isStoppingRef.current = false;
@@ -186,14 +182,14 @@ export function TriangleSimulation() {
       <div className="h-10" />
 
       {/* triangle canvas */}
-      <div className="w-full h-full p-2 rounded-2xl bg-slate-100 dark:bg-slate-900">
+      <div className="flex w-full h-full p-2 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md">
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
       <div className="h-6" />
 
       {/* iterations */}
-      <div className="p-2">
+      <div className="flex flex-col p-2">
         <p className="font-bold">Iterations</p>
         <div className="flex flex-row">
           <p className="w-36 lg:w-20">Current</p>

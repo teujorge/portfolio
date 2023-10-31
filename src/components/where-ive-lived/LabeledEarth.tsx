@@ -1,5 +1,3 @@
-"use client";
-
 import Spline from "@splinetool/react-spline";
 
 export const LabeledEarth = ({ onLoad }: { onLoad?: (e: any) => void }) => {
