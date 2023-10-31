@@ -1,7 +1,7 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Nunito } from "next/font/google";
-import "~/styles/globals.css";
 import App from "./app";
-import Head from "next/head";
+import "~/styles/globals.css";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -22,14 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={nunito.className}>
-      <Head>
-        <meta
-          name="ahrefs-site-verification"
-          content="9edc99c9920327d31526354a0013ef033ab3ba9aa979a4f9e9d6b5d0fa43adc2"
-        />
-      </Head>
       <body>
         <App>{children}</App>
+        <Analytics />
       </body>
     </html>
   );
