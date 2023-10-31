@@ -24,6 +24,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  background-color: transparent;
 }
 
 body {
@@ -126,6 +127,14 @@ button:hover {
 
 .icon-button:hover .icon-button-label {
   opacity: 1;
+}
+
+.header-link-underline {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.header-link:hover .header-link-underline {
+  transform: scaleX(1);
 }
 
 .timeline-slider {
