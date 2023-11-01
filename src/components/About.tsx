@@ -7,7 +7,7 @@ export const About = () => {
     <div className="section">
       <h2>About</h2>
 
-      <p className="pt-3 pb-16 pl-8 pr-8">
+      <p className="pt-3 pb-16">
         Whether I&apos;m designing and building fun games or working on complex
         web apps, I&apos;m constantly pushing myself to develop my software
         skills and take on new challenges. I believe that software engineering

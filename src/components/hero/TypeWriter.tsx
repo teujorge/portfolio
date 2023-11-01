@@ -49,7 +49,7 @@ export const TypeWriter = () => {
   }, [currentHeaderIndex, currentHeaderText, isTyping]);
 
   return (
-    <p className="text-center w-full text-6xl font-thin mt-8">
+    <p className="text-center w-full text-4xl sm:text-6xl font-thin mt-8">
       {currentHeaderText}
       <span className="w-5 h-1 inline-block rounded-[var(--border-radius)] bg-[var(--primary-color)] transform translate-y-[2px] animate-pulse" />
     </p>
