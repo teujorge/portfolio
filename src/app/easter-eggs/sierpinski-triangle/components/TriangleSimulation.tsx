@@ -124,7 +124,7 @@ export function TriangleSimulation() {
       currentIteration: 0,
     }));
 
-    // if it's the first iteration, choose a random starting point
+    // choose a random starting point
     let currentPoint = new Point(Math.random(), Math.random());
 
     for (let i = 0; i < inputIterations; i++) {

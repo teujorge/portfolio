@@ -1,7 +1,7 @@
 "use client";
 
 import { MOBILE_WIDTH } from "@/app/app";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
 import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
 import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
@@ -12,6 +12,7 @@ import { SvgPlayStore } from "~/public/svg/play-store";
 import { IconButton } from "../IconButton";
 import { ProjectDescription } from "./ProjectDescription";
 import { ProjectImage } from "./ProjectImage";
+import { useWindowSize } from "@/contexts/WindowSize";
 
 export const Projects = () => {
   const iconClassName = "w-6 h-6";
@@ -23,24 +24,8 @@ export const Projects = () => {
   const descRef3 = useRef<HTMLDivElement>(null);
   const descRef4 = useRef<HTMLDivElement>(null);
 
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < MOBILE_WIDTH) {
-        if (!isMobile) setIsMobile(true);
-      } else {
-        if (isMobile) setIsMobile(false);
-      }
-    }
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isMobile]);
+  const windowSize = useWindowSize();
+  const isMobile = windowSize.width < MOBILE_WIDTH;
 
   const projectDescriptions = [
     <div ref={descRef1} key={"project-description-co-pilot"}>

@@ -1,12 +1,12 @@
 "use client";
 
-import { windowSize } from "@/app/app";
 import { inViewPercentage } from "@/utils/inView";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { ProjectImageProps } from "./ProjectImage";
+import { useWindowSize } from "@/contexts/WindowSize";
 
 export const ProjectImageDesktop = ({
   descRef,
@@ -15,6 +15,8 @@ export const ProjectImageDesktop = ({
 }: ProjectImageProps) => {
   const projectImageOutWrapperRef = useRef<HTMLDivElement>(null);
   const projectImageInWrapperRef = useRef<HTMLDivElement>(null);
+
+  const windowSize = useWindowSize();
 
   useEffect(() => {
     const wrapperElement = wrapperRef.current;
@@ -84,7 +86,7 @@ export const ProjectImageDesktop = ({
       type: "scroll",
       onChangeY: handleScroll,
     });
-  }, []);
+  }, [descRef, wrapperRef, windowSize]);
 
   return (
     <div

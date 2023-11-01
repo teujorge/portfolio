@@ -1,8 +1,4 @@
-"use client";
-
-import { useExpansion } from "@/utils/useExpansion";
-import { gsap } from "gsap";
-import { useEffect, useRef } from "react";
+import { Expandable } from "@/components/Expandable";
 
 export const Job = ({
   title,
@@ -19,16 +15,6 @@ export const Job = ({
   city?: string;
   desc: string[];
 }) => {
-  const descriptionRef = useRef<HTMLUListElement>(null);
-  const descriptionContainerRef = useRef<HTMLDivElement>(null);
-
-  const toggleExpansion = useExpansion(descriptionRef.current!);
-
-  useEffect(() => {
-    const descElem = descriptionRef.current!;
-    gsap.set(descElem, { height: 0, opacity: 0 });
-  }, []);
-
   const date = start
     ? end
       ? `${start} - ${end}`
@@ -37,11 +23,11 @@ export const Job = ({
     ? `${end}`
     : "current";
 
+  const expandableId = `job-${title}-${employer}`;
+
   return (
-    <div
-      onMouseEnter={toggleExpansion}
-      onMouseLeave={toggleExpansion}
-      ref={descriptionContainerRef}
+    <Expandable
+      expandableTargetId={expandableId}
       className="reveal flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-4 md:p-2 md:border-l-2"
     >
       <div className="reveal flex flex-col items-start text-left mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5">
@@ -51,7 +37,7 @@ export const Job = ({
           {city ? `, ${city}` : ""}
         </h4>
         <p className="text-xs mt-1">{date ? date : "current"}</p>
-        <ul ref={descriptionRef}>
+        <ul id={expandableId} className="h-0 opacity-0">
           {desc.map((description, index) => (
             <div
               key={`description-${title}-${index}`}
@@ -64,6 +50,6 @@ export const Job = ({
           ))}
         </ul>
       </div>
-    </div>
+    </Expandable>
   );
 };

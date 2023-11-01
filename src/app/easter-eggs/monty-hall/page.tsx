@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MontyHallSimulation } from "./components/MontyHallSimulation";
 
 export default function MontyHallProblem() {

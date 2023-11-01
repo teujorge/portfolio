@@ -4,6 +4,7 @@ import Bubbles from "bubbles-bg";
 import { useState } from "react";
 import { LabeledInput } from "./components/LabeledInput";
 import { SvgBack } from "~/public/svg/back";
+import { Modal } from "@/components/Modal";
 
 type BubblesProps = {
   quantity: number;
@@ -248,48 +249,42 @@ export default function BubblesBg() {
       </div>
 
       {/* color modal */}
-      <div
-        className={`fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-[#00000090] backdrop-blur-lg transition-transform cursor-pointer
-          ${isChoosingColors ? "translate-y-0" : "translate-y-full"}
-        `}
-        onClick={() => setIsChoosingColors(false)}
+      <Modal
+        isOpen={isChoosingColors}
+        setIsOpen={setIsChoosingColors}
+        className="flex flex-wrap items-center justify-center"
       >
-        <div
-          className="flex flex-wrap items-center justify-center w-fit max-w-[50vw] h-fit max-h-[50vh] p-2 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md overflow-y-scroll cursor-default"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {bubblesProps.colors?.map((color, index) => (
-            <div key={`color-picker-${index}`} className="flex flex-row">
-              <LabeledInput
-                type="color"
-                label={`color ${index + 1}`}
-                value={rgbaToHex(color.r, color.g, color.b)}
-                onChange={(e) => onChangeColors(e, index)}
-              />
-              <div
-                onClick={() => {
-                  setBubblesProps((prevProps) => {
-                    return {
-                      ...prevProps,
-                      colors: prevProps.colors?.filter((_, i) => i !== index),
-                    };
-                  });
-                }}
-                className="w-4 h-4 -ml-1.5 mr-1.5 rounded-full cursor-pointer"
-              >
-                X
-              </div>
+        {bubblesProps.colors?.map((color, index) => (
+          <div key={`color-picker-${index}`} className="flex flex-row">
+            <LabeledInput
+              type="color"
+              label={`color ${index + 1}`}
+              value={rgbaToHex(color.r, color.g, color.b)}
+              onChange={(e) => onChangeColors(e, index)}
+            />
+            <div
+              onClick={() => {
+                setBubblesProps((prevProps) => {
+                  return {
+                    ...prevProps,
+                    colors: prevProps.colors?.filter((_, i) => i !== index),
+                  };
+                });
+              }}
+              className="w-4 h-4 -ml-1.5 mr-1.5 rounded-full cursor-pointer"
+            >
+              X
             </div>
-          ))}
-          <LabeledInput
-            key="color-picker--1"
-            type="color"
-            label="add color"
-            value=""
-            onChange={(e) => onChangeColors(e)}
-          />
-        </div>
-      </div>
+          </div>
+        ))}
+        <LabeledInput
+          key="color-picker--1"
+          type="color"
+          label="add color"
+          value=""
+          onChange={(e) => onChangeColors(e)}
+        />
+      </Modal>
     </main>
   );
 }

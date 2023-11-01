@@ -9,35 +9,35 @@ export const World = () => {
   const [mapWidth, setMapWidth] = useState(350);
   const mapHeight = mapWidth * (worldMap.height / worldMap.width);
 
-  function calculateMapWidth(screenWidth: number) {
-    if (screenWidth < 500) {
-      if (mapWidth === 350) return undefined;
-      return 350;
-    } else if (screenWidth < 750) {
-      if (mapWidth === 400) return undefined;
-      return 400;
-    } else if (screenWidth < 1000) {
-      if (mapWidth === 650) return undefined;
-      return 650;
-    } else if (screenWidth < 1250) {
-      if (mapWidth === 900) return undefined;
-      return 900;
-    }
-
-    return 1000;
-  }
-
   useEffect(() => {
-    handleResize();
+    function calculateMapWidth(screenWidth: number) {
+      if (screenWidth < 500) {
+        if (mapWidth === 350) return undefined;
+        return 350;
+      } else if (screenWidth < 750) {
+        if (mapWidth === 400) return undefined;
+        return 400;
+      } else if (screenWidth < 1000) {
+        if (mapWidth === 650) return undefined;
+        return 650;
+      } else if (screenWidth < 1250) {
+        if (mapWidth === 900) return undefined;
+        return 900;
+      }
+
+      return 1000;
+    }
 
     function handleResize() {
       const newWidth = calculateMapWidth(window.innerWidth);
       if (newWidth) setMapWidth(newWidth);
     }
 
+    handleResize();
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [mapWidth]);
 
   const CITIES_LIVED: {
     name: string;

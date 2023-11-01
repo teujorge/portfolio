@@ -3,6 +3,7 @@
 import delay from "@/utils/delay";
 import { useRef, useState } from "react";
 import { Bar } from "./Bar";
+import { Modal } from "@/components/Modal";
 
 type SimulationData = {
   isRunning: boolean;
@@ -22,6 +23,7 @@ export function MontyHallSimulation() {
     withSwitchWins: 0,
     withoutSwitchWins: 0,
   });
+  const [showResultsModal, setShowResultsModal] = useState<boolean>(false);
 
   function changeIterations(event: React.ChangeEvent<HTMLInputElement>): void {
     const newIterations = parseInt(event.target.value);
@@ -203,22 +205,78 @@ export function MontyHallSimulation() {
       <div className="h-6" />
 
       {/* user interaction */}
-      <button
-        onClick={
-          data.isRunning
-            ? stopSimulation
+      <div className="flex flex-row">
+        {/* start, stop, reset */}
+        <button
+          onClick={
+            data.isRunning
+              ? stopSimulation
+              : data.currentIteration > 0
+              ? resetSimulation
+              : startSimulation
+          }
+        >
+          {data.isRunning
+            ? "Stop"
             : data.currentIteration > 0
-            ? resetSimulation
-            : startSimulation
-        }
+            ? "Reset"
+            : "Start"}{" "}
+          Simulation
+        </button>
+
+        {/* show results */}
+        {!data.isRunning && data.currentIteration > 0 && (
+          <button onClick={() => setShowResultsModal(true)}>
+            Explain Results
+          </button>
+        )}
+      </div>
+
+      {/* end results */}
+      <Modal
+        isOpen={showResultsModal}
+        setIsOpen={setShowResultsModal}
+        className="flex flex-col items-start justify-start space-y-4"
       >
-        {data.isRunning
-          ? "Stop"
-          : data.currentIteration > 0
-          ? "Reset"
-          : "Start"}{" "}
-        Simulation
-      </button>
+        <h3 className="font-bold">Results</h3>
+
+        {withSwitchWinPercentage > 55 ? (
+          <p>The simulation confirms a well-known probability puzzle:</p>
+        ) : (
+          <p>
+            The simulation could not confirm the well-known probability puzzle.
+            Most likely the simulation was not run for enough iterations. In
+            theory:
+          </p>
+        )}
+
+        <p>
+          Switching doors increases your chances of winning. Specifically, while
+          your initial choice of a door has a 1 in 3 (or 33%) chance of being
+          the winning door, switching after the host reveals a goat behind one
+          of the other doors gives you a 2 in 3 (or 66%) chance.
+        </p>
+
+        <p>
+          Why does this happen? Initially, you have a 33% chance of picking the
+          prize door and a 66% chance of picking a goat door. When the host, who
+          knows where the prize is, reveals a goat behind one of the other
+          doors, nothing changes about the door you initially picked. If it was
+          a losing door (which happens 66% of the time), then the other unopened
+          door must have the prize. This is why switching gives you a 66% chance
+          of winning. On the other hand, if your initial choice was the prize
+          door (33% chance), switching will make you lose.
+        </p>
+
+        <p>
+          Therefore, if you aim to maximize your odds, you should always switch
+          doors.
+        </p>
+
+        <div className="flex items-center justify-center w-full">
+          <button onClick={() => setShowResultsModal(false)}>close</button>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -1,13 +1,16 @@
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
-import { Hero } from "@/components/Hero";
+import { Hero } from "@/components/hero/Hero";
 import { Projects } from "@/components/projects/Projects";
+import { WindowSizeProvider } from "../contexts/WindowSize";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <Projects />
+      <WindowSizeProvider>
+        <Projects />
+      </WindowSizeProvider>
       <About />
       <Contact />
     </main>

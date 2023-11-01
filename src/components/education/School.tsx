@@ -1,8 +1,4 @@
-"use client";
-
-import { useExpansion } from "@/utils/useExpansion";
-import { gsap } from "gsap";
-import { useEffect, useRef } from "react";
+import { Expandable } from "@/components/Expandable";
 
 export const School = ({
   school,
@@ -19,21 +15,11 @@ export const School = ({
   date: string;
   description: string;
 }) => {
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const descriptionContainerRef = useRef<HTMLDivElement>(null);
-
-  const toggleExpansion = useExpansion(descriptionRef.current!);
-
-  useEffect(() => {
-    const descElem = descriptionRef.current!;
-    gsap.set(descElem, { height: 0, opacity: 0 });
-  }, []);
+  const expandableId = `school-${school}-${degree}`;
 
   return (
-    <div
-      onMouseEnter={toggleExpansion}
-      onMouseLeave={toggleExpansion}
-      ref={descriptionContainerRef}
+    <Expandable
+      expandableTargetId={expandableId}
       className="reveal flex flex-row items-center justify-center border-[var(--primary-color)] md:m-4 md:p-2 md:border-r-2"
     >
       <div className="flex flex-col justify-center items-start my-2.5 md:mx-7.5">
@@ -43,10 +29,10 @@ export const School = ({
         <p className="reveal text-xs text-right w-full">
           {date ? date : "current"}
         </p>
-        <p ref={descriptionRef} className="md:reveal m-2.5">
+        <p id={expandableId} className="md:reveal m-2.5 h-0 opacity-0">
           {description}
         </p>
       </div>
-    </div>
+    </Expandable>
   );
 };
