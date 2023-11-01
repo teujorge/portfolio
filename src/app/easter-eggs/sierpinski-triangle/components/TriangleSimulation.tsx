@@ -41,8 +41,6 @@ export function TriangleSimulation() {
 
   // resize canvas
   useEffect(() => {
-    console.log("reset canvas");
-
     const canvas = canvasRef.current;
     if (!canvas) return;
 
