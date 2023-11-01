@@ -178,18 +178,18 @@ export function TriangleSimulation() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen max-h-[100svh]">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen overflow-hidden">
       <div className="h-10" />
 
       {/* triangle canvas */}
-      <div className="flex w-full h-full p-2 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md">
+      <div className="flex flex-grow w-full h-full p-2 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md">
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
       <div className="h-6" />
 
       {/* iterations */}
-      <div className="flex flex-col p-2">
+      <div className="flex flex-col items-start justify-center p-2 h-24">
         <p className="font-bold">Iterations</p>
         <div className="flex flex-row">
           <p className="w-36 lg:w-20">Current</p>
@@ -220,6 +220,7 @@ export function TriangleSimulation() {
             ? resetSimulation
             : startSimulation
         }
+        className="h-12"
       >
         {data.isRunning
           ? "Stop"
