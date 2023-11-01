@@ -24,8 +24,8 @@ type BubblesProps = {
 const DEFAULT_BUBBLES_PROPS: BubblesProps = {
   quantity: 50,
   blur: 100,
-  minSpeed: 50,
-  maxSpeed: 100,
+  minSpeed: 100,
+  maxSpeed: 500,
   minSize: 25,
   maxSize: 55,
 };
