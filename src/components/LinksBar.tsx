@@ -1,10 +1,7 @@
-"use client";
-
 import { Position } from "@/utils/position";
 import { SvgFile } from "~/public/svg/file";
 import { SvgGithub } from "~/public/svg/github";
 import { SvgLinkedIn } from "~/public/svg/linkedin";
-import { SvgMessage } from "~/public/svg/message";
 import { IconButton } from "./IconButton";
 
 export const LinksBar = () => {
@@ -26,12 +23,12 @@ export const LinksBar = () => {
         descPos={Position.right}
       />
 
-      <IconButton
+      {/* <IconButton
         href={"#contact-me"}
         src={<SvgMessage className={iconClassName} />}
         desc="Message"
         descPos={Position.right}
-      />
+      /> */}
 
       <IconButton
         href={"/resume.pdf"}
