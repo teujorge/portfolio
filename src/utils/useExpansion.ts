@@ -7,6 +7,10 @@ export function useExpansion(expandableElement: HTMLElement) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
+    // kill any ongoing animations
+    gsap.killTweensOf(expandableElement);
+
+    // collapse
     if (isExpanded) {
       gsap.to(expandableElement, {
         height: "auto",
@@ -14,7 +18,10 @@ export function useExpansion(expandableElement: HTMLElement) {
         duration: 0.25,
         ease: "ease",
       });
-    } else {
+    }
+
+    // expand
+    else {
       gsap.to(expandableElement, {
         height: 0,
         opacity: 0,
