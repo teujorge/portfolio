@@ -53,8 +53,6 @@ export const ProjectImageDesktop = ({
         filter: `brightness(${imageBrightness})`,
         duration: ANIM_DURATION,
       });
-
-      console.log(imageWrapperHeight);
     }
 
     gsap.registerPlugin(ScrollTrigger);
