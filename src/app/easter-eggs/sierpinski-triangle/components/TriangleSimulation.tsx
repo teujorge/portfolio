@@ -27,28 +27,77 @@ type SimulationData = {
   vertices: Point[]; // vertices of the triangle
 };
 
+const VERTEX_RADIUS = 4.0;
+const POINT_RADIUS = 1.5;
+
 export function TriangleSimulation() {
   const canvasRef = useRef<HTMLCanvasElement>(null); // canvas element
   const isStoppingRef = useRef(false); // whether the simulation should stop
-  const [inputIterations, setInputIterations] = useState(1000); // for the input field [not used]
+  const [inputIterations, setInputIterations] = useState(5000); // for the input field [not used]
   const [data, setData] = useState<SimulationData>({
     isRunning: false,
-    totalIterations: 1000,
+    totalIterations: 5000,
     currentIteration: 0,
     points: [],
     vertices: VERTICES,
   });
 
-  // resize canvas
+  // for drawing points and resize
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvasParent = canvas?.parentElement;
+    if (!canvas || !canvasParent) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      canvas.width = canvasParent.clientWidth;
+      canvas.height = canvasParent.clientHeight;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      for (let vertex of data.vertices) {
+        ctx.beginPath();
+        ctx.arc(
+          vertex.x * canvas.width,
+          vertex.y * canvas.height,
+          VERTEX_RADIUS,
+          0,
+          2 * Math.PI
+        );
+        ctx.fillStyle = "red";
+        ctx.fill();
+      }
+
+      for (let points of data.points) {
+        ctx.beginPath();
+        ctx.arc(
+          points.x * canvas.width,
+          points.y * canvas.height,
+          POINT_RADIUS,
+          0,
+          2 * Math.PI
+        );
+        ctx.fillStyle = "red";
+        ctx.fill();
+      }
+    });
+
+    resizeObserver.observe(canvas);
+
+    return () => resizeObserver.disconnect();
+  }, [data.points, data.vertices]);
+
+  // for resetting the canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const canvasParent = canvas?.parentElement;
+    if (!canvas || !canvasParent) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    canvas.width = canvasParent.clientWidth;
+    canvas.height = canvasParent.clientHeight;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -57,7 +106,7 @@ export function TriangleSimulation() {
       ctx.arc(
         vertex.x * canvas.width,
         vertex.y * canvas.height,
-        4,
+        VERTEX_RADIUS,
         0,
         2 * Math.PI
       );
@@ -65,31 +114,6 @@ export function TriangleSimulation() {
       ctx.fill();
     }
   }, [data.vertices]);
-
-  // draw triangle on canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // draw last point
-    if (data.points.length > 0) {
-      const lastPoint = data.points[data.points.length - 1];
-
-      ctx.beginPath();
-      ctx.arc(
-        lastPoint.x * canvas.width,
-        lastPoint.y * canvas.height,
-        1,
-        0,
-        2 * Math.PI
-      );
-      ctx.fillStyle = "red";
-      ctx.fill();
-    }
-  }, [data]);
 
   function changeIterations(event: React.ChangeEvent<HTMLInputElement>): void {
     const newIterations = parseInt(event.target.value);
@@ -130,13 +154,12 @@ export function TriangleSimulation() {
         break;
       }
 
-      // choose a random vertex
-      const vertex = data.vertices[Math.floor(Math.random() * 3)];
+      const randomVertex = data.vertices[Math.floor(Math.random() * 3)];
 
       // calculate the midpoint between the current point and the vertex
       const newPoint = new Point(
-        (currentPoint.x + vertex.x) / 2,
-        (currentPoint.y + vertex.y) / 2
+        (currentPoint.x + randomVertex.x) / 2,
+        (currentPoint.y + randomVertex.y) / 2
       );
 
       setData((prev) => ({
@@ -164,15 +187,15 @@ export function TriangleSimulation() {
   }
 
   function resetSimulation(): void {
-    // reset data
+    isStoppingRef.current = false;
     setData((prev) => ({
       ...prev,
       isRunning: false,
       totalIterations: inputIterations,
       currentIteration: 0,
       vertices: [...VERTICES],
+      points: [],
     }));
-    isStoppingRef.current = false;
   }
 
   return (
@@ -180,7 +203,7 @@ export function TriangleSimulation() {
       <div className="h-10" />
 
       {/* triangle canvas */}
-      <div className="flex flex-grow w-full h-full p-2 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md">
+      <div className="flex flex-grow w-full h-full max-h-screen rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md">
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
