@@ -13,7 +13,7 @@ export const Contact = () => {
       <h2>Get In Touch</h2>
 
       <form
-        className="reveal flex flex-col items-center justify-center w-5/6 max-w-md m-4 p-4 md:p-8 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md"
+        className="reveal flex flex-col items-center justify-center w-full max-w-md m-4 p-4 md:p-8 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md"
         name="portfolio-contact-form"
         method="POST"
         data-netlify="true"
