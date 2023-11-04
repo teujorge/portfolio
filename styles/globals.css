@@ -36,6 +36,7 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 100svh;
+  width: 100%;
   padding: 1rem;
 }
 

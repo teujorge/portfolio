@@ -2,7 +2,7 @@ import { MontyHallSimulation } from "./components/MontyHallSimulation";
 
 export default function MontyHallProblem() {
   return (
-    <main className="flex flex-col items-center justify-center px-10 sm:px-16 w-full lg:w-3/4">
+    <main className="flex flex-col items-center justify-center px-10 md:px-[10vw] lg:px-[15vw]">
       {/* title */}
       <h2>Monty Hall</h2>
       {/* description */}

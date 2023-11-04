@@ -2,7 +2,7 @@ import { TriangleSimulation } from "./components/TriangleSimulation";
 
 export default function SierpinskiTriangle() {
   return (
-    <main className="flex flex-col items-center justify-center px-10 sm:px-16 w-full lg:w-3/4">
+    <main className="flex flex-col items-center justify-center px-10 md:px-[10vw] lg:px-[15vw]">
       {/* title */}
       <h2>Sierpiński Triangle</h2>
       {/* description */}
