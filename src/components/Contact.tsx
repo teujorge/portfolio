@@ -9,7 +9,7 @@ export const Contact = () => {
   const LABEL_STYLES = "reveal mt-2.5 ml-2.5 w-full";
 
   return (
-    <div id="contact-me" className="section mb-0 pb-0 overflow-y-hidden">
+    <div id="contact-me" className="section mb-0 pb-0 overflow-hidden">
       <h2>Get In Touch</h2>
 
       <form

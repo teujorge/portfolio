@@ -189,7 +189,10 @@ export const Projects = () => {
   ];
 
   return (
-    <div id="projects-section" className="section">
+    <div
+      id="projects-section"
+      className="section w-full max-lg:overflow-x-clip"
+    >
       <h2>Side Projects</h2>
 
       {isMobile ? (
