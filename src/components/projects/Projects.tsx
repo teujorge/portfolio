@@ -1,6 +1,7 @@
 "use client";
 
 import { MOBILE_WIDTH } from "@/app/app";
+import { useWindowSize } from "@/contexts/WindowSize";
 import { useRef } from "react";
 import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
 import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
@@ -12,7 +13,6 @@ import { SvgPlayStore } from "~/public/svg/play-store";
 import { IconButton } from "../IconButton";
 import { ProjectDescription } from "./ProjectDescription";
 import { ProjectImage } from "./ProjectImage";
-import { useWindowSize } from "@/contexts/WindowSize";
 
 export const Projects = () => {
   const iconClassName = "w-6 h-6";
@@ -220,7 +220,9 @@ export const Projects = () => {
           <div>{projectDescriptions.map((desc, _) => desc)}</div>
 
           {/* right column */}
-          <div>{projectImages.map((image, _) => image)}</div>
+          <div className="sticky top-0 bottom-0 w-full h-screen">
+            {projectImages.map((image, _) => image)}
+          </div>
         </div>
       )}
     </div>

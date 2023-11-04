@@ -1,85 +1,62 @@
 "use client";
 
+import { useWindowSize } from "@/contexts/WindowSize";
 import { inViewPercentage } from "@/utils/inView";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 import { ProjectImageProps } from "./ProjectImage";
-import { useWindowSize } from "@/contexts/WindowSize";
 
 export const ProjectImageDesktop = ({
   descRef,
   wrapperRef,
   media,
 }: ProjectImageProps) => {
-  const projectImageOutWrapperRef = useRef<HTMLDivElement>(null);
-  const projectImageInWrapperRef = useRef<HTMLDivElement>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
 
   const windowSize = useWindowSize();
 
   useEffect(() => {
+    // component wrapper (whole projects section)
     const wrapperElement = wrapperRef.current;
+
+    // project description
     const projectDescElement = descRef.current;
 
-    if (!wrapperElement || !projectDescElement) return;
+    // project image wrapper
+    const imageWrapperElement = imageWrapperRef.current;
 
-    const projectImageOutWrapperElement = projectImageOutWrapperRef.current;
-    const projectImageInWrapperElement = projectImageInWrapperRef.current;
+    if (!wrapperElement || !projectDescElement || !imageWrapperElement) {
+      return;
+    }
 
-    const ANIM_DURATION = 0;
+    const ANIM_DURATION = 0; // seconds
+
     async function handleScroll() {
-      let percentageInView = inViewPercentage(projectDescElement!);
+      let percentageDescInView = inViewPercentage(projectDescElement!);
 
-      // determine height
-      let height = 0;
-      if (percentageInView > -100 && percentageInView < 200) {
-        height = Math.max(0, percentageInView); // handle < 0 percentage
-        height = Math.min(100, percentageInView); // handle > 100 percentage
+      let imageWrapperHeight = 0;
+      if (percentageDescInView > -100 && percentageDescInView < 200) {
+        imageWrapperHeight = Math.max(0, percentageDescInView);
+        imageWrapperHeight = Math.min(100, percentageDescInView);
+        imageWrapperHeight += 10;
       }
 
-      // determine brightness
-      let brightness = 1;
-      if (percentageInView > 100) {
-        brightness = Math.min(1, 1 - (percentageInView / 100 - 1) / 2); // handle > 100 percentage
+      let imageBrightness = 1;
+      if (percentageDescInView > 100) {
+        imageBrightness = Math.min(1, 1 - (percentageDescInView / 100 - 1) / 2);
       }
 
-      // animate
-      gsap.to(projectImageOutWrapperElement, {
-        height: `${height}vh`,
-        filter: `brightness(${brightness})`,
+      gsap.to(imageWrapperElement, {
+        height: `${imageWrapperHeight}vh`,
+        filter: `brightness(${imageBrightness})`,
         duration: ANIM_DURATION,
       });
 
-      // for sticky effect
-      const wrapperRect = wrapperElement!.getBoundingClientRect();
-
-      // move top when projects section is scrolling into view
-      if (wrapperRect.top > 0) {
-        gsap.to(projectImageOutWrapperElement, {
-          top: wrapperRect.top,
-          duration: ANIM_DURATION,
-        });
-      }
-
-      // move bottom when projects section is scrolling out of view
-      else if (wrapperRect.bottom <= windowSize.height) {
-        gsap.to(projectImageOutWrapperElement, {
-          top: wrapperRect.bottom - windowSize.height,
-          duration: ANIM_DURATION,
-        });
-      }
-
-      // stay on top 0px
-      else {
-        gsap.to(projectImageOutWrapperElement, {
-          top: 0,
-          duration: ANIM_DURATION,
-        });
-      }
+      console.log(imageWrapperHeight);
     }
 
-    // scroll listener
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.observe({
       target: window,
@@ -90,13 +67,10 @@ export const ProjectImageDesktop = ({
 
   return (
     <div
-      ref={projectImageOutWrapperRef}
-      className="fixed right-0 overflow-hidden w-1/2 h-screen"
+      ref={imageWrapperRef}
+      className="absolute top-0 right-0 bottom-0 overflow-hidden w-full"
     >
-      <div
-        ref={projectImageInWrapperRef}
-        className="flex items-center w-full h-screen"
-      >
+      <div className="flex items-center w-full h-screen">
         <Image
           className="object-contain ml-2.5 w-fit h-fit rounded-[var(--border-radius)] shadow-md transition-none"
           style={{
