@@ -8,7 +8,7 @@ type ModalProps = {
 export function Modal({ children, className, isOpen, setIsOpen }: ModalProps) {
   return (
     <div
-      className={`fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-[#00000090] backdrop-blur-lg transition-transform cursor-pointer
+      className={`fixed z-50 top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-[#00000090] backdrop-blur-lg transition-transform cursor-pointer
         ${isOpen ? "translate-y-0" : "translate-y-full"}
       `}
       onClick={() => setIsOpen(false)}
