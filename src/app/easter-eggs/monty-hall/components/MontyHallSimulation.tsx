@@ -236,7 +236,7 @@ export function MontyHallSimulation() {
       <Modal
         isOpen={showResultsModal}
         setIsOpen={setShowResultsModal}
-        className="flex flex-col items-start justify-start space-y-4"
+        className="flex flex-col items-start justify-start gap-4"
       >
         <h3 className="font-bold">Results</h3>
 

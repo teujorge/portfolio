@@ -24,4 +24,14 @@ export const easterEggRoutes: EasterEggRoutesType = {
     title: "Sierpiński's Triangle",
     description: "Fractals",
   },
+  snake: {
+    href: "/easter-eggs/snake-game",
+    title: "Snake Game",
+    description: "The classic game",
+  },
+  boids: {
+    href: "/easter-eggs/boids",
+    title: "Boids Simulation",
+    description: "Swarm simulation",
+  },
 };
