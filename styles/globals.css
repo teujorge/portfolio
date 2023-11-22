@@ -214,6 +214,9 @@ button:hover {
   }
 
   .section {
-    padding: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }

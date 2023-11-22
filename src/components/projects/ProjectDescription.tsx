@@ -24,11 +24,11 @@ export const ProjectDescription = ({
   icons.forEach((icon) => iconButtons.push(icon));
 
   return (
-    <div className="reveal flex flex-col justify-center items-center ml-0 mr-0 mt-12 mb-0 p-3 w-auto lg:m-5 lg:p-5 lg:w-[40vw] lg:min-h-screen">
-      <h3 className="m-2.5 text-left">{title}</h3>
-      <p className="m-2.5">{technologies}</p>
-      <p className="m-2.5">{desc}</p>
-      <div className="flex m-2.5 w-[fit-content]">
+    <div className="reveal flex flex-col justify-center items-center mt-12 w-auto lg:m-5 lg:p-5 lg:w-[40vw] lg:min-h-screen">
+      <h3 className="my-2.5 text-left">{title}</h3>
+      <p className="my-2.5">{technologies}</p>
+      <p className="my-2.5">{desc}</p>
+      <div className="flex my-2.5 w-[fit-content]">
         {icons.map((icon, index) => (
           <React.Fragment key={index}>{icon}</React.Fragment>
         ))}

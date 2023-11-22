@@ -25,7 +25,14 @@ export default function App({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <BubblesBg className="-z-10" />
+      <BubblesBg
+        className="-z-10"
+        quantity={10}
+        minSize={40}
+        maxSize={80}
+        minSpeed={10}
+        maxSpeed={100}
+      />
       {children}
       <LinksBar />
     </>
