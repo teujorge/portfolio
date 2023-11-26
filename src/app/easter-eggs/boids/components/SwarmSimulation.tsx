@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useSwarmSimulation } from "../hooks/useSwarmSimulation";
 import { SwarmControls } from "./SwarmControls";
+import { Boid } from "../types";
 
 export function SwarmSimulation() {
   const boidsRef = useRef<Boid[]>([]);

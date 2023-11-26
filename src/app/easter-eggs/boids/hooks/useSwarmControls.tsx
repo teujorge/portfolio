@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { Boid } from "../types";
 
 export function useSwarmControls() {
   const boidsRef = useRef<Boid[]>([]);
