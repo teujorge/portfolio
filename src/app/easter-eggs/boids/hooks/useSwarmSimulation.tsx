@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Boid } from "../types";
 
 const BOID_COUNT = 100;
 const MAX_VELOCITY = 100;
