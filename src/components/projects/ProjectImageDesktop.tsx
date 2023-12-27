@@ -1,6 +1,5 @@
 "use client";
 
-import { useWindowSize } from "@/contexts/WindowSize";
 import { inViewPercentage } from "@/utils/inView";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -14,8 +13,6 @@ export const ProjectImageDesktop = ({
   media,
 }: ProjectImageProps) => {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
-
-  const windowSize = useWindowSize();
 
   useEffect(() => {
     // component wrapper (whole projects section)
@@ -61,7 +58,7 @@ export const ProjectImageDesktop = ({
       type: "scroll",
       onChangeY: handleScroll,
     });
-  }, [descRef, wrapperRef, windowSize]);
+  }, [descRef, wrapperRef]);
 
   return (
     <div
@@ -70,7 +67,7 @@ export const ProjectImageDesktop = ({
     >
       <div className="flex items-center w-full h-screen">
         <Image
-          className="object-contain ml-2.5 w-fit h-fit rounded-[var(--border-radius)] shadow-md transition-none"
+          className="object-cover ml-2.5 w-fit h-fit rounded-[var(--border-radius)] shadow-md transition-none"
           style={{
             maxWidth: "90%",
             maxHeight: "90%",
