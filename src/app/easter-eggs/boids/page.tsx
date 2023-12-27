@@ -1,4 +1,5 @@
-import { SwarmSimulation } from "./components/SwarmSimulation";
+import { WindowSizeProvider } from "@/contexts/WindowSize";
+import { BoidSimulation } from "./BoidSimulation";
 
 export default function BoidsPage() {
   return (
@@ -6,7 +7,9 @@ export default function BoidsPage() {
       <h2 className="absolute top-1/2 left-1/2 -translate-x-full -translate-y-1/2">
         Boids
       </h2>
-      <SwarmSimulation />
+      <WindowSizeProvider>
+        <BoidSimulation />
+      </WindowSizeProvider>
     </main>
   );
 }
