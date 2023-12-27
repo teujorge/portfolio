@@ -24,7 +24,7 @@ export const ProjectDescription = ({
   icons.forEach((icon) => iconButtons.push(icon));
 
   return (
-    <div className="reveal flex flex-col justify-center items-center mt-12 w-auto lg:m-5 lg:p-5 lg:w-[40vw] lg:min-h-screen">
+    <div className="reveal flex flex-col justify-center items-center mt-12 w-full lg:m-5 lg:p-5 lg:w-[40vw] lg:min-h-screen">
       <h3 className="my-2.5 text-left">{title}</h3>
       <p className="my-2.5">{technologies}</p>
       <p className="my-2.5">{desc}</p>

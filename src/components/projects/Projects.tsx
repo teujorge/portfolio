@@ -232,7 +232,7 @@ export const Projects = () => {
   );
 
   return (
-    <div id="projects-section" className="section w-full">
+    <div id="projects-section" className="section">
       <h2>Side Projects</h2>
 
       {isMobile ? (
