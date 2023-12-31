@@ -2,7 +2,13 @@
 
 import { useWindowSize } from "@/contexts/WindowSize";
 import { useEffect, useRef, useState } from "react";
-import { Boid, Vector } from "./boid";
+import { Boid } from "./boid";
+
+type Coefficients = {
+  alignment: number;
+  cohesion: number;
+  separation: number;
+};
 
 export function BoidSimulation({ onStop }: { onStop: () => void }) {
   const windowSize = useWindowSize();
@@ -11,7 +17,7 @@ export function BoidSimulation({ onStop }: { onStop: () => void }) {
 
   const [flock, setFlock] = useState<Boid[]>([]);
 
-  const [coefficients, setCoefficients] = useState({
+  const [coefficients, setCoefficients] = useState<Coefficients>({
     alignment: 1,
     cohesion: 1,
     separation: 1.25,
@@ -49,23 +55,30 @@ export function BoidSimulation({ onStop }: { onStop: () => void }) {
     // animation loop
 
     let animationFrameId: number;
+    let lastRenderTime = performance.now();
 
-    function animate() {
+    function animate(currentTime: number) {
       animationFrameId = requestAnimationFrame(animate);
+
+      const dt = (currentTime - lastRenderTime) / 1000; // seconds
+      if (dt <= 0) return;
+      lastRenderTime = currentTime;
+
       canvasContext?.clearRect(
         0,
         0,
         canvasRef.current?.width ?? 0,
         canvasRef.current?.height ?? 0
       );
+
       flock.forEach((boid) => {
         boid.flock(flock);
-        boid.update();
+        boid.update(dt);
         boid.draw();
       });
     }
 
-    animate();
+    animate(performance.now());
 
     return () => {
       cancelAnimationFrame(animationFrameId);
