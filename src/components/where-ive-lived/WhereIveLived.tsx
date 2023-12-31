@@ -30,7 +30,7 @@ export const IWasHere = () => {
           />
         </div>
 
-        <div className="relative overflow-hidden flex flex-col justify-center items-center p-0 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-[var(--shadow-color)]">
+        <div className="relative overflow-hidden flex flex-col justify-center items-center p-0 w-full rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-[var(--shadow-color)]">
           {/* use finger to move icon */}
           {is3D && (
             <div className="absolute bottom-8 right-10 w-10 h-10 -scale-x-100 -rotate-45 fill-[var(--foreground-color)]">
@@ -40,11 +40,8 @@ export const IWasHere = () => {
 
           {is3D ? (
             <div
-              className="cursor-grab active:cursor-grabbing"
+              className="cursor-grab active:cursor-grabbing w-[80vw] h-[80vw] max-h-[80vh]"
               style={{
-                width: "75vw",
-                height: "75vw",
-                maxHeight: "75vh",
                 filter: `grayscale(${earthLoaded ? 0 : 1}) blur(${
                   earthLoaded ? 0 : 200
                 }px)`,
@@ -52,18 +49,11 @@ export const IWasHere = () => {
               }}
             >
               <LabeledEarth
-                onLoad={() => {
-                  delay(50).then(() => setEarthLoaded(true));
-                }}
+                onLoad={() => delay(50).then(() => setEarthLoaded(true))}
               />
             </div>
           ) : (
-            <div
-              style={{
-                width: "75vw",
-                height: "auto",
-              }}
-            >
+            <div className="w-[80vw] h-[80vw]">
               <World />
             </div>
           )}

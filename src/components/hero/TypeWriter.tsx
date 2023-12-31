@@ -3,7 +3,15 @@
 import delay from "@/utils/delay";
 import { useEffect, useState } from "react";
 
-const HEADERS = ["Engineer", "Front End", "Web Dev"];
+const HEADERS = [
+  "Innovative Developer",
+  "Engineer",
+  "Solution-Oriented",
+  "Tech Enthusiast",
+  "Detail-Oriented",
+  "Team Player",
+  "Dedicated Problem Solver",
+];
 
 export const TypeWriter = () => {
   const [isTyping, setIsTyping] = useState(true);
@@ -49,9 +57,9 @@ export const TypeWriter = () => {
   }, [currentHeaderIndex, currentHeaderText, isTyping]);
 
   return (
-    <p className="text-center w-full text-4xl sm:text-6xl font-thin mt-8">
+    <p className="h-10 text-center w-full text-4xl sm:text-6xl font-thin mt-8">
       {currentHeaderText}
-      <span className="w-5 h-1 inline-block rounded-[var(--border-radius)] bg-[var(--primary-color)] transform translate-y-[2px] animate-pulse" />
+      <span className="w-5 h-0.5 inline-block rounded-[var(--border-radius)] bg-[var(--primary-color)] transform translate-y-[2px] animate-pulse" />
     </p>
   );
 };

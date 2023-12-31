@@ -6,7 +6,9 @@ export const Experience = () => {
       <h3>Experience</h3>
 
       <Job
-        title={"Freelance Software Engineer"}
+        title={"Software Developer"}
+        employer={"Dtek.ai"}
+        city={"Dubai"}
         desc={[
           `Increased profitability for 
           Zid store owners by developing a web-based 

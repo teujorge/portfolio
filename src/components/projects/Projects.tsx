@@ -7,12 +7,14 @@ import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
 import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
 import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
+import showZakkyAgency from "~/public/images/demos/demo-zakky-agency.png";
 import { SvgEye } from "~/public/svg/eye";
 import { SvgGithub } from "~/public/svg/github";
 import { SvgPlayStore } from "~/public/svg/play-store";
 import { IconButton } from "../IconButton";
 import { ProjectDescription } from "./ProjectDescription";
 import { ProjectImage } from "./ProjectImage";
+import assert from "assert";
 
 export const Projects = () => {
   const iconClassName = "w-6 h-6";
@@ -23,6 +25,7 @@ export const Projects = () => {
   const descRef2 = useRef<HTMLDivElement>(null);
   const descRef3 = useRef<HTMLDivElement>(null);
   const descRef4 = useRef<HTMLDivElement>(null);
+  const descRef5 = useRef<HTMLDivElement>(null);
 
   const windowSize = useWindowSize();
   const isMobile = windowSize.width < MOBILE_WIDTH;
@@ -152,6 +155,33 @@ export const Projects = () => {
         ]}
       />
     </div>,
+
+    // <div ref={descRef5} key={"project-description-zakky-agency"}>
+    //   <ProjectDescription
+    //     title={"Zakky Agency"}
+    //     desc={`
+    //     This website is a landing page for a fictional digital
+    //     marketing agency. The site is built with NextJS and deployed
+    //     on Netlify, and features a responsive design for mobile
+    //     and desktop.
+    //   `}
+    //     tech={["NextJS"]}
+    //     icons={[
+    //       <IconButton
+    //         key={"zakky-agency"}
+    //         src={<SvgEye className={iconClassName} />}
+    //         href={"https://zakky.agency/"}
+    //         desc={"Demo"}
+    //       />,
+    //       <IconButton
+    //         key={"zakky-agency-github"}
+    //         src={<SvgGithub className={iconClassName} />}
+    //         href={"https://github.com/teujorge/company"}
+    //         desc={"GitHub"}
+    //       />,
+    //     ]}
+    //   />
+    // </div>,
   ];
 
   const projectImages = [
@@ -186,13 +216,23 @@ export const Projects = () => {
       media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
       isMobile={isMobile}
     />,
+
+    // <ProjectImage
+    //   descRef={descRef5}
+    //   wrapperRef={projectsDesktopRef}
+    //   key={"project-image-zakky-agency"}
+    //   media={{ src: showZakkyAgency, alt: "zakky-agency-demo" }}
+    //   isMobile={isMobile}
+    // />,
   ];
 
+  assert(
+    projectDescriptions.length === projectImages.length,
+    "projectDescriptions and projectImages must have the same length"
+  );
+
   return (
-    <div
-      id="projects-section"
-      className="section w-full max-lg:overflow-x-clip"
-    >
+    <div id="projects-section" className="section">
       <h2>Side Projects</h2>
 
       {isMobile ? (
@@ -200,10 +240,7 @@ export const Projects = () => {
         projectDescriptions.map((desc, index) => (
           <div
             key={`project-${index}`}
-            className="flex flex-col justify-center items-center"
-            style={{
-              width: "calc(95vw - 20px)",
-            }}
+            className="flex flex-col justify-center items-center w-full"
           >
             {desc}
             {projectImages[index]}
@@ -214,10 +251,7 @@ export const Projects = () => {
         // desktop
         <div
           ref={projectsDesktopRef}
-          className="relative flex flex-row items-center my-12"
-          style={{
-            width: "90vw",
-          }}
+          className="relative flex flex-row items-center my-12 w-[90vw]"
         >
           {/* left column */}
           <div>{projectDescriptions.map((desc, _) => desc)}</div>

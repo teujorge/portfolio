@@ -4,7 +4,7 @@ import { SvgGithub } from "~/public/svg/github";
 import { SvgLinkedIn } from "~/public/svg/linkedin";
 import { IconButton } from "./IconButton";
 
-export const LinksBar = () => {
+export const Header = () => {
   const iconClassName = "w-6 h-6";
 
   return (
