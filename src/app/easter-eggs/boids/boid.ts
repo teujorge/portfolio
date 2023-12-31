@@ -22,8 +22,8 @@ export class Boid {
       Math.random() * canvas.height
     );
     this.velocity = new Vector(
-      Math.random() * 100 - 50,
-      Math.random() * 100 - 50
+      Math.random() * 200 - 100,
+      Math.random() * 200 - 100
     );
     this.acceleration = new Vector();
   }
