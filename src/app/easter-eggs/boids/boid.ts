@@ -65,7 +65,8 @@ export class Boid {
   }
 
   update(dt: number) {
-    this.position.add(Vector.mult(this.velocity, dt));
+    const distanceToTravel = Vector.mult(this.velocity, dt);
+    this.position.add(distanceToTravel);
     this.velocity.add(this.acceleration);
 
     this.velocity.limit(this.maxSpeed);
@@ -165,6 +166,12 @@ export class Boid {
       this.position.y = 0;
     } else if (this.position.y < 0) {
       this.position.y = this.canvas.height;
+    }
+
+    if (this.position.z > 10) {
+      this.position.z = -10;
+    } else if (this.position.z < -10) {
+      this.position.z = 10;
     }
   }
 }
