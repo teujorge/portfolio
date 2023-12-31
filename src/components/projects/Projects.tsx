@@ -240,10 +240,7 @@ export const Projects = () => {
         projectDescriptions.map((desc, index) => (
           <div
             key={`project-${index}`}
-            className="flex flex-col justify-center items-center"
-            style={{
-              width: "calc(95vw - 20px)",
-            }}
+            className="flex flex-col justify-center items-center w-full"
           >
             {desc}
             {projectImages[index]}
@@ -254,10 +251,7 @@ export const Projects = () => {
         // desktop
         <div
           ref={projectsDesktopRef}
-          className="relative flex flex-row items-center my-12"
-          style={{
-            width: "90vw",
-          }}
+          className="relative flex flex-row items-center my-12 w-[90vw]"
         >
           {/* left column */}
           <div>{projectDescriptions.map((desc, _) => desc)}</div>

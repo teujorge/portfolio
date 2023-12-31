@@ -4,7 +4,7 @@ import { useWindowSize } from "@/contexts/WindowSize";
 import { useEffect, useRef, useState } from "react";
 import { Boid, Vector } from "./boid";
 
-export function BoidSimulation() {
+export function BoidSimulation({ onStop }: { onStop: () => void }) {
   const windowSize = useWindowSize();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -77,10 +77,10 @@ export function BoidSimulation() {
       <canvas
         ref={canvasRef}
         width={windowSize.width * 0.8}
-        height={windowSize.height * 0.8}
-        className="rounded-2xl border-2 border-red-500"
+        height={windowSize.height * 0.8 - 80}
+        className="rounded-2xl border-2 border-black dark:border-white bg-black bg-opacity-50 dark:bg-white dark:bg-opacity-10"
       />
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="h-20 flex flex-wrap items-center justify-center gap-3 w-3/4">
         <div className="flex flex-row items-center">
           <label className="mr-1">Alignment</label>
           <input
@@ -129,6 +129,7 @@ export function BoidSimulation() {
             }
           />
         </div>
+        <button onClick={() => onStop()}>Stop Simulation</button>
       </div>
     </>
   );

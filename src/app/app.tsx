@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from "react";
 import BubblesBg from "@/components/BubblesBg";
-import { LinksBar } from "@/components/LinksBar";
+import { Header } from "@/components/Header";
 import { inView } from "@/utils/inView";
 
 export const MOBILE_WIDTH = 1024;
@@ -26,7 +26,7 @@ export default function App({ children }: { children: ReactNode }) {
   return (
     <>
       <BubblesBg
-        className="-z-10"
+        className="-z-10 !opacity-40 dark:opacity-100"
         quantity={10}
         minSize={40}
         maxSize={80}
@@ -34,7 +34,7 @@ export default function App({ children }: { children: ReactNode }) {
         maxSpeed={100}
       />
       {children}
-      <LinksBar />
+      <Header />
     </>
   );
 }
