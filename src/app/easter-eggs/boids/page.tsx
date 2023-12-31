@@ -15,16 +15,25 @@ export default function BoidsPage() {
         </WindowSizeProvider>
       ) : (
         <>
-          <h2>Boids</h2>
           <p className="w-3/4">
-            What are boid? Boids are a type of artificial life that simulate the
-            flocking behavior of birds. The simulation is based on the{" "}
+            <strong>Discover the Dynamics of Boids:</strong> Boids are simulated
+            agents that exemplify the collective behavior of birds or fish. This
+            captivating simulation, rooted in the{" "}
             <a
               className="underline transition-colors hover:text-[var(--primary-color)]"
               href="https://en.wikipedia.org/wiki/Boids"
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              Boids Algorithm.
+              Boids Algorithm
             </a>
+            , demonstrates how complex patterns emerge from simple rules. Each
+            boid independently follows three basic principles: alignment,
+            cohesion, and separation. Alignment ensures boids steer in the same
+            direction, cohesion brings them closer together, and separation
+            prevents overcrowding. Together, these rules result in a mesmerizing
+            display of synchronized movement, reflecting the profound
+            interconnectedness found in natural systems.
           </p>
           <button
             className="mt-4"
