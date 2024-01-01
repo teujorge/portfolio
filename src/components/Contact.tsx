@@ -14,16 +14,31 @@ export const Contact = () => {
 
       <form
         className="reveal flex flex-col items-center justify-center w-full max-w-md m-4 p-4 md:p-8 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md"
-        name="portfolio-contact-form"
+        action="https://api.web3forms.com/submit"
         method="POST"
-        data-netlify="true"
       >
-        <input type="hidden" name="form-name" value="portfolio-contact-form" />
+        <input
+          type="hidden"
+          name="access_key"
+          value={process.env.NEXT_PUBLIC_CONTACT_FORM_ACCESS_KEY}
+        />
+
+        <input
+          type="hidden"
+          name="redirect"
+          value={`https://mjorge.me/email-success`}
+        />
+
+        <input
+          type="hidden"
+          name="subject"
+          value="New Submission from Web3Forms"
+        />
 
         <label className={LABEL_STYLES} htmlFor="name">
           Name:
         </label>
-        <input className={INPUT_STYLES} type="text" name="name" required />
+        <input className={INPUT_STYLES} type="name" name="name" required />
 
         <label className={LABEL_STYLES} htmlFor="email">
           Email:
@@ -43,6 +58,8 @@ export const Contact = () => {
           <button className="reveal px-4" type="submit">
             Send
           </button>
+
+          <input type="checkbox" name="botcheck" className="hidden" />
 
           <IconButton
             href={"mailto:mrljorge@outlook.com"}
