@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Nunito } from "next/font/google";
 import App from "./app";
 import "~/styles/globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body>
         <App>{children}</App>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
