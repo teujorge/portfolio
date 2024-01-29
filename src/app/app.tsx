@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode, useEffect } from "react";
-import BubblesBg from "@/components/BubblesBg";
 import { Header } from "@/components/Header";
 import { inView } from "@/utils/inView";
 
@@ -25,14 +24,6 @@ export default function App({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <BubblesBg
-        className="-z-10 !opacity-40 dark:opacity-100"
-        quantity={10}
-        minSize={40}
-        maxSize={80}
-        minSpeed={10}
-        maxSpeed={100}
-      />
       {children}
       <Header />
     </>
