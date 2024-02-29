@@ -22,20 +22,6 @@ export const Header = () => {
         desc="LinkedIn"
         descPos={Position.right}
       />
-
-      {/* <IconButton
-        href={"#contact-me"}
-        src={<SvgMessage className={iconClassName} />}
-        desc="Message"
-        descPos={Position.right}
-      /> */}
-
-      <IconButton
-        href={"/resume.pdf"}
-        src={<SvgFile className={iconClassName} />}
-        desc="Resume"
-        descPos={Position.right}
-      />
     </header>
   );
 };
