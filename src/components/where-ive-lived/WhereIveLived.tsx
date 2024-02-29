@@ -53,7 +53,7 @@ export const IWasHere = () => {
               />
             </div>
           ) : (
-            <div className="w-[80vw] h-[80vw]">
+            <div className="w-[80vw] h-[80vw] max-h-[80vh]">
               <World />
             </div>
           )}

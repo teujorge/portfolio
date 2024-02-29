@@ -1,20 +1,19 @@
 "use client";
 
-import { MOBILE_WIDTH } from "@/app/app";
-import { useWindowSize } from "@/contexts/WindowSize";
-import { useRef } from "react";
-import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
+import assert from "assert";
 import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
+import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
 import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
 import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
-import showZakkyAgency from "~/public/images/demos/demo-zakky-agency.png";
+import { useRef } from "react";
 import { SvgEye } from "~/public/svg/eye";
 import { SvgGithub } from "~/public/svg/github";
-import { SvgPlayStore } from "~/public/svg/play-store";
 import { IconButton } from "../IconButton";
-import { ProjectDescription } from "./ProjectDescription";
+import { MOBILE_WIDTH } from "@/app/app";
 import { ProjectImage } from "./ProjectImage";
-import assert from "assert";
+import { SvgPlayStore } from "~/public/svg/play-store";
+import { useWindowSize } from "@/contexts/WindowSize";
+import { ProjectDescription } from "./ProjectDescription";
 
 export const Projects = () => {
   const iconClassName = "w-6 h-6";
@@ -25,7 +24,6 @@ export const Projects = () => {
   const descRef2 = useRef<HTMLDivElement>(null);
   const descRef3 = useRef<HTMLDivElement>(null);
   const descRef4 = useRef<HTMLDivElement>(null);
-  const descRef5 = useRef<HTMLDivElement>(null);
 
   const windowSize = useWindowSize();
   const isMobile = windowSize.width < MOBILE_WIDTH;
@@ -97,12 +95,6 @@ export const Projects = () => {
       `}
         tech={["Dart", "Flutter", "API"]}
         icons={[
-          // <IconButton
-          //   key={"movie-matter-app-store"}
-          //   src={<SvgAppleStore className={iconClassName} />}
-          //   href={"https://apps.apple.com/us/app/moviematter/id1631748579"}
-          //   desc={"Apple Store"}
-          // />,
           <IconButton
             key={"movie-matter-google-store"}
             src={<SvgPlayStore className={iconClassName} />}
@@ -140,12 +132,6 @@ export const Projects = () => {
             href={"https://teujorge.github.io/atlas/"}
             desc={"Web Demo"}
           />,
-          // <IconButton
-          //   key={"atlas-arena-beta"}
-          //   src={<SvgAppleStore className={iconClassName} />}
-          //   href={"https://testflight.apple.com/join/GC3yVQk6"}
-          //   desc={"Beta"}
-          // />,
           <IconButton
             key={"atlas-arena-github"}
             src={<SvgGithub className={iconClassName} />}
@@ -155,33 +141,6 @@ export const Projects = () => {
         ]}
       />
     </div>,
-
-    // <div ref={descRef5} key={"project-description-zakky-agency"}>
-    //   <ProjectDescription
-    //     title={"Zakky Agency"}
-    //     desc={`
-    //     This website is a landing page for a fictional digital
-    //     marketing agency. The site is built with NextJS and deployed
-    //     on Netlify, and features a responsive design for mobile
-    //     and desktop.
-    //   `}
-    //     tech={["NextJS"]}
-    //     icons={[
-    //       <IconButton
-    //         key={"zakky-agency"}
-    //         src={<SvgEye className={iconClassName} />}
-    //         href={"https://zakky.agency/"}
-    //         desc={"Demo"}
-    //       />,
-    //       <IconButton
-    //         key={"zakky-agency-github"}
-    //         src={<SvgGithub className={iconClassName} />}
-    //         href={"https://github.com/teujorge/company"}
-    //         desc={"GitHub"}
-    //       />,
-    //     ]}
-    //   />
-    // </div>,
   ];
 
   const projectImages = [
@@ -216,14 +175,6 @@ export const Projects = () => {
       media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
       isMobile={isMobile}
     />,
-
-    // <ProjectImage
-    //   descRef={descRef5}
-    //   wrapperRef={projectsDesktopRef}
-    //   key={"project-image-zakky-agency"}
-    //   media={{ src: showZakkyAgency, alt: "zakky-agency-demo" }}
-    //   isMobile={isMobile}
-    // />,
   ];
 
   assert(

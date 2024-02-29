@@ -115,7 +115,7 @@ export const World = () => {
   const timeToTravel = distanceToTravel / mapVelocity;
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center w-full h-full relative">
       {/* interactive map */}
       <div
         className="relative"
@@ -163,27 +163,28 @@ export const World = () => {
         </div>
       </div>
 
-      {/* slider to change time */}
-      <input
-        className="timeline-slider"
-        type="range"
-        min={0}
-        max={CITIES_LIVED.length - 1}
-        step={0.01}
-        value={currentCityIndex}
-        onChange={(event) => {
-          const chosenIndex = Math.round(Number(event.target.value));
+      <div className="absolute bottom-0 left-0 w-full flex flex-col items-center justify-center p-4">
+        {/* slider to change time */}
+        <input
+          className="timeline-slider"
+          type="range"
+          min={0}
+          max={CITIES_LIVED.length - 1}
+          step={0.01}
+          value={currentCityIndex}
+          onChange={(event) => {
+            const chosenIndex = Math.round(Number(event.target.value));
 
-          if (chosenIndex !== currentCityIndex) {
-            setCurrentCityIndex(chosenIndex);
-          }
-        }}
-      />
-
-      {/* time label for input range slider */}
-      <p className="p-2">
-        Where I was in {CITIES_LIVED[currentCityIndex].year}
-      </p>
+            if (chosenIndex !== currentCityIndex) {
+              setCurrentCityIndex(chosenIndex);
+            }
+          }}
+        />
+        {/* time label for input range slider */}
+        <p className="p-2">
+          Where I was in {CITIES_LIVED[currentCityIndex].year}
+        </p>
+      </div>
     </div>
   );
 };

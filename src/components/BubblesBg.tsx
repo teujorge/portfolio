@@ -1,5 +1,7 @@
 "use client";
 
-import Bubbles from "bubbles-bg";
+import dynamic from "next/dynamic";
+
+const Bubbles = dynamic(() => import("bubbles-bg"), { ssr: false });
 
 export default Bubbles;
