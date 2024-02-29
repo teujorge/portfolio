@@ -11,7 +11,7 @@ My portfolio stands as a testament to my passion for technology and programming.
 - **Device Friendly**: Whether you're on a desktop, tablet, or mobile, my portfolio is optimized for your viewing pleasure.
 - **Smooth Navigation**: Enjoy the seamless animated scrolling effects as you navigate through different sections.
 - **Comprehensive**: Get to know me better, see my skills, check out my projects, and find out how to get in touch.
-- **Stay Connected**: Access direct links to my GitHub, LinkedIn, Email, and even download my resume.
+- **Stay Connected**: Access direct links to my GitHub, LinkedIn, and Email.
 
 ## 🛠 Technologies & Tools
 
