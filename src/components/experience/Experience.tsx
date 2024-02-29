@@ -8,6 +8,7 @@ export const Experience = () => {
       <Job
         title={"Software Developer"}
         employer={"Dtek.ai"}
+        employerLink="https://dtek.ai"
         city={"Dubai"}
         desc={[
           `Increased profitability for 
@@ -30,6 +31,7 @@ export const Experience = () => {
       <Job
         title={"Test Software Engineer"}
         employer={"Honeywell Aerospace"}
+        employerLink="https://aerospace.honeywell.com"
         city={"Clearwater"}
         start={"2020"}
         end={"2022"}
@@ -54,6 +56,7 @@ export const Experience = () => {
       <Job
         title={"Systems Engineer Intern"}
         employer={"BendixKing"}
+        employerLink="https://www.bendixking.com"
         city={"Albuquerque"}
         end={"2019"}
         desc={[

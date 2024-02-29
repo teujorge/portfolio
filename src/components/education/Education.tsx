@@ -7,6 +7,7 @@ export const Education = () => {
 
       <School
         school={"University of Vermont"}
+        schoolLink={"https://www.uvm.edu"}
         degree={"BS Mechanical Engineering"}
         city={"Burlington"}
         country={"USA"}
@@ -28,6 +29,7 @@ export const Education = () => {
 
       <School
         school={"American School Foundation"}
+        schoolLink={"https://www.asf.edu.mx"}
         degree={"High School"}
         city={"Mexico City"}
         country={"MX"}
@@ -45,6 +47,7 @@ export const Education = () => {
 
       <School
         school={"American Community School"}
+        schoolLink={"https://www.acs.sch.ae"}
         degree={"High School"}
         city={"Abu Dhabi"}
         country={"UAE"}

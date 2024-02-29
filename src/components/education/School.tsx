@@ -2,6 +2,7 @@ import { Expandable } from "@/components/Expandable";
 
 export const School = ({
   school,
+  schoolLink,
   degree,
   city,
   country,
@@ -9,6 +10,7 @@ export const School = ({
   description,
 }: {
   school: string;
+  schoolLink?: string;
   degree: string;
   city: string;
   country: string;
@@ -24,7 +26,20 @@ export const School = ({
     >
       <div className="flex flex-col justify-center items-start my-2.5 md:mx-7.5">
         <h4 className="reveal text-lg font-bold text-right w-full">
-          {degree}, {school}, {city}, {country}
+          {degree},{" "}
+          {schoolLink ? (
+            <a
+              href={schoolLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[var(--primary-color)] transition-colors"
+            >
+              {school}
+            </a>
+          ) : (
+            school
+          )}
+          , {city}, {country}
         </h4>
         <p className="reveal text-xs text-right w-full">
           {date ? date : "current"}
