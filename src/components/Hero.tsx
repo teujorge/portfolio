@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeroImage from "~/public/images/hero.png";
+import HeroImage from "~/public/images/hero.webp";
 
 export const Hero = () => {
   return (
