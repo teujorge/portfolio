@@ -10,9 +10,8 @@ const nunito = Nunito_Sans({
 });
 
 export const metadata = {
-  title: "Matheus's Portfolio",
-  description:
-    "Explore my experience and background with software engineering. Browse through my projects and accomplishments to learn more about my skills and expertise.",
+  title: "Matheus Jorge",
+  description: "Matheus Jorge's portfolio website",
   icons: { icon: "/images/mjIcon.webp" },
 };
 
