@@ -1,12 +1,10 @@
 import { Education } from "./education/Education";
 import { Experience } from "./experience/Experience";
-import { IWasHere } from "./where-ive-lived/WhereIveLived";
+import { IWasHere } from "./i-was-here/IWasHere";
 
 export const About = () => {
   return (
     <div className="section">
-      <h2>About</h2>
-
       <p className="pt-3 pb-16">
         Whether I&apos;m designing and building fun games or working on complex
         web apps, I&apos;m constantly pushing myself to develop my software
@@ -18,7 +16,6 @@ export const About = () => {
 
       <Experience />
       <Education />
-      <IWasHere />
     </div>
   );
 };

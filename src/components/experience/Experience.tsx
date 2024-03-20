@@ -3,8 +3,6 @@ import { Job } from "./Job";
 export const Experience = () => {
   return (
     <div className="subsection">
-      <h3>Experience</h3>
-
       <Job
         title={"Software Developer"}
         employer={"Dtek.ai"}

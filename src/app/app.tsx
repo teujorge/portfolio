@@ -1,9 +1,9 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
 import BubblesBg from "@/components/BubblesBg";
-import { Header } from "@/components/Header";
 import { inView } from "@/utils/inView";
+import { Header } from "@/components/Header";
+import { ReactNode, useEffect } from "react";
 
 export const MOBILE_WIDTH = 1024;
 
@@ -26,7 +26,7 @@ export default function App({ children }: { children: ReactNode }) {
   return (
     <>
       <BubblesBg
-        className="-z-10 !opacity-40 dark:opacity-100"
+        className="-z-10 !opacity-40 !dark:opacity-100"
         quantity={10}
         minSize={40}
         maxSize={80}

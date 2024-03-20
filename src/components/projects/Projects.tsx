@@ -184,8 +184,6 @@ export const Projects = () => {
 
   return (
     <div id="projects-section" className="section">
-      <h2>Side Projects</h2>
-
       {isMobile ? (
         // mobile
         projectDescriptions.map((desc, index) => (

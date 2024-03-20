@@ -3,8 +3,6 @@ import { School } from "./School";
 export const Education = () => {
   return (
     <div className="subsection">
-      <h3>Education</h3>
-
       <School
         school={"University of Vermont"}
         schoolLink={"https://www.uvm.edu"}
