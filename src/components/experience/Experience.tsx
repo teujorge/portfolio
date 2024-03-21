@@ -3,11 +3,15 @@ import { Job } from "./Job";
 export const Experience = () => {
   return (
     <div className="subsection">
+      <h3>Experience</h3>
+
       <Job
         title={"Software Developer"}
         employer={"Dtek.ai"}
         employerLink="https://dtek.ai"
         city={"Dubai"}
+        start={"2023"}
+        end={"Present"}
         desc={[
           `Increased profitability for 
           Zid store owners by developing a web-based 
