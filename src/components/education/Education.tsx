@@ -3,10 +3,12 @@ import { School } from "./School";
 export const Education = () => {
   return (
     <div className="subsection">
+      <h3>Education</h3>
+
       <School
         school={"University of Vermont"}
         schoolLink={"https://www.uvm.edu"}
-        degree={"BS Mechanical Engineering"}
+        degree={"BS Mechanical Engineering + CS Minor"}
         city={"Burlington"}
         country={"USA"}
         date={"2016-2020"}
@@ -28,7 +30,6 @@ export const Education = () => {
       <School
         school={"American School Foundation"}
         schoolLink={"https://www.asf.edu.mx"}
-        degree={"High School"}
         city={"Mexico City"}
         country={"MX"}
         date={"2015-2016"}
@@ -46,7 +47,6 @@ export const Education = () => {
       <School
         school={"American Community School"}
         schoolLink={"https://www.acs.sch.ae"}
-        degree={"High School"}
         city={"Abu Dhabi"}
         country={"UAE"}
         date={"2008-2015"}

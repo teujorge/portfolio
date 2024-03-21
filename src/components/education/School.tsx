@@ -11,7 +11,7 @@ export const School = ({
 }: {
   school: string;
   schoolLink?: string;
-  degree: string;
+  degree?: string;
   city: string;
   country: string;
   date: string;
@@ -26,7 +26,7 @@ export const School = ({
     >
       <div className="flex flex-col justify-center items-start my-2.5 md:mx-7.5">
         <h4 className="reveal text-lg font-bold text-right w-full">
-          {degree},{" "}
+          {degree ? degree + ", " : ""}
           {schoolLink ? (
             <a
               href={schoolLink}
