@@ -12,6 +12,7 @@ import { IconButton } from "../IconButton";
 import { MOBILE_WIDTH } from "@/app/app";
 import { ProjectImage } from "./ProjectImage";
 import { SvgPlayStore } from "~/public/svg/play-store";
+import { SvgAppleStore } from "~/public/svg/apple-store";
 import { useWindowSize } from "@/contexts/WindowSize";
 import { ProjectDescription } from "./ProjectDescription";
 
@@ -102,6 +103,14 @@ export const Projects = () => {
               "https://play.google.com/store/apps/details?id=com.mjorge.MovieMatter&pli=1"
             }
             desc={"Google Store"}
+          />,
+          <IconButton
+            key={"movie-matter-apple-store"}
+            src={<SvgAppleStore className={iconClassName} />}
+            href={
+              "https://apps.apple.com/br/app/moviematter/id1631748579?l=en-GB"
+            }
+            desc={"Apple Store"}
           />,
           <IconButton
             key={"movie-matter-github"}
