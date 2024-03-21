@@ -29,7 +29,7 @@ export const IWasHere = () => {
 
   return (
     <div className="section">
-      <h3>Where I&apos;ve Lived</h3>
+      <h2>Where I&apos;ve Lived</h2>
       <div className="reveal flex flex-col justify-center items-center">
         <div className="m-3">
           <Toggle
