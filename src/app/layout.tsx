@@ -1,7 +1,7 @@
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Nunito_Sans } from "next/font/google";
 import App from "./app";
+import { Analytics } from "@vercel/analytics/react";
+import { Nunito_Sans } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "~/styles/globals.css";
 
 const nunito = Nunito_Sans({
@@ -12,7 +12,7 @@ const nunito = Nunito_Sans({
 export const metadata = {
   title: "Matheus Jorge",
   description: "Matheus Jorge's portfolio website",
-  icons: { icon: "/images/mjIcon.webp" },
+  icons: { icon: "/images/hero.webp" },
 };
 
 export default function RootLayout({
