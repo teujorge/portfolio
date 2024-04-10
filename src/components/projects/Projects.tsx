@@ -1,7 +1,6 @@
 "use client";
 
 import assert from "assert";
-import ShowDtekSwift from "~/public/images/demos/dtek-swift.gif";
 import ShowMovieMatter from "~/public/images/demos/movie-matter.webp";
 import ShowPollistDashboard from "~/public/images/demos/pollist.webp";
 import { useRef } from "react";
@@ -110,10 +109,18 @@ export const Projects = () => {
       descRef={descRef1}
       wrapperRef={projectsDesktopRef}
       key={"project-image-co-pilot"}
-      media={{ src: ShowDtekSwift, alt: "dtek-swift-preview" }}
+      media={undefined}
       isMobile={isMobile}
-      className="py-[4dvw] bg-neutral-800"
-    />,
+    >
+      <video
+        autoPlay
+        loop
+        muted
+        className="w-full h-full object-cover border-4 rounded-[var(--border-radius)] border-black"
+      >
+        <source src="/raw/dtek-swift.mp4" type="video/mp4" />
+      </video>
+    </ProjectImage>,
 
     <ProjectImage
       descRef={descRef2}
@@ -121,7 +128,14 @@ export const Projects = () => {
       key={"project-image-pollist"}
       media={{ src: ShowPollistDashboard, alt: "pollist-dashboard-preview" }}
       isMobile={isMobile}
-    />,
+      className="w-full h-full"
+    >
+      <iframe
+        src="https://pollist.org"
+        className="w-full h-full"
+        title="pollist-preview"
+      />
+    </ProjectImage>,
 
     <ProjectImage
       descRef={descRef3}
@@ -129,7 +143,9 @@ export const Projects = () => {
       key={"project-image-movie-matter"}
       media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
       isMobile={isMobile}
-    />,
+    >
+      {null}
+    </ProjectImage>,
   ];
 
   assert(

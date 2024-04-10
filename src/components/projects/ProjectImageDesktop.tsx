@@ -11,7 +11,8 @@ export const ProjectImageDesktop = ({
   descRef,
   wrapperRef,
   media,
-  className,
+  children,
+  className: _className,
 }: ProjectImageProps) => {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -61,22 +62,35 @@ export const ProjectImageDesktop = ({
     });
   }, [descRef, wrapperRef]);
 
+  const className = `object-cover ml-2.5 w-full h-full rounded-[var(--border-radius)] overflow-hidden shadow-md transition-none ${_className}`;
+  const style: React.CSSProperties = {
+    maxWidth: "90%",
+    maxHeight: "90%",
+    boxShadow: "0px 0px 10px var(--shadow-color)",
+  };
+
   return (
     <div
       ref={imageWrapperRef}
       className="absolute top-0 right-0 bottom-0 overflow-hidden w-full"
     >
       <div className="flex items-center w-full h-screen">
-        <Image
-          className={`object-cover ml-2.5 w-full h-fit rounded-[var(--border-radius)] shadow-md transition-none ${className}`}
-          style={{
-            maxWidth: "90%",
-            maxHeight: "90%",
-            boxShadow: "0px 0px 10px var(--shadow-color)",
-          }}
-          src={media.src}
-          alt={media.alt}
-        />
+        {media && children ? (
+          <div className={className} style={style}>
+            {children}
+          </div>
+        ) : media ? (
+          <Image
+            className={className}
+            style={style}
+            src={media.src}
+            alt={media.alt}
+          />
+        ) : (
+          <div className={className} style={style}>
+            {children}
+          </div>
+        )}
       </div>
     </div>
   );
