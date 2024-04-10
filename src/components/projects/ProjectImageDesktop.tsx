@@ -76,7 +76,6 @@ export const ProjectImageDesktop = ({
           }}
           src={media.src}
           alt={media.alt}
-          priority
         />
       </div>
     </div>

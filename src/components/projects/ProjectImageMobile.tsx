@@ -12,7 +12,6 @@ export const ProjectImageMobile = ({ media }: ProjectMediaProps) => {
       }}
       src={media.src}
       alt={media.alt}
-      priority
     />
   );
 };
