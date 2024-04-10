@@ -1,7 +1,7 @@
-import { StaticImageData } from "next/image";
 import { RefObject } from "react";
-import { ProjectImageDesktop } from "./ProjectImageDesktop";
+import { StaticImageData } from "next/image";
 import { ProjectImageMobile } from "./ProjectImageMobile";
+import { ProjectImageDesktop } from "./ProjectImageDesktop";
 
 export type ProjectMediaProps = {
   media: { src: StaticImageData; alt: string };
@@ -10,6 +10,7 @@ export type ProjectMediaProps = {
 export type ProjectImageProps = ProjectMediaProps & {
   descRef: RefObject<HTMLDivElement>;
   wrapperRef: RefObject<HTMLDivElement>;
+  className?: string;
 };
 
 export const ProjectImage = ({
@@ -17,6 +18,7 @@ export const ProjectImage = ({
   wrapperRef,
   media,
   isMobile,
+  className,
 }: ProjectImageProps & { isMobile: boolean }) => {
   if (isMobile) return <ProjectImageMobile media={media} />;
   return (
@@ -24,6 +26,7 @@ export const ProjectImage = ({
       media={media}
       descRef={descRef}
       wrapperRef={wrapperRef}
+      className={className}
     />
   );
 };

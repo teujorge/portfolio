@@ -1,10 +1,9 @@
 "use client";
 
 import assert from "assert";
-import ShowCoPilot from "~/public/images/demos/demo-co-pilot.webp";
-import ShowAtlasArena from "~/public/images/demos/demo-atlas.webp";
-import ShowMovieMatter from "~/public/images/demos/demo-movie-matter.webp";
-import ShowZidDashboard from "~/public/images/demos/demo-zid.webp";
+import ShowDtekSwift from "~/public/images/demos/dtek-swift.gif";
+import ShowMovieMatter from "~/public/images/demos/movie-matter.webp";
+import ShowPollistDashboard from "~/public/images/demos/pollist.webp";
 import { useRef } from "react";
 import { SvgEye } from "~/public/svg/eye";
 import { SvgGithub } from "~/public/svg/github";
@@ -24,60 +23,48 @@ export const Projects = () => {
   const descRef1 = useRef<HTMLDivElement>(null);
   const descRef2 = useRef<HTMLDivElement>(null);
   const descRef3 = useRef<HTMLDivElement>(null);
-  const descRef4 = useRef<HTMLDivElement>(null);
 
   const windowSize = useWindowSize();
   const isMobile = windowSize.width < MOBILE_WIDTH;
 
   const projectDescriptions = [
-    <div ref={descRef1} key={"project-description-co-pilot"}>
+    <div ref={descRef1} key={"project-description-dtek-swift"}>
       <ProjectDescription
-        title={"Co Pilot"}
-        desc={`
-        This platform connects users with skilled 
-        freelancers to efficiently complete their projects. With 
-        intuitive tools and a streamlined user experience, users 
-        can easily create and collaborate on projects, as well as 
-        submit project proposals and receive bids from qualified 
-        freelancers. Authentication through Google and seamless 
-        payment processing via Stripe make it easy to get started 
-        and manage projects from start to finish.
-      `}
-        tech={["NextJS", "DB", "API"]}
+        title={"Dtek Swift"}
+        desc={
+          "A cutting-edge retail technology solution designed to enhance the shopping experience by utilizing AI, computer vision, and data analytics. This innovative system aims to streamline the checkout process, reduce waiting times, and address common retail challenges such as stock mismanagement and crowded checkouts. SWIFT offers plug-and-play integration for minimal operational disruption, making it an efficient tool for retailers looking to improve efficiency, customer satisfaction, and gain valuable insights into their operations."
+        }
+        tech={["Flutter", "Firebase"]}
         icons={[
           <IconButton
-            key={"co-pilot-platform"}
+            key={"dtek-swift-website"}
             src={<SvgEye className={iconClassName} />}
-            href={"https://co-pilot.netlify.app"}
-            desc={"Demo"}
-          />,
-          <IconButton
-            key={"co-pilot-github"}
-            src={<SvgGithub className={iconClassName} />}
-            href={"https://github.com/teujorge/co-pilot-web"}
-            desc={"GitHub"}
+            href={"https://dtek.ai"}
+            desc={"Website"}
           />,
         ]}
       />
     </div>,
 
-    <div ref={descRef2} key={"project-description-zid"}>
+    <div ref={descRef2} key={"project-description-pollist"}>
       <ProjectDescription
-        title={"Zid Product Manager"}
-        desc={`
-        The Zid Platform Dashboard is a powerful web application 
-        designed to help users manage their products with ease. The 
-        dashboard provides centralized location for viewing and 
-        editing product details and includes robust filtering 
-        options for quick and efficient navigation.
-      `}
-        tech={["React", "DB", "API"]}
+        title={"Pollist"}
+        desc={
+          "A dynamic social media app focused on polls, enabling users to easily create, share, and vote on polls across any topic. With an endless scroll feature on the home page, it offers a seamless browsing experience. It delivers real-time updates on poll results, along with a suite of social features such as commenting, liking, and following, all with prompt notifications. User profiles display their created polls and voting history, with privacy options for sensitive votes, fostering a vibrant community of poll enthusiasts."
+        }
+        tech={["Next.Js", "React", "Supabase", "Clerk"]}
         icons={[
           <IconButton
             key={"zid-platform"}
             src={<SvgEye className={iconClassName} />}
-            href={"https://zid-products-staging.netlify.app/login"}
-            desc={"Demo"}
+            href={"https://pollist.org"}
+            desc={"Website"}
+          />,
+          <IconButton
+            key={"pollist-github"}
+            src={<SvgGithub className={iconClassName} />}
+            href={"https://github.com/teujorge/pollist"}
+            desc={"GitHub"}
           />,
         ]}
       />
@@ -86,14 +73,9 @@ export const Projects = () => {
     <div ref={descRef3} key={"project-description-movie-matter"}>
       <ProjectDescription
         title={"MovieMatter"}
-        desc={`
-        This media hub app is a must-have for movie and TV show 
-        enthusiasts. Using the TMDB API, the app provides users with 
-        personalized recommendations for movies, TV shows, and 
-        celebrities. The app also allows users to create personalized 
-        lists of their favorite media, making it easy to keep track 
-        of what they've watched and what they want to see next.
-      `}
+        desc={
+          "This media hub app is a must-have for movie and TV show enthusiasts. Using the TMDB API, the app provides users with personalized recommendations for movies, TV shows, and celebrities. The app also allows users to create personalized lists of their favorite media, making it easy to keep track of what they've watched and what they want to see next."
+        }
         tech={["Dart", "Flutter", "API"]}
         icons={[
           <IconButton
@@ -121,35 +103,6 @@ export const Projects = () => {
         ]}
       />
     </div>,
-
-    <div ref={descRef4} key={"project-description-atlas"}>
-      <ProjectDescription
-        title={"Atlas Arena"}
-        desc={`[In-Beta] Atlas is a thrilling pixel-art game 
-        where players take on the role of Atlas, defending their 
-        home from endless waves of enemies. Players can choose to be 
-        a Knight, a Mage, or an Archer, each with unique abilities 
-        and skills to master. The game features challenging game 
-        play, with increasingly difficult levels and a variety of 
-        enemies to defeat.
-      `}
-        tech={["Dart", "Flutter", "FlameGame"]}
-        icons={[
-          <IconButton
-            key={"atlas-arena-demo"}
-            src={<SvgEye className={iconClassName} />}
-            href={"https://teujorge.github.io/atlas/"}
-            desc={"Web Demo"}
-          />,
-          <IconButton
-            key={"atlas-arena-github"}
-            src={<SvgGithub className={iconClassName} />}
-            href={"https://github.com/teujorge/atlas"}
-            desc={"GitHub"}
-          />,
-        ]}
-      />
-    </div>,
   ];
 
   const projectImages = [
@@ -157,15 +110,16 @@ export const Projects = () => {
       descRef={descRef1}
       wrapperRef={projectsDesktopRef}
       key={"project-image-co-pilot"}
-      media={{ src: ShowCoPilot, alt: "co-pilot-platform-preview" }}
+      media={{ src: ShowDtekSwift, alt: "dtek-swift-preview" }}
       isMobile={isMobile}
+      className="py-[4dvw] bg-neutral-800"
     />,
 
     <ProjectImage
       descRef={descRef2}
       wrapperRef={projectsDesktopRef}
-      key={"project-image-zid"}
-      media={{ src: ShowZidDashboard, alt: "zid-dashboard-preview" }}
+      key={"project-image-pollist"}
+      media={{ src: ShowPollistDashboard, alt: "pollist-dashboard-preview" }}
       isMobile={isMobile}
     />,
 
@@ -174,14 +128,6 @@ export const Projects = () => {
       wrapperRef={projectsDesktopRef}
       key={"project-image-movie-matter"}
       media={{ src: ShowMovieMatter, alt: "movie-matter-app-preview" }}
-      isMobile={isMobile}
-    />,
-
-    <ProjectImage
-      descRef={descRef4}
-      wrapperRef={projectsDesktopRef}
-      key={"project-image-atlas"}
-      media={{ src: ShowAtlasArena, alt: "atlas-arena-demo" }}
       isMobile={isMobile}
     />,
   ];
