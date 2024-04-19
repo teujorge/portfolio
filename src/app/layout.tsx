@@ -1,4 +1,4 @@
-import App from "./app";
+import BubblesBg from "@/components/BubblesBg";
 import { Analytics } from "@vercel/analytics/react";
 import { Nunito_Sans } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -23,9 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={nunito.className}>
       <body>
-        <App>{children}</App>
+        {children}
         <Analytics />
         <SpeedInsights />
+        <BubblesBg
+          className="-z-10 !opacity-40 !dark:opacity-100"
+          quantity={10}
+          minSize={40}
+          maxSize={80}
+          minSpeed={10}
+          maxSpeed={100}
+        />
       </body>
     </html>
   );

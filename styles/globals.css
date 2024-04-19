@@ -19,12 +19,6 @@
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
-  background-color: transparent;
-}
-
 body {
   background-color: var(--background-color);
 }
@@ -38,6 +32,11 @@ main {
   width: 100%;
   max-width: 100vw;
   padding: 1rem;
+}
+
+.three-canvas canvas {
+  min-height: 100vh; /* Using vh (viewport height) units */
+  max-height: 100vh;
 }
 
 a {
