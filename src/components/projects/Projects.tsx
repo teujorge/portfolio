@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import assert from "assert";
 import ShowMovieMatter from "~/public/images/demos/movie-matter.webp";
 import ShowPollistDashboard from "~/public/images/demos/pollist.webp";
@@ -116,7 +117,7 @@ export const Projects = () => {
         autoPlay
         loop
         muted
-        className="w-full h-full object-cover border-4 rounded-[var(--border-radius)] border-black"
+        className="w-full h-full object-cover border-8 rounded-[var(--border-radius)] border-black"
       >
         <source src="/raw/dtek-swift.mp4" type="video/mp4" />
       </video>
@@ -128,13 +129,28 @@ export const Projects = () => {
       key={"project-image-pollist"}
       media={{ src: ShowPollistDashboard, alt: "pollist-dashboard-preview" }}
       isMobile={isMobile}
-      className="w-full h-full"
+      className="w-full h-full flex flex-col"
     >
       <iframe
         src="https://pollist.org"
         className="w-full h-full"
         title="pollist-preview"
       />
+      <div className="flex items-center justify-center w-full h-fit p-3 bg-white group">
+        <div className="animate-bounce group-hover:animate-none flex-row flex flex-wrap items-center justify-center w-full h-fit text-black">
+          <p className="text-sm">
+            For the best experience, please visit the{" "}
+            <Link
+              href="https://pollist.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              website
+            </Link>
+          </p>
+        </div>
+      </div>
     </ProjectImage>,
 
     <ProjectImage
