@@ -138,7 +138,7 @@ export const Projects = () => {
       />
       <div className="flex items-center justify-center w-full h-fit p-3 bg-white group">
         <div className="animate-bounce group-hover:animate-none flex-row flex flex-wrap items-center justify-center w-full h-fit text-black">
-          <p className="text-sm">
+          <p className="text-center">
             For the best experience, please visit the{" "}
             <Link
               href="https://pollist.org"
