@@ -8,7 +8,7 @@ import { useRef } from "react";
 import { SvgEye } from "~/public/svg/eye";
 import { SvgGithub } from "~/public/svg/github";
 import { IconButton } from "../IconButton";
-import { MOBILE_WIDTH } from "@/app/(v1)/app";
+import { MOBILE_WIDTH } from "@/app/(v1)/(portfolio)/app";
 import { ProjectImage } from "./ProjectImage";
 import { SvgPlayStore } from "~/public/svg/play-store";
 import { SvgAppleStore } from "~/public/svg/apple-store";
