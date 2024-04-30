@@ -14,7 +14,7 @@ export function Modal({ children, className, isOpen, setIsOpen }: ModalProps) {
       onClick={() => setIsOpen(false)}
     >
       <div
-        className={`w-fit max-w-[90vw] md:max-w-[50vw] h-fit max-h-[75vh] p-6 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md overflow-y-scroll cursor-default
+        className={`w-fit max-w-[90vw] md:max-w-[50vw] h-fit max-h-[75dvh] p-6 rounded-[var(--border-radius)] bg-[var(--off-background-color)] shadow-md overflow-y-scroll cursor-default
           ${className}
         `}
         onClick={(e) => e.stopPropagation()}
