@@ -14,16 +14,16 @@ export function Slides() {
         images={[
           {
             scale: [5, 7],
-            url: "https://pollist.org/images/me/kids.png",
+            url: "https://mjorge.me/images/me/kids.png",
           },
           {
             scale: [7, 5],
-            url: "https://pollist.org/images/me/beach.png",
+            url: "https://mjorge.me/images/me/beach.png",
           },
 
           {
             scale: [5, 5],
-            url: "https://pollist.org/images/me/hike.jpg",
+            url: "https://mjorge.me/images/me/hike.jpg",
           },
         ]}
       />
@@ -33,16 +33,16 @@ export function Slides() {
         images={[
           {
             scale: [5, 7],
-            url: "https://pollist.org/images/demos/atlas.webp",
+            url: "https://mjorge.me/images/demos/atlas.webp",
           },
           {
             scale: [7, 5],
-            url: "https://pollist.org/images/demos/movie-matter.webp",
+            url: "https://mjorge.me/images/demos/movie-matter.webp",
           },
 
           {
             scale: [5, 5],
-            url: "https://pollist.org/images/demos/pollist.webp",
+            url: "https://mjorge.me/images/demos/pollist.webp",
           },
         ]}
       />
@@ -52,16 +52,16 @@ export function Slides() {
         images={[
           {
             scale: [5, 7],
-            url: "https://pollist.org/images/me/kids.png",
+            url: "https://mjorge.me/images/me/kids.png",
           },
           {
             scale: [7, 5],
-            url: "https://pollist.org/images/me/beach.png",
+            url: "https://mjorge.me/images/me/beach.png",
           },
 
           {
             scale: [5, 5],
-            url: "https://pollist.org/images/me/hike.jpg",
+            url: "https://mjorge.me/images/me/hike.jpg",
           },
         ]}
       />
