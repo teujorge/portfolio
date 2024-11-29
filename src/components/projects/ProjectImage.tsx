@@ -10,8 +10,8 @@ export type ProjectMediaProps = {
 };
 
 export type ProjectImageProps = ProjectMediaProps & {
-  descRef: RefObject<HTMLDivElement>;
-  wrapperRef: RefObject<HTMLDivElement>;
+  descRef: RefObject<HTMLDivElement | null>;
+  wrapperRef: RefObject<HTMLDivElement | null>;
   className?: string;
 };
 

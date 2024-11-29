@@ -19,7 +19,7 @@ importers:
         specifier: ^9.105.4
         version: 9.117.3(@react-three/fiber@8.17.10(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(three@0.163.0))(@types/three@0.170.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(three@0.163.0)(types-react@19.0.0-rc.1)(use-sync-external-store@1.2.2(react@19.0.0-rc-66855b96-20241106))
       '@react-three/fiber':
-        specifier: ^8.16.2
+        specifier: ^8.17.10
         version: 8.17.10(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(three@0.163.0)
       '@splinetool/react-spline':
         specifier: ^2.2.6
@@ -36,6 +36,9 @@ importers:
       '@types/react-dom':
         specifier: npm:types-react-dom@19.0.0-rc.1
         version: types-react-dom@19.0.0-rc.1
+      '@types/three':
+        specifier: ^0.170.0
+        version: 0.170.0
       '@vercel/analytics':
         specifier: ^1.2.2
         version: 1.4.1(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)

@@ -1,9 +1,8 @@
-"use client";
-
+import { Image as DImage, ImageProps, useScroll } from "@react-three/drei";
+import { GroupProps, useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
-import { GroupProps, useFrame, useThree } from "@react-three/fiber";
-import { ImageProps, Image as DImage, useScroll } from "@react-three/drei";
+("use client");
 
 export function Slides() {
   const { width } = useThree((state) => state.viewport);
@@ -87,6 +86,7 @@ function Slide({ images, ...props }: SlideProps) {
   console.log("isTiny", isTiny);
 
   return (
+    // @ts-ignore
     <group ref={ref} {...props}>
       {!isTiny && (
         <DreiImage
@@ -107,6 +107,7 @@ function Slide({ images, ...props }: SlideProps) {
         scale={images[2].scale ?? [5, 7]}
         url={images[2].url}
       />
+      {/* @ts-ignore */}
     </group>
   );
 }
@@ -138,8 +139,10 @@ function DreiImage(props: ImageProps) {
     }
   });
   return (
+    // @ts-ignore
     <group ref={group}>
       <DImage ref={ref} {...props} />
+      {/* @ts-ignore */}
     </group>
   );
 }
