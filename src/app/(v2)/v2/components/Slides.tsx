@@ -1,8 +1,9 @@
+"use client";
+
 import { Image as DImage, ImageProps, useScroll } from "@react-three/drei";
 import { GroupProps, useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
-("use client");
 
 export function Slides() {
   const { width } = useThree((state) => state.viewport);
