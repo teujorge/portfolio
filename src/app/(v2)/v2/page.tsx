@@ -1,10 +1,10 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import { Slides } from "./components/Slides";
-import { Suspense } from "react";
-import { TextSlides } from "./components/TextSlides";
 import { Preload, Scroll, ScrollControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+import { Slides } from "./components/Slides";
+import { TextSlides } from "./components/TextSlides";
 
 export default function Hero() {
   return (
