@@ -23,6 +23,7 @@ export const School = ({
     <Expandable
       expandableTargetId={expandableId}
       className="reveal flex flex-row items-center justify-center border-[var(--primary-color)] md:m-4 md:p-2 md:border-r-2"
+      animateFromLeft={false}
     >
       <div className="flex flex-col justify-center items-start my-2.5 md:mx-7.5">
         <h4 className="reveal text-lg font-bold text-right w-full">

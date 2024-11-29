@@ -2,7 +2,7 @@
 
 import { Position } from "@/utils/position";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 
 export const IconButton = ({
   src,

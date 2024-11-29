@@ -3,37 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^14.1.4",
+    "@next/bundle-analyzer": "15.0.3",
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^1.0.54",
     "@types/node": "20.11.23",
-    "@types/react": "18.2.61",
-    "@types/react-dom": "18.2.19",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "@vercel/analytics": "^1.2.2",
     "@vercel/speed-insights": "^1.0.10",
     "bubbles-bg": "^1.1.5",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "eslint": "8.57.0",
     "framer-motion": "^11.1.1",
     "gsap": "^3.12.5",
-    "next": "^14.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "lucide-react": "^0.462.0",
+    "next": "15.0.3",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
     "sharp": "^0.33.2",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
     "three": "^0.163.0",
     "typescript": "5.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
-    "eslint-config-next": "^14.1.0",
+    "eslint-config-next": "15.0.3",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "npm:types-react@19.0.0-rc.1",
+      "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    }
   }
 }

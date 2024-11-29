@@ -30,9 +30,10 @@ export const Job = ({
   return (
     <Expandable
       expandableTargetId={expandableId}
-      className="reveal flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-4 md:p-2 md:border-l-2"
+      className="reveal w-full flex items-center justify-center border-l-0 border-[var(--primary-color)] md:m-4 md:p-2 md:border-l-2"
+      animateFromLeft={true}
     >
-      <div className="reveal flex flex-col items-start text-left mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5">
+      <div className="reveal flex flex-col items-start text-left mt-2.5 mb-2.5 md:ml-7.5 md:mr-7.5 w-full">
         <h4 className="text-lg font-bold">
           {title}
           {employer ? (

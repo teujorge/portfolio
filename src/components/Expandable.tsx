@@ -1,3 +1,4 @@
+import { cn } from "@/utils/common";
 // "use client";
 
 // import { MOBILE_WIDTH } from "@/app/app";
@@ -79,10 +80,22 @@ export function Expandable({
   expandableTargetId,
   children,
   className,
+  animateFromLeft,
 }: {
   expandableTargetId: string;
   children: React.ReactNode;
   className?: string;
+  animateFromLeft: boolean;
 }) {
-  return <div className={className}>{children}</div>;
+  return (
+    <div className={cn(className, "group")}>
+      <div
+        className={cn(
+          "absolute inset-0 bg-[var(--primary-color)] opacity-5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300  ease-in-out",
+          animateFromLeft ? "origin-left" : "origin-right"
+        )}
+      />
+      {children}
+    </div>
+  );
 }

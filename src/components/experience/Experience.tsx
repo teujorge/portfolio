@@ -7,11 +7,21 @@ export const Experience = () => {
 
       <Job
         title={"Software Developer"}
-        employer={"Dtek.ai"}
+        employer={"Sharpify"}
+        employerLink="https://sharpify.ai"
+        city={"Potomac"}
+        start={"2024"}
+        end={"Present"}
+        desc={[""]}
+      />
+
+      <Job
+        title={"Software Developer"}
+        employer={"Dtek"}
         employerLink="https://dtek.ai"
         city={"Dubai"}
         start={"2023"}
-        end={"Present"}
+        end={"2024"}
         desc={[
           `Increased profitability for 
           Zid store owners by developing a web-based 

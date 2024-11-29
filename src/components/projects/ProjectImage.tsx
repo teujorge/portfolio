@@ -1,8 +1,8 @@
 import assert from "assert";
-import { RefObject } from "react";
 import { StaticImageData } from "next/image";
-import { ProjectImageMobile } from "./ProjectImageMobile";
+import { RefObject } from "react";
 import { ProjectImageDesktop } from "./ProjectImageDesktop";
+import { ProjectImageMobile } from "./ProjectImageMobile";
 
 export type ProjectMediaProps = {
   media: { src: StaticImageData; alt: string } | undefined;
